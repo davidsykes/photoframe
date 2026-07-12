@@ -1,29 +1,14 @@
-#!/usr/bin/env python3
-
 import pygame
 from PIL import Image
 
-print("Python is working")
-print(f"Pygame version: {pygame.version.ver}")
-print(f"Pillow version: {Image.__version__}")
-
 pygame.init()
+screen = pygame.display.set_mode((800, 480))
 
-screen = pygame.display.set_mode((400, 200))
-pygame.display.set_caption("Pygame Test")
+img = Image.new("RGB", (800, 480), "red")
+img.save("test.jpg")
 
-screen.fill((0, 100, 200))
+surface = pygame.image.load("test.jpg")
+screen.blit(surface, (0, 0))
 pygame.display.flip()
 
-print("Pygame window created successfully")
-print("Close the window to exit")
-
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-pygame.quit()
-
-print("Finished successfully")
+input("Press Enter to quit...")
