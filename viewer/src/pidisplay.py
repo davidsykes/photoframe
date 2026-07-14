@@ -12,21 +12,6 @@ class PiSystemDisplay:
         pygame.display.set_caption("Pi System Display")
 
     def show_image(self, image_path):
-        print(f"Showing image on Pi: {image_path}")
-        image = pygame.image.load(image_path)
-        self.screen.blit(image, (0, 0))
-        pygame.display.flip()
-
-    def show_image2(self, image_path):
-        image = pygame.image.load(image_path).convert()
-        image = pygame.transform.smoothscale(
-            image,
-            (self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
-        )
-        self.screen.blit(image, (0, 0))
-        pygame.display.flip()
-
-    def show_image_resized(self, image_path):
         image = pygame.image.load(image_path).convert()
         iw, ih = image.get_size()
 
