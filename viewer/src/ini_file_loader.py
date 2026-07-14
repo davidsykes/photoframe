@@ -2,7 +2,7 @@ import json
 
 class IniFileLoader:
     def __init__(self, file_loader, file_name):
-        self.data = file_loader.load(file_name)
+        self.data = file_loader.load_file(file_name)
         self.config = json.loads(self.data) if self.data else {}
 
     def get(self, key):
