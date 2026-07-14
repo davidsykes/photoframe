@@ -5,3 +5,6 @@ class PCSystemDisplay:
 
     def initialise(self):
         print("Initialising PC System Display")
+
+    def show_image(self, image_path):
+        print(f"Showing image on PC: {image_path}")

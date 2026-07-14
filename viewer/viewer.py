@@ -5,8 +5,6 @@ from app import PhotoFrameApp
 from pcdisplay import PCSystemDisplay
 from pidisplay import PiSystemDisplay
 
-print(sys.argv)
-
 display = None
 if len(sys.argv) > 1:
     if sys.argv[1] == "test":

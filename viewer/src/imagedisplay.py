@@ -5,4 +5,6 @@ class ImageDisplay:
 
     def display_images(self, image_paths):
         # Implementation for displaying images
-        pass
+        for image_path in image_paths:
+            print(f"Displaying image: {image_path}")
+            self.display.show_image(image_path)
