@@ -1,7 +1,7 @@
 from imagepathloader import ImagePathLoader
 from randomiser import Randomiser
 from imagedisplay import ImageDisplay
-from ini_file_loader import IniFileLoader
+from common.src.ini_file_loader import IniFileLoader
 from system_operations import SystemFileLoader
 
 class PhotoFrameApp:

@@ -1,12 +1,12 @@
 import sys
-sys.path.append('src')
+sys.path.append('common/src')
 import unittest
 from ini_file_loader import IniFileLoader
 
 class FileLoader:
     def __init__(self, data):
         self.data = data
-    def load(self, file_name):
+    def load_file(self, file_name):
         if file_name == "config.ini":
             return self.data
 
