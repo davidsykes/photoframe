@@ -1,8 +1,8 @@
 from imagepathloader import ImagePathLoader
 from randomiser import Randomiser
 from imagedisplay import ImageDisplay
-from common.src.ini_file_loader import IniFileLoader
-from system_operations import SystemFileLoader
+from common.src.config_file_loader import IniFileLoader
+from common.src.system_operations import SystemFileLoader
 
 class PhotoFrameApp:
     def __init__(self, display):

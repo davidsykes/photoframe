@@ -1,5 +1,5 @@
 
-class SystemFileLoader:
+class SystemOperations:
     def load_file(self, file_name):
         with open(file_name, 'r') as file:
             data = file.read()

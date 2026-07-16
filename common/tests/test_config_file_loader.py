@@ -1,7 +1,7 @@
 import sys
 sys.path.append('common/src')
 import unittest
-from ini_file_loader import IniFileLoader
+from config_file_loader import ConfigFileLoader
 
 class FileLoader:
     def __init__(self, data):
@@ -15,7 +15,7 @@ class TestGetReturnsAString(unittest.TestCase):
         data = "{ \"image_directory\": \"images\" }"
         file_loader = FileLoader(data)
 
-        ini_file = IniFileLoader(file_loader, "config.ini")
+        ini_file = ConfigFileLoader(file_loader, "config.ini")
 
         self.assertEqual(ini_file.get("image_directory"), "images")
 
@@ -24,7 +24,7 @@ class TestGettingAMissingValueThrowsAnException(unittest.TestCase):
         data = "{ \"image_directory\": \"images\" }"
         file_loader = FileLoader(data)
 
-        ini_file = IniFileLoader(file_loader, "config.ini")
+        ini_file = ConfigFileLoader(file_loader, "config.ini")
 
         with self.assertRaises(Exception) as context:
             ini_file.get("image_directory2")
