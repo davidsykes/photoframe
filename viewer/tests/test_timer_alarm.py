@@ -1,5 +1,3 @@
-import sys
-sys.path.append('src')
 import unittest
 from timer_alarm import TimerAlarm
 
@@ -21,6 +19,3 @@ class AnAlarmGoesOffAtTheCorrectTime(unittest.TestCase):
 
         # Check if the alarm has gone off
         self.assertTrue(timer_alarm.alarm_triggered)
-
-if __name__ == "__main__":
-    unittest.main()

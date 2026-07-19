@@ -1,7 +1,6 @@
-import sys
-sys.path.append('common/src')
 import unittest
-from config_file_loader import ConfigFileLoader
+
+from common.src.config_file_loader import ConfigFileLoader
 
 class FileLoader:
     def __init__(self, data):
@@ -10,24 +9,22 @@ class FileLoader:
         if file_name == "config.ini":
             return self.data
 
-class TestGetReturnsAString(unittest.TestCase):
+class TestConfigFileLoader(unittest.TestCase):
     def test_load(self):
-        data = "{ \"image_directory\": \"images\" }"
-        file_loader = FileLoader(data)
-
-        ini_file = ConfigFileLoader(file_loader, "config.ini")
+        ini_file = self.out.load_config_file("config.ini")
 
         self.assertEqual(ini_file.get("image_directory"), "images")
 
-class TestGettingAMissingValueThrowsAnException(unittest.TestCase):
-    def test_load(self):
-        data = "{ \"image_directory\": \"images\" }"
-        file_loader = FileLoader(data)
+    def test_load_failure(self):
+        file_loader = FileLoader("invalid json")
 
-        ini_file = ConfigFileLoader(file_loader, "config.ini")
+        loader = ConfigFileLoader(file_loader)
 
         with self.assertRaises(Exception) as context:
-            ini_file.get("image_directory2")
+            loader.load_config_file("config.ini")
 
-if __name__ == "__main__":
-    unittest.main()
+    @classmethod
+    def setUp(self):
+        data = "{ \"image_directory\": \"images\" }"
+        file_loader = FileLoader(data)
+        self.out = ConfigFileLoader(file_loader)
