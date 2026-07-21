@@ -11,23 +11,23 @@ sys_operations.set_logger("C:\\TestData\\PhotoFrame\\Logs\\updater.log")
 
 try:
     config_file_loader = ConfigFileLoader(sys_operations)
-    updater_config_data = config_file_loader.load_config_file('updater/config.json')
+    updater_config_data = config_file_loader.load_config_file('updater/updater_config.json')
     remote_files_local_storage_path = updater_config_data.get('remote_files_local_storage_path')
     remote_files_retriever = RemoteFilesRetriever(sys_operations, remote_files_local_storage_path)
-    viewer_config_remote_url = updater_config_data.get('viewer_config_remote_url')
-    viewer_config_local_path = updater_config_data.get('viewer_config_local_path')
+    viewer_versions_config_remote_url = updater_config_data.get('viewer_versions_config_remote_url')
+    viewer_versions_config_local_path = updater_config_data.get('viewer_versions_config_local_path')
     config_file_updater = ConfigFileUpdater()
     viewer_versions_config_loader = ViewerVersionsConfigLoader(
         config_file_updater,
         config_file_loader,
-        viewer_config_remote_url,
-        viewer_config_local_path)
+        viewer_versions_config_remote_url,
+        viewer_versions_config_local_path)
 
     check_for_updates = True
     while check_for_updates:
         check_for_updates = False
 
-        viewer_versions_config = viewer_versions_config_loader.load_viewer_versions_config(viewer_config_remote_url)
+        viewer_versions_config = viewer_versions_config_loader.load_viewer_versions_config(viewer_versions_config_remote_url)
 
         version_list = viewer_versions_config.get('version_list')
 

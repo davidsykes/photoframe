@@ -10,9 +10,9 @@ class ViewerVersionsConfigLoader:
         self.remote_viewer_versions_config_path = remote_viewer_versions_config_path
         self.local_viewer_versions_config_path = local_viewer_versions_config_path
 
-    def load_viewer_versions_config(self, viewer_config_remote_url):
+    def load_viewer_versions_config(self, viewer_versions_config_remote_url):
         self._config_file_updater.update_config_file(
-            viewer_config_remote_url,
+            viewer_versions_config_remote_url,
             self.local_viewer_versions_config_path)
 
         new_config = self._config_file_loader.load_config_file(
