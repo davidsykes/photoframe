@@ -8,6 +8,7 @@ class ConfigFileLoader:
 
     def load_config_file(self, file_name):
         try:
+            print(f"Loading config file: {file_name}")
             data = self.file_loader.load_file(file_name)
             config = json.loads(data) if data else {}
             return ConfigFile(config, file_name)

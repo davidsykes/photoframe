@@ -28,6 +28,7 @@ class RemoteFilesRetriever:
 
             self._system_operations.log("Replacing temporary file with destination file: " + str(destination))
             os.replace(temporary_file, destination)
+            return True
 
         except HTTPError as ex:
             temporary_file.unlink(missing_ok=True)

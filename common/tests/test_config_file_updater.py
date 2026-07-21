@@ -25,7 +25,7 @@ class TestConfigFileUpdater(unittest.TestCase):
         self.config_file_loader.load_config_file.assert_not_called()
         self.sys_operations.move_file.assert_not_called()
 
-    def test_if_invalid_data_is_loaded_the_file_is_not_updated(self):
+    def test_if_downloaded_config_is_invalid_the_file_is_not_updated(self):
         self.config_file_loader.load_config_file.return_value = None
 
         self.out.update_config_file("remote_url", "local_file_path")
@@ -35,6 +35,15 @@ class TestConfigFileUpdater(unittest.TestCase):
         self.config_file_loader.load_config_file.assert_called_once_with(
             "local_file_path.new")
         self.sys_operations.move_file.assert_not_called()
+
+    def test_if_downloaded_config_is_invalid_the_temp_file_is_deleted(self):
+        self.config_file_loader.load_config_file.return_value = None
+
+        self.out.update_config_file("remote_url", "local_file_path")
+        
+        self.sys_operations.delete_file.assert_called_once_with(
+            "local_file_path.new"
+        )
 
     @classmethod
     def setUp(self):

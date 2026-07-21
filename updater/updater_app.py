@@ -16,7 +16,10 @@ try:
     remote_files_retriever = RemoteFilesRetriever(sys_operations, remote_files_local_storage_path)
     viewer_versions_config_remote_url = updater_config_data.get('viewer_versions_config_remote_url')
     viewer_versions_config_local_path = updater_config_data.get('viewer_versions_config_local_path')
-    config_file_updater = ConfigFileUpdater()
+    config_file_updater = ConfigFileUpdater(
+        remote_files_retriever,
+        config_file_loader,
+        sys_operations)
     viewer_versions_config_loader = ViewerVersionsConfigLoader(
         config_file_updater,
         config_file_loader,
