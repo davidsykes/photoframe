@@ -17,9 +17,11 @@ try:
     config_file_loader = ConfigFileLoader(sys_operations)
     updater_config_data = config_file_loader.load_config_file('updater/updater_config.json')
     remote_files_local_storage_path = updater_config_data.get('remote_files_local_storage_path')
-    remote_files_retriever = RemoteFilesRetriever(sys_operations, remote_files_local_storage_path)
     viewer_versions_config_remote_url = updater_config_data.get('viewer_versions_config_remote_url')
     viewer_versions_config_local_path = updater_config_data.get('viewer_versions_config_local_path')
+    viewer_versions_local_path = updater_config_data.get('viewer_versions_local_path')
+
+    remote_files_retriever = RemoteFilesRetriever(sys_operations, remote_files_local_storage_path)
     config_file_updater = ConfigFileUpdater(
         remote_files_retriever,
         config_file_loader,
@@ -29,7 +31,10 @@ try:
         config_file_loader,
         viewer_versions_config_remote_url,
         viewer_versions_config_local_path)
-    version_has_been_downloaded_checker = VersionHasBeenDownloadedChecker()
+    version_has_been_downloaded_checker = VersionHasBeenDownloadedChecker(
+        sys_operations,
+        viewer_versions_local_path
+    )
     version_downloader = VersionDownloader()
     version_runner = VersionRunner()
     version_repeater = VersionRepeater(

@@ -11,6 +11,9 @@ class SystemOperations:
 
     def replace_file(self, from_file, to_file):
         os.replace(from_file, to_file)
+
+    def isdir(self, path):
+        return os.path.isdir(path)
     
     def set_logger(self, log_file_path):
         import logging
