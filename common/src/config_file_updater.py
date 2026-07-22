@@ -16,7 +16,7 @@ class ConfigFileUpdater:
             print(f"Downloaded file to {temp_local_file_path}")
             if (self._config_file_loader.load_config_file(
                 temp_local_file_path) is not None):
-                self._sys_operations.move_file(
+                self._sys_operations.replace_file(
                     temp_local_file_path, local_file_path)
             else:
                 self._sys_operations.delete_file(temp_local_file_path)
