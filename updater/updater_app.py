@@ -5,6 +5,7 @@ from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.config_file_loader import ConfigFileLoader
 from common.src.system_operations import SystemOperations
 from updater.src.viewer_versions_config_loader import ViewerVersionsConfigLoader
+from updater.src.version_repeater import VersionRepeater
 
 sys_operations = SystemOperations()
 sys_operations.set_logger("C:\\TestData\\PhotoFrame\\Logs\\updater.log")
@@ -25,6 +26,7 @@ try:
         config_file_loader,
         viewer_versions_config_remote_url,
         viewer_versions_config_local_path)
+    version_repeater = VersionRepeater()
 
     check_for_updates = True
     while check_for_updates:
@@ -38,7 +40,7 @@ try:
 
         while check_for_updates is False and next_version_to_try >= 0:
             version = version_list[next_version_to_try]
-            if (VersionRepeater().run_version(version, 3) == CHECK_FOR_UPDATES):
+            if (version_repeater.run_version(version, 3) == CHECK_FOR_UPDATES):
                 check_for_updates = True      
             next_version_to_try -= 1
 except RuntimeError as ex:
