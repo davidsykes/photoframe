@@ -4,6 +4,9 @@ from common.src.config_file_updater import ConfigFileUpdater
 from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.config_file_loader import ConfigFileLoader
 from common.src.system_operations import SystemOperations
+from updater.src.version_downloader import VersionDownloader
+from updater.src.version_has_been_downloaded_checker import VersionHasBeenDownloadedChecker
+from updater.src.version_runner import VersionRunner
 from updater.src.viewer_versions_config_loader import ViewerVersionsConfigLoader
 from updater.src.version_repeater import VersionRepeater
 
@@ -26,7 +29,13 @@ try:
         config_file_loader,
         viewer_versions_config_remote_url,
         viewer_versions_config_local_path)
-    version_repeater = VersionRepeater()
+    version_has_been_downloaded_checker = VersionHasBeenDownloadedChecker()
+    version_downloader = VersionDownloader()
+    version_runner = VersionRunner()
+    version_repeater = VersionRepeater(
+        version_has_been_downloaded_checker,
+        version_downloader,
+        version_runner)
 
     check_for_updates = True
     while check_for_updates:
