@@ -5,7 +5,7 @@ class ConfigFile:
         self.config = data
         self.file_name = file_name
 
-    def get(self, key):
+    def get(self, key) -> str:
         if key in self.config:
             return self.config[key]
         else:

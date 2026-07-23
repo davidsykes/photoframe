@@ -6,7 +6,7 @@ class ConfigFileLoader:
     def __init__(self, system_operations):
         self._system_operations = system_operations
 
-    def load_config_file(self, file_name):
+    def load_config_file(self, file_name) -> ConfigFile:
         try:
             data = self._system_operations.load_file(file_name)
             if data:

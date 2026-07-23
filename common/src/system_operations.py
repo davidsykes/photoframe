@@ -1,7 +1,7 @@
 import os
 
 class SystemOperations:
-    def load_file(self, file_name):
+    def load_file(self, file_name) -> str:
         with open(file_name, 'r') as file:
             data = file.read()
         return data
@@ -12,7 +12,7 @@ class SystemOperations:
     def replace_file(self, from_file, to_file):
         os.replace(from_file, to_file)
 
-    def isdir(self, path):
+    def isdir(self, path) -> bool:
         return os.path.isdir(path)
     
     def set_logger(self, log_file_path):

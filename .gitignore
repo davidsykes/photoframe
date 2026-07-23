@@ -3,3 +3,4 @@ viewer/src/__pycache__
 images
 viewer/config.ini
 __pycache__/
+dist

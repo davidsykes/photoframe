@@ -6,7 +6,7 @@ class MockSystemOperations:
     def __init__(self, data):
         self.data = data
         self.logs = []
-    def load_file(self, file_name):
+    def load_file(self, file_name) -> str:
         if file_name == "config.ini":
             return self.data
     def log(self, text):
