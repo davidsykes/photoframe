@@ -3,17 +3,16 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 import os
 import shutil
+from zipfile import ZipFile
 
 class RemoteFilesRetriever:
     def __init__(self, system_operations, local_storage_path):
         self._system_operations = system_operations
         self.local_storage_path = local_storage_path
 
-    def download_file(self, url: str, destination: Path) -> None:
-        self._system_operations.log("Downloading file: " + url)
+    def download_file(self, url: str, destination: Path) -> bool:
         destination = Path(destination)
         temporary_file = destination.with_suffix(destination.suffix + ".tmp")
-        self._system_operations.log("Temporary file: " + str(temporary_file))
 
         request = Request(
             url,
@@ -21,12 +20,10 @@ class RemoteFilesRetriever:
         )
 
         try:
-            self._system_operations.log("Make request to URL: " + url)
             with urlopen(request, timeout=30) as response:
                 with temporary_file.open("wb") as output:
                     shutil.copyfileobj(response, output)
 
-            self._system_operations.log("Replacing temporary file with destination file: " + str(destination))
             os.replace(temporary_file, destination)
             return True
 
@@ -47,3 +44,7 @@ class RemoteFilesRetriever:
             raise RuntimeError(
                 f"Could not save downloaded file as '{destination}': {ex}"
             ) from ex
+
+    def extract_release(zip_path: Path, target_folder: Path) -> None:
+        with ZipFile(zip_path, "r") as archive:
+            archive.extractall(target_folder)

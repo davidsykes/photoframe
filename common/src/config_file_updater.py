@@ -8,11 +8,9 @@ class ConfigFileUpdater:
         self._sys_operations = sys_operations
 
     def update_config_file(self, remote_url, local_file_path):
-        print(f"Updating config file from {remote_url} to {local_file_path}")
         temp_local_file_path = local_file_path + ".new"
         if self._remote_files_retriever.download_file(
             remote_url, temp_local_file_path) is True:
-            print(f"Downloaded file to {temp_local_file_path}")
             if (self._config_file_loader.load_config_file(
                 temp_local_file_path) is not None):
                 self._sys_operations.replace_file(

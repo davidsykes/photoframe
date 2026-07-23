@@ -1,4 +1,9 @@
+from enum import Enum, auto
 
+class DownloadResult(Enum):
+    REMOTE_VERSION_MISSING = auto()
+    VERSION_APPLICATION_ENDED = auto()
+    CHECK_FOR_UPDATES = auto()
 
 class VersionRepeater:
     def __init__(
@@ -12,6 +17,8 @@ class VersionRepeater:
 
     def run_version(self, version_name, repeat_count):
         if self._version_has_been_downloaded_checker.check_if_version_has_been_downloaded(version_name) is False:
-            self._version_downloader.download_version(version_name)
+            if self._version_downloader.download_version(version_name) is False:
+                return DownloadResult.REMOTE_VERSION_MISSING
 
         self._version_runner.run_version(version_name)
+        return DownloadResult.VERSION_APPLICATION_ENDED

@@ -8,7 +8,7 @@ from updater.src.version_downloader import VersionDownloader
 from updater.src.version_has_been_downloaded_checker import VersionHasBeenDownloadedChecker
 from updater.src.version_runner import VersionRunner
 from updater.src.viewer_versions_config_loader import ViewerVersionsConfigLoader
-from updater.src.version_repeater import VersionRepeater
+from updater.src.version_repeater import DownloadResult, VersionRepeater
 
 sys_operations = SystemOperations()
 sys_operations.set_logger("C:\\TestData\\PhotoFrame\\Logs\\updater.log")
@@ -54,7 +54,7 @@ try:
 
         while check_for_updates is False and next_version_to_try >= 0:
             version = version_list[next_version_to_try]
-            if (version_repeater.run_version(version, 3) == CHECK_FOR_UPDATES):
+            if (version_repeater.run_version(version, 3) == DownloadResult.CHECK_FOR_UPDATES):
                 check_for_updates = True      
             next_version_to_try -= 1
 except RuntimeError as ex:
