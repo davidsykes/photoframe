@@ -11,7 +11,6 @@ class ViewerVersionsConfigLoader:
         self.local_viewer_versions_config_path = local_viewer_versions_config_path
 
     def load_viewer_versions_config(self, viewer_versions_config_remote_url):
-        print(f"Load viewer version file from {viewer_versions_config_remote_url} to {self.local_viewer_versions_config_path}")
         self._config_file_updater.update_config_file(
             viewer_versions_config_remote_url,
             self.local_viewer_versions_config_path)

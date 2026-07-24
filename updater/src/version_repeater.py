@@ -15,9 +15,10 @@ class VersionRepeater:
         self._version_downloader = version_downloader
         self._version_runner = version_runner
 
-    def run_version(self, version_name, repeat_count):
+    def run_version(self, version, repeat_count) -> DownloadResult:
+        version_name = version[0]
         if self._version_has_been_downloaded_checker.check_if_version_has_been_downloaded(version_name) is False:
-            if self._version_downloader.download_version(version_name) is False:
+            if self._version_downloader.download_version(version) is False:
                 return DownloadResult.REMOTE_VERSION_MISSING
 
         self._version_runner.run_version(version_name)
