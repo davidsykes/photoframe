@@ -16,6 +16,10 @@ class ConfigFileLoader:
                 self._system_operations.log(
                     f"Unable to open config file: '{file_name}'"
                 )
+        except FileNotFoundError as ex:
+                self._system_operations.log(
+                f"Unable to open config file '{file_name}': {str(ex)}"
+                )
         except json.decoder.JSONDecodeError as ex:
                 self._system_operations.log(
                 f"Failed to parse JSON file '{file_name}': {str(ex)}"

@@ -26,4 +26,7 @@ class SystemOperations:
 
     def log(self, message):
         self.logger.info(message)
-        print(message)
+        print("--- " + message)
+
+    def progress(self, message):
+        print("+++ " + message)

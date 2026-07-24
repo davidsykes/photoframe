@@ -8,10 +8,12 @@ from zipfile import ZipFile
 class RemoteFilesRetriever:
     def __init__(self, system_operations, local_storage_path):
         self._system_operations = system_operations
-        self.local_storage_path = local_storage_path
+        self._local_storage_path = Path(local_storage_path)
 
-    def download_file(self, url: str, destination: Path) -> bool:
-        destination = Path(destination)
+    def download_file(self, url: str, destination: str) -> bool:
+        destination = self._local_storage_path.joinpath(destination)
+        self._system_operations.progress(
+            f"Download url {url} to {destination}")
         temporary_file = destination.with_suffix(destination.suffix + ".tmp")
 
         request = Request(
@@ -25,6 +27,7 @@ class RemoteFilesRetriever:
                     shutil.copyfileobj(response, output)
 
             os.replace(temporary_file, destination)
+            self._system_operations.progress("Download succeeded")
             return True
 
         except HTTPError as ex:

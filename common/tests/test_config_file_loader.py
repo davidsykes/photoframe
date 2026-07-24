@@ -9,6 +9,8 @@ class MockSystemOperations:
     def load_file(self, file_name) -> str:
         if file_name == "config.ini":
             return self.data
+        else:
+            raise FileNotFoundError("message")
     def log(self, text):
         self.logs.append(text)
 
@@ -25,7 +27,7 @@ class TestConfigFileLoader(unittest.TestCase):
         self.assertIsNone(ini_file)
         self.assertEqual(
             self.system_operations.logs,
-            ["Unable to open config file: 'not config.ini'"])
+            ["Unable to open config file 'not config.ini': message"])
 
     def test_if_the_json_is_invalid_the_error_is_logged(self):
         self.system_operations.data = 'invalid json'
