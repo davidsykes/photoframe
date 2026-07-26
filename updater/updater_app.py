@@ -4,6 +4,7 @@ from common.src.config_file_updater import ConfigFileUpdater
 from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.config_file_loader import ConfigFileLoader
 from common.src.system_operations import SystemOperations
+from updater.src.sandbox import Sandbox
 from updater.src.version_downloader import VersionDownloader
 from updater.src.version_has_been_downloaded_checker import VersionHasBeenDownloadedChecker
 from updater.src.version_runner import VersionRunner
@@ -16,9 +17,14 @@ sys_operations.set_logger("C:\\TestData\\PhotoFrame\\Logs\\updater.log")
 try:
     config_file_loader = ConfigFileLoader(sys_operations)
     updater_config_data = config_file_loader.load_config_file('updater/updater_config.json')
-    viewer_app_working_folder = updater_config_data.get('viewer_app_working_folder')
+    viewer_app_working_folder = updater_config_data.get(
+        'viewer_app_working_folder')
+    viewer_sandbox = Sandbox(viewer_app_working_folder)
     viewer_versions_config_remote_url = updater_config_data.get('viewer_versions_config_remote_url')
-    viewer_versions_config_local_path = updater_config_data.get('viewer_versions_config_local_path')
+    updater_working_folder = Path(__file__).resolve().parent
+    print(f"UPDATER WORKING FOLDE {updater_working_folder}")
+    viewer_versions_config_local_path = updater_working_folder.joinpath(
+        'viewer_versions_config.json')
 
     remote_files_retriever = RemoteFilesRetriever(
         sys_operations,
@@ -50,7 +56,8 @@ try:
     while check_for_updates:
         check_for_updates = False
 
-        viewer_versions_config = viewer_versions_config_loader.load_viewer_versions_config(viewer_versions_config_remote_url)
+        viewer_versions_config = viewer_versions_config_loader.load_viewer_versions_config(
+            viewer_versions_config_remote_url)
 
         version_list = viewer_versions_config.get('version_list')
 
