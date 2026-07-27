@@ -1,3 +1,4 @@
+import datetime
 import os
 
 class SystemOperations:
@@ -21,6 +22,8 @@ class SystemOperations:
     
     def set_logger(self, log_file_path):
         import logging
+        now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+        log_file_path += now
         logging.basicConfig(
             filename=log_file_path,
             level=logging.INFO,
