@@ -1,8 +1,8 @@
-from imagepathloader import ImagePathLoader
-from randomiser import Randomiser
-from imagedisplay import ImageDisplay
-from common.src.config_file_loader import IniFileLoader
-from common.src.system_operations import SystemFileLoader
+from viewer.src.imagepathloader import ImagePathLoader
+from viewer.src.randomiser import Randomiser
+from viewer.src.imagedisplay import ImageDisplay
+from common.src.config_file_loader import ConfigFileLoader
+from common.src.system_operations import SystemOperations
 
 class PhotoFrameApp:
     def __init__(self, display):
@@ -10,9 +10,9 @@ class PhotoFrameApp:
 
     def run(self):
         ini_file_name = "config.ini"
-        file_loader = SystemFileLoader()
-        ini_file = IniFileLoader(file_loader, ini_file_name)
-        image_path_loader = ImagePathLoader(ini_file.get("image_directory"))
+        system_operations = SystemOperations()
+        config_file = ConfigFileLoader(system_operations, ini_file_name)
+        image_path_loader = ImagePathLoader(config_file.get("image_directory"))
         image_paths = image_path_loader.load_image_paths()
         randomiser = Randomiser()
         randomised_image_paths = randomiser.randomise(image_paths)

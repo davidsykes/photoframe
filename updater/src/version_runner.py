@@ -17,6 +17,7 @@ class VersionRunner:
             print(f'Viewer exited with code {process.returncode}')
 
         exit_code = process.wait()
+        return exit_code
 
     def launch_viewer(self, release_folder: Path) -> subprocess.Popen:
         print(f'Launch viewer from {release_folder}')
