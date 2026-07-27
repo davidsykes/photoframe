@@ -14,6 +14,10 @@ class SystemOperations:
 
     def isdir(self, path) -> bool:
         return os.path.isdir(path)
+
+    def rename(self, from_path, to_path):
+        os.rename(from_path, to_path)
+        return True
     
     def set_logger(self, log_file_path):
         import logging

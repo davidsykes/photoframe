@@ -5,6 +5,7 @@ from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.config_file_loader import ConfigFileLoader
 from common.src.system_operations import SystemOperations
 from updater.src.sandbox import Sandbox
+from updater.src.unzipper import UnZipper
 from updater.src.version_downloader import VersionDownloader
 from updater.src.version_has_been_downloaded_checker import VersionHasBeenDownloadedChecker
 from updater.src.version_runner import VersionRunner
@@ -42,9 +43,12 @@ try:
         sys_operations,
         viewer_app_working_folder
     )
+    unzipper = UnZipper()
     version_downloader = VersionDownloader(
         sys_operations,
-        remote_files_retriever
+        viewer_sandbox,
+        remote_files_retriever,
+        unzipper
     )
     version_runner = VersionRunner()
     version_repeater = VersionRepeater(

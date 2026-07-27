@@ -21,7 +21,7 @@ class VersionDownloader:
             return True
         return False
 
-    def download_remote_file(self, version_name, version_url, zip_path):        
+    def download_remote_file(self, version_name, version_url, zip_path):
         if self._remote_files_retriever.download_file(
             version_url, zip_path):
             return True
@@ -32,6 +32,7 @@ class VersionDownloader:
 
     def unzip(self, name, zip_path, unzip_folder):
         if (self._unzipper.unzip(zip_path, unzip_folder)):
+            self._system_operations.delete_file(zip_path)
             return True
         self._system_operations.log(
             f'Unzip folder {zip_path} failed'

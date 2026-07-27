@@ -26,6 +26,9 @@ class VersionDownloaderTests(unittest.TestCase):
         self.unzipper.unzip.assert_called_once_with(
             'zip file location', 'temporary zip folder'
         )
+        self.system_operations.delete_file.assert_called_once_with(
+            'zip file location'
+        )
         self.system_operations.rename.assert_called_once_with(
             'temporary zip folder', 'version folder'
         )
@@ -39,6 +42,7 @@ class VersionDownloaderTests(unittest.TestCase):
         self.remote_files_retriever.download_file.assert_called_once_with(
             'url','zip file location')
         self.unzipper.unzip.assert_not_called()
+        self.system_operations.delete_file.assert_not_called()
         self.system_operations.rename.assert_not_called()
         self.assertFalse(result)
         self.system_operations.log.assert_called_once_with(
@@ -54,6 +58,7 @@ class VersionDownloaderTests(unittest.TestCase):
         self.unzipper.unzip.assert_called_once_with(
             'zip file location', 'temporary zip folder'
         )
+        self.system_operations.delete_file.assert_not_called()
         self.system_operations.rename.assert_not_called()
         self.assertFalse(result)
         self.system_operations.log.assert_called_once_with(
@@ -68,6 +73,9 @@ class VersionDownloaderTests(unittest.TestCase):
             'url','zip file location')
         self.unzipper.unzip.assert_called_once_with(
             'zip file location', 'temporary zip folder'
+        )
+        self.system_operations.delete_file.assert_called_once_with(
+            'zip file location'
         )
         self.system_operations.rename.assert_called_once_with(
             'temporary zip folder', 'version folder'
