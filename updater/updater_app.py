@@ -13,7 +13,7 @@ from updater.src.viewer_versions_config_loader import ViewerVersionsConfigLoader
 from updater.src.version_repeater import DownloadResult, VersionRepeater
 
 sys_operations = SystemOperations()
-sys_operations.set_logger("C:\\TestData\\PhotoFrame\\Logs\\updater.log")
+sys_operations.set_logger('updater.log')
 
 try:
     config_file_loader = ConfigFileLoader(sys_operations)
@@ -23,7 +23,7 @@ try:
     viewer_sandbox = Sandbox(viewer_app_working_folder)
     viewer_versions_config_remote_url = updater_config_data.get('viewer_versions_config_remote_url')
     updater_working_folder = Path(__file__).resolve().parent
-    print(f"UPDATER WORKING FOLDE {updater_working_folder}")
+    print(f"Updater working folder: {updater_working_folder}")
     viewer_versions_config_local_path = updater_working_folder.joinpath(
         'viewer_versions_config.json')
 

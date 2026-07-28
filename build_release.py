@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile
 import hashlib
@@ -92,4 +93,8 @@ def build_release(version: str) -> Path:
 
 
 if __name__ == "__main__":
-    build_release("1.2.0")
+    if len(sys.argv) == 2:
+        release = sys.argv[1]
+        build_release(release)
+    else:
+        print("Release version missing")

@@ -1,0 +1,2 @@
+To build a new version
+python build_release.py n.n.n
