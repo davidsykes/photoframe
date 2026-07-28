@@ -9,9 +9,13 @@ class PhotoFrameApp:
         self.display = display
 
     def run(self):
-        ini_file_name = "config.ini"
+        ini_file_name = "viewer/viewer_config.ini"
         system_operations = SystemOperations()
-        config_file = ConfigFileLoader(system_operations, ini_file_name)
+        system_operations.set_logger('viewer.log')
+        config_file_loader = ConfigFileLoader(system_operations)
+        config_file = config_file_loader.load_config_file(ini_file_name)
+        if config_file is None:
+            return 1
         image_path_loader = ImagePathLoader(config_file.get("image_directory"))
         image_paths = image_path_loader.load_image_paths()
         randomiser = Randomiser()
