@@ -2,6 +2,4 @@ __pycache__/
 updater/updater_config.json
 viewer/__pycache__
 viewer/src/__pycache__
-viewer/viewer_config.ini
-images
 dist
