@@ -24,6 +24,5 @@ class ViewerVersionsConfigLoaderTests(unittest.TestCase):
         self.out = ViewerVersionsConfigLoader(
             self.config_file_updater,
             self.config_file_loader,
-            "remote_url",
             "viewer config path"
         )

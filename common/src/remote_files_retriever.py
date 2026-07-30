@@ -6,12 +6,10 @@ import shutil
 from zipfile import ZipFile
 
 class RemoteFilesRetriever:
-    def __init__(self, system_operations, local_storage_path):
+    def __init__(self, system_operations):
         self._system_operations = system_operations
-        self._local_storage_path = Path(local_storage_path)
 
-    def download_file(self, url: str, destination: str) -> bool:
-        destination = self._local_storage_path.joinpath(destination)
+    def download_file(self, url: str, destination: str) -> str:
         self._system_operations.progress(
             f"Download url {url} to {destination}")
         temporary_file = destination.with_suffix(destination.suffix + ".tmp")

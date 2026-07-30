@@ -16,20 +16,21 @@ sys_operations = SystemOperations()
 sys_operations.set_logger('updater.log')
 
 try:
+    updater_working_folder = Path(__file__).resolve().parent
+    print(f"Updater working folder: {updater_working_folder}")
+
     config_file_loader = ConfigFileLoader(sys_operations)
     updater_config_data = config_file_loader.load_config_file('updater/updater_config.json')
     viewer_app_working_folder = updater_config_data.get(
         'viewer_app_working_folder')
     viewer_sandbox = Sandbox(viewer_app_working_folder)
-    viewer_versions_config_remote_url = updater_config_data.get('viewer_versions_config_remote_url')
-    updater_working_folder = Path(__file__).resolve().parent
-    print(f"Updater working folder: {updater_working_folder}")
+    
+    project_config = config_file_loader.load_config_file('project_config.json')
+    remote_config_url = project_config.get('remote_config_url')
     viewer_versions_config_local_path = updater_working_folder.joinpath(
         'viewer_versions_config.json')
 
-    remote_files_retriever = RemoteFilesRetriever(
-        sys_operations,
-        viewer_app_working_folder)
+    remote_files_retriever = RemoteFilesRetriever(sys_operations)
     config_file_updater = ConfigFileUpdater(
         remote_files_retriever,
         config_file_loader,
@@ -37,7 +38,6 @@ try:
     viewer_versions_config_loader = ViewerVersionsConfigLoader(
         config_file_updater,
         config_file_loader,
-        viewer_versions_config_remote_url,
         viewer_versions_config_local_path)
     version_has_been_downloaded_checker = VersionHasBeenDownloadedChecker(
         sys_operations,
@@ -61,7 +61,7 @@ try:
         check_for_updates = False
 
         viewer_versions_config = viewer_versions_config_loader.load_viewer_versions_config(
-            viewer_versions_config_remote_url)
+            remote_config_url)
 
         version_list = viewer_versions_config.get('version_list')
 

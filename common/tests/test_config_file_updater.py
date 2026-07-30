@@ -6,7 +6,7 @@ from common.src.config_file_updater import ConfigFileUpdater
 
 class TestConfigFileUpdater(unittest.TestCase):
     def test_update(self):
-        self.out.update_config_file("remote_url", Path('local_file_path'))
+        self.out.update_config_file("remote_url", 'local_file_path')
 
         self.remote_files_retriever.download_file.assert_called_once_with(
             "remote_url", Path('local_file_path.new'))

@@ -1,3 +1,6 @@
+from pathlib import Path
+
+
 class ConfigFileUpdater:
     def __init__(self,
                  remote_files_retriever,
@@ -8,6 +11,7 @@ class ConfigFileUpdater:
         self._sys_operations = sys_operations
 
     def update_config_file(self, remote_url, local_file_path):
+        local_file_path = Path(local_file_path)
         temp_local_file_path = local_file_path.with_suffix('.new')
         if self._remote_files_retriever.download_file(
             remote_url, temp_local_file_path) is True:
