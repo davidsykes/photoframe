@@ -1,5 +1,5 @@
 __pycache__/
 updater/updater_config.json
-viewer/__pycache__
-viewer/src/__pycache__
+synchroniser/working/
 dist
+logs

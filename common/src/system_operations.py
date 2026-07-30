@@ -1,5 +1,6 @@
 import datetime
 import os
+from pathlib import Path
 
 class SystemOperations:
     def load_file(self, file_name) -> str:
@@ -21,14 +22,14 @@ class SystemOperations:
         os.rename(from_path, to_path)
         return True
     
-    def set_logger(self, log_file_path):
+    def set_logger(self, log_file_name):
         import logging
         now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-        log_file_path += now
+        logfile_path = Path('logs') / f'{log_file_name} {now}.log'
         logging.basicConfig(
-            filename=log_file_path,
+            filename=logfile_path,
             level=logging.INFO,
-            format="%(asctime)s %(levelname)s %(name)s %(message)s"
+            format="%(asctime)s %(levelname)s %(message)s"
         )
         self.logger = logging.getLogger(__name__)
 
@@ -37,4 +38,5 @@ class SystemOperations:
         print("--- " + message)
 
     def progress(self, message):
+        self.logger.info(message)
         print("+++ " + message)

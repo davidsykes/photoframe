@@ -15,14 +15,14 @@ def main() -> int:
     if not os.path.exists(WORING_FOLDER):
         os.makedirs(WORING_FOLDER)
     system_operations = SystemOperations()
-    system_operations.set_logger('synchroniser.log')
+    system_operations.set_logger('synchroniser')
     config_file_loader = ConfigFileLoader(system_operations)
     remote_files_retriever = RemoteFilesRetriever(system_operations)
     config_file_updater = ConfigFileUpdater(remote_files_retriever, config_file_loader, system_operations)
 
     project_config = config_file_loader.load_config_file('project_config.json')
     remote_config_url = project_config.get('remote_config_url')
-    sync_remote_config_local_path = 'sync_global_config.json'
+    sync_remote_config_local_path = WORING_FOLDER / 'global_viewer_versions_config.json'
     config_file_updater.update_config_file(
         remote_config_url,
         sync_remote_config_local_path

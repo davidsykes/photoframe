@@ -11,7 +11,7 @@ class PhotoFrameApp:
     def run(self):
         ini_file_name = "viewer/viewer_config.ini"
         system_operations = SystemOperations()
-        system_operations.set_logger('viewer.log')
+        system_operations.set_logger('viewer')
         config_file_loader = ConfigFileLoader(system_operations)
         config_file = config_file_loader.load_config_file(ini_file_name)
         if config_file is None:

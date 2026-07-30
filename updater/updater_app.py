@@ -13,7 +13,7 @@ from updater.src.viewer_versions_config_loader import ViewerVersionsConfigLoader
 from updater.src.version_repeater import DownloadResult, VersionRepeater
 
 sys_operations = SystemOperations()
-sys_operations.set_logger('updater.log')
+sys_operations.set_logger('updater')
 
 try:
     updater_working_folder = Path(__file__).resolve().parent
