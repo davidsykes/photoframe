@@ -32,7 +32,13 @@ def main() -> int:
         'viewer_config',
         config_file_updater,
         config_file_loader)
-    photo_folder_synchroniser = PhotoFolderSynchroniser(system_operations)
+    remote_folder_downloader = RemoteFolderDownloader()
+    images_folder = project_config.get('images_folder')
+    photo_folder_synchroniser = PhotoFolderSynchroniser(
+        system_operations,
+        remote_folder_downloader,
+        images_folder
+        )
     photo_folders_synchroniser = PhotoFoldersSynchroniser(photo_folder_synchroniser)
 
     app = SynchroniserApp(project_config,

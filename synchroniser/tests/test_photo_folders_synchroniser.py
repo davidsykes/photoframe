@@ -1,6 +1,6 @@
 from pathlib import Path
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, call
 
 from synchroniser.src.photo_folders_synchroniser import PhotoFoldersSynchroniser
 
@@ -10,7 +10,7 @@ class TestPhotoFoldersSynchroniser(unittest.TestCase):
         self.out.sync_folders([['one'],['two']])
 
         self.photo_folder_synchroniser.sync_folder.assert_has_calls(
-            [['one'],['two']]
+            [call(['one']),call(['two'])]
         )
 
     @classmethod
