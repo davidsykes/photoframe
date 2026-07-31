@@ -9,9 +9,9 @@ class SynchroniserApp:
         self._photo_folders_synchroniser = photo_folders_synchroniser
 
     def sync(self):
-        remote_config_url = self._whole_project_config['remote_config_url']
+        remote_config_url = self._whole_project_config.get('remote_config_url')
         remote_config = self._remote_config_loader.load_config(
             remote_config_url
         )
-        photo_folders = remote_config['photo_folders']
+        photo_folders = remote_config.get('photo_folders')
         self._photo_folders_synchroniser.sync_folders(photo_folders)
