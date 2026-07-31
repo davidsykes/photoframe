@@ -5,6 +5,7 @@ from common.src.config_file_loader import ConfigFileLoader
 from common.src.config_file_updater import ConfigFileUpdater
 from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.system_operations import SystemOperations
+from synchroniser.src.photo_folder_synchroniser import PhotoFolderSynchroniser
 from synchroniser.src.photo_folders_synchroniser import PhotoFoldersSynchroniser
 from synchroniser.src.remote_config_loader import RemoteConfigLoader
 from synchroniser.src.synchroniser_app import SynchroniserApp
@@ -31,7 +32,8 @@ def main() -> int:
         'viewer_config',
         config_file_updater,
         config_file_loader)
-    photo_folders_synchroniser = PhotoFoldersSynchroniser(system_operations)
+    photo_folder_synchroniser = PhotoFolderSynchroniser(system_operations)
+    photo_folders_synchroniser = PhotoFoldersSynchroniser(photo_folder_synchroniser)
 
     app = SynchroniserApp(project_config,
                           remote_config_loader,
