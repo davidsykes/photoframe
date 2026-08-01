@@ -41,7 +41,7 @@ def main() -> int:
     remote_folder_downloader_wrapper = RemoteFolderDownloaderWrapper(
         system_operations,
         remote_folder_downloader)
-    images_folder = PROJECT_ROOT.parent / 'images'
+    images_folder = project_config.get('images_folder')
     system_operations.ensure_folder_exists(images_folder)
     photo_folder_synchroniser = PhotoFolderSynchroniser(
         system_operations,
