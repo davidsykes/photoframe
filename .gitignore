@@ -3,3 +3,4 @@ updater/updater_config.json
 synchroniser/working/
 dist
 logs
+project_config.json

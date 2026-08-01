@@ -3,8 +3,9 @@ import subprocess
 import sys
 
 class VersionRunner:
-    def __init__(self, sandbox):
+    def __init__(self, sandbox, parameters):
         self._sandbox = sandbox
+        self._parameters = parameters
 
     def run_version(self, name):
         release_folder = Path('/home/pi/photoframe/releases/1.2.0')
@@ -26,6 +27,7 @@ class VersionRunner:
                 sys.executable,
                 '-m',
                 'viewer.viewer_app',
+                self._parameters
             ],
             cwd=release_folder,
         )

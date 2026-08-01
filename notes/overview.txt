@@ -1,0 +1,8 @@
+The updater downloads the latest version of photoframe.ini on dropbox
+This contains a list of code versions for the project
+The updater starts with the end of the list, downloads that version if it
+has not already been downloaded, and tries executing it.
+Executing a version involves running the synchroniser and then the viewer.
+
+The url for the photoframe config is held in project_config.json
+This is not included in the distributed versions, and so must be copied each time

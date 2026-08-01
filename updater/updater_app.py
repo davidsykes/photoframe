@@ -50,7 +50,8 @@ try:
         remote_files_retriever,
         unzipper
     )
-    version_runner = VersionRunner(viewer_sandbox)
+    parameters = project_config.get('viewer_parameters')
+    version_runner = VersionRunner(viewer_sandbox, parameters)
     version_repeater = VersionRepeater(
         version_has_been_downloaded_checker,
         version_downloader,
