@@ -16,6 +16,7 @@ sys_operations = SystemOperations()
 sys_operations.set_logger('updater')
 
 try:
+    project_config_path = 'project_config.json'
     updater_working_folder = Path(__file__).resolve().parent
     print(f"Updater working folder: {updater_working_folder}")
 
@@ -25,7 +26,7 @@ try:
         'viewer_app_working_folder')
     viewer_sandbox = Sandbox(viewer_app_working_folder)
     
-    project_config = config_file_loader.load_config_file('project_config.json')
+    project_config = config_file_loader.load_config_file(project_config_path)
     remote_config_url = project_config.get('remote_config_url')
     viewer_versions_config_local_path = updater_working_folder.joinpath(
         'viewer_versions_config.json')
@@ -48,7 +49,8 @@ try:
         sys_operations,
         viewer_sandbox,
         remote_files_retriever,
-        unzipper
+        unzipper,
+        project_config_path
     )
     parameters = project_config.get('viewer_parameters')
     version_runner = VersionRunner(viewer_sandbox, parameters)

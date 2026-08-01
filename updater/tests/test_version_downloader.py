@@ -32,6 +32,9 @@ class VersionDownloaderTests(unittest.TestCase):
         self.system_operations.rename.assert_called_once_with(
             'temporary zip folder', 'version folder'
         )
+        self.system_operations.shutil_copy.assert_called_once_with(
+            'project config file', 'version folder'
+        )
         self.assertTrue(result)
 
     def test_if_the_download_fails_false_is_returned_and_the_failure_logged(self):
@@ -44,6 +47,7 @@ class VersionDownloaderTests(unittest.TestCase):
         self.unzipper.unzip.assert_not_called()
         self.system_operations.delete_file.assert_not_called()
         self.system_operations.rename.assert_not_called()
+        self.system_operations.shutil_copy.assert_not_called()
         self.assertFalse(result)
         self.system_operations.log.assert_called_once_with(
             'Download version name to zip file location failed')
@@ -60,6 +64,7 @@ class VersionDownloaderTests(unittest.TestCase):
         )
         self.system_operations.delete_file.assert_not_called()
         self.system_operations.rename.assert_not_called()
+        self.system_operations.shutil_copy.assert_not_called()
         self.assertFalse(result)
         self.system_operations.log.assert_called_once_with(
             'Unzip folder zip file location failed')
@@ -80,6 +85,7 @@ class VersionDownloaderTests(unittest.TestCase):
         self.system_operations.rename.assert_called_once_with(
             'temporary zip folder', 'version folder'
         )
+        self.system_operations.shutil_copy.assert_not_called()
         self.assertFalse(result)
         self.system_operations.log.assert_called_once_with(
             'Move folder temporary zip folder failed')
@@ -94,4 +100,5 @@ class VersionDownloaderTests(unittest.TestCase):
             self.system_operations,
             self.sandbox,
             self.remote_files_retriever,
-            self.unzipper)
+            self.unzipper,
+            'project config file')

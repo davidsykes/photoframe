@@ -1,13 +1,17 @@
+import shutil
+
 class VersionDownloader:
     def __init__(self,
                  system_operations,
                  sandbox,
                  remote_files_retriever,
-                 unzipper):
+                 unzipper,
+                 project_config_path):
         self._system_operations = system_operations
         self._sandbox = sandbox
         self._remote_files_retriever = remote_files_retriever
         self._unzipper = unzipper
+        self._project_config_path = project_config_path
 
     def download_version(self, version):
         version_name = version[0]
@@ -42,6 +46,7 @@ class VersionDownloader:
     def move_folder(self, version_name, unzip_folder):
         version_folder = self._sandbox.get_version_folder(version_name)
         if self._system_operations.rename(unzip_folder, version_folder):
+            self._system_operations.shutil_copy(self._project_config_path, version_folder)
             return True
         self._system_operations.log(
             f'Move folder {unzip_folder} failed'

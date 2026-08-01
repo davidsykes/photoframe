@@ -1,5 +1,6 @@
 import datetime
 import os
+import shutil
 from pathlib import Path
 
 class SystemOperations:
@@ -14,6 +15,10 @@ class SystemOperations:
     def replace_file(self, from_file, to_file):
         self.log(f'Move file {from_file} to {to_file}')
         os.replace(from_file, to_file)
+
+    def shutil_copy(self, from_file, to_file):
+        self.log(f'Copy file {from_file} to {to_file}')
+        shutil.copy(from_file, to_file)
 
     def isdir(self, path) -> bool:
         return os.path.isdir(path)
