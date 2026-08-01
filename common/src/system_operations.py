@@ -18,6 +18,11 @@ class SystemOperations:
     def isdir(self, path) -> bool:
         return os.path.isdir(path)
 
+    def ensure_folder_exists(self, folder_path):
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path)
+            self.log(f'Created folder {folder_path}')
+
     def rename(self, from_path, to_path):
         os.rename(from_path, to_path)
         return True
