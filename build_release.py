@@ -76,6 +76,12 @@ def build_release(version: str) -> Path:
 
         add_folder(
             archive,
+            PROJECT_ROOT / "synchroniser",
+            Path("synchroniser"),
+        )
+
+        add_folder(
+            archive,
             PROJECT_ROOT / "common",
             Path("common"),
         )

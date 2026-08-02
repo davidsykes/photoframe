@@ -11,7 +11,7 @@ class MockSystemOperations:
             return self.data
         else:
             raise FileNotFoundError("message")
-    def log(self, text):
+    def error(self, text):
         self.logs.append(text)
 
 

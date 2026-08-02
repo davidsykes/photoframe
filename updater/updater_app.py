@@ -6,6 +6,7 @@ from common.src.config_file_loader import ConfigFileLoader
 from common.src.system_operations import SystemOperations
 from updater.src.sandbox import Sandbox
 from common.unzipper import UnZipper
+from updater.src.subprocess_exec import SubprocessExec
 from updater.src.version_downloader import VersionDownloader
 from updater.src.version_has_been_downloaded_checker import VersionHasBeenDownloadedChecker
 from updater.src.version_runner import VersionRunner
@@ -53,8 +54,13 @@ try:
         unzipper,
         project_config_path
     )
-    parameters = project_config.get('viewer_parameters')
-    version_runner = VersionRunner(sys_operations, viewer_sandbox, parameters)
+    subprocess_exec = SubprocessExec(sys_operations)
+    viewer_parameters = project_config.get('viewer_parameters')
+    version_runner = VersionRunner(
+        sys_operations,
+        subprocess_exec,
+        viewer_sandbox,
+        viewer_parameters)
     version_repeater = VersionRepeater(
         version_has_been_downloaded_checker,
         version_downloader,

@@ -40,7 +40,7 @@ class RemoteFolderDownloaderTests(unittest.TestCase):
         self.system_operations.delete_file.assert_not_called()
         self.system_operations.rename.assert_not_called()
         self.assertFalse(result)
-        self.system_operations.log.assert_called_once_with(
+        self.system_operations.error.assert_called_once_with(
             'Download version url to working path\\zip.zip failed')
 
     def test_if_the_unzip_fails_false_is_returned_and_the_failure_logged(self):
@@ -60,7 +60,7 @@ class RemoteFolderDownloaderTests(unittest.TestCase):
         self.system_operations.delete_file.assert_not_called()
         self.system_operations.rename.assert_not_called()
         self.assertFalse(result)
-        self.system_operations.log.assert_called_once_with(
+        self.system_operations.error.assert_called_once_with(
             'Unzip folder working path\\zip.zip failed')
 
     def test_if_the_move_fails_false_is_returned_and_the_failure_logged(self):
@@ -84,7 +84,7 @@ class RemoteFolderDownloaderTests(unittest.TestCase):
             Path('working path') / 'contents', 'destination path'
         )
         self.assertFalse(result)
-        self.system_operations.log.assert_called_once_with(
+        self.system_operations.error.assert_called_once_with(
             'Move folder working path\\contents to destination path failed')
 
     @classmethod

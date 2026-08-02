@@ -24,7 +24,7 @@ class RemoteFolderDownloader:
         if self._remote_files_retriever.download_file(
             version_url, zip_path):
             return True
-        self._system_operations.log(
+        self._system_operations.error(
             f'Download version {version_url} to {zip_path} failed'
             )
         return False
