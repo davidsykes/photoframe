@@ -13,14 +13,14 @@ class ConfigFileLoader:
                 config = json.loads(data) if data else {}
                 return ConfigFile(config, file_name)
             else:
-                self._system_operations.log(
+                self._system_operations.error(
                     f"Unable to open config file: '{file_name}'"
                 )
         except FileNotFoundError as ex:
-                self._system_operations.log(
+                self._system_operations.error(
                 f"Unable to open config file '{file_name}': {str(ex)}"
                 )
         except json.decoder.JSONDecodeError as ex:
-                self._system_operations.log(
+                self._system_operations.error(
                 f"Failed to parse JSON file '{file_name}': {str(ex)}"
                 )

@@ -33,7 +33,7 @@ class RemoteFolderDownloader:
         if (self._unzipper.unzip(zip_path, unzip_folder)):
             self._system_operations.delete_file(zip_path)
             return True
-        self._system_operations.log(
+        self._system_operations.error(
             f'Unzip folder {zip_path} failed'
             )
         return False
@@ -41,7 +41,7 @@ class RemoteFolderDownloader:
     def move_folder(self, source, destination):
         if self._system_operations.rename(source, destination):
             return True
-        self._system_operations.log(
+        self._system_operations.error(
             f'Move folder {source} to {destination} failed'
             )
         return False

@@ -20,9 +20,6 @@ sys_operations.set_logger('updater')
 
 try:
     project_config_path = 'project_config.json'
-    #updater_working_folder = Path(__file__).resolve().parent
-    #print(f"Updater working folder: {updater_working_folder}")
-
     config_file_loader = ConfigFileLoader(sys_operations)
     updater_config_data = config_file_loader.load_config_file('updater/updater_config.json')
     viewer_app_working_folder = updater_config_data.get(
