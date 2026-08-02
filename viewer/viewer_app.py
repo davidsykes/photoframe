@@ -11,7 +11,6 @@ def main() -> int:
         from viewer.src.pidisplay import PiSystemDisplay
         display = PiSystemDisplay()
 
-    display.initialise()
     app = PhotoFrameApp(display)
     result = app.run()
     return result

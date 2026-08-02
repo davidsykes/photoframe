@@ -18,5 +18,6 @@ class PhotoFrameApp:
         image_paths = image_path_loader.load_image_paths()
         randomiser = Randomiser()
         randomised_image_paths = randomiser.randomise(image_paths)
+        self.display.initialise()
         image_display = ImageDisplay(self.display)
         image_display.display_images(randomised_image_paths)

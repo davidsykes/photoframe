@@ -1,9 +1,11 @@
 from pathlib import Path
 import subprocess
 import sys
+from time import time
 
 class VersionRunner:
-    def __init__(self, sandbox, parameters):
+    def __init__(self, system_operations, sandbox, parameters):
+        self._system_operations = system_operations
         self._sandbox = sandbox
         self._parameters = parameters
 
@@ -18,6 +20,9 @@ class VersionRunner:
             print(f'Viewer exited with code {process.returncode}')
 
         exit_code = process.wait()
+        self._system_operations.log(f'Viewer exited with code {exit_code}')
+        print('Trying an earlier version in 5 seconds...')
+        time.sleep(5)
         return exit_code
 
     def launch_viewer(self, release_folder: Path) -> subprocess.Popen:
