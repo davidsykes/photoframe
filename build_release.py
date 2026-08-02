@@ -6,7 +6,7 @@ import json
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent
-OUTPUT_FOLDER = PROJECT_ROOT / "dist"
+OUTPUT_FOLDER = PROJECT_ROOT / "releases"
 
 EXCLUDED_FOLDER_NAMES = {
     "__pycache__",
