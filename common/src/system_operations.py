@@ -8,7 +8,7 @@ class SystemOperations:
         with open(file_name, 'r') as file:
             data = file.read()
         return data
-        
+
     def delete_file(self, file_name):
         os.remove(file_name)
 
@@ -31,10 +31,11 @@ class SystemOperations:
     def rename(self, from_path, to_path):
         os.rename(from_path, to_path)
         return True
-    
+
     def set_logger(self, log_file_name):
         import logging
         now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+        self.ensure_folder_exists('logs')
         logfile_path = Path('logs') / f'{log_file_name} {now}.log'
         logging.basicConfig(
             filename=logfile_path,
