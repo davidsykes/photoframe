@@ -33,10 +33,12 @@ class SystemOperations:
         return True
 
     def set_logger(self, log_file_name):
+        log_folder = Path('logs')
+        if not os.path.exists(log_folder):
+            os.makedirs(log_folder)
         import logging
         now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-        self.ensure_folder_exists('logs')
-        logfile_path = Path('logs') / f'{log_file_name} {now}.log'
+        logfile_path = log_folder / f'{log_file_name} {now}.log'
         logging.basicConfig(
             filename=logfile_path,
             level=logging.INFO,
