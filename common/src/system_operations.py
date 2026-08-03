@@ -29,10 +29,10 @@ class SystemOperations:
             self.log(f'Created folder {folder_path}')
 
     def rename(self, from_path, to_path):
-        os.rename(from_path, to_path)
+        shutil.move(str(from_path), str(to_path))
         return True
 
-    def set_logger(self, log_file_name):
+    def set_logger(self, log_file_name, log_indent):
         log_folder = Path('logs')
         if not os.path.exists(log_folder):
             os.makedirs(log_folder)
@@ -45,15 +45,16 @@ class SystemOperations:
             format="%(asctime)s %(levelname)s %(message)s"
         )
         self.logger = logging.getLogger(__name__)
+        self.log_indent = log_indent
 
     def log(self, message):
         self.logger.info(message)
-        print("--- " + message)
+        print(f'{self.log_indent}--- {message}')
 
     def error(self, message):
         self.logger.error(message)
-        print("!!! " + message)
+        print(f'{self.log_indent}!!! {message}')
 
     def progress(self, message):
         self.logger.info(message)
-        print("+++ " + message)
+        print(f'{self.log_indent}+++ {message}')

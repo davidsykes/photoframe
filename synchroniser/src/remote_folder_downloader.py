@@ -13,7 +13,7 @@ class RemoteFolderDownloader:
         self._system_operations.progress(f"Download folder {url}")
         working_folder = Path(working_folder)
         zip_path = working_folder / 'zip.zip'
-        unzip_folder = working_folder / 'contents'
+        unzip_folder = working_folder / 'unzip_folder'
         if self.download_remote_file(url, zip_path) and \
             self.unzip(zip_path, unzip_folder) and \
                 self.move_folder(unzip_folder, destination_path):

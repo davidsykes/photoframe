@@ -18,8 +18,10 @@ WORKING_FOLDER = PROJECT_ROOT / "working"
 
 def main() -> int:
     system_operations = SystemOperations()
+    system_operations.set_logger('synchroniser', '--')
     system_operations.ensure_folder_exists(WORKING_FOLDER)
-    system_operations.set_logger('synchroniser')
+    temp_folder_location = PROJECT_ROOT / "temp"
+    system_operations.ensure_folder_exists(temp_folder_location)
     config_file_loader = ConfigFileLoader(system_operations)
     remote_files_retriever = RemoteFilesRetriever(system_operations)
     config_file_updater = ConfigFileUpdater(
@@ -40,7 +42,9 @@ def main() -> int:
     )
     remote_folder_downloader_wrapper = RemoteFolderDownloaderWrapper(
         system_operations,
-        remote_folder_downloader)
+        remote_folder_downloader,
+        temp_folder_location
+    )
     images_folder = project_config.get('images_folder')
     system_operations.log(f"Images folder: {images_folder}")
     system_operations.ensure_folder_exists(images_folder)

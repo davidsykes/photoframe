@@ -16,13 +16,13 @@ class RemoteFolderDownloaderTests(unittest.TestCase):
             'url', Path('working path') / 'zip.zip')
         self.unzipper.unzip.assert_called_once_with(
             Path('working path') / 'zip.zip',
-            Path('working path') / 'contents'
+            Path('working path') / 'unzip_folder'
         )
         self.system_operations.delete_file.assert_called_once_with(
             Path('working path') / 'zip.zip'
         )
         self.system_operations.rename.assert_called_once_with(
-            Path('working path') / 'contents', 'destination path'
+            Path('working path') / 'unzip_folder', 'destination path'
         )
         self.assertTrue(result)
 
@@ -55,7 +55,7 @@ class RemoteFolderDownloaderTests(unittest.TestCase):
             'url', Path('working path') / 'zip.zip')
         self.unzipper.unzip.assert_called_once_with(
             Path('working path') / 'zip.zip',
-            Path('working path') / 'contents'
+            Path('working path') / 'unzip_folder'
         )
         self.system_operations.delete_file.assert_not_called()
         self.system_operations.rename.assert_not_called()
@@ -75,17 +75,17 @@ class RemoteFolderDownloaderTests(unittest.TestCase):
             'url', Path('working path') / 'zip.zip')
         self.unzipper.unzip.assert_called_once_with(
             Path('working path') / 'zip.zip',
-            Path('working path') / 'contents'
+            Path('working path') / 'unzip_folder'
         )
         self.system_operations.delete_file.assert_called_once_with(
             Path('working path') / 'zip.zip'
         )
         self.system_operations.rename.assert_called_once_with(
-            Path('working path') / 'contents', 'destination path'
+            Path('working path') / 'unzip_folder', 'destination path'
         )
         self.assertFalse(result)
         self.system_operations.error.assert_called_once_with(
-            'Move folder working path\\contents to destination path failed')
+            'Move folder working path\\unzip_folder to destination path failed')
 
     @classmethod
     def setUp(self):

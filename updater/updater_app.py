@@ -17,7 +17,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent
 WORKING_FOLDER = PROJECT_ROOT / "working"
 
 sys_operations = SystemOperations()
-sys_operations.set_logger('updater')
+sys_operations.set_logger('updater', '')
 
 try:
     project_config_path = 'project_config.json'
@@ -84,10 +84,10 @@ try:
             if (version_repeater.run_version(version, 3) == DownloadResult.CHECK_FOR_UPDATES):
                 check_for_updates = True      
             next_version_to_try -= 1
+except KeyboardInterrupt as ex:
+    sys_operations.log('Stopped by keyboard')
 except RuntimeError as ex:
-    sys_operations.logger.error(str(ex))
-    print("Run time error: " +str(ex))
+    sys_operations.error(f'Runtime error: {str(ex)}')
 except Exception as ex:
-    sys_operations.logger.error(str(ex))
-    print("Unhandled Exception: " +str(ex))
+    sys_operations.error(f'Unhandled exception: {str(ex)}')
     traceback.print_exc()

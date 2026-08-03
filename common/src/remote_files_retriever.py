@@ -25,7 +25,6 @@ class RemoteFilesRetriever:
                     shutil.copyfileobj(response, output)
 
             os.replace(temporary_file, destination)
-            self._system_operations.progress("Download succeeded")
             return True
 
         except HTTPError as ex:

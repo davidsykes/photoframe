@@ -11,7 +11,7 @@ class PhotoFrameApp:
     def run(self):
         ini_file_name = "project_config.json"
         system_operations = SystemOperations()
-        system_operations.set_logger('viewer')
+        system_operations.set_logger('viewer', '..')
         config_file_loader = ConfigFileLoader(system_operations)
         config_file = config_file_loader.load_config_file(ini_file_name)
         image_path_loader = ImagePathLoader(config_file.get("images_folder"))

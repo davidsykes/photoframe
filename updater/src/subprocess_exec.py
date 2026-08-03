@@ -30,6 +30,6 @@ class SubprocessExec:
 
         exit_code = process.wait()
         self._system_operations.log(f'{module_name} exited with code {exit_code}')
-        print('Trying an earlier version in 5 seconds...')
+        print(f'Pausing for {sleep_time} seconds...')
         time.sleep(sleep_time)
         return exit_code
