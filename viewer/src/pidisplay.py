@@ -6,7 +6,7 @@ class PiSystemDisplay:
         self.SCREEN_HEIGHT = 800
 
     def initialise(self):
-        print("Initialising Pi System Display")
+        print("Initialising Pi System Display.")
         pygame.init()
         self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT), pygame.FULLSCREEN)
         pygame.display.set_caption("Pi System Display")

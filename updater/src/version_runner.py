@@ -16,14 +16,17 @@ class VersionRunner:
         exit_code = self.launch_app(
             release_folder,
             'synchroniser.synchroniser_main',
-            '')
+            '',
+            3)
         exit_code = self.launch_app(
             release_folder,
             'viewer.viewer_app',
-            self._parameters)
+            self._parameters,
+            10)
 
-    def launch_app(self, release_folder, module_name, parameters):
+    def launch_app(self, release_folder, module_name, parameters, sleep_time):
         return self._subprocess_exec.launch_app(
             release_folder,
             module_name,
-            parameters)
+            parameters,
+            sleep_time)

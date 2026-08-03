@@ -1,0 +1,17 @@
+
+
+Run tests
+    python -m unittest discover
+
+Run the updater
+python -m updater.updater_app
+
+Build a release
+python build_release.py 0.0.6
+
+Run the synchroniser
+python -m synchroniser.synchroniser_main
+
+Run the viewer on pc
+python -m viewer.viewer_app pc
+

@@ -42,6 +42,7 @@ def main() -> int:
         system_operations,
         remote_folder_downloader)
     images_folder = project_config.get('images_folder')
+    system_operations.log(f"Images folder: {images_folder}")
     system_operations.ensure_folder_exists(images_folder)
     photo_folder_synchroniser = PhotoFolderSynchroniser(
         system_operations,

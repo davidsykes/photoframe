@@ -15,11 +15,13 @@ class VersionRunnerTests(unittest.TestCase):
             [call(
                 'version rease folder',
                 'synchroniser.synchroniser_main',
-                ''
+                '',
+                3
             ), call(
                 'version rease folder',
                 'viewer.viewer_app',
-                'viewer parameters'
+                'viewer parameters',
+                10
             )]
         )
 

@@ -10,7 +10,8 @@ class SubprocessExec:
     def launch_app(self,
                    release_folder: Path,
                    module_name: str,
-                   parameters: str) -> subprocess.Popen:
+                   parameters: str,
+                   sleep_time: int) -> subprocess.Popen:
         print(f'Launch {module_name} from {release_folder}')
         process = subprocess.Popen(
             [
@@ -30,5 +31,5 @@ class SubprocessExec:
         exit_code = process.wait()
         self._system_operations.log(f'{module_name} exited with code {exit_code}')
         print('Trying an earlier version in 5 seconds...')
-        time.sleep(5)
+        time.sleep(sleep_time)
         return exit_code
