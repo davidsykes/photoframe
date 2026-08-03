@@ -12,7 +12,12 @@ class PiSystemDisplay:
         pygame.display.set_caption("Pi System Display")
 
     def show_image(self, image_path):
-        image = pygame.image.load(image_path).convert()
+        try:
+            image = pygame.image.load(image_path)
+        except pygame.error as e:
+            raise RuntimeError(
+                f"Unable to load image {image_path}: {e}")
+        image = image.convert()
         iw, ih = image.get_size()
 
         scale = min(
