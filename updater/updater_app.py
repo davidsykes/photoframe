@@ -25,6 +25,8 @@ try:
     updater_config_data = config_file_loader.load_config_file('updater/updater_config.json')
     viewer_app_working_folder = updater_config_data.get(
         'viewer_app_working_folder')
+    sys_operations.log(f"Viewer app working folder: {viewer_app_working_folder}")
+    sys_operations.ensure_folder_exists(viewer_app_working_folder)
     viewer_sandbox = Sandbox(viewer_app_working_folder)
     
     project_config = config_file_loader.load_config_file(project_config_path)
