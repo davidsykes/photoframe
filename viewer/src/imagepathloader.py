@@ -3,6 +3,7 @@ from pathlib import Path
 class ImagePathLoader:
     def __init__(self, image_directory):
         self.image_directory = image_directory
+        self.excluded_extensions = {'.json', '.txt'}
 
     def load_image_paths(self):
         print(f"Loading image paths from directory: {self.image_directory}")
@@ -16,4 +17,5 @@ class ImagePathLoader:
             str(path)
             for path in Path(self.image_directory).rglob("*")
             if path.is_file()
+            and path.suffix.lower() not in self.excluded_extensions
         ]

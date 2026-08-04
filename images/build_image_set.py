@@ -35,7 +35,8 @@ def should_include(path: Path) -> bool:
 def add_folder(
     archive: ZipFile,
     source_folder: Path
-) -> None:
+) -> int:
+    file_count = 0
     for path in source_folder.rglob("*"):
         if not should_include(path):
             continue
@@ -44,7 +45,9 @@ def add_folder(
         archive_path = relative_path
 
         archive.write(path, archive_path.as_posix())
+        file_count += 1
 
+    return file_count
 
 def calculate_sha256(path: Path) -> str:
     digest = hashlib.sha256()
@@ -67,18 +70,19 @@ def build_release(version: str, set_path: Path) -> Path:
     }
 
     with ZipFile(zip_path, "w", compression=ZIP_DEFLATED) as archive:
-        add_folder(
+        file_count = add_folder(
             archive,
             set_path
         )
 
-        archive.writestr("VERSION", version + "\n")
-        archive.writestr(
-            "release.json",
-            json.dumps(release_metadata, indent=2),
-        )
+        #archive.writestr("VERSION", version + "\n")
+        #archive.writestr(
+        #    "release.json",
+        #    json.dumps(release_metadata, indent=2),
+        #)
 
     print(f"Created: {zip_path}")
+    print(f"File count: {file_count}")
     print(f"SHA-256: {calculate_sha256(zip_path)}")
 
     return zip_path

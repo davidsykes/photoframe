@@ -15,8 +15,8 @@ class PiSystemDisplay:
         try:
             image = pygame.image.load(image_path)
         except pygame.error as e:
-            raise RuntimeError(
-                f"Unable to load image {image_path}: {e}")
+            err = f'Unable to load image {image_path}: {e}'
+            raise RuntimeError(err)
         image = image.convert()
         iw, ih = image.get_size()
 
