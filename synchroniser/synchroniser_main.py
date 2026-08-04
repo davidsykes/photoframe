@@ -13,14 +13,15 @@ from synchroniser.src.remote_folder_downloader import RemoteFolderDownloader
 from synchroniser.src.remote_folder_downloader_wrapper import RemoteFolderDownloaderWrapper
 from synchroniser.src.synchroniser_app import SynchroniserApp
 
-PROJECT_ROOT = Path(__file__).resolve().parent
-WORKING_FOLDER = PROJECT_ROOT / "working"
+SYNCHRONISER_PROJECT_ROOT = Path(__file__).resolve().parent
+PHOTOFRAME_PROJECT_ROOT = SYNCHRONISER_PROJECT_ROOT.parent
+WORKING_FOLDER = SYNCHRONISER_PROJECT_ROOT / "working"
 
 def main() -> int:
     system_operations = SystemOperations()
     system_operations.set_logger('synchroniser', '--')
     system_operations.ensure_folder_exists(WORKING_FOLDER)
-    temp_folder_location = PROJECT_ROOT / "temp"
+    temp_folder_location = PHOTOFRAME_PROJECT_ROOT / "temp"
     system_operations.ensure_folder_exists(temp_folder_location)
     config_file_loader = ConfigFileLoader(system_operations)
     remote_files_retriever = RemoteFilesRetriever(system_operations)
