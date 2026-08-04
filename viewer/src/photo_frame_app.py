@@ -16,7 +16,9 @@ class PhotoFrameApp:
         system_operations.set_logger('viewer', '..')
         config_file_loader = ConfigFileLoader(system_operations)
         config_file = config_file_loader.load_config_file(ini_file_name)
-        image_path_loader = ImagePathLoader(config_file.get("images_folder"))
+        image_path_path = config_file.get("images_folder")
+        image_path_loader = ImagePathLoader(image_path_path)
+        sleep_time_seconds = config_file.get("sleep_time_seconds")
         randomiser = Randomiser()
         next_image_selector = NextImageSelector(randomiser)
         cycle_stop_detector = CycleStopDetector()
@@ -24,7 +26,8 @@ class PhotoFrameApp:
             system_operations,
             next_image_selector,
             cycle_stop_detector,
-            self.display)
+            self.display,
+            sleep_time_seconds)
         self.display.initialise()
         image_paths = image_path_loader.load_image_paths()
         next_image_selector.set_images(image_paths)

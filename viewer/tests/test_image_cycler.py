@@ -54,4 +54,5 @@ class ImageCyclerTests(unittest.TestCase):
             self.system_operations,
             self.next_image_selector,
             self.cycle_stop_detector,
-            self.display )
+            self.display,
+            42)
