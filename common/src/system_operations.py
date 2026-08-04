@@ -2,6 +2,7 @@ import datetime
 import os
 import shutil
 from pathlib import Path
+import time
 
 class SystemOperations:
     def load_file(self, file_name) -> str:
@@ -57,3 +58,6 @@ class SystemOperations:
     def progress(self, message):
         self.logger.info(message)
         print(f'{self.log_indent}+++ {message}')
+
+    def sleep(self, seconds):
+        time.sleep(seconds)

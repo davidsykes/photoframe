@@ -21,6 +21,7 @@ class PhotoFrameApp:
         next_image_selector = NextImageSelector(randomiser)
         cycle_stop_detector = CycleStopDetector()
         image_cycler = ImageCycler(
+            system_operations,
             next_image_selector,
             cycle_stop_detector,
             self.display)
