@@ -13,7 +13,6 @@ class SystemOperations:
         os.remove(file_name)
 
     def replace_file(self, from_file, to_file):
-        self.log(f'Move file {from_file} to {to_file}')
         os.replace(from_file, to_file)
 
     def shutil_copy(self, from_file, to_file):

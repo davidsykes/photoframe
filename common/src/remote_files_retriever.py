@@ -10,8 +10,6 @@ class RemoteFilesRetriever:
         self._system_operations = system_operations
 
     def download_file(self, url: str, destination: str) -> str:
-        self._system_operations.progress(
-            f"Download url {url} to {destination}")
         temporary_file = destination.with_suffix(destination.suffix + ".tmp")
 
         request = Request(

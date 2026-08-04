@@ -11,6 +11,8 @@ class ConfigFileUpdater:
         self._sys_operations = sys_operations
 
     def update_config_file(self, remote_url, local_file_path):
+        self._sys_operations.progress(
+            f"Update config file {local_file_path} from {remote_url}")
         local_file_path = Path(local_file_path)
         temp_local_file_path = local_file_path.with_suffix('.new')
         if self._remote_files_retriever.download_file(

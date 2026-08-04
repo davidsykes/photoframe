@@ -12,7 +12,7 @@ class RemoteFolderDownloaderWrapper:
     def download_folder(self, url, destination_path):
         with TemporaryDirectory(dir=self._tmp_folder_location) as test_folder:
             self._system_operations.progress(
-                f"Download folder {url} to {destination_path} using temporary folder {test_folder}")
+                f"Download folder {destination_path} from {url} using temporary folder {test_folder}")
             return self._remote_folder_downloader.download_folder(
                 url,
                 test_folder,
