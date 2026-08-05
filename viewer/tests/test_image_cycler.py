@@ -14,7 +14,7 @@ class ImageCyclerTests(unittest.TestCase):
              call('three')
             ]
         )
-        self.system_operations.sleep.assert_has_calls(
+        self.display.sleep.assert_has_calls(
             [call(42),
              call(42),
              call(42)
@@ -32,7 +32,7 @@ class ImageCyclerTests(unittest.TestCase):
              call('two')
             ]
         )
-        self.system_operations.sleep.assert_has_calls(
+        self.display.sleep.assert_has_calls(
             [call(42),
              call(42)
             ]
@@ -40,8 +40,6 @@ class ImageCyclerTests(unittest.TestCase):
 
     @classmethod
     def setUp(self):
-        self.system_operations = Mock()
-        self.system_operations.sleep = Mock()
         self.next_image_selector = Mock()
         self.next_image_selector.select_next_image.side_effect = [
             'one', 'two', 'three', 'four'
@@ -51,7 +49,6 @@ class ImageCyclerTests(unittest.TestCase):
             False, False, False, True]
         self.display = Mock()
         self.out = ImageCycler(
-            self.system_operations,
             self.next_image_selector,
             self.cycle_stop_detector,
             self.display,

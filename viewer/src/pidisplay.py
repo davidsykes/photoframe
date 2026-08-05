@@ -1,3 +1,5 @@
+import time
+
 import pygame
 
 class PiSystemDisplay:
@@ -39,3 +41,20 @@ class PiSystemDisplay:
         self.screen.blit(image, (x, y))
         pygame.display.flip()
 
+    def sleep(self, seconds):
+        time_sec = time.time()
+        while time.time() - time_sec < seconds:
+            self._handle_events()
+            time.sleep(0.1)
+
+    def _handle_events(self):
+        for event in pygame.event.get():
+            print(f"Event: {event}")
+            if event.type == pygame.QUIT:
+                running = False
+                raise SystemExit("Quit event received")
+
+            elif event.type == pygame.KEYDOWN:
+                if event.key in (pygame.K_ESCAPE, pygame.K_q):
+                    running = False
+                raise SystemExit("Quit event received")
