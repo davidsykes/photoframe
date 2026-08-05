@@ -1,18 +1,13 @@
 import sys
-from viewer.src.photo_frame_app import PhotoFrameApp
+from viewer.src.photo_frame_app import DisplayType, PhotoFrameApp
 
 def main() -> int:
     try:
-        display = None
+        display_type = DisplayType.PI_DISPLAY_VERSION
         if len(sys.argv) > 1:
             if sys.argv[1] == "pc":
-                from viewer.src.pcdisplay import PCSystemDisplay
-                display = PCSystemDisplay()
-        if display is None:
-            from viewer.src.pidisplay import PiSystemDisplay
-            display = PiSystemDisplay()
-
-        app = PhotoFrameApp(display)
+                display_type = DisplayType.PC_TEST_VERSION
+        app = PhotoFrameApp(display_type)
         result = app.run()
         return result
     except KeyboardInterrupt as e:
