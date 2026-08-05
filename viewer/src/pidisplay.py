@@ -55,5 +55,9 @@ class PiSystemDisplay:
                 raise ViewerExitException(100, "Quit event received")
 
             elif event.type == pygame.KEYDOWN:
+                ctrl_c = (
+                    event.key == pygame.K_c
+                    and (event.mod & pygame.KMOD_CTRL)
+                    )
                 if event.key in (pygame.K_ESCAPE, pygame.K_q) or ctrl_c:
                     raise ViewerExitException(100, f"Quit event {event.key} received")
