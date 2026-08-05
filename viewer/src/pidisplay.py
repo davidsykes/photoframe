@@ -1,9 +1,10 @@
 import time
-
 import pygame
+from viewer.src.viewer_exit_exception import ViewerExitException
 
 class PiSystemDisplay:
-    def __init__(self):
+    def __init__(self, system_operations):
+        self.system_operations = system_operations
         self.SCREEN_WIDTH = 1280
         self.SCREEN_HEIGHT = 800
 
@@ -49,12 +50,10 @@ class PiSystemDisplay:
 
     def _handle_events(self):
         for event in pygame.event.get():
-            print(f"Event: {event}")
+            self.system_operations.log(f"Pygame Event: {event}")
             if event.type == pygame.QUIT:
-                running = False
-                raise SystemExit("Quit event received")
+                raise ViewerExitException(100, "Quit event received")
 
             elif event.type == pygame.KEYDOWN:
-                if event.key in (pygame.K_ESCAPE, pygame.K_q):
-                    running = False
-                raise SystemExit("Quit event received")
+                if event.key in (pygame.K_ESCAPE, pygame.K_q) or ctrl_c:
+                    raise ViewerExitException(100, f"Quit event {event.key} received")
