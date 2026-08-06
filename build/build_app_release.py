@@ -5,7 +5,8 @@ import hashlib
 import json
 
 
-PROJECT_ROOT = Path(__file__).resolve().parent
+BUILDER_ROOT = Path(__file__).resolve().parent
+PROJECT_ROOT = BUILDER_ROOT.parent
 OUTPUT_FOLDER = PROJECT_ROOT / "releases"
 
 EXCLUDED_FOLDER_NAMES = {

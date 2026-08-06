@@ -6,7 +6,6 @@ from viewer.src.next_image_selector import NextImageSelector
 from viewer.src.randomiser import Randomiser
 from viewer.src.image_cycler import ImageCycler
 from common.src.config_file_loader import ConfigFileLoader
-from common.src.system_operations import SystemOperations
 
 
 class DisplayType(Enum):
@@ -17,10 +16,8 @@ class PhotoFrameApp:
     def __init__(self, display_type):
         self._display_type = display_type
 
-    def run(self):
+    def run(self, system_operations):
         ini_file_name = "project_config.json"
-        system_operations = SystemOperations()
-        system_operations.set_logger('viewer', '..')
         config_file_loader = ConfigFileLoader(system_operations)
         config_file = config_file_loader.load_config_file(ini_file_name)
         image_path_path = config_file.get("images_folder")

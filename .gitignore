@@ -2,7 +2,7 @@ __pycache__/
 updater/updater_config.json
 updater/working/
 synchroniser/working/
-dist
+releases
 logs
 project_config.json
 images/
