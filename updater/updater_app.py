@@ -22,14 +22,15 @@ sys_operations.set_logger('updater', '')
 try:
     project_config_path = 'project_config.json'
     config_file_loader = ConfigFileLoader(sys_operations)
-    updater_config_data = config_file_loader.load_config_file('updater/updater_config.json')
-    viewer_app_working_folder = updater_config_data.get(
+    project_config = config_file_loader.load_config_file(project_config_path)
+    if project_config is None:
+        raise RuntimeError(f"Failed to load project config file: {project_config_path}")
+    viewer_app_working_folder = project_config.get(
         'viewer_app_working_folder')
     sys_operations.log(f"Viewer app working folder: {viewer_app_working_folder}")
     sys_operations.ensure_folder_exists(viewer_app_working_folder)
     viewer_sandbox = Sandbox(viewer_app_working_folder)
     
-    project_config = config_file_loader.load_config_file(project_config_path)
     remote_config_url = project_config.get('remote_config_url')
     sys_operations.ensure_folder_exists(WORKING_FOLDER)
     viewer_versions_config_local_path = WORKING_FOLDER.joinpath(
