@@ -1,7 +1,10 @@
 from enum import Enum, auto
 
+from common.src.config_file_updater import ConfigFileUpdater
+from common.src.remote_files_retriever import RemoteFilesRetriever
 from viewer.src.cycle_stop_detector import CycleStopDetector
 from viewer.src.imagepathloader import ImagePathLoader
+from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.next_image_selector import NextImageSelector
 from viewer.src.randomiser import Randomiser
 from viewer.src.image_cycler import ImageCycler
@@ -16,7 +19,7 @@ class PhotoFrameApp:
     def __init__(self, display_type):
         self._display_type = display_type
 
-    def run(self, system_operations):
+    def run(self, system_operations, PROJECT_ROOT):
         ini_file_name = "project_config.json"
         config_file_loader = ConfigFileLoader(system_operations)
         config_file = config_file_loader.load_config_file(ini_file_name)
@@ -25,7 +28,21 @@ class PhotoFrameApp:
         sleep_time_seconds = config_file.get("sleep_time_seconds")
         randomiser = Randomiser()
         next_image_selector = NextImageSelector(randomiser)
-        cycle_stop_detector = CycleStopDetector()
+        remote_config_url = config_file.get("remote_config_url")
+        remote_files_retriever = RemoteFilesRetriever(system_operations)
+        config_file_updater = ConfigFileUpdater(
+            remote_files_retriever,
+            config_file_loader,
+            system_operations)
+        new_app_or_new_photos_detector = NewAppOrNewPhotosDetector(
+            config_file_updater,
+            config_file_loader,
+            remote_config_url,
+            PROJECT_ROOT / 'viewer_config.json',
+            )
+        cycle_stop_detector = CycleStopDetector(
+            [new_app_or_new_photos_detector]
+        )
 
         display = None
         if self._display_type == DisplayType.PC_TEST_VERSION:

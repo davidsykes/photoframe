@@ -9,6 +9,3 @@ class CycleStopDetector:
                 self._stop = True
                 return True
         return False
-
-    def stop(self):
-        self._stop = True
