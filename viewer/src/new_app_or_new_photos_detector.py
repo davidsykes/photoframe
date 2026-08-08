@@ -6,7 +6,7 @@ class NewAppOrNewPhotosDetector:
                  remote_version_loader):
         self._version_retriever = remote_version_loader
 
-    def check_for_stop(self) -> None:
+    def poll(self) -> None:
         current_version = self._version_retriever.get_version()
         if not hasattr(self, '_last_version'):
             self._last_version = current_version

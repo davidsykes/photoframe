@@ -39,6 +39,7 @@ class VersionRepeaterTests(unittest.TestCase):
     @classmethod
     def setUp(self):
         self.version_runner = Mock()
+        self.version_runner.run_version.return_value = DownloadResult.VERSION_APPLICATION_ENDED
         self.version_downloader = Mock()
         self.version_has_been_downloaded_checker = Mock()
         self.out = VersionRepeater(

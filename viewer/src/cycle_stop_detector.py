@@ -3,9 +3,9 @@ class CycleStopDetector:
         self._reasons = reasons
         self._stop = False
 
-    def check_for_stop(self):
+    def poll(self):
         for reason in self._reasons:
-            if reason.check_for_stop():
+            if reason.poll():
                 self._stop = True
                 return True
         return False

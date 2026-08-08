@@ -12,7 +12,7 @@ class ImageCycler:
 
     def cycle_images(self):
         while True:
-            if self._cycle_stop_detector.check_for_stop():
+            if self._cycle_stop_detector.poll():
                 break
             next_image = self._next_image_selector.select_next_image()
             self._display.show_image(next_image)
