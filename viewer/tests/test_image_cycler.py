@@ -22,7 +22,7 @@ class ImageCyclerTests(unittest.TestCase):
         )
         
     def test_cycling_stops_when_cycle_stop_detector_indicates_stop(self):
-        self.cycle_stop_detector.should_stop.side_effect = [
+        self.cycle_stop_detector.check_for_stop.side_effect = [
             False, False, True, True]
         
         self.out.cycle_images()
@@ -45,7 +45,7 @@ class ImageCyclerTests(unittest.TestCase):
             'one', 'two', 'three', 'four'
         ]
         self.cycle_stop_detector = Mock()
-        self.cycle_stop_detector.should_stop.side_effect = [
+        self.cycle_stop_detector.check_for_stop.side_effect = [
             False, False, False, True]
         self.display = Mock()
         self.out = ImageCycler(

@@ -9,6 +9,8 @@ from viewer.src.next_image_selector import NextImageSelector
 from viewer.src.randomiser import Randomiser
 from viewer.src.image_cycler import ImageCycler
 from common.src.config_file_loader import ConfigFileLoader
+from viewer.src.remote_config_version_loader import RemoteConfigVersionLoader
+from viewer.src.status_updater import StatusUpdater
 
 
 class DisplayType(Enum):
@@ -34,12 +36,17 @@ class PhotoFrameApp:
             remote_files_retriever,
             config_file_loader,
             system_operations)
-        new_app_or_new_photos_detector = NewAppOrNewPhotosDetector(
+        status_updater = StatusUpdater()
+        remote_config_version_loader = RemoteConfigVersionLoader(
             config_file_updater,
             config_file_loader,
+            status_updater,
             remote_config_url,
             PROJECT_ROOT / 'viewer_config.json',
             )
+        new_app_or_new_photos_detector = NewAppOrNewPhotosDetector(
+            remote_config_version_loader
+        )
         cycle_stop_detector = CycleStopDetector(
             [new_app_or_new_photos_detector]
         )
