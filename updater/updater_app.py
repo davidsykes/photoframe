@@ -84,7 +84,8 @@ try:
             version = version_list[next_version_to_try]
             if (version_repeater.run_version(version, 3) == DownloadResult.CHECK_FOR_UPDATES):
                 check_for_updates = True      
-            next_version_to_try -= 1
+            else:
+                next_version_to_try -= 1
 except KeyboardInterrupt as ex:
     sys_operations.log('Stopped by keyboard')
 except RuntimeError as ex:

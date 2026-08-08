@@ -5,4 +5,4 @@ class StatusUpdater:
         pass
 
     def update_status(self, key, value):
-        print(f"{key}: {value}")
+        print(f"Status Update: {key}: {value}")

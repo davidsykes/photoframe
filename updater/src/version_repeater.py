@@ -21,5 +21,4 @@ class VersionRepeater:
             if self._version_downloader.download_version(version) is False:
                 return DownloadResult.REMOTE_VERSION_MISSING
 
-        self._version_runner.run_version(version_name)
-        return DownloadResult.VERSION_APPLICATION_ENDED
+        return self._version_runner.run_version(version_name)

@@ -1,3 +1,4 @@
+from updater.src.version_repeater import DownloadResult
 
 
 class VersionRunner:
@@ -23,6 +24,11 @@ class VersionRunner:
             'viewer.viewer_app',
             self._parameters,
             10)
+        if exit_code == 100:
+            self._system_operations.log(
+                f"Version {name} has been stopped due to version change.")
+            return DownloadResult.CHECK_FOR_UPDATES
+        return DownloadResult.VERSION_APPLICATION_ENDED
 
     def launch_app(self, release_folder, module_name, parameters, sleep_time):
         return self._subprocess_exec.launch_app(
