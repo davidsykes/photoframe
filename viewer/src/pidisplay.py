@@ -7,6 +7,7 @@ class PiSystemDisplay:
         self.system_operations = system_operations
         self.SCREEN_WIDTH = 1280
         self.SCREEN_HEIGHT = 800
+        self.event_count = 0
 
     def initialise(self):
         print("Initialising Pi System Display.")
@@ -42,7 +43,7 @@ class PiSystemDisplay:
         self.screen.fill((0, 0, 0))
         self.screen.blit(image, (x, y))
 
-        text_surface = self.my_font.render('Some Text',
+        text_surface = self.my_font.render(f'Events: {self.event_count}',
                                            True,
                                            (255, 255, 255))
         self.screen.blit(text_surface, (10, 10))
@@ -57,6 +58,7 @@ class PiSystemDisplay:
 
     def _handle_events(self):
         for event in pygame.event.get():
+            self.event_count += 1
             self.system_operations.log(f"Pygame Event: {event}")
             if event.type == pygame.QUIT:
                 raise ViewerExitException(100, "Quit event received")
