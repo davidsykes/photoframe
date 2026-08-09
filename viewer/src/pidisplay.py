@@ -16,12 +16,10 @@ class PiSystemDisplay:
         self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT), pygame.FULLSCREEN)
         print('Configured:', self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
         print('Pygame surface:', self.screen.get_size())
+        self.SCREEN_WIDTH, self.SCREEN_HEIGHT = self.screen.get_size()
 
         pygame.display.set_caption("Pi System Display")
         self.my_font = pygame.font.SysFont('Comic Sans MS', 30)
-
-        print('Image:', iw, ih)
-        print('Scaled:', new_size)
 
     def show_image(self, image_path):
         try:
