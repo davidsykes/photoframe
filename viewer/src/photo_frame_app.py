@@ -51,8 +51,10 @@ class PhotoFrameApp:
         new_app_or_new_photos_detector = NewAppOrNewPhotosDetector(
             remote_config_version_loader
         )
-        time_between_version_checks_seconds = viewer_configuration.get("time_between_version_checks_seconds")
+        time_between_version_checks_seconds = viewer_configuration.get(
+            "time_between_version_checks_seconds")
         timed_new_app_or_new_photos_detector = ActionTimer(
+            system_operations,
             new_app_or_new_photos_detector.poll,
             time_between_version_checks_seconds)
         cycle_stop_detector = CycleStopDetector(
