@@ -42,7 +42,9 @@ class PiSystemDisplay:
         self.screen.fill((0, 0, 0))
         self.screen.blit(image, (x, y))
 
-        text_surface = self.my_font.render('Some Text', False, (0, 0, 0))
+        text_surface = self.my_font.render('Some Text',
+                                           True,
+                                           (255, 255, 255))
         self.screen.blit(text_surface, (10, 10))
 
         pygame.display.flip()
