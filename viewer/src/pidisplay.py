@@ -13,6 +13,7 @@ class PiSystemDisplay:
         pygame.init()
         self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT), pygame.FULLSCREEN)
         pygame.display.set_caption("Pi System Display")
+        self.my_font = pygame.font.SysFont('Comic Sans MS', 30)
 
     def show_image(self, image_path):
         try:
@@ -40,6 +41,10 @@ class PiSystemDisplay:
 
         self.screen.fill((0, 0, 0))
         self.screen.blit(image, (x, y))
+
+        text_surface = self.my_font.render('Some Text', False, (0, 0, 0))
+        self.screen.blit(text_surface, (10, 10))
+
         pygame.display.flip()
 
     def sleep(self, seconds):
