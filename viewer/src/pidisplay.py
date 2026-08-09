@@ -29,6 +29,7 @@ class PiSystemDisplay:
             raise RuntimeError(err)
         image = image.convert()
         iw, ih = image.get_size()
+        print('Configured:', self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
 
         scale = min(
             self.SCREEN_WIDTH / iw,
