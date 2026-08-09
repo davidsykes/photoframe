@@ -12,12 +12,14 @@ class PiSystemDisplay:
     def initialise(self):
         print("Initialising Pi System Display.")
         pygame.init()
+        print('Desktop sizes:', pygame.display.get_desktop_sizes())
         self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT), pygame.FULLSCREEN)
+        print('Configured:', self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
+        print('Pygame surface:', self.screen.get_size())
+
         pygame.display.set_caption("Pi System Display")
         self.my_font = pygame.font.SysFont('Comic Sans MS', 30)
 
-        print('Configured:', self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
-        print('Pygame surface:', self.screen.get_size())
         print('Image:', iw, ih)
         print('Scaled:', new_size)
 
