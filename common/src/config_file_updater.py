@@ -15,11 +15,14 @@ class ConfigFileUpdater:
             f"Update config file {local_file_path} from {remote_url}")
         local_file_path = Path(local_file_path)
         temp_local_file_path = local_file_path.with_suffix('.new')
-        if self._remote_files_retriever.download_file(
-            remote_url, temp_local_file_path) is True:
-            if (self._config_file_loader.load_config_file(
-                temp_local_file_path) is not None):
-                self._sys_operations.replace_file(
-                    temp_local_file_path, local_file_path)
-            else:
-                self._sys_operations.delete_file(temp_local_file_path)
+        try:
+            if self._remote_files_retriever.download_file(
+                remote_url, temp_local_file_path) is True:
+                if (self._config_file_loader.load_config_file(
+                    temp_local_file_path) is not None):
+                    self._sys_operations.replace_file(
+                        temp_local_file_path, local_file_path)
+                else:
+                    self._sys_operations.delete_file(temp_local_file_path)
+        except Exception as e:
+            pass

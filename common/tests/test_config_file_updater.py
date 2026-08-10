@@ -16,8 +16,7 @@ class TestConfigFileUpdater(unittest.TestCase):
             Path('local_file_path.new'), Path('local_file_path'))
 
     def test_if_retrieve_fails_the_file_is_not_updated(self):
-        self.remote_files_retriever.download_file.return_value\
-             = False
+        self.remote_files_retriever.download_file.side_effect = Mock(side_effect=Exception('Test'))
 
         self.out.update_config_file("remote_url", self.local_file_path)
 
