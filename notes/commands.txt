@@ -6,8 +6,17 @@ Run tests
 Run the updater
 python -m updater.updater_app
 
-Build a release
-python build_release.py 0.0.6
+Build an app release
+python build/build_app_release.py version
+
+Upload the app to the frame
+scp releases/photoframe-v.zip pi@192.168.1.123:/home/pi/Documents/photoframe
+
+Unzip the app on the target machine
+unzip -o photoframe
+
+Build a viewer release
+python build/build_viewer_release.py.py version
 
 Run the synchroniser
 python -m synchroniser.synchroniser_main

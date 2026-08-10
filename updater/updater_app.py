@@ -82,14 +82,17 @@ try:
 
         while check_for_updates is False and next_version_to_try >= 0:
             version = version_list[next_version_to_try]
-            if (version_repeater.run_version(version, 3) == DownloadResult.CHECK_FOR_UPDATES):
-                check_for_updates = True      
+            version_result = version_repeater.run_version(version, 3)
+            if (version_result == DownloadResult.CHECK_FOR_UPDATES):
+                check_for_updates = True
+            elif (version_result == DownloadResult.VERSION_APPLICATION_QUIT):
+                break
             else:
                 next_version_to_try -= 1
 except KeyboardInterrupt as ex:
     sys_operations.log('Stopped by keyboard')
-except RuntimeError as ex:
-    sys_operations.error(f'Runtime error: {str(ex)}')
+#except RuntimeError as ex:
+#    sys_operations.error(f'Runtime error: {str(ex)}')
 except Exception as ex:
     sys_operations.error(f'Unhandled exception: {str(ex)}')
     traceback.print_exc()

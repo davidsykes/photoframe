@@ -5,9 +5,10 @@ from viewer.src.viewer_exit_exception import ViewerExitException
 class PiSystemDisplay:
     def __init__(self, system_operations):
         self.system_operations = system_operations
-        self.SCREEN_WIDTH = 1280
-        self.SCREEN_HEIGHT = 800
+        self.SCREEN_WIDTH = 1920
+        self.SCREEN_HEIGHT = 1200
         self.event_count = 0
+        self.last_mouse_pos = 'None yet'
 
     def initialise(self):
         print("Initialising Pi System Display.")
@@ -49,12 +50,16 @@ class PiSystemDisplay:
         self.screen.fill((0, 0, 0))
         self.screen.blit(image, (x, y))
 
-        text_surface = self.my_font.render(f'Events: {self.event_count}',
-                                           True,
-                                           (255, 255, 255))
-        self.screen.blit(text_surface, (10, 10))
+        self.print(10, 10, f'Events: {self.event_count}')
+        self.print(20, 30, f'Last mouse position: {self.last_mouse_pos}')
 
         pygame.display.flip()
+
+    def print(self, x, y, message):
+        text_surface = self.my_font.render(message,
+                                           True,
+                                           (255, 255, 255))
+        self.screen.blit(text_surface, (x, y))
 
     def sleep(self, seconds):
         time_sec = time.time()
@@ -75,4 +80,10 @@ class PiSystemDisplay:
                     and (event.mod & pygame.KMOD_CTRL)
                     )
                 if event.key in (pygame.K_ESCAPE, pygame.K_q) or ctrl_c:
+                    if event.key == pygame.K_c:
+                        raise ViewerExitException(101, f"Control-C event received")
                     raise ViewerExitException(100, f"Quit event {event.key} received")
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                self.last_mouse_pos = event.pos
+                x = event.pos[0]
+                y = event.pos[1]

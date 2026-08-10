@@ -2,8 +2,9 @@ from enum import Enum, auto
 
 class DownloadResult(Enum):
     REMOTE_VERSION_MISSING = auto()
-    VERSION_APPLICATION_ENDED = auto()
+    VERSION_APPLICATION_ENDED_UNEXPECTEDLY = auto()
     CHECK_FOR_UPDATES = auto()
+    VERSION_APPLICATION_QUIT = auto()
 
 class VersionRepeater:
     def __init__(

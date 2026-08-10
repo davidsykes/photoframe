@@ -28,7 +28,11 @@ class VersionRunner:
             self._system_operations.log(
                 f"Version {name} has been stopped due to version change.")
             return DownloadResult.CHECK_FOR_UPDATES
-        return DownloadResult.VERSION_APPLICATION_ENDED
+        if exit_code == 101:
+            self._system_operations.log(
+                f"Version {name} has been stopped by a Control-C event.")
+            return DownloadResult.VERSION_APPLICATION_QUIT
+        return DownloadResult.VERSION_APPLICATION_ENDED_UNEXPECTEDLY
 
     def launch_app(self, release_folder, module_name, parameters, sleep_time):
         return self._subprocess_exec.launch_app(

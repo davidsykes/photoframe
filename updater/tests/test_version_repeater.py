@@ -12,7 +12,7 @@ class VersionRepeaterTests(unittest.TestCase):
     def test_the_result_indicates_when_the_version_ends(self):
         result = self.out.run_version(["name", "url"], 22)
 
-        self.assertEqual(result, DownloadResult.VERSION_APPLICATION_ENDED)
+        self.assertEqual(result, DownloadResult.VERSION_APPLICATION_ENDED_UNEXPECTEDLY)
 
     def test_if_the_version_does_not_exist_it_is_downloaded(self):
         self.version_has_been_downloaded_checker.check_if_version_has_been_downloaded.return_value = False
@@ -39,7 +39,7 @@ class VersionRepeaterTests(unittest.TestCase):
     @classmethod
     def setUp(self):
         self.version_runner = Mock()
-        self.version_runner.run_version.return_value = DownloadResult.VERSION_APPLICATION_ENDED
+        self.version_runner.run_version.return_value = DownloadResult.VERSION_APPLICATION_ENDED_UNEXPECTEDLY
         self.version_downloader = Mock()
         self.version_has_been_downloaded_checker = Mock()
         self.out = VersionRepeater(
