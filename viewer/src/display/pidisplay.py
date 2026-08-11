@@ -42,6 +42,12 @@ class PiSystemDisplay:
             int(ih * scale)
         )
 
+        print(
+            'screen=', self.screen.get_size(),
+            'configured=', (self.SCREEN_WIDTH, self.SCREEN_HEIGHT),
+            'image=', image.get_size()
+            )
+
         image = pygame.transform.smoothscale(image, new_size)
 
         x = (self.SCREEN_WIDTH - new_size[0]) // 2
@@ -56,6 +62,11 @@ class PiSystemDisplay:
         self.print(10, 10, f'Events: {self.event_count}')
         self.print(20, 30, f'Last mouse position: {self.last_mouse_pos}')
 
+        print(
+            'show screen=', self.screen.get_size(),
+            'position=', (image.x, image.y),
+            'image=', image.image.get_size()
+            )
         pygame.display.flip()
 
     def print(self, x, y, message):
