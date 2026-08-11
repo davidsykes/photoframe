@@ -1,5 +1,6 @@
 import time
 import pygame
+from viewer.src.display.pygame_image import PygameImage
 from viewer.src.viewer_exit_exception import ViewerExitException
 
 class PiSystemDisplay:
@@ -22,7 +23,7 @@ class PiSystemDisplay:
         pygame.display.set_caption("Pi System Display")
         self.my_font = pygame.font.SysFont('Comic Sans MS', 30)
 
-    def show_image(self, image_path):
+    def load_image(self, image_path):
         try:
             image = pygame.image.load(image_path)
         except pygame.error as e:
@@ -30,7 +31,6 @@ class PiSystemDisplay:
             raise RuntimeError(err)
         image = image.convert()
         iw, ih = image.get_size()
-        print('Configured:', self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
 
         scale = min(
             self.SCREEN_WIDTH / iw,
@@ -47,8 +47,11 @@ class PiSystemDisplay:
         x = (self.SCREEN_WIDTH - new_size[0]) // 2
         y = (self.SCREEN_HEIGHT - new_size[1]) // 2
 
+        return PygameImage(image, x, y)
+
+    def show_image(self, image):
         self.screen.fill((0, 0, 0))
-        self.screen.blit(image, (x, y))
+        self.screen.blit(image.image, (image.x, image.y))
 
         self.print(10, 10, f'Events: {self.event_count}')
         self.print(20, 30, f'Last mouse position: {self.last_mouse_pos}')
