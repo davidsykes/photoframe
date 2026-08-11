@@ -6,8 +6,6 @@ from viewer.src.viewer_exit_exception import ViewerExitException
 class PiSystemDisplay:
     def __init__(self, system_operations):
         self.system_operations = system_operations
-        self.SCREEN_WIDTH = 1920
-        self.SCREEN_HEIGHT = 1200
         self.event_count = 0
         self.last_mouse_pos = 'None yet'
 
@@ -15,11 +13,9 @@ class PiSystemDisplay:
         print("Initialising Pi System Display.")
         pygame.init()
         print('Desktop sizes:', pygame.display.get_desktop_sizes())
-        self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT), pygame.FULLSCREEN)
-        print('Configured:', self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
+        self.screen = pygame.display.set_mode(
+            (0,0), pygame.FULLSCREEN)
         print('Pygame surface:', self.screen.get_size())
-        self.SCREEN_WIDTH, self.SCREEN_HEIGHT = self.screen.get_size()
-
         pygame.display.set_caption("Pi System Display")
         self.my_font = pygame.font.SysFont('Comic Sans MS', 30)
 
@@ -31,10 +27,11 @@ class PiSystemDisplay:
             raise RuntimeError(err)
         image = image.convert()
         iw, ih = image.get_size()
+        sw, sh = self.screen.get_size()
 
         scale = min(
-            self.SCREEN_WIDTH / iw,
-            self.SCREEN_HEIGHT / ih
+            sw / iw,
+            sh / ih
         )
 
         new_size = (
@@ -42,16 +39,10 @@ class PiSystemDisplay:
             int(ih * scale)
         )
 
-        print(
-            'screen=', self.screen.get_size(),
-            'configured=', (self.SCREEN_WIDTH, self.SCREEN_HEIGHT),
-            'image=', image.get_size()
-            )
-
         image = pygame.transform.smoothscale(image, new_size)
 
-        x = (self.SCREEN_WIDTH - new_size[0]) // 2
-        y = (self.SCREEN_HEIGHT - new_size[1]) // 2
+        x = (sw - new_size[0]) // 2
+        y = (sh - new_size[1]) // 2
 
         return PygameImage(image, x, y)
 
