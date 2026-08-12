@@ -10,6 +10,7 @@ from viewer.src.next_image_selector import NextImageSelector
 from viewer.src.randomiser import Randomiser
 from viewer.src.image_cycler import ImageCycler
 from viewer.src.remote_config_version_loader import RemoteConfigVersionLoader
+from viewer.src.sleeper import Sleeper
 from viewer.src.status_updater import StatusUpdater
 from viewer.src.action_timer import ActionTimer
 
@@ -72,11 +73,12 @@ class PhotoFrameApp:
             raise ValueError(f"Unknown display type: {self._display_type}")
         display.initialise()
 
+        sleeper = Sleeper(sleep_time_seconds)
         image_cycler = ImageCycler(
             next_image_selector,
             cycle_stop_detector,
             display,
-            sleep_time_seconds)
+            sleeper)
         image_paths = image_path_loader.load_image_paths()
         next_image_selector.set_images(image_paths)
         image_cycler.cycle_images()

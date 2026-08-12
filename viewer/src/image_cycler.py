@@ -4,11 +4,11 @@ class ImageCycler:
                  next_image_selector,
                  cycle_stop_detector,
                  display,
-                 sleep_time_seconds):
+                 sleeper):
         self._next_image_selector = next_image_selector
         self._cycle_stop_detector = cycle_stop_detector
         self._display = display
-        self._sleep_time_seconds = sleep_time_seconds
+        self._sleeper = sleeper
         self._skip_first_pause = True
 
     def cycle_images(self):
@@ -24,4 +24,4 @@ class ImageCycler:
         if self._skip_first_pause:
             self._skip_first_pause = False
         else:
-            self._display.sleep(self._sleep_time_seconds)
+            self._sleeper.sleep()

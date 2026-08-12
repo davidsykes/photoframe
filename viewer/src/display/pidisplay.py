@@ -1,5 +1,5 @@
 import time
-import pygame
+import pygame # pyright: ignore[reportMissingImports]
 from viewer.src.display.pygame_image import PygameImage
 from viewer.src.viewer_exit_exception import ViewerExitException
 

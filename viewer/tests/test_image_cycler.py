@@ -9,15 +9,14 @@ class ImageCyclerTests(unittest.TestCase):
         self.out.cycle_images()
 
         self.display.show_image.assert_has_calls(
-            [call('one'),
-             call('two'),
-             call('three')
+            [call('image one'),
+             call('image two'),
+             call('image three')
             ]
         )
-        self.display.sleep.assert_has_calls(
-            [call(42),
-             call(42),
-             call(42)
+        self.sleeper.sleep.assert_has_calls(
+            [call(),
+             call()
             ]
         )
         
@@ -28,13 +27,12 @@ class ImageCyclerTests(unittest.TestCase):
         self.out.cycle_images()
 
         self.display.show_image.assert_has_calls(
-            [call('one'),
-             call('two')
+            [call('image one'),
+             call('image two')
             ]
         )
-        self.display.sleep.assert_has_calls(
-            [call(42),
-             call(42)
+        self.sleeper.sleep.assert_has_calls(
+            [call()
             ]
         )
 
@@ -48,8 +46,13 @@ class ImageCyclerTests(unittest.TestCase):
         self.cycle_stop_detector.poll.side_effect = [
             False, False, False, True]
         self.display = Mock()
+        self.display.load_image = self.side_effect
+        self.sleeper = Mock()
         self.out = ImageCycler(
             self.next_image_selector,
             self.cycle_stop_detector,
             self.display,
-            42)
+            self.sleeper)
+
+    def side_effect(path):
+        return 'image ' + path
