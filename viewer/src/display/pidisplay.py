@@ -98,19 +98,21 @@ class PiSystemDisplay:
                     x,
                     y
                 ))
-                print(f'EVENENENTEN 111 {events}')
             elif event.type in [
                 pygame.MOUSEMOTION,
                 pygame.WINDOWSHOWN,
                 pygame.WINDOWMOVED,
                 pygame.WINDOWHIDDEN,
-                pygame.WINDOWEXPOSED
+                pygame.WINDOWEXPOSED,
+                pygame.AUDIODEVICEADDED,
+                pygame.WINDOWSIZECHANGED,
+                pygame.VIDEOEXPOSE,
+                pygame.WINDOWENTER,
+                pygame.WINDOWFOCUSGAINED
             ]:
                 pass
             else:
                 self.system_operations.log(f"Pygame Event: {event}")
-
-        print(f'EVENENENTEN 222 {events}')
         return events
 
     def _handle_events(self):

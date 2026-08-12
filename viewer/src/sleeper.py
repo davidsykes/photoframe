@@ -15,9 +15,8 @@ class Sleeper:
         time_sec = self._system_operations.get_time_seconds()
         while self._system_operations.get_time_seconds() - time_sec < self._sleep_time:
             self._handle_events()
-            self._system_operations.sleep(0.51)
+            self._system_operations.sleep(0.1)
 
     def _handle_events(self):
         events = self._display.get_events()
-        print(f'EVENENENTEN {events}')
         self._events_handler.handle_events(events)
