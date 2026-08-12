@@ -4,6 +4,8 @@ from common.src.config_file_updater import ConfigFileUpdater
 from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.config_file_loader import ConfigFileLoader
 from viewer.src.cycle_stop_detector import CycleStopDetector
+from viewer.src.events.event_handler import EventHandler
+from viewer.src.events.events_handler import EventsHandler
 from viewer.src.imagepathloader import ImagePathLoader
 from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.next_image_selector import NextImageSelector
@@ -73,7 +75,13 @@ class PhotoFrameApp:
             raise ValueError(f"Unknown display type: {self._display_type}")
         display.initialise()
 
-        sleeper = Sleeper(sleep_time_seconds)
+        event_handler = EventHandler()
+        events_handler = EventsHandler(event_handler)
+        sleeper = Sleeper(
+            system_operations,
+            display,
+            events_handler,
+            sleep_time_seconds)
         image_cycler = ImageCycler(
             next_image_selector,
             cycle_stop_detector,

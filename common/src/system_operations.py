@@ -62,5 +62,5 @@ class SystemOperations:
     def sleep(self, seconds):
         time.sleep(seconds)
 
-    def get_time(self):
+    def get_time_seconds(self):
         return time.time()

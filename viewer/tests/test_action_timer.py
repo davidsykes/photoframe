@@ -51,7 +51,7 @@ class ActionTimerTests(unittest.TestCase):
     @classmethod
     def setUp(self):
         self.system_operations = Mock()
-        self.system_operations.get_time = Mock()
+        self.system_operations.get_time_seconds = Mock()
         self.current_time = 0
         self.wait_time(self, 123)
         self.action = Mock()
@@ -62,4 +62,4 @@ class ActionTimerTests(unittest.TestCase):
 
     def wait_time(self, time):
         self.current_time += time
-        self.system_operations.get_time.return_value = self.current_time
+        self.system_operations.get_time_seconds.return_value = self.current_time

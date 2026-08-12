@@ -9,7 +9,7 @@ class SleeperTests(unittest.TestCase):
         self.out.sleep()
 
         self.assertEqual(
-            self.system_operations.time.call_count,
+            self.system_operations.get_time_seconds.call_count,
             5)
         self.system_operations.sleep.assert_has_calls(
             [call(0.1),call(0.1),call(0.1)]
@@ -28,7 +28,7 @@ class SleeperTests(unittest.TestCase):
     @classmethod
     def setUp(self):
         self.system_operations = Mock()
-        self.system_operations.time.side_effect = [
+        self.system_operations.get_time_seconds.side_effect = [
             100, 101, 110, 125, 142]
         self.display = Mock()
         self.event_handler = Mock()

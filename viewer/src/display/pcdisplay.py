@@ -15,3 +15,6 @@ class PCSystemDisplay:
 
     def sleep(self, seconds):
         print(f"Sleeping for {seconds} seconds")
+
+    def get_events(self):
+        return []
