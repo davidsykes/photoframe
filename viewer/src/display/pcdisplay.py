@@ -1,3 +1,5 @@
+from viewer.src.events.uievent import UIEvent
+
 
 class PCSystemDisplay:
     def __init__(self):
@@ -17,4 +19,12 @@ class PCSystemDisplay:
         print(f"Sleeping for {seconds} seconds")
 
     def get_events(self):
-        return []
+        events = []
+        x = 10
+        y = 20
+        events.append(UIEvent(
+            UIEvent.MouseDown,
+            x,
+            y
+        ))
+        return events

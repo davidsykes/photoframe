@@ -1,6 +1,7 @@
 import time
 import pygame # pyright: ignore[reportMissingImports]
 from viewer.src.display.pygame_image import PygameImage
+from viewer.src.events.uievent import UIEvent
 from viewer.src.viewer_exit_exception import ViewerExitException
 
 class PiSystemDisplay:
@@ -71,6 +72,35 @@ class PiSystemDisplay:
         while time.time() - time_sec < seconds:
             self._handle_events()
             time.sleep(0.1)
+
+    
+    def get_events(self):
+        events = []
+        for event in pygame.event.get():
+            self.event_count += 1
+            if event.type == pygame.QUIT:
+                raise ViewerExitException(100, "Quit event received")
+            elif event.type == pygame.KEYDOWN:
+                ctrl_c = (
+                    event.key == pygame.K_c
+                    and (event.mod & pygame.KMOD_CTRL)
+                    )
+                if event.key in (pygame.K_ESCAPE, pygame.K_q) or ctrl_c:
+                    if event.key == pygame.K_c:
+                        raise ViewerExitException(101, f"Control-C event received")
+                    raise ViewerExitException(100, f"Quit event {event.key} received")
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                self.last_mouse_pos = event.pos
+                x = event.pos[0]
+                y = event.pos[1]
+                events.append(UIEvent(
+                    UIEvent.MouseDown,
+                    x,
+                    y
+                ))
+            else:
+                self.system_operations.log(f"Pygame Event: {event}")
+        return []
 
     def _handle_events(self):
         for event in pygame.event.get():
