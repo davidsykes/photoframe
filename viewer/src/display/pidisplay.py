@@ -111,7 +111,7 @@ class PiSystemDisplay:
                 self.system_operations.log(f"Pygame Event: {event}")
 
         print(f'EVENENENTEN 222 {events}')
-        return []
+        return events
 
     def _handle_events(self):
         for event in pygame.event.get():
