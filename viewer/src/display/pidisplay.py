@@ -98,7 +98,14 @@ class PiSystemDisplay:
                     x,
                     y
                 ))
-            elif event.type == pygame.MOUSEMOTION:
+                print(f'EVENENENTEN 111 {events}')
+            elif event.type in [
+                pygame.MOUSEMOTION,
+                pygame.WINDOWSHOWN,
+                pygame.WINDOWMOVED,
+                pygame.WINDOWHIDDEN,
+                pygame.WINDOWEXPOSED
+            ]:
                 pass
             else:
                 self.system_operations.log(f"Pygame Event: {event}")
