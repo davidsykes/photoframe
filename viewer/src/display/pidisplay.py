@@ -98,6 +98,8 @@ class PiSystemDisplay:
                     x,
                     y
                 ))
+            elif event.type == pygame.MOUSEMOTION:
+                pass
             else:
                 self.system_operations.log(f"Pygame Event: {event}")
         return []

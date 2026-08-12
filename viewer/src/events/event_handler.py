@@ -8,4 +8,5 @@ class EventHandler:
         pass
 
     def handle_event(self, event):
+        print('EventHandler handle_event')
         raise ViewerExitException(100, "Quit event received")
