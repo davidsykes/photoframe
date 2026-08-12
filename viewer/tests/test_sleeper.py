@@ -37,6 +37,3 @@ class SleeperTests(unittest.TestCase):
             self.display,
             self.event_handler,
             42)
-
-    def side_effect(path):
-        return 'image ' + path
