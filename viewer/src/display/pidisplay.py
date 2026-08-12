@@ -109,6 +109,8 @@ class PiSystemDisplay:
                 pass
             else:
                 self.system_operations.log(f"Pygame Event: {event}")
+
+        print(f'EVENENENTEN 222 {events}')
         return []
 
     def _handle_events(self):
