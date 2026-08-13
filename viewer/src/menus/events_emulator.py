@@ -1,9 +1,19 @@
-class EventEmulator:
+from viewer.src.menus.uievent import UIEvent
+
+
+class EventsEmulator:
     def __init__(self, system_operations):
         self._system_operations = system_operations
         self._next_event = 0
         self._events = []
         self._start_time = system_operations.get_time_seconds()
+        self._set_initial_events()
+
+    def _set_initial_events(self):
+        self.set_events([
+            (2, [UIEvent(UIEvent.MouseDown, 20, 20)])
+            ]
+        )
 
     def set_events(self, events):
         self._events = events

@@ -1,11 +1,10 @@
 import unittest
 from unittest.mock import Mock, call
 
-from viewer.src.action_timer import ActionTimer
-from viewer.src.menus.event_emulator import EventEmulator
+from viewer.src.menus.events_emulator import EventsEmulator
 
 
-class EventEmulatorTests(unittest.TestCase):
+class EventsEmulatorTests(unittest.TestCase):
     def test_events_appear_when_they_are_ready(self):
         self.out.set_events([
             (10,'Set 1'),
@@ -30,7 +29,7 @@ class EventEmulatorTests(unittest.TestCase):
         self.system_operations.get_time_seconds = Mock()
         self.base_time = 345
         self.set_time(self, 0)
-        self.out = EventEmulator(
+        self.out = EventsEmulator(
             self.system_operations)
 
     def set_time(self, time):

@@ -1,9 +1,8 @@
-from viewer.src.events.uievent import UIEvent
 
 
 class PCSystemDisplay:
-    def __init__(self):
-        pass
+    def __init__(self, event_emulator):
+        self._event_emulator = event_emulator
 
     def initialise(self):
         print("Initialising PC System Display")
@@ -19,12 +18,4 @@ class PCSystemDisplay:
         print(f"Sleeping for {seconds} seconds")
 
     def get_events(self):
-        events = []
-        x = 10
-        y = 20
-        events.append(UIEvent(
-            UIEvent.MouseDown,
-            x,
-            y
-        ))
-        return events
+        return self._event_emulator.get_events()

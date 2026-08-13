@@ -4,8 +4,8 @@ from common.src.config_file_updater import ConfigFileUpdater
 from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.config_file_loader import ConfigFileLoader
 from viewer.src.cycle_stop_detector import CycleStopDetector
-from viewer.src.events.event_handler import EventHandler
-from viewer.src.events.events_handler import EventsHandler
+from viewer.src.menus.event_handler import EventHandler
+from viewer.src.menus.events_handler import EventsHandler
 from viewer.src.imagepathloader import ImagePathLoader
 from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.next_image_selector import NextImageSelector
@@ -67,7 +67,9 @@ class PhotoFrameApp:
         display = None
         if self._display_type == DisplayType.PC_TEST_VERSION:
             from viewer.src.display.pcdisplay import PCSystemDisplay
-            display = PCSystemDisplay()
+            from viewer.src.menus.events_emulator import EventsEmulator
+            events = EventsEmulator(system_operations)
+            display = PCSystemDisplay(events)
         elif self._display_type == DisplayType.PI_DISPLAY_VERSION:
             from viewer.src.display.pidisplay import PiSystemDisplay
             display = PiSystemDisplay(system_operations)
