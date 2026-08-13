@@ -1,7 +1,7 @@
 import time
 import pygame # pyright: ignore[reportMissingImports]
 from viewer.src.display.pygame_image import PygameImage
-from viewer.src.events.uievent import UIEvent
+from viewer.src.menus.uievent import UIEvent
 from viewer.src.viewer_exit_exception import ViewerExitException
 
 class PiSystemDisplay:
