@@ -1,0 +1,22 @@
+class EventEmulator:
+    def __init__(self, system_operations):
+        self._system_operations = system_operations
+        self._next_event = 0
+        self._events = []
+        self._start_time = system_operations.get_time_seconds()
+
+    def set_events(self, events):
+        self._events = events
+
+    def get_events(self):
+        if self._next_event < len(self._events):
+            return self._check_next_event()
+        return []
+
+    def _check_next_event(self):
+        current_time = self._system_operations.get_time_seconds() - self._start_time
+        current_event = self._events[self._next_event]
+        if current_time >= current_event[0]:
+            self._next_event += 1
+            return current_event[1]
+        return []
