@@ -17,8 +17,9 @@ class ImageCycler:
                 break
             next_image_path = self._next_image_selector.select_next_image()
             next_image = self._display.load_image(next_image_path)
-            self.pause_for_user_input()
             self._display.show_image(next_image)
+            self.pause_for_user_input()
+            self._display.flip()
 
     def pause_for_user_input(self):
         if self._skip_first_pause:

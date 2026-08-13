@@ -59,6 +59,8 @@ class PiSystemDisplay:
             'position=', (image.x, image.y),
             'image=', image.image.get_size()
             )
+
+    def flip(self):
         pygame.display.flip()
 
     def print(self, x, y, message):
@@ -67,12 +69,11 @@ class PiSystemDisplay:
                                            (255, 255, 255))
         self.screen.blit(text_surface, (x, y))
 
-    def sleep(self, seconds):
-        time_sec = time.time()
-        while time.time() - time_sec < seconds:
-            self._handle_events()
-            time.sleep(0.1)
-
+    # def sleep(self, seconds):
+    #     time_sec = time.time()
+    #     while time.time() - time_sec < seconds:
+    #         self._handle_events()
+    #         time.sleep(0.1)
     
     def get_events(self):
         events = []
@@ -115,23 +116,23 @@ class PiSystemDisplay:
                 self.system_operations.log(f"Pygame Event: {event}")
         return events
 
-    def _handle_events(self):
-        for event in pygame.event.get():
-            self.event_count += 1
-            self.system_operations.log(f"Pygame Event: {event}")
-            if event.type == pygame.QUIT:
-                raise ViewerExitException(100, "Quit event received")
+    # def _handle_events(self):
+    #     for event in pygame.event.get():
+    #         self.event_count += 1
+    #         self.system_operations.log(f"Pygame Event: {event}")
+    #         if event.type == pygame.QUIT:
+    #             raise ViewerExitException(100, "Quit event received")
 
-            elif event.type == pygame.KEYDOWN:
-                ctrl_c = (
-                    event.key == pygame.K_c
-                    and (event.mod & pygame.KMOD_CTRL)
-                    )
-                if event.key in (pygame.K_ESCAPE, pygame.K_q) or ctrl_c:
-                    if event.key == pygame.K_c:
-                        raise ViewerExitException(101, f"Control-C event received")
-                    raise ViewerExitException(100, f"Quit event {event.key} received")
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                self.last_mouse_pos = event.pos
-                x = event.pos[0]
-                y = event.pos[1]
+    #         elif event.type == pygame.KEYDOWN:
+    #             ctrl_c = (
+    #                 event.key == pygame.K_c
+    #                 and (event.mod & pygame.KMOD_CTRL)
+    #                 )
+    #             if event.key in (pygame.K_ESCAPE, pygame.K_q) or ctrl_c:
+    #                 if event.key == pygame.K_c:
+    #                     raise ViewerExitException(101, f"Control-C event received")
+    #                 raise ViewerExitException(100, f"Quit event {event.key} received")
+    #         elif event.type == pygame.MOUSEBUTTONDOWN:
+    #             self.last_mouse_pos = event.pos
+    #             x = event.pos[0]
+    #             y = event.pos[1]

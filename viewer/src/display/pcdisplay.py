@@ -14,6 +14,9 @@ class PCSystemDisplay:
     def show_image(self, image_path):
         print(f"Showing image on PC: {image_path}")
 
+    def flip(self):
+        print('flip')
+
     def sleep(self, seconds):
         print(f"Sleeping for {seconds} seconds")
 
