@@ -38,7 +38,7 @@ class SystemOperations:
             os.makedirs(log_folder)
         import logging
         now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-        logfile_path = log_folder / f'{log_file_name} {now}.log'
+        logfile_path = log_folder / f'{log_file_name}-{now}.log'
         logging.basicConfig(
             filename=logfile_path,
             level=logging.INFO,

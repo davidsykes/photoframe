@@ -35,6 +35,7 @@ class VersionRunner:
         return DownloadResult.VERSION_APPLICATION_ENDED_UNEXPECTEDLY
 
     def launch_app(self, release_folder, module_name, parameters, sleep_time):
+        self._system_operations.log(f'Launch {module_name} from {release_folder}')
         return self._subprocess_exec.launch_app(
             release_folder,
             module_name,
