@@ -4,11 +4,13 @@ class MainMenu:
     
     def render(self, display):
         statuses = self._statuses.statuses
-        x = 20
-        y = 40
+        x = 40
+        y = 80
         for key, value in statuses.items():
             s = f'{key}: {value}'
             display.print(x, y, s)
+            x += 40
+            y += 80
 
     def mouse_down(self, x, y):
         return None
