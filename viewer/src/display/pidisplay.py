@@ -96,7 +96,9 @@ class PiSystemDisplay:
                 pygame.WINDOWSIZECHANGED,
                 pygame.VIDEOEXPOSE,
                 pygame.WINDOWENTER,
-                pygame.WINDOWFOCUSGAINED
+                pygame.WINDOWFOCUSGAINED,
+                pygame.ACTIVEEVENT,
+                pygame.MOUSEBUTTONUP
             ]:
                 pass
             else:

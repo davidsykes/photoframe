@@ -1,9 +1,10 @@
-Display a sequence of images.
-Implement shuffle-without-repeats.
-Detect a screen touch and toggle a simple status overlay.
-Add support for reloading the image list when a changes file appears.
-Test memory usage after running for several hours.
+pygame.mouse.set_visible(False)
 
+Locally overidable values such as time between update checks
+    So development versions can check much quicker
+Implement shuffle-without-repeats.
+
+Test memory usage after running for several hours.
 The long-duration test is particularly worthwhile because photo frames have a habit of running continuously for months. If memory usage stays stable over 24 hours you've largely proven the viewer is production ready.
 
 One thing you may discover is that preloading the next image removes even the slight pause that can occur while loading from the SD card:
