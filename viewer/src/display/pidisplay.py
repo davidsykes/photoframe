@@ -47,8 +47,10 @@ class PiSystemDisplay:
 
         return PygameImage(image, x, y)
 
-    def show_image(self, image):
+    def prepare_screen(self):
         self.screen.fill((0, 0, 0))
+
+    def show_image(self, image):
         self.screen.blit(image.image, (image.x, image.y))
 
         self.print(10, 10, f'Events: {self.event_count}')
@@ -68,6 +70,7 @@ class PiSystemDisplay:
                                            True,
                                            (255, 255, 255))
         self.screen.blit(text_surface, (x, y))
+
 
     # def sleep(self, seconds):
     #     time_sec = time.time()
@@ -115,6 +118,7 @@ class PiSystemDisplay:
             else:
                 self.system_operations.log(f"Pygame Event: {event}")
         return events
+
 
     # def _handle_events(self):
     #     for event in pygame.event.get():

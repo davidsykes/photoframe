@@ -10,9 +10,15 @@ class PCSystemDisplay:
     def load_image(self, image_path):
         print(f"Loading image on PC: {image_path}")
         return image_path
+    
+    def prepare_screen(self):
+        print('Prep screen')
 
     def show_image(self, image_path):
         print(f"Showing image on PC: {image_path}")
+
+    def print(self, x, y, s):
+        print(f'print({x},{y} {s})')
 
     def flip(self):
         print('flip')

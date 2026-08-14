@@ -2,7 +2,7 @@
 
 class StatusUpdater:
     def __init__(self):
-        pass
+        self.statuses = {}
 
     def update_status(self, key, value):
-        print(f"Status Update: {key}: {value}")
+        self.statuses[key] = value

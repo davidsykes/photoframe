@@ -7,6 +7,8 @@ from viewer.src.cycle_stop_detector import CycleStopDetector
 from viewer.src.menus.event_handler import EventHandler
 from viewer.src.menus.events_handler import EventsHandler
 from viewer.src.imagepathloader import ImagePathLoader
+from viewer.src.menus.main_menu import MainMenu
+from viewer.src.menus.menu_handler import MenuHandler
 from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.next_image_selector import NextImageSelector
 from viewer.src.randomiser import Randomiser
@@ -77,7 +79,9 @@ class PhotoFrameApp:
             raise ValueError(f"Unknown display type: {self._display_type}")
         display.initialise()
 
-        event_handler = EventHandler()
+        main_menu = MainMenu(status_updater)
+        menu_handler = MenuHandler(main_menu)
+        event_handler = EventHandler(menu_handler)
         events_handler = EventsHandler(event_handler)
         sleeper = Sleeper(
             system_operations,
@@ -87,9 +91,10 @@ class PhotoFrameApp:
         image_cycler = ImageCycler(
             next_image_selector,
             cycle_stop_detector,
+            menu_handler,
             display,
             sleeper)
-        image_paths = image_path_loader.load_image_paths()
+        image_paths = image_path_loader.load_image_paths(status_updater)
         next_image_selector.set_images(image_paths)
         image_cycler.cycle_images()
         

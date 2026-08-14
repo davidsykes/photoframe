@@ -5,10 +5,12 @@ class ImagePathLoader:
         self.image_directory = image_directory
         self.excluded_extensions = {'.json', '.txt'}
 
-    def load_image_paths(self):
+    def load_image_paths(self, status_updater):
         print(f"Loading image paths from directory: {self.image_directory}")
         image_paths = self._list_files_recursive(self.image_directory)
-        print(f"Found {len(image_paths)} images.")
+        status_updater.update_status(
+            'Photos', len(image_paths)
+        )
         return image_paths
 
     def _list_files_recursive(self, path):

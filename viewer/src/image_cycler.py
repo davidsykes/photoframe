@@ -3,10 +3,12 @@ class ImageCycler:
     def __init__(self,
                  next_image_selector,
                  cycle_stop_detector,
+                 menu,
                  display,
                  sleeper):
         self._next_image_selector = next_image_selector
         self._cycle_stop_detector = cycle_stop_detector
+        self._menu = menu
         self._display = display
         self._sleeper = sleeper
         self._skip_first_pause = True
@@ -17,7 +19,9 @@ class ImageCycler:
                 break
             next_image_path = self._next_image_selector.select_next_image()
             next_image = self._display.load_image(next_image_path)
+            self._display.prepare_screen()
             self._display.show_image(next_image)
+            self._menu.render(self._display)
             self.pause_for_user_input()
             self._display.flip()
 
