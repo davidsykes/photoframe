@@ -1,9 +1,0 @@
-A service definition
-
-sudo systemctl enable photoframe
-
-
-What does this mean
-After=local-fs.target
-
-Will ssh still work?

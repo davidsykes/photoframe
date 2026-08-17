@@ -81,6 +81,12 @@ def build_release(version: str) -> Path:
             Path("common"),
         )
 
+        add_folder(
+            archive,
+            PROJECT_ROOT / "release",
+            Path("release"),
+        )
+
         archive.writestr("VERSION", version + "\n")
         archive.writestr(
             "release.json",

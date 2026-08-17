@@ -1,0 +1,12 @@
+Create a pi system sd card
+
+Build a new app release
+python build/build_app_release.py version
+
+
+Move
+release/photoframe.desktop
+to
+~/.config/autostart/photoframe.desktop
+
+reboot
