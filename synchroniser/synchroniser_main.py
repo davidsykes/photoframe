@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 from common.src.config_file_loader import ConfigFileLoader

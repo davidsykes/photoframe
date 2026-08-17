@@ -91,8 +91,6 @@ try:
                 next_version_to_try -= 1
 except KeyboardInterrupt as ex:
     sys_operations.log('Stopped by keyboard')
-#except RuntimeError as ex:
-#    sys_operations.error(f'Runtime error: {str(ex)}')
 except Exception as ex:
     sys_operations.error(f'Unhandled exception: {str(ex)}')
     traceback.print_exc()
