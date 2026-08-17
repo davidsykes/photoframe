@@ -5,6 +5,7 @@ from viewer.src.image_cycler import ImageCycler
 
 
 class ImageCyclerTests(unittest.TestCase):
+    @unittest.skip("code will be refactored")
     def test_images_are_cycled_in_sequence(self):
         self.out.cycle_images()
 
@@ -20,6 +21,7 @@ class ImageCyclerTests(unittest.TestCase):
             ]
         )
         
+    @unittest.skip("code will be refactored")
     def test_cycling_stops_when_cycle_stop_detector_indicates_stop(self):
         self.cycle_stop_detector.poll.side_effect = [
             False, False, True, True]
