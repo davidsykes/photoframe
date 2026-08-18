@@ -1,12 +1,33 @@
 Create a pi system sd card
+Boot up the new system and set up the initial values
+enable ssh
+ sudo raspi-config
+Download updates
+ sudo apt-get update
+ sudo apt-get upgrade
+ sudo apt-get update
+ sudo apt-get upgrade
 
 Build a new app release
-python build/build_app_release.py version
+ python utilities/build_app_release.py version
 
+Transfer the app release to the new system
+ scp releases/photoframe-0.1.0.zip h32@192.168.1.nnn:/home/pi/photoframe
+
+Log on to the new system
+ ssh
+
+Unzip the code
+ unzip -o 
+
+Edit the file release/photoframe.desktop and correct the start folder
 
 Move
 release/photoframe.desktop
 to
 ~/.config/autostart/photoframe.desktop
+
+Move release/project_config.json to /home/pi/photoframe
+and edit the values
 
 reboot

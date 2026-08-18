@@ -1,3 +1,7 @@
+show VERSION files
+
+remove unreferenced folders
+
 pygame.mouse.set_visible(False)
 
 Locally overidable values such as time between update checks
