@@ -20,12 +20,16 @@ Log on to the new system
 Unzip the code
  unzip -o 
 
-Edit the file release/photoframe.desktop and correct the start folder
 
-Move
-release/photoframe.desktop
-to
-~/.config/autostart/photoframe.desktop
+Edit  release/start-photoframe.sh
+Move the file to the photoframe folder
+Make it executable
+ chmod +x start-photoframe.sh
+
+Add the sh file to the autostart
+ nano ~/.config/labwc/autostart
+and add
+ /home/david/photoframe/start-photoframe.sh &
 
 Move release/project_config.json to /home/pi/photoframe
 and edit the values
