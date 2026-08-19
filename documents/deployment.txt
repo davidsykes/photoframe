@@ -12,7 +12,7 @@ Build a new app release
  python utilities/build_app_release.py version
 
 Transfer the app release to the new system
- scp releases/photoframe-0.1.0.zip h32@192.168.1.nnn:/home/pi/photoframe
+ scp releases/photoframe-0.1.0.zip pi@192.168.1.nnn:/home/pi/photoframe
 
 Log on to the new system
  ssh
@@ -29,7 +29,7 @@ Make it executable
 Add the sh file to the autostart
  nano ~/.config/labwc/autostart
 and add
- /home/david/photoframe/start-photoframe.sh &
+ /home/pi/photoframe/start-photoframe.sh &
 
 Move release/project_config.json to /home/pi/photoframe
 and edit the values

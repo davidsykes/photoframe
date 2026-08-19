@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Photo Frame
-Exec=/usr/bin/python3 -m updater.updater_app
-Path=/home/david/photoframe
-Terminal=false
-X-GNOME-Autostart-enabled=true
