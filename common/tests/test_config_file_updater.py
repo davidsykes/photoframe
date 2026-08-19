@@ -8,7 +8,7 @@ class TestConfigFileUpdater(unittest.TestCase):
     def test_update(self):
         self.out.update_config_file("remote_url", 'local_file_path')
 
-        self.remote_files_retriever.download_file.assert_called_once_with(
+        self.remote_files_retriever.download_file_or_return_false.assert_called_once_with(
             "remote_url", Path('local_file_path.new'))
         self.config_file_loader.load_config_file.assert_called_once_with(
             Path('local_file_path.new'))
@@ -16,11 +16,12 @@ class TestConfigFileUpdater(unittest.TestCase):
             Path('local_file_path.new'), Path('local_file_path'))
 
     def test_if_retrieve_fails_the_file_is_not_updated(self):
-        self.remote_files_retriever.download_file.side_effect = Mock(side_effect=Exception('Test'))
+        self.remote_files_retriever.download_file_or_return_false\
+            .return_value = False
 
         self.out.update_config_file("remote_url", self.local_file_path)
 
-        self.remote_files_retriever.download_file.assert_called_once_with(
+        self.remote_files_retriever.download_file_or_return_false.assert_called_once_with(
             "remote_url", self.local_file_path_new)
         self.config_file_loader.load_config_file.assert_not_called()
         self.sys_operations.replace_file.assert_not_called()
@@ -30,7 +31,7 @@ class TestConfigFileUpdater(unittest.TestCase):
 
         self.out.update_config_file("remote_url", self.local_file_path)
 
-        self.remote_files_retriever.download_file.assert_called_once_with(
+        self.remote_files_retriever.download_file_or_return_false.assert_called_once_with(
             "remote_url", self.local_file_path_new)
         self.config_file_loader.load_config_file.assert_called_once_with(
             self.local_file_path_new)
@@ -50,8 +51,8 @@ class TestConfigFileUpdater(unittest.TestCase):
         self.local_file_path = Path('local_file_path')
         self.local_file_path_new = Path('local_file_path.new')
         self.remote_files_retriever = Mock()
-        self.remote_files_retriever.download_file = Mock()
-        self.remote_files_retriever.download_file.return_value =\
+        self.remote_files_retriever.download_file_or_return_false = Mock()
+        self.remote_files_retriever.download_file_or_return_false.return_value =\
              True
         self.config_file_loader = Mock()
         self.config_file_loader.load_config_file = Mock()

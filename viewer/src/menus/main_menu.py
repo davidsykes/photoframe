@@ -1,3 +1,6 @@
+from viewer.src.viewer_exit_exception import ViewerExitException
+
+
 class MainMenu:
     def __init__(self, statuses):
         self._statuses = statuses
@@ -12,4 +15,5 @@ class MainMenu:
             y += 20
 
     def mouse_down(self, x, y):
+        raise ViewerExitException(101, f"Control-C event received")
         return None

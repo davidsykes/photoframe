@@ -21,7 +21,7 @@ class VersionDownloaderTests(unittest.TestCase):
 
         result = self.out.download_version(["name", "url"])
 
-        self.remote_files_retriever.download_file.assert_called_once_with(
+        self.remote_files_retriever.download_file_or_return_false.assert_called_once_with(
             'url','zip file location')
         self.unzipper.unzip.assert_called_once_with(
             'zip file location', 'temporary zip folder'
@@ -38,11 +38,11 @@ class VersionDownloaderTests(unittest.TestCase):
         self.assertTrue(result)
 
     def test_if_the_download_fails_false_is_returned_and_the_failure_logged(self):
-        self.remote_files_retriever.download_file.return_value = False
+        self.remote_files_retriever.download_file_or_return_false.return_value = False
 
         result = self.out.download_version(["name", "url"])
 
-        self.remote_files_retriever.download_file.assert_called_once_with(
+        self.remote_files_retriever.download_file_or_return_false.assert_called_once_with(
             'url','zip file location')
         self.unzipper.unzip.assert_not_called()
         self.system_operations.delete_file.assert_not_called()
@@ -57,7 +57,7 @@ class VersionDownloaderTests(unittest.TestCase):
 
         result = self.out.download_version(["name", "url"])
 
-        self.remote_files_retriever.download_file.assert_called_once_with(
+        self.remote_files_retriever.download_file_or_return_false.assert_called_once_with(
             'url','zip file location')
         self.unzipper.unzip.assert_called_once_with(
             'zip file location', 'temporary zip folder'
@@ -74,7 +74,7 @@ class VersionDownloaderTests(unittest.TestCase):
 
         result = self.out.download_version(["name", "url"])
 
-        self.remote_files_retriever.download_file.assert_called_once_with(
+        self.remote_files_retriever.download_file_or_return_false.assert_called_once_with(
             'url','zip file location')
         self.unzipper.unzip.assert_called_once_with(
             'zip file location', 'temporary zip folder'

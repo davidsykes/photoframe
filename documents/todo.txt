@@ -1,8 +1,10 @@
+Ensure there is a touch screen method of returning to the desktop
+
+pygame.mouse.set_visible(False)
+
 show VERSION files
 
 remove unreferenced folders
-
-pygame.mouse.set_visible(False)
 
 Locally overidable values such as time between update checks
     So development versions can check much quicker

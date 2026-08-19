@@ -26,7 +26,7 @@ class VersionDownloader:
         return False
 
     def download_remote_file(self, version_name, version_url, zip_path):
-        if self._remote_files_retriever.download_file(
+        if self._remote_files_retriever.download_file_or_return_false(
             version_url, zip_path):
             return True
         self._system_operations.error(
