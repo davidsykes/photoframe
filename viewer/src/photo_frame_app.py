@@ -15,8 +15,9 @@ from viewer.src.randomiser import Randomiser
 from viewer.src.image_cycler import ImageCycler
 from viewer.src.remote_config_version_loader import RemoteConfigVersionLoader
 from viewer.src.sleeper import Sleeper
-from viewer.src.status_updater import StatusUpdater
+from viewer.src.status.status_updater import StatusUpdater
 from viewer.src.action_timer import ActionTimer
+from viewer.src.status.version_loader import VersionLoader
 
 class DisplayType(Enum):
     PC_TEST_VERSION = auto()
@@ -46,6 +47,7 @@ class PhotoFrameApp:
             config_file_loader,
             system_operations)
         status_updater = StatusUpdater()
+        VersionLoader().load_version_details('VERSION', status_updater)
         remote_config_version_loader = RemoteConfigVersionLoader(
             config_file_updater,
             config_file_loader,
