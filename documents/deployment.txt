@@ -2,11 +2,11 @@ Create a pi system sd card
 Boot up the new system and set up the initial values
 enable ssh
  sudo raspi-config
-Download updates
+Download updates (on the target machine if possible)
  sudo apt-get update
- sudo apt-get upgrade
+ sudo apt full-upgrade
  sudo apt-get update
- sudo apt-get upgrade
+sudo apt full-upgrade
 
 Build a new app release
  python utilities/build_app_release.py version
@@ -21,8 +21,9 @@ Unzip the code
  unzip -o 
 
 
-Edit  release/start-photoframe.sh
-Move the file to the photoframe folder
+Move release/start-photoframe.sh
+To the photoframe folder
+Edit it
 Make it executable
  chmod +x start-photoframe.sh
 
@@ -30,6 +31,8 @@ Add the sh file to the autostart
  nano ~/.config/labwc/autostart
 and add
  /home/pi/photoframe/start-photoframe.sh &
+Make it executable
+ chmod +x ~/.config/labwc/autostart
 
 Move release/project_config.json to /home/pi/photoframe
 and edit the values

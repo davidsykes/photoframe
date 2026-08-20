@@ -30,6 +30,7 @@ class SubprocessExec:
 
         exit_code = process.wait()
         self._system_operations.log(f'{module_name} exited with code {exit_code}')
+        self._system_operations.log('--------------')
         if exit_code not in [100,101]:
             print(f'Pausing for {sleep_time} seconds...')
             time.sleep(sleep_time)

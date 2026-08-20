@@ -1,0 +1,8 @@
+Plug the photoframe in
+Wait for the photos to start
+Touch the screen once and wait for two changes in photos
+Some text should appear
+Touch the screen again, the desktop should appear
+Click on the two vertical arrows to the left of the time
+Select the wifi point and enter the password
+Reboot
