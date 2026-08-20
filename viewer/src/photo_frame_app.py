@@ -50,7 +50,8 @@ class PhotoFrameApp:
             config_file_loader,
             system_operations)
         status_updater = StatusUpdater()
-        VersionLoader().load_version_details('VERSION', status_updater)
+        VersionLoader(system_operations, status_updater)\
+            .load_version_details(PROJECT_ROOT / 'VERSION')
         remote_config_version_loader = RemoteConfigVersionLoader(
             config_file_updater,
             config_file_loader,

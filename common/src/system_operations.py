@@ -6,9 +6,12 @@ import time
 
 class SystemOperations:
     def load_file(self, file_name) -> str:
-        with open(file_name, 'r') as file:
-            data = file.read()
-        return data
+        try:
+            with open(file_name, 'r') as file:
+                data = file.read()
+            return data        
+        except FileNotFoundError:
+            return None
 
     def delete_file(self, file_name):
         os.remove(file_name)
