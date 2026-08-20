@@ -18,6 +18,7 @@ from viewer.src.sleeper import Sleeper
 from viewer.src.status.status_updater import StatusUpdater
 from viewer.src.action_timer import ActionTimer
 from viewer.src.status.version_loader import VersionLoader
+from viewer.src.viewer_exit_exception import ViewerExitException
 
 class DisplayType(Enum):
     PC_TEST_VERSION = auto()
@@ -31,6 +32,8 @@ class PhotoFrameApp:
         config_file_loader = ConfigFileLoader(system_operations)
         whole_project_config_file_name = "project_config.json"
         whole_project_configuration = config_file_loader.load_config_file(whole_project_config_file_name)
+        if whole_project_configuration is None:
+            raise ViewerExitException(1, f'Missing project configuration {whole_project_config_file_name}')
         viewer_config_file_name = "viewer/viewer_config.json"
         viewer_configuration = config_file_loader.load_config_file(viewer_config_file_name)
         if viewer_configuration is None:
