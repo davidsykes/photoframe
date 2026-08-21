@@ -7,10 +7,11 @@ class ActionTimer:
         self._system_operations = system_operations
         self._action = action
         self._time_between_checks = time_between_checks
-        self._next_time = self._system_operations.get_time_seconds() + self._time_between_checks
+        self._next_time = 0
 
-    def poll(self):
+    def run_if_due(self):
         now = self._system_operations.get_time_seconds()
         if now >= self._next_time:
-            self._action()
             self._next_time = now + self._time_between_checks
+            return self._action()
+        return None
