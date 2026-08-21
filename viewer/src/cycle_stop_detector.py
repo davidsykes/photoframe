@@ -5,7 +5,7 @@ class CycleStopDetector:
 
     def poll(self):
         for reason in self._reasons:
-            if reason.poll():
+            if reason.run_if_due():
                 self._stop = True
                 return True
         return False
