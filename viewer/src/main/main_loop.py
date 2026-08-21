@@ -3,11 +3,13 @@ class MainLoop:
                  cycle_stop_detector,
                  next_image_timer,
                  display,
-                 events_handler):
+                 events_handler,
+                 menu):
         self._cycle_stop_detector = cycle_stop_detector
         self._next_image_timer = next_image_timer
         self._display = display
         self._events_handler = events_handler
+        self._menu = menu
         self._current_image = self._next_image_timer.run_if_due()
 
     def loop(self):
@@ -29,7 +31,7 @@ class MainLoop:
             next_image = self._display.load_image(self._current_image)
             self._display.prepare_screen()
             self._display.show_image(next_image)
-            #self._menu.render(self._display)
+            self._menu.render(self._display)
             #self.pause_for_user_input() Uses Sleeper
             self._display.flip()
             self._images_shown += 1

@@ -106,7 +106,8 @@ class PhotoFrameApp:
             cycle_stop_detector,
             next_image_timer,
             display,
-            events_handler)
+            events_handler,
+            menu_handler)
         system_operations.log('Main loop Starting')
         main_loop.loop()
         system_operations.log('Main loop Ended')
