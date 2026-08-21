@@ -107,7 +107,9 @@ class PhotoFrameApp:
             cycle_stop_detector,
             next_image_timer,
             display)
+        system_operations.log('Main loop Starting')
         main_loop.loop()
+        system_operations.log('Main loop Ended')
 
         image_cycler = ImageCycler(
             next_image_selector,

@@ -13,7 +13,7 @@ class MainLoop:
         self._images_shown = 0
         while self._images_shown < 3:
             self.loop_once()
-        print('*************** Out of new mainloop ***************')
+        raise RuntimeError('*************** Out of new mainloop ***************')
 
     def loop_once(self):
         needs_update = False

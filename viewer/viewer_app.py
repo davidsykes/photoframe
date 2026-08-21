@@ -12,6 +12,7 @@ def main() -> int:
     print(f"Starting Photo Frame Viewer from {PROJECT_ROOT}")
     system_operations = SystemOperations()
     system_operations.set_logger('viewer', '..')
+    system_operations.log('Application Starting')
     try:
         display_type = DisplayType.PI_DISPLAY_VERSION
         if len(sys.argv) > 1:
