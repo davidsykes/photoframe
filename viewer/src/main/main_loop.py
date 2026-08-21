@@ -9,11 +9,11 @@ class MainLoop:
         self._current_image = self._next_image_timer.run_if_due()
 
     def loop(self):
-        print('IN NNAONASO NLADLSDJ')
+        print('*************** In new mainloop ***************')
         self._images_shown = 0
         while self._images_shown < 3:
             self.loop_once()
-        print('IN NNAONASO NLADLSDJ KLJFJLDJKSFLJ')
+        print('*************** Out of new mainloop ***************')
 
     def loop_once(self):
         needs_update = False
@@ -23,8 +23,9 @@ class MainLoop:
             self._current_image = new_image
             needs_update = True
         if needs_update:
+            next_image = self._display.load_image(self._current_image)
             self._display.prepare_screen()
-            self._display.show_image(self._current_image)
+            self._display.show_image(next_image)
             #self._menu.render(self._display)
             #self.pause_for_user_input() Uses Sleeper
             self._display.flip()
