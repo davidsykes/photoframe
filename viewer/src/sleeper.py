@@ -3,11 +3,9 @@
 class Sleeper:
     def __init__(self,
                  system_operations,
-                 display,
                  events_handler,
                  sleep_time):
         self._system_operations = system_operations
-        self._display = display
         self._events_handler = events_handler
         self._sleep_time = sleep_time
 
@@ -18,5 +16,4 @@ class Sleeper:
             self._system_operations.sleep(0.1)
 
     def _handle_events(self):
-        events = self._display.get_events()
-        self._events_handler.handle_events(events)
+        self._events_handler.handle_events()

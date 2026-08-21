@@ -2,10 +2,12 @@ class MainLoop:
     def __init__(self,
                  cycle_stop_detector,
                  next_image_timer,
-                 display):
+                 display,
+                 events_handler):
         self._cycle_stop_detector = cycle_stop_detector
         self._next_image_timer = next_image_timer
         self._display = display
+        self._events_handler = events_handler
         self._current_image = self._next_image_timer.run_if_due()
 
     def loop(self):
@@ -13,11 +15,12 @@ class MainLoop:
         self._images_shown = 0
         while self._images_shown < 3:
             self.loop_once()
-        raise RuntimeError('*************** Out of new mainloop ***************')
+        #raise RuntimeError('*************** Out of new mainloop ***************')
 
     def loop_once(self):
         needs_update = False
         self._cycle_stop_detector.poll()
+        self._events_handler.handle_events()
         new_image = self._next_image_timer.run_if_due()
         if new_image is not None:
             self._current_image = new_image

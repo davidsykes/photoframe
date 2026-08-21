@@ -89,10 +89,9 @@ class PhotoFrameApp:
         main_menu = MainMenu(status_updater)
         menu_handler = MenuHandler(main_menu)
         event_handler = EventHandler(menu_handler)
-        events_handler = EventsHandler(event_handler)
+        events_handler = EventsHandler(display, event_handler)
         sleeper = Sleeper(
             system_operations,
-            display,
             events_handler,
             sleep_time_seconds)
         image_paths = image_path_loader.load_image_paths(status_updater)
@@ -106,7 +105,8 @@ class PhotoFrameApp:
         main_loop = MainLoop(
             cycle_stop_detector,
             next_image_timer,
-            display)
+            display,
+            events_handler)
         system_operations.log('Main loop Starting')
         main_loop.loop()
         system_operations.log('Main loop Ended')
