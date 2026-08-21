@@ -1,4 +1,4 @@
-Ensure there is a touch screen method of returning to the desktop
+ImageCycler can go
 
 pygame.mouse.set_visible(False)
 

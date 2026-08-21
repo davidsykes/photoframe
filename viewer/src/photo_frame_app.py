@@ -4,6 +4,7 @@ from common.src.config_file_updater import ConfigFileUpdater
 from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.config_file_loader import ConfigFileLoader
 from viewer.src.cycle_stop_detector import CycleStopDetector
+from viewer.src.main.main_loop import MainLoop
 from viewer.src.menus.event_handler import EventHandler
 from viewer.src.menus.events_handler import EventsHandler
 from viewer.src.imagepathloader import ImagePathLoader
@@ -94,13 +95,25 @@ class PhotoFrameApp:
             display,
             events_handler,
             sleep_time_seconds)
+        image_paths = image_path_loader.load_image_paths(status_updater)
+        next_image_selector.set_images(image_paths)
+
+        next_image_timer = ActionTimer(
+            system_operations,
+            next_image_selector.select_next_image,
+            sleep_time_seconds
+        )
+        main_loop = MainLoop(
+            cycle_stop_detector,
+            next_image_timer,
+            display)
+        main_loop.loop()
+
         image_cycler = ImageCycler(
             next_image_selector,
             cycle_stop_detector,
             menu_handler,
             display,
             sleeper)
-        image_paths = image_path_loader.load_image_paths(status_updater)
-        next_image_selector.set_images(image_paths)
         image_cycler.cycle_images()
         

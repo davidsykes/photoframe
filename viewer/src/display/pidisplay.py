@@ -1,4 +1,3 @@
-import time
 import pygame # pyright: ignore[reportMissingImports]
 from viewer.src.display.pygame_image import PygameImage
 from viewer.src.menus.uievent import UIEvent
@@ -9,6 +8,10 @@ class PiSystemDisplay:
         self.system_operations = system_operations
         self.event_count = 0
         self.last_mouse_pos = 'None yet'
+        self._clock = pygame.time.Clock()
+
+    def tick(self, v):
+        self._clock.tick(v)
 
     def initialise(self):
         print("Initialising Pi System Display.")

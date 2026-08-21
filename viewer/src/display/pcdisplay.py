@@ -28,3 +28,6 @@ class PCSystemDisplay:
 
     def get_events(self):
         return self._event_emulator.get_events()
+
+    def tick(self, v):
+        pass
