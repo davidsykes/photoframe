@@ -1,4 +1,4 @@
-ImageCycler can go
+ImageCycler and sleeper can go
 
 pygame.mouse.set_visible(False)
 

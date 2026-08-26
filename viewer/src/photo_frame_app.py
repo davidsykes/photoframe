@@ -108,9 +108,9 @@ class PhotoFrameApp:
             display,
             events_handler,
             menu_handler)
-        system_operations.log('Main loop Starting')
+        system_operations.log('---------------------- Main loop Starting')
         main_loop.loop()
-        system_operations.log('Main loop Ended')
+        system_operations.log('---------------------- Main loop Ended')
 
         image_cycler = ImageCycler(
             next_image_selector,

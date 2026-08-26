@@ -15,7 +15,7 @@ class MainLoop:
     def loop(self):
         print('*************** In new mainloop ***************')
         self._images_shown = 0
-        while self._images_shown < 3:
+        while self._images_shown < 5:
             self.loop_once()
         #raise RuntimeError('*************** Out of new mainloop ***************')
 
