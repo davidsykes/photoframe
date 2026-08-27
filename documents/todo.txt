@@ -1,5 +1,3 @@
-ImageCycler and sleeper can go
-
 pygame.mouse.set_visible(False)
 
 show VERSION files

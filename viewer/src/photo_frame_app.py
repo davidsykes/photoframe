@@ -13,9 +13,7 @@ from viewer.src.menus.menu_handler import MenuHandler
 from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.next_image_selector import NextImageSelector
 from viewer.src.randomiser import Randomiser
-from viewer.src.image_cycler import ImageCycler
 from viewer.src.remote_config_version_loader import RemoteConfigVersionLoader
-from viewer.src.sleeper import Sleeper
 from viewer.src.status.status_updater import StatusUpdater
 from viewer.src.action_timer import ActionTimer
 from viewer.src.status.version_loader import VersionLoader
@@ -90,10 +88,6 @@ class PhotoFrameApp:
         menu_handler = MenuHandler(main_menu)
         event_handler = EventHandler(menu_handler)
         events_handler = EventsHandler(display, event_handler)
-        sleeper = Sleeper(
-            system_operations,
-            events_handler,
-            sleep_time_seconds)
         image_paths = image_path_loader.load_image_paths(status_updater)
         next_image_selector.set_images(image_paths)
 
@@ -108,15 +102,5 @@ class PhotoFrameApp:
             display,
             events_handler,
             menu_handler)
-        system_operations.log('---------------------- Main loop Starting')
         main_loop.loop()
-        system_operations.log('---------------------- Main loop Ended')
-
-        image_cycler = ImageCycler(
-            next_image_selector,
-            cycle_stop_detector,
-            menu_handler,
-            display,
-            sleeper)
-        image_cycler.cycle_images()
         

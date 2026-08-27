@@ -10,14 +10,14 @@ class PCSystemDisplay:
         print("Initialising PC System Display")
 
     def load_image(self, image_path):
-        print(f"Loading image on PC: {image_path}")
+        #print(f"Loading image on PC: {image_path}")
         return PygameImage(image_path, image_path, 1, 1)
     
     def prepare_screen(self):
         print('Prep screen')
 
-    def show_image(self, image_path):
-        print(f"Showing image on PC: {image_path}")
+    def show_image(self, image):
+        print(f"Showing image on PC: {image.image_path}")
 
     def print(self, x, y, s):
         print(f'print({x},{y} {s})')
@@ -32,5 +32,4 @@ class PCSystemDisplay:
         return self._event_emulator.get_events()
 
     def tick(self, v):
-        print('tick')
         time.sleep(1)
