@@ -60,7 +60,9 @@ def main() -> int:
     photo_folders_filterer = PhotoFoldersFilterer(filter_string)
     photo_folders_synchroniser = PhotoFoldersSynchroniser(
         photo_folder_synchroniser)
-    photo_folders_remover = PhotoFoldersRemover(images_folder)
+    photo_folders_remover = PhotoFoldersRemover(
+        system_operations,
+        images_folder)
 
     app = SynchroniserApp(project_config,
                           remote_config_loader,

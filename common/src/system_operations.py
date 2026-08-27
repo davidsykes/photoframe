@@ -35,6 +35,7 @@ class SystemOperations:
             self.log(f'Created folder {folder_path}')
 
     def rmtree(self, path):
+        print(f'Remove folder {path}')
         shutil.rmtree(path)
 
     def rename(self, from_path, to_path):
