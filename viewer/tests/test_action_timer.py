@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import Mock, call
 
+from common.src.system_operations import SystemOperations
 from viewer.src.action_timer import ActionTimer
 
 
@@ -49,7 +50,7 @@ class ActionTimerTests(unittest.TestCase):
 
     @classmethod
     def setUp(self):
-        self.system_operations = Mock()
+        self.system_operations = Mock(spec=SystemOperations)
         self.system_operations.get_time_seconds = Mock()
         self.current_time = 0
         self.wait_time(self, 123)

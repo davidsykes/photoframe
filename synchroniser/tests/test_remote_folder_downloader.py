@@ -2,6 +2,7 @@ from pathlib import Path
 import unittest
 from unittest.mock import Mock
 
+from common.src.system_operations import SystemOperations
 from synchroniser.src.remote_folder_downloader import RemoteFolderDownloader
 
 class RemoteFolderDownloaderTests(unittest.TestCase):
@@ -89,7 +90,7 @@ class RemoteFolderDownloaderTests(unittest.TestCase):
 
     @classmethod
     def setUp(self):
-        self.system_operations = Mock()
+        self.system_operations = Mock(spec=SystemOperations)
         self.remote_files_retriever = Mock()
         self.unzipper = Mock()
         self.out = RemoteFolderDownloader(

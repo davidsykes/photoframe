@@ -23,6 +23,9 @@ class SystemOperations:
         self.log(f'Copy file {from_file} to {to_file}')
         shutil.copy(from_file, to_file)
 
+    def listdir(self, path) -> []:
+        return os.listdir(path)
+
     def isdir(self, path) -> bool:
         return os.path.isdir(path)
 
@@ -30,6 +33,9 @@ class SystemOperations:
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
             self.log(f'Created folder {folder_path}')
+
+    def rmtree(self, path):
+        shutil.rmtree(path)
 
     def rename(self, from_path, to_path):
         shutil.move(str(from_path), str(to_path))

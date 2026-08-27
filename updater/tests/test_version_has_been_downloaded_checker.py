@@ -2,6 +2,7 @@ from pathlib import Path
 import unittest
 from unittest.mock import Mock
 
+from common.src.system_operations import SystemOperations
 from updater.src.version_has_been_downloaded_checker import VersionHasBeenDownloadedChecker
 
 
@@ -46,7 +47,7 @@ class VersionHasBeenDownloadedCheckerTests(unittest.TestCase):
 
     @classmethod
     def setUp(self):
-        self.system_operations = Mock()
+        self.system_operations = Mock(spec=SystemOperations)
         self.out = VersionHasBeenDownloadedChecker(
             self.system_operations,
             "versions_path"

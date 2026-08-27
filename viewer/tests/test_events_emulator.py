@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import Mock, call
 
+from common.src.system_operations import SystemOperations
 from viewer.src.menus.events_emulator import EventsEmulator
 
 
@@ -25,7 +26,7 @@ class EventsEmulatorTests(unittest.TestCase):
 
     @classmethod
     def setUp(self):
-        self.system_operations = Mock()
+        self.system_operations = Mock(spec=SystemOperations)
         self.system_operations.get_time_seconds = Mock()
         self.base_time = 345
         self.set_time(self, 0)

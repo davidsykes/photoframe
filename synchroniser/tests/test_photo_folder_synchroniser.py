@@ -2,6 +2,7 @@ from pathlib import Path
 import unittest
 from unittest.mock import Mock
 
+from common.src.system_operations import SystemOperations
 from synchroniser.src.photo_folder_synchroniser import PhotoFolderSynchroniser
 
 
@@ -31,7 +32,7 @@ class TestPhotoFolderSynchroniser(unittest.TestCase):
 
     @classmethod
     def setUp(self):
-        self.system_operations = Mock()
+        self.system_operations = Mock(spec=SystemOperations)
         self.remote_folder_downloader = Mock()
         self.out = PhotoFolderSynchroniser(
             self.system_operations,

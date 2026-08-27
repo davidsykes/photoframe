@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import Mock
 
+from common.src.system_operations import SystemOperations
 from updater.src.version_downloader import VersionDownloader
 
 class MockSandbox:
@@ -92,7 +93,7 @@ class VersionDownloaderTests(unittest.TestCase):
 
     @classmethod
     def setUp(self):
-        self.system_operations = Mock()
+        self.system_operations = Mock(spec=SystemOperations)
         self.sandbox = MockSandbox()
         self.remote_files_retriever = Mock()
         self.unzipper = Mock()
