@@ -55,7 +55,9 @@ def main() -> int:
         remote_folder_downloader_wrapper,
         images_folder
         )
-    photo_folders_filterer = PhotoFoldersFilterer()
+    filter_string = project_config.get_or_default('images_folder', 'ava')
+    system_operations.log(f'Photo filter: {filter_string}')
+    photo_folders_filterer = PhotoFoldersFilterer(filter_string)
     photo_folders_synchroniser = PhotoFoldersSynchroniser(
         photo_folder_synchroniser)
     photo_folders_remover = PhotoFoldersRemover()
