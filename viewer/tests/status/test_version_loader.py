@@ -23,6 +23,15 @@ class VersionLoaderTests(unittest.TestCase):
             'Version', 'VERSION Contents'
         )
 
+    def test_line_feeds_are_changed_to_spaces(self):
+        self.system_operations.load_file.return_value = 'VERSION\r\n\nContents\n\r\n'
+
+        self.out.load_version_details('VERSION')
+
+        self.status.update_status.assert_called_once_with(
+            'Version', 'VERSION  Contents  '
+        )
+
     @classmethod
     def setUp(self):
         self.system_operations = Mock()

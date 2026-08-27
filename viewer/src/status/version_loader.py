@@ -8,7 +8,7 @@ class VersionLoader:
         if data is None:
             self.set_status(f"File '{version_path}' not found")
         else:
-            self.set_status(data)
+            self.set_status(data.replace("\r\n", " ").replace("\n", " "))
 
     def set_status(self, status):
         self._status.update_status('Version', status)
