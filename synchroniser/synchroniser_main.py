@@ -6,6 +6,8 @@ from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.system_operations import SystemOperations
 from common.unzipper import UnZipper
 from synchroniser.src.photo_folder_synchroniser import PhotoFolderSynchroniser
+from synchroniser.src.photo_folders_filterer import PhotoFoldersFilterer
+from synchroniser.src.photo_folders_remover import PhotoFoldersRemover
 from synchroniser.src.photo_folders_synchroniser import PhotoFoldersSynchroniser
 from synchroniser.src.remote_config_loader import RemoteConfigLoader
 from synchroniser.src.remote_folder_downloader import RemoteFolderDownloader
@@ -31,7 +33,7 @@ def main() -> int:
     project_config = config_file_loader.load_config_file('project_config.json')
     remote_config_loader = RemoteConfigLoader(
         WORKING_FOLDER,
-        'viewer_config',
+        'remote_viewer_config',
         config_file_updater,
         config_file_loader)
     unzipper = UnZipper()
@@ -53,11 +55,16 @@ def main() -> int:
         remote_folder_downloader_wrapper,
         images_folder
         )
-    photo_folders_synchroniser = PhotoFoldersSynchroniser(photo_folder_synchroniser)
+    photo_folders_filterer = PhotoFoldersFilterer()
+    photo_folders_synchroniser = PhotoFoldersSynchroniser(
+        photo_folder_synchroniser)
+    photo_folders_remover = PhotoFoldersRemover()
 
     app = SynchroniserApp(project_config,
                           remote_config_loader,
-                          photo_folders_synchroniser)
+                          photo_folders_filterer,
+                          photo_folders_synchroniser,
+                          photo_folders_remover)
     app.sync()
 
     return 123

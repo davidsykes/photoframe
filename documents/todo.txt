@@ -1,3 +1,9 @@
+Where @classmethod occurs apply style changes:
+    Remove @classmethod
+    Change \ to ()
+    Add spec to mock
+        self.remote_config_loader = Mock(spec=RemoteConfigLoader)
+
 pygame.mouse.set_visible(False)
 
 show VERSION files
