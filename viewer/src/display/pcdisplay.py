@@ -1,3 +1,5 @@
+import time
+from viewer.src.display.pygame_image import PygameImage
 
 
 class PCSystemDisplay:
@@ -9,7 +11,7 @@ class PCSystemDisplay:
 
     def load_image(self, image_path):
         print(f"Loading image on PC: {image_path}")
-        return image_path
+        return PygameImage(image_path, image_path, 1, 1)
     
     def prepare_screen(self):
         print('Prep screen')
@@ -30,4 +32,5 @@ class PCSystemDisplay:
         return self._event_emulator.get_events()
 
     def tick(self, v):
-        pass
+        print('tick')
+        time.sleep(1)

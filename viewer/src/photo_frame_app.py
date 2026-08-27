@@ -81,7 +81,7 @@ class PhotoFrameApp:
             display = PCSystemDisplay(events)
         elif self._display_type == DisplayType.PI_DISPLAY_VERSION:
             from viewer.src.display.pidisplay import PiSystemDisplay
-            display = PiSystemDisplay(system_operations)
+            display = PiSystemDisplay(system_operations, status_updater)
         else:
             raise ValueError(f"Unknown display type: {self._display_type}")
         display.initialise()

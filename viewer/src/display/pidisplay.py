@@ -4,11 +4,13 @@ from viewer.src.menus.uievent import UIEvent
 from viewer.src.viewer_exit_exception import ViewerExitException
 
 class PiSystemDisplay:
-    def __init__(self, system_operations):
+    def __init__(self, system_operations, status_updater):
         self.system_operations = system_operations
+        self._status_updater = status_updater
         self.event_count = 0
         self.last_mouse_pos = 'None yet'
         self._clock = pygame.time.Clock()
+        self._flip_count = 0
 
     def tick(self, v):
         self._clock.tick(v)
@@ -24,6 +26,7 @@ class PiSystemDisplay:
         self.my_font = pygame.font.SysFont('Comic Sans MS', 30)
 
     def load_image(self, image_path):
+        self._status_updater.update_status('Current image', image_path)
         try:
             image = pygame.image.load(image_path)
         except pygame.error as e:
@@ -48,16 +51,19 @@ class PiSystemDisplay:
         x = (sw - new_size[0]) // 2
         y = (sh - new_size[1]) // 2
 
-        return PygameImage(image, x, y)
+        return PygameImage(image_path, image, x, y)
 
     def prepare_screen(self):
         self.screen.fill((0, 0, 0))
 
     def show_image(self, image):
         self.screen.blit(image.image, (image.x, image.y))
+        self._status_updater.update_status('Current image', image.image_path)
 
     def flip(self):
         pygame.display.flip()
+        self._flip_count = self._flip_count + 1
+        self._status_updater.update_status('Flip count', self._flip_count)
 
     def print(self, x, y, message):
         text_surface = self.my_font.render(message,
