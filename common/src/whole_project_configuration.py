@@ -8,4 +8,6 @@ class WholeProjectConfiguration:
         config = self._config_file_loader.load_config_file(
             self._configuration_file_name
         )
+        self.remote_config_url = config.get('remote_config_url')
         self.images_folder = config.get('images_folder')
+        self.sleep_time_seconds = config.get('sleep_time_seconds')

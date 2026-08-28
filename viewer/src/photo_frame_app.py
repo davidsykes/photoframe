@@ -3,6 +3,7 @@ from enum import Enum, auto
 from common.src.config_file_updater import ConfigFileUpdater
 from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.config_file_loader import ConfigFileLoader
+from common.src.whole_project_configuration import WholeProjectConfiguration
 from viewer.src.cycle_stop_detector import CycleStopDetector
 from viewer.src.main.main_loop import MainLoop
 from viewer.src.menus.event_handler import EventHandler
@@ -29,20 +30,19 @@ class PhotoFrameApp:
 
     def run(self, system_operations, PROJECT_ROOT):
         config_file_loader = ConfigFileLoader(system_operations)
-        whole_project_config_file_name = "project_config.json"
-        whole_project_configuration = config_file_loader.load_config_file(whole_project_config_file_name)
-        if whole_project_configuration is None:
-            raise ViewerExitException(1, f'Missing project configuration {whole_project_config_file_name}')
+        whole_project_configuration = WholeProjectConfiguration(
+            config_file_loader
+        )
         viewer_config_file_name = "viewer/viewer_config.json"
         viewer_configuration = config_file_loader.load_config_file(viewer_config_file_name)
         if viewer_configuration is None:
             return 1
-        image_path_path = whole_project_configuration.get("images_folder")
-        image_path_loader = ImagePathLoader(image_path_path)
-        sleep_time_seconds = whole_project_configuration.get("sleep_time_seconds")
+        images_folder = whole_project_configuration.images_folder
+        image_path_loader = ImagePathLoader(images_folder)
+        sleep_time_seconds = whole_project_configuration.sleep_time_seconds
         randomiser = Randomiser()
         next_image_selector = NextImageSelector(randomiser)
-        remote_config_url = whole_project_configuration.get("remote_config_url")
+        remote_config_url = whole_project_configuration.remote_config_url
         remote_files_retriever = RemoteFilesRetriever(system_operations)
         config_file_updater = ConfigFileUpdater(
             remote_files_retriever,
