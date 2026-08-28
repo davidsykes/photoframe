@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import Mock, call
+from unittest.mock import Mock
 
 from common.src.system_operations import SystemOperations
 from viewer.src.menus.events_emulator import EventsEmulator

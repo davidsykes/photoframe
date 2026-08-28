@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import Mock, call
+from unittest.mock import Mock
 
 from viewer.src.remote_config_version_loader import RemoteConfigVersionLoader
 

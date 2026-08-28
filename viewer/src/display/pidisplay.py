@@ -12,10 +12,7 @@ class PiSystemDisplay:
         self._clock = pygame.time.Clock()
         self._flip_count = 0
 
-    def tick(self, v):
-        self._clock.tick(v)
-
-    def initialise(self):
+    def initialise_display(self):
         print("Initialising Pi System Display.")
         pygame.init()
         print('Desktop sizes:', pygame.display.get_desktop_sizes())
@@ -55,6 +52,7 @@ class PiSystemDisplay:
 
     def prepare_screen(self):
         self.screen.fill((0, 0, 0))
+        self._print_y = 0
 
     def show_image(self, image):
         self.screen.blit(image.image, (image.x, image.y))
@@ -65,11 +63,15 @@ class PiSystemDisplay:
         self._flip_count = self._flip_count + 1
         self._status_updater.update_status('Flip count', self._flip_count)
 
-    def print(self, x, y, message):
+    def tick(self, v):
+        self._clock.tick(v)
+
+    def print(self, message):
         text_surface = self.my_font.render(message,
                                            True,
                                            (255, 255, 255))
-        self.screen.blit(text_surface, (x, y))
+        self.screen.blit(text_surface, (8, self._print_y))
+        self._print_y += 20
     
     def get_events(self):
         events = []
@@ -127,8 +129,8 @@ class PiSystemDisplay:
         pygame.draw.rect(self.screen, LIGHT, play_button)
         pygame.draw.rect(self.screen, DARK, quit_button)
 
-        play_text = self.my_font.render("Play", True, WHITE)
-        quit_text = self.my_font.render("Quit", True, WHITE)
+        play_text = self.my_font.render("Pause", True, WHITE)
+        quit_text = self.my_font.render("Resume", True, WHITE)
 
         self.screen.blit(play_text, (335, 305))
         self.screen.blit(quit_text, (335, 385))

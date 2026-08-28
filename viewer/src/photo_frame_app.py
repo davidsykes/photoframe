@@ -14,7 +14,7 @@ from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.next_image_selector import NextImageSelector
 from viewer.src.randomiser import Randomiser
 from viewer.src.remote_config_version_loader import RemoteConfigVersionLoader
-from viewer.src.status.status_updater import StatusUpdater
+from viewer.src.status.application_status import ApplicationStatus
 from viewer.src.action_timer import ActionTimer
 from viewer.src.status.version_loader import VersionLoader
 from viewer.src.viewer_exit_exception import ViewerExitException
@@ -48,7 +48,7 @@ class PhotoFrameApp:
             remote_files_retriever,
             config_file_loader,
             system_operations)
-        status_updater = StatusUpdater()
+        status_updater = ApplicationStatus()
         VersionLoader(system_operations, status_updater)\
             .load_version_details(PROJECT_ROOT / 'VERSION')
         remote_config_version_loader = RemoteConfigVersionLoader(
@@ -82,7 +82,7 @@ class PhotoFrameApp:
             display = PiSystemDisplay(system_operations, status_updater)
         else:
             raise ValueError(f"Unknown display type: {self._display_type}")
-        display.initialise()
+        display.initialise_display()
 
         main_menu = MainMenu(status_updater)
         menu_handler = MenuHandler(main_menu)

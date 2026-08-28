@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import Mock, call
+from unittest.mock import Mock
 
 from viewer.src.cycle_stop_detector import CycleStopDetector
 

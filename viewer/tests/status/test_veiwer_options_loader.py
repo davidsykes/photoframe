@@ -1,5 +1,4 @@
 import unittest
-from unittest.mock import Mock, call
 
 from viewer.src.status.viewer_options_loader import ViewerOptionsLoader
 

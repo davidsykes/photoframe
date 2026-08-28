@@ -6,13 +6,14 @@ class MainMenu:
         self._statuses = statuses
     
     def render(self, display):
-        statuses = self._statuses.statuses
-        x = 10
-        y = 20
-        for key, value in statuses.items():
-            s = f'{key}: {value}'
-            display.print(x, y, s)
-            y += 20
+        self._statuses.render(display)
+        # statuses = self._statuses.statuses
+        # x = 10
+        # y = 20
+        # for key, value in statuses.items():
+        #     s = f'{key}: {value}'
+        #     display.print(x, y, s)
+        #     y += 20
         display.draw_button()
 
     def mouse_down(self, x, y):

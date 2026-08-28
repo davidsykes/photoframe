@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import Mock, call
+from unittest.mock import Mock
 
 from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.viewer_exit_exception import ViewerExitException
