@@ -113,3 +113,22 @@ class PiSystemDisplay:
             else:
                 self.system_operations.log(f"Pygame Event: {event}")
         return events
+
+    def draw_button(self):
+        line_color = (255, 0, 0)
+        pygame.draw.line(self.screen, line_color, (60, 80), (130, 100))
+
+        play_button = pygame.Rect(300, 300, 140, 50)
+        quit_button = pygame.Rect(300, 380, 140, 50)
+
+        WHITE = (255,255,255)
+        LIGHT = (170,170,170)
+        DARK = (100,100,100)
+        pygame.draw.rect(self.screen, LIGHT, play_button)
+        pygame.draw.rect(self.screen, DARK, quit_button)
+
+        play_text = self.my_font.render("Play", True, WHITE)
+        quit_text = self.my_font.render("Quit", True, WHITE)
+
+        self.screen.blit(play_text, (335, 305))
+        self.screen.blit(quit_text, (335, 385))

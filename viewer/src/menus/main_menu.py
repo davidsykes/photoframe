@@ -13,6 +13,7 @@ class MainMenu:
             s = f'{key}: {value}'
             display.print(x, y, s)
             y += 20
+        display.draw_button()
 
     def mouse_down(self, x, y):
         raise ViewerExitException(101, f"Control-C event received")

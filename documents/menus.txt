@@ -1,0 +1,10 @@
+The menu handler receives mouse down events
+
+The menu system has two functions
+
+Mouse down
+If the main menu is not enabled then it is enabled
+If the main menu is enabled it receives the mouse down.
+
+render
+If the menu is enabled it is rendered
