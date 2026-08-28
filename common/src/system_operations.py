@@ -23,7 +23,7 @@ class SystemOperations:
         self.log(f'Copy file {from_file} to {to_file}')
         shutil.copy(from_file, to_file)
 
-    def listdir(self, path) -> []:
+    def listdir(self, path) -> list[str]:
         return os.listdir(path)
 
     def isdir(self, path) -> bool:

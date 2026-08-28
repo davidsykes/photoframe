@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 class ImagePathLoader:
@@ -11,6 +12,9 @@ class ImagePathLoader:
         status_updater.update_status(
             'Photos', len(image_paths)
         )
+        photo_sets = os.listdir(self.image_directory)
+        for set in photo_sets:
+            status_updater.log(f'Set: {set}')
         return image_paths
 
     def _list_files_recursive(self, path):
