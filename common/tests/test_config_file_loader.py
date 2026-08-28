@@ -39,7 +39,6 @@ class TestConfigFileLoader(unittest.TestCase):
             self.system_operations.logs,
             ["Failed to parse JSON file 'config.ini': Expecting value: line 1 column 1 (char 0)"])
 
-    @classmethod
     def setUp(self):
         data = "{ \"image_directory\": \"images\" }"
         self.system_operations = MockSystemOperations(data)

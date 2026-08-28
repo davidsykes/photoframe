@@ -9,7 +9,7 @@ class RemoteFilesRetriever:
     def __init__(self, system_operations):
         self._system_operations = system_operations
 
-    def download_file_or_return_false(self, url: str, destination: str) -> str:
+    def download_file_or_return_false(self, url: str, destination: str) -> bool:
         temporary_file = destination.with_suffix(destination.suffix + ".tmp")
 
         request = Request(

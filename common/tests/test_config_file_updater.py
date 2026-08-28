@@ -1,7 +1,10 @@
 from pathlib import Path
 import unittest
 from unittest.mock import Mock
+from common.src.config_file_loader import ConfigFileLoader
 from common.src.config_file_updater import ConfigFileUpdater
+from common.src.remote_files_retriever import RemoteFilesRetriever
+from common.src.system_operations import SystemOperations
 
 
 class TestConfigFileUpdater(unittest.TestCase):
@@ -46,18 +49,15 @@ class TestConfigFileUpdater(unittest.TestCase):
             self.local_file_path_new
         )
 
-    @classmethod
     def setUp(self):
         self.local_file_path = Path('local_file_path')
         self.local_file_path_new = Path('local_file_path.new')
-        self.remote_files_retriever = Mock()
-        self.remote_files_retriever.download_file_or_return_false = Mock()
-        self.remote_files_retriever.download_file_or_return_false.return_value =\
-             True
-        self.config_file_loader = Mock()
-        self.config_file_loader.load_config_file = Mock()
+        self.remote_files_retriever = Mock(spec = RemoteFilesRetriever)
+        self.remote_files_retriever.download_file_or_return_false.return_value = (
+             True)
+        self.config_file_loader = Mock(spec = ConfigFileLoader)
         self.config_file_loader.load_config_file.return_value = { "a": "b" }
-        self.sys_operations = Mock()
+        self.sys_operations = Mock(spec = SystemOperations)
         self.out = ConfigFileUpdater(
             self.remote_files_retriever,
             self.config_file_loader,
