@@ -49,6 +49,7 @@ class PhotoFrameApp:
             config_file_loader,
             system_operations)
         status_updater = ApplicationStatus()
+        status_updater.update_status('Filter', whole_project_configuration.photo_set_filter)
         VersionLoader(system_operations, status_updater)\
             .load_version_details(PROJECT_ROOT / 'VERSION')
         remote_config_version_loader = RemoteConfigVersionLoader(

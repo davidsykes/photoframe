@@ -4,6 +4,7 @@ from common.src.config_file_loader import ConfigFileLoader
 from common.src.config_file_updater import ConfigFileUpdater
 from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.system_operations import SystemOperations
+from common.src.whole_project_configuration import WholeProjectConfiguration
 from common.unzipper import UnZipper
 from synchroniser.src.photo_folder_synchroniser import PhotoFolderSynchroniser
 from synchroniser.src.photo_folders_filterer import PhotoFoldersFilterer
@@ -30,7 +31,8 @@ def main() -> int:
         remote_files_retriever,
         config_file_loader,
         system_operations)
-    project_config = config_file_loader.load_config_file('project_config.json')
+    #project_config = config_file_loader.load_config_file('project_config.json')
+    project_config = WholeProjectConfiguration(config_file_loader)
     remote_config_loader = RemoteConfigLoader(
         WORKING_FOLDER,
         'remote_viewer_config',
@@ -47,7 +49,7 @@ def main() -> int:
         remote_folder_downloader,
         temp_folder_location
     )
-    images_folder = project_config.get('images_folder')
+    images_folder = project_config.images_folder
     system_operations.log(f"Images folder: {images_folder}")
     system_operations.ensure_folder_exists(images_folder)
     photo_folder_synchroniser = PhotoFolderSynchroniser(
@@ -55,9 +57,9 @@ def main() -> int:
         remote_folder_downloader_wrapper,
         images_folder
         )
-    filter_string = project_config.get_or_default('images_folder', 'ava')
-    system_operations.log(f'Photo filter: {filter_string}')
-    photo_folders_filterer = PhotoFoldersFilterer(filter_string)
+    filter_string = project_config.photo_set_filter
+    system_operations.log(f'Photo filter: \'{filter_string}\'')
+    photo_folders_filterer = PhotoFoldersFilterer(system_operations, filter_string)
     photo_folders_synchroniser = PhotoFoldersSynchroniser(
         photo_folder_synchroniser)
     photo_folders_remover = PhotoFoldersRemover(

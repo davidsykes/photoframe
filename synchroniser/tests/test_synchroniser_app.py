@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import Mock
 from common.src.config_file import ConfigFile
+from common.src.whole_project_configuration import WholeProjectConfiguration
 from synchroniser.src.photo_folders_filterer import PhotoFoldersFilterer
 from synchroniser.src.photo_folders_remover import PhotoFoldersRemover
 from synchroniser.src.photo_folders_synchroniser import PhotoFoldersSynchroniser
@@ -26,7 +27,8 @@ class TestSynchroniserApp(unittest.TestCase):
         )
 
     def setUp(self):
-        whole_project_config = ConfigFile({"remote_config_url": "remote_config_url" }, 'whole project')
+        whole_project_config = Mock(spec = WholeProjectConfiguration)
+        whole_project_config.remote_config_url = 'remote_config_url'
         self.remote_config_loader = Mock(RemoteConfigLoader)
         self.remote_config_loader.load_config.return_value = (
             ConfigFile({"photo_folders": 'list of unfiltered photo folders' }, 'test'))

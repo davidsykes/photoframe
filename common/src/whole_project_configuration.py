@@ -11,3 +11,6 @@ class WholeProjectConfiguration:
         self.remote_config_url = config.get('remote_config_url')
         self.images_folder = config.get('images_folder')
         self.sleep_time_seconds = config.get('sleep_time_seconds')
+        self.photo_set_filter = config.get_or_default(
+            'photo_set_filter',
+            'ava')

@@ -13,7 +13,7 @@ class SynchroniserApp:
         self._photo_folders_remover = photo_folders_remover
 
     def sync(self):
-        remote_config_url = self._whole_project_config.get('remote_config_url')
+        remote_config_url = self._whole_project_config.remote_config_url
         remote_config = self._remote_config_loader.load_config(
             remote_config_url
         )
