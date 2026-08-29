@@ -5,6 +5,7 @@ from viewer.src.display.pygame_image import PygameImage
 class PCSystemDisplay:
     def __init__(self, event_emulator):
         self._event_emulator = event_emulator
+        self.COLOUR_WHITE = 'White colour'
         self.COLOUR_LIGHT = 'Light colour'
 
     def initialise_display(self):
@@ -39,3 +40,6 @@ class PCSystemDisplay:
 
     def draw_rectangle(self, colour, position):
         print(f'Draw {colour} rectangle {position}')
+
+    def draw_text(self, text, colour, position):
+        print(f'Draw text {text} in {colour} at {position}')

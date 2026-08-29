@@ -11,6 +11,7 @@ class PiSystemDisplay:
         self.last_mouse_pos = 'None yet'
         self._clock = pygame.time.Clock()
         self._flip_count = 0
+        self.COLOUR_WHITE = (255,255,255)
         self.COLOUR_LIGHT = (170,170,170)
 
     def initialise_display(self):
@@ -117,7 +118,7 @@ class PiSystemDisplay:
                 pass
             elif event.type in [
                 pygame.WINDOWLEAVE,
-                pygame.UNKNOWN
+                pygame.K_UNKNOWN
             ]:
                 self.system_operations.log(f"Pygame Event: {event}")
             else:
@@ -148,3 +149,7 @@ class PiSystemDisplay:
                          position[2], position[3])
 
         pygame.draw.rect(self.screen, colour, rect)
+
+    def draw_text(self, text, colour, position):
+        pygame_text = self.my_font.render(text, True, colour)
+        self.screen.blit(pygame_text, position)

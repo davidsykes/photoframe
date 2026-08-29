@@ -29,5 +29,6 @@ class EventsEmulator:
         current_event = self._events[self._next_event]
         if current_time >= current_event[0]:
             self._next_event += 1
+            print(f'EVENT {current_event[1][0].type}')
             return current_event[1]
         return []

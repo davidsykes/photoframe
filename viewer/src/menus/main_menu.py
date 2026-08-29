@@ -6,7 +6,7 @@ class MainMenu:
     def __init__(self, statuses):
         self._statuses = statuses
         self._buttons = [
-            MenuButton(600, 600, 200, 100, 'Quit')
+            MenuButton(800, 200, 100, 50, 'Quit')
         ]
     
     def render(self, display):

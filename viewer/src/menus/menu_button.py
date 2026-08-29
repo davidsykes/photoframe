@@ -15,3 +15,8 @@ class MenuButton:
              self._w,
              self._h)
         )
+        display.draw_text(
+            self._text,
+            display.COLOUR_WHITE,
+            (self._x, self._y)
+        )

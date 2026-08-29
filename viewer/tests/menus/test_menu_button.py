@@ -9,11 +9,18 @@ class MenuButtonTests(unittest.TestCase):
         self.out.render(self.display)
 
         self.display.draw_rectangle.assert_called_once_with(
-            'colour',
+            'light colour',
             (123, 456, 100, 150)
+        )
+
+        self.display.draw_text.assert_called_once_with(
+            'button text',
+            'white colour',
+            (123, 456)
         )
 
     def setUp(self):
         self.display = Mock()
-        self.display.COLOUR_LIGHT = 'colour'
+        self.display.COLOUR_LIGHT = 'light colour'
+        self.display.COLOUR_WHITE = 'white colour'
         self.out = MenuButton(123, 456, 100, 150, 'button text')
