@@ -6,7 +6,7 @@ Where @classmethod occurs apply style changes:
 
 pygame.mouse.set_visible(False)
 
-remove unreferenced folders
++++remove unreferenced folders
 
 Locally overidable values such as time between update checks
     So development versions can check much quicker

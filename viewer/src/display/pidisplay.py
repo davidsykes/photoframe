@@ -11,6 +11,7 @@ class PiSystemDisplay:
         self.last_mouse_pos = 'None yet'
         self._clock = pygame.time.Clock()
         self._flip_count = 0
+        self.COLOUR_LIGHT = (170,170,170)
 
     def initialise_display(self):
         print("Initialising Pi System Display.")
@@ -105,15 +106,22 @@ class PiSystemDisplay:
                 pygame.WINDOWEXPOSED,
                 pygame.AUDIODEVICEADDED,
                 pygame.WINDOWSIZECHANGED,
+                pygame.WINDOWRESIZED,
+                pygame.VIDEORESIZE,
                 pygame.VIDEOEXPOSE,
                 pygame.WINDOWENTER,
                 pygame.WINDOWFOCUSGAINED,
                 pygame.ACTIVEEVENT,
-                pygame.MOUSEBUTTONUP
+                pygame.MOUSEBUTTONUP,
             ]:
                 pass
-            else:
+            elif event.type in [
+                pygame.WINDOWLEAVE,
+                pygame.UNKNOWN
+            ]:
                 self.system_operations.log(f"Pygame Event: {event}")
+            else:
+                self.system_operations.log(f"Unrecognised Pygame Event: {event}")
         return events
 
     def draw_button(self):
@@ -134,3 +142,9 @@ class PiSystemDisplay:
 
         self.screen.blit(play_text, (335, 305))
         self.screen.blit(quit_text, (335, 385))
+
+    def draw_rectangle(self, colour, position):
+        rect = pygame.Rect(position[0], position[1],
+                         position[2], position[3])
+
+        pygame.draw.rect(self.screen, colour, rect)

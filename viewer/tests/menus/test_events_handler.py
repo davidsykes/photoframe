@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import Mock, call
 
+from viewer.src.menus.event_handler import EventHandler
 from viewer.src.menus.events_handler import EventsHandler
 
 class EventsHandlerTests(unittest.TestCase):
@@ -16,10 +17,9 @@ class EventsHandlerTests(unittest.TestCase):
             ]
         )
 
-    @classmethod
     def setUp(self):
         self.event_source = Mock()
-        self.event_handler = Mock()
+        self.event_handler = Mock(spec=EventHandler)
         self.out = EventsHandler(
             self.event_source,
             self.event_handler)

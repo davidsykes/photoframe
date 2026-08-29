@@ -7,7 +7,7 @@ class TestConfigFile(unittest.TestCase):
         self.assertEqual(self.out.get('image_directory'), 'images')
 
     def test_missing_key(self):
-        with self.assertRaises(Exception) as context:
+        with self.assertRaises(Exception):
             self.out.get('image_directory2')
 
     def test_get_or_default_returns_value_if_it_exitsts(self):
@@ -20,7 +20,6 @@ class TestConfigFile(unittest.TestCase):
             self.out.get_or_default('image_directory2', 'ava'),
             'ava')
 
-    @classmethod
     def setUp(self):
         self.out = ConfigFile(
             { 'image_directory': 'images' },
