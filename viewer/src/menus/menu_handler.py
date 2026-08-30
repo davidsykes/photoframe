@@ -1,3 +1,4 @@
+from viewer.src.menus.menu_action import MenuAction
 
 
 class MenuHandler:
@@ -6,13 +7,17 @@ class MenuHandler:
         self._menu_enabled = False
 
     def mouse_down(self, x, y):
-        result = False
         if self._menu_enabled:
-            result = self._main_menu.mouse_down(x, y)
+            self.handle_mouse_down(x,y)
         else:
             self._menu_enabled = True
-        return result
 
     def render(self, display):
         if self._menu_enabled:
             self._main_menu.render(display)
+
+    def handle_mouse_down(self, x, y):
+        result = self._main_menu.mouse_down(x, y)
+        if result == MenuAction.BACK:
+            self._menu_enabled = False
+
