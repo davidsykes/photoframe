@@ -6,12 +6,12 @@ class MenuHandler:
         self._menu_enabled = False
 
     def mouse_down(self, x, y):
+        result = False
         if self._menu_enabled:
             result = self._main_menu.mouse_down(x, y)
-            if result is None:
-                self._menu_enabled = False
         else:
             self._menu_enabled = True
+        return result
 
     def render(self, display):
         if self._menu_enabled:

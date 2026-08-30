@@ -17,7 +17,9 @@ class MainMenu:
 
     def mouse_down(self, x, y):
         for button in self._buttons:
-            button.mouse_down(x, y)
+            if button.mouse_down(x, y):
+                return True
+        return False
 
     def terminate(self):
         raise ViewerExitException(101, f"Quit by mouse down")

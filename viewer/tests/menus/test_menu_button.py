@@ -36,6 +36,10 @@ class MenuButtonTests(unittest.TestCase):
         self.mouse_miss(self.x2, self.y2+1)
         self.mouse_hit(self.x2, self.y2)
 
+    def test_mouse_hits_return_true(self):
+        self.assertFalse(self.out.mouse_down(self.x-1, self.y))
+        self.assertTrue(self.out.mouse_down(self.x, self.y))
+
     def setUp(self):
         self.display = Mock()
         self.display.COLOUR_LIGHT = 'light colour'

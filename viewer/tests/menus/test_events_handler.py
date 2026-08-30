@@ -17,6 +17,20 @@ class EventsHandlerTests(unittest.TestCase):
             ]
         )
 
+    def test_if_there_are_events_true_is_returned(self):
+        self.event_source.get_events.return_value = [1,2,3]
+
+        result = self.out.handle_events()
+
+        self.assertTrue(result)
+
+    def test_if_there_are_no_events_false_is_returned(self):
+        self.event_source.get_events.return_value = []
+
+        result = self.out.handle_events()
+
+        self.assertFalse(result)
+
     def setUp(self):
         self.event_source = Mock()
         self.event_handler = Mock(spec=EventHandler)

@@ -17,9 +17,8 @@ class MainLoop:
             self.loop_once()
 
     def loop_once(self):
-        needs_update = False
         self._cycle_stop_detector.poll()
-        self._events_handler.handle_events()
+        needs_update = self._events_handler.handle_events()
         new_image_path = self._next_image_timer.run_if_due()
         if new_image_path is not None:
             self._current_image = self._display.load_image(new_image_path)

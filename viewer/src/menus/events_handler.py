@@ -9,5 +9,8 @@ class EventsHandler:
 
     def handle_events(self):
         events = self._event_source.get_events()
+        had_events = False
         for event in events:
             self._event_handler.handle_event(event)
+            had_events = True
+        return had_events

@@ -30,3 +30,5 @@ class MenuButton:
             x <= self._x2 and
             y <= self._y2):
             self._action()
+            return True
+        return False
