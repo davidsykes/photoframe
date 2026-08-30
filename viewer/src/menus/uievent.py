@@ -9,3 +9,6 @@ class UIEvent:
         self.type = type
         self.x = x
         self.y = y
+
+    def __str__(self):
+        return f'{self.type} -> {self.x, self.y}'
