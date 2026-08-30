@@ -6,7 +6,7 @@ class MainMenu:
     def __init__(self, statuses):
         self._statuses = statuses
         self._buttons = [
-            MenuButton(800, 200, 100, 50, 'Quit')
+            MenuButton(800, 200, 100, 50, 'Quit', self.terminate)
         ]
     
     def render(self, display):
@@ -16,5 +16,8 @@ class MainMenu:
         display.draw_button()
 
     def mouse_down(self, x, y):
+        for button in self._buttons:
+            button.mouse_down(x, y)
+
+    def terminate(self):
         raise ViewerExitException(101, f"Quit by mouse down")
-        return None

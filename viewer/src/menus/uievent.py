@@ -1,10 +1,11 @@
-from enum import auto
+from enum import Enum, auto
+
+
+class UIEventType(Enum):
+    MOUSE_DOWN = auto()
 
 
 class UIEvent:
-    
-    MouseDown = auto()
-
     def __init__(self, type, x, y):
         self.type = type
         self.x = x
@@ -12,3 +13,5 @@ class UIEvent:
 
     def __str__(self):
         return f'{self.type} -> {self.x, self.y}'
+    def __repr__(self):
+        return str(self)

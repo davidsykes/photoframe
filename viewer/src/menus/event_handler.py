@@ -1,3 +1,4 @@
+from viewer.src.menus.uievent import UIEventType
 from viewer.src.viewer_exit_exception import ViewerExitException
 
 
@@ -6,7 +7,7 @@ class EventHandler:
         self._menu_handler = menu_handler
 
     def handle_event(self, event):
-        if event.type == event.MouseDown:
+        if event.type == UIEventType.MOUSE_DOWN:
             self._menu_handler.mouse_down(event.x, event.y)
         else:
             raise ViewerExitException(101, "Quit event received")

@@ -1,6 +1,6 @@
 import pygame # pyright: ignore[reportMissingImports]
 from viewer.src.display.pygame_image import PygameImage
-from viewer.src.menus.uievent import UIEvent
+from viewer.src.menus.uievent import UIEvent, UIEventType
 from viewer.src.viewer_exit_exception import ViewerExitException
 
 class PiSystemDisplay:
@@ -95,7 +95,7 @@ class PiSystemDisplay:
                 x = event.pos[0]
                 y = event.pos[1]
                 events.append(UIEvent(
-                    UIEvent.MouseDown,
+                    UIEventType.MOUSE_DOWN,
                     x,
                     y
                 ))
