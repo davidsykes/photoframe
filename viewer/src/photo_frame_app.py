@@ -65,6 +65,7 @@ class PhotoFrameApp:
         time_between_version_checks_seconds = viewer_configuration.get(
             "time_between_version_checks_seconds")
         timed_new_app_or_new_photos_detector = ActionTimer(
+            'Remote update'
             system_operations,
             new_app_or_new_photos_detector.poll,
             time_between_version_checks_seconds)
