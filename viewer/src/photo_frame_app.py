@@ -85,18 +85,19 @@ class PhotoFrameApp:
             raise ValueError(f"Unknown display type: {self._display_type}")
         display.initialise_display()
 
-        main_menu = MainMenu(status_updater)
+        next_image_timer = ActionTimer(
+            'Image change',
+            system_operations,
+            next_image_selector.select_next_image,
+            sleep_time_seconds
+        )
+
+        main_menu = MainMenu(status_updater, next_image_timer)
         menu_handler = MenuHandler(main_menu)
         event_handler = EventHandler(menu_handler)
         events_handler = EventsHandler(display, event_handler)
         image_paths = image_path_loader.load_image_paths(status_updater)
         next_image_selector.set_images(image_paths)
-
-        next_image_timer = ActionTimer(
-            system_operations,
-            next_image_selector.select_next_image,
-            sleep_time_seconds
-        )
         main_loop = MainLoop(
             cycle_stop_detector,
             next_image_timer,

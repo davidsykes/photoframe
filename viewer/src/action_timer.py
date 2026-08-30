@@ -1,9 +1,11 @@
 
 class ActionTimer:
     def __init__(self,
+                 name,
                  system_operations,
                  action,
                  time_between_checks):
+        self._name = name
         self._system_operations = system_operations
         self._action = action
         self._time_between_checks = time_between_checks

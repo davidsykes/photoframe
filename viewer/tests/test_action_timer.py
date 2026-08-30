@@ -57,6 +57,7 @@ class ActionTimerTests(unittest.TestCase):
         self.action = Mock()
         self.action.side_effect  = [1,2,3]
         self.out = ActionTimer(
+            'name','
             self.system_operations,
             self.action,
             10)

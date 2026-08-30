@@ -35,9 +35,6 @@ class PCSystemDisplay:
     def tick(self, v):
         time.sleep(1)
 
-    def draw_button(self):
-        print('Draw button')
-
     def draw_rectangle(self, colour, position):
         print(f'Draw {colour} rectangle {position}')
 
