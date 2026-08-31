@@ -10,7 +10,8 @@ class MainMenu:
         self._buttons = [
             MenuButton(924, 50, 100, 50, 'Back', self.back_action),
             MenuButton(924, 120, 100, 50, 'Pause', self.pause),
-            MenuButton(924, 170, 100, 50, 'Quit', self.terminate)
+            MenuButton(924, 170, 100, 50, 'Resume', self.resume),
+            MenuButton(924, 220, 100, 50, 'Quit', self.terminate)
         ]
     
     def render(self, display):
@@ -30,6 +31,9 @@ class MainMenu:
 
     def pause(self):
         self._next_image_timer.pause()
+
+    def resume(self):
+        self._next_image_timer.resume()
 
     def terminate(self):
         raise ViewerExitException(101, f"Quit by mouse down")
