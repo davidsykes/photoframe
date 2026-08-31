@@ -12,6 +12,7 @@ class TestWholeProjectConfiguration(unittest.TestCase):
         self.assertEqual(self.out.images_folder, "images folder")
         self.assertEqual(self.out.sleep_time_seconds, 2)
         self.assertEqual(self.out.photo_set_filter, 'filter')
+        self.assertEqual(self.out.hide_mouse, False)
 
     def test_the_filter_defaults_to_ava(self):
         data = { "images_folder": "images folder",
@@ -27,13 +28,27 @@ class TestWholeProjectConfiguration(unittest.TestCase):
 
         self.assertEqual(self.out.photo_set_filter, 'ava')
 
+    def test_hide_mouse_defaults_to_true(self):
+        data = { "images_folder": "images folder",
+                "remote_config_url": "remote config url",
+                "sleep_time_seconds": 2,
+                "viewer_parameters": "pc" }
+        config = ConfigFile(data, 'test config file')
+        self.config_file_loader = Mock(spec = ConfigFileLoader)
+        self.config_file_loader.load_config_file.return_value = config
+        self.out = WholeProjectConfiguration(
+            self.config_file_loader
+        )
+
+        self.assertEqual(self.out.hide_mouse, True)
 
     def setUp(self):
         data = { "images_folder": "images folder",
                 "remote_config_url": "remote config url",
                 "sleep_time_seconds": 2,
                 "photo_set_filter": 'filter',
-                "viewer_parameters": "pc" }
+                "viewer_parameters": "pc",
+                 "hide_mouse": False }
         config = ConfigFile(data, 'test config file')
         self.config_file_loader = Mock(spec = ConfigFileLoader)
         self.config_file_loader.load_config_file.return_value = config

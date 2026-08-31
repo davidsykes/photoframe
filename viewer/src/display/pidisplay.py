@@ -4,9 +4,10 @@ from viewer.src.menus.uievent import UIEvent, UIEventType
 from viewer.src.viewer_exit_exception import ViewerExitException
 
 class PiSystemDisplay:
-    def __init__(self, system_operations, status_updater):
+    def __init__(self, system_operations, status_updater, hide_mouse):
         self.system_operations = system_operations
         self._status_updater = status_updater
+        self._hide_mouse = hide_mouse
         self.event_count = 0
         self._clock = pygame.time.Clock()
         self._flip_count = 0
@@ -22,7 +23,8 @@ class PiSystemDisplay:
         print('Pygame surface:', self.screen.get_size())
         pygame.display.set_caption("Pi System Display")
         self.my_font = pygame.font.SysFont('Comic Sans MS', 30)
-        pygame.mouse.set_visible(False)
+        if self._hide_mouse is True:
+            pygame.mouse.set_visible(False)
 
     def load_image(self, image_path):
         self._status_updater.update_status('Current image', image_path)

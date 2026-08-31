@@ -14,3 +14,6 @@ class WholeProjectConfiguration:
         self.photo_set_filter = config.get_or_default(
             'photo_set_filter',
             'ava')
+        self.hide_mouse = config.get_or_default(
+            'hide_mouse',
+            True)
