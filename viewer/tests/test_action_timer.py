@@ -22,11 +22,25 @@ class ActionTimerTests(unittest.TestCase):
         self.assert_call_at_time_returns(120, 3)
         self.assert_call_at_time_returns(129, None)
 
+    def test_action_time_can_be_paused(self):
+        self.assert_call_at_time_returns(0, 1)
+        self.assert_call_at_time_returns(10, 2)
+
+        self.out.pause()
+
+        self.assert_call_at_time_returns(100, None)
+
+        self.out.resume()
+
+        self.assert_call_at_time_returns(100, 3)
+        self.assert_call_at_time_returns(109, None)
+        self.assert_call_at_time_returns(110, 4)
+
     def setUp(self):
         self.system_operations = Mock(spec=SystemOperations)
         self.start_of_time = 123
         self.action = Mock()
-        self.action.side_effect  = [1,2,3]
+        self.action.side_effect  = [1,2,3,4]
         self.out = ActionTimer(
             'name',
             self.system_operations,

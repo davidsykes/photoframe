@@ -13,8 +13,15 @@ class ActionTimer:
         self._paused = False
 
     def run_if_due(self):
-        now = self._system_operations.get_time_seconds()
-        if now >= self._next_time:
-            self._next_time = now + self._time_between_checks
-            return self._action()
+        if self._paused is False:
+            now = self._system_operations.get_time_seconds()
+            if now >= self._next_time:
+                self._next_time = now + self._time_between_checks
+                return self._action()
         return None
+
+    def pause(self):
+        self._paused = True
+
+    def resume(self):
+        self._paused = False
