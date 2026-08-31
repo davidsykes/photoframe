@@ -8,7 +8,6 @@ class PiSystemDisplay:
         self.system_operations = system_operations
         self._status_updater = status_updater
         self.event_count = 0
-        self.last_mouse_pos = 'None yet'
         self._clock = pygame.time.Clock()
         self._flip_count = 0
         self.COLOUR_WHITE = (255,255,255)
@@ -23,6 +22,7 @@ class PiSystemDisplay:
         print('Pygame surface:', self.screen.get_size())
         pygame.display.set_caption("Pi System Display")
         self.my_font = pygame.font.SysFont('Comic Sans MS', 30)
+        pygame.mouse.set_visible(False)
 
     def load_image(self, image_path):
         self._status_updater.update_status('Current image', image_path)
@@ -91,7 +91,6 @@ class PiSystemDisplay:
                         raise ViewerExitException(101, f"Control-C event received")
                     raise ViewerExitException(100, f"Quit event {event.key} received")
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                self.last_mouse_pos = event.pos
                 x = event.pos[0]
                 y = event.pos[1]
                 events.append(UIEvent(

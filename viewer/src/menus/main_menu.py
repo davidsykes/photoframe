@@ -8,10 +8,10 @@ class MainMenu:
         self._statuses = statuses
         self._next_image_timer = next_image_timer
         self._buttons = [
-            MenuButton(924, 50, 100, 50, 'Back', self.back_action),
-            MenuButton(924, 120, 100, 50, 'Pause', self.pause),
-            MenuButton(924, 170, 100, 50, 'Resume', self.resume),
-            MenuButton(924, 220, 100, 50, 'Quit', self.terminate)
+            MenuButton(924, 50, 100, 40, 'Back', self.back_action),
+            MenuButton(924, 100, 100, 40, 'Pause', self.pause),
+            MenuButton(924, 150, 100, 40, 'Resume', self.resume),
+            MenuButton(924, 200, 100, 40, 'Quit', self.terminate)
         ]
     
     def render(self, display):

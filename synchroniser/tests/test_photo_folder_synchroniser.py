@@ -4,6 +4,7 @@ from unittest.mock import Mock
 
 from common.src.system_operations import SystemOperations
 from synchroniser.src.photo_folder_synchroniser import PhotoFolderSynchroniser
+from synchroniser.src.remote_folder_downloader_wrapper import RemoteFolderDownloaderWrapper
 
 
 class TestPhotoFolderSynchroniser(unittest.TestCase):
@@ -30,10 +31,9 @@ class TestPhotoFolderSynchroniser(unittest.TestCase):
         )
         self.remote_folder_downloader.download_folder.assert_not_called()
 
-    @classmethod
     def setUp(self):
         self.system_operations = Mock(spec=SystemOperations)
-        self.remote_folder_downloader = Mock()
+        self.remote_folder_downloader = Mock(spec=RemoteFolderDownloaderWrapper)
         self.out = PhotoFolderSynchroniser(
             self.system_operations,
             self.remote_folder_downloader,
