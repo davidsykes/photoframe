@@ -6,66 +6,35 @@ from viewer.src.action_timer import ActionTimer
 
 
 class ActionTimerTests(unittest.TestCase):
-    def test_an_action_is_triggered_on_the_first_call(self):
-        self.assert_call_returns(1)
+    def test_an_action_is_triggered_on_the_first_call_and_then_repeated(self):
+        self.assert_call_at_time_returns(0, 1)
+        self.assert_call_at_time_returns(9, None)
+        self.assert_call_at_time_returns(10, 2)
+        self.assert_call_at_time_returns(19, None)
+        self.assert_call_at_time_returns(20, 3)
+        self.assert_call_at_time_returns(29, None)
 
-    def test_actions_are_not_triggered_before_it_is_time(self):
-        self.out.run_if_due()
-        self.wait_time(9)
+    def test_actions_are_timed_from_the_previous_change(self):
+        self.assert_call_at_time_returns(0, 1)
+        self.assert_call_at_time_returns(9, None)
+        self.assert_call_at_time_returns(110, 2)
+        self.assert_call_at_time_returns(119, None)
+        self.assert_call_at_time_returns(120, 3)
+        self.assert_call_at_time_returns(129, None)
 
-        self.assert_call_returns(None)
-
-    def test_actions_are_triggered_when_it_is_time(self):
-        self.out.run_if_due()
-        self.wait_time(10)
-
-        self.assert_call_returns(2)
-
-    def test_actions_are_not_repeated_until_it_is_time(self):
-        self.out.run_if_due()
-        self.wait_time(10)
-        self.out.run_if_due()
-        self.wait_time(9)
-        
-        self.assert_call_returns(None)
-
-    def test_actions_are_repeated_every_time(self):
-        self.out.run_if_due()
-        self.wait_time(10)
-        self.out.run_if_due()
-        self.wait_time(10)
-
-        self.assert_call_returns(3)
-
-    def test_subsequent_actions_are_timed_from_their_previous_execution(self):
-        self.out.run_if_due()
-        self.wait_time(12)
-        self.assert_call_returns(2)
-
-        self.wait_time(9)
-        self.assert_call_returns(None)
-
-        self.wait_time(1)
-        self.assert_call_returns(3)
-
-    @classmethod
     def setUp(self):
         self.system_operations = Mock(spec=SystemOperations)
-        self.system_operations.get_time_seconds = Mock()
-        self.current_time = 0
-        self.wait_time(self, 123)
+        self.start_of_time = 123
         self.action = Mock()
         self.action.side_effect  = [1,2,3]
         self.out = ActionTimer(
-            'name','
+            'name',
             self.system_operations,
             self.action,
             10)
 
-    def wait_time(self, time):
-        self.current_time += time
+    def assert_call_at_time_returns(self, current_time, return_value):
+        self.current_time = self.start_of_time + current_time
         self.system_operations.get_time_seconds.return_value = self.current_time
-
-    def assert_call_returns(self, value):
         v = self.out.run_if_due()
-        self.assertEqual(v, value)
+        self.assertEqual(v, return_value)

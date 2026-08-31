@@ -10,7 +10,7 @@ class MainMenu:
         self._buttons = [
             MenuButton(924, 50, 100, 50, 'Back', self.back_action),
             MenuButton(924, 120, 100, 50, 'Pause', self.pause),
-            MenuButton(924, 120, 100, 50, 'Quit', self.terminate)
+            MenuButton(924, 170, 100, 50, 'Quit', self.terminate)
         ]
     
     def render(self, display):

@@ -10,6 +10,7 @@ class ActionTimer:
         self._action = action
         self._time_between_checks = time_between_checks
         self._next_time = 0
+        self._paused = False
 
     def run_if_due(self):
         now = self._system_operations.get_time_seconds()
