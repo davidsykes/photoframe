@@ -4,13 +4,11 @@ Where @classmethod occurs apply style changes:
     Add spec to mock
         self.remote_config_loader = Mock(spec=RemoteConfigLoader)
 
-pygame.mouse.set_visible(False)
+Implement a sleep cycle
 
-+++remove unreferenced folders
-
-Locally overidable values such as time between update checks
-    So development versions can check much quicker
 Implement shuffle-without-repeats.
+
+If no photos match the filter the viewer crashes
 
 Test memory usage after running for several hours.
 The long-duration test is particularly worthwhile because photo frames have a habit of running continuously for months. If memory usage stays stable over 24 hours you've largely proven the viewer is production ready.

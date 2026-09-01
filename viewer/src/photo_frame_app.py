@@ -8,11 +8,11 @@ from viewer.src.cycle_stop_detector import CycleStopDetector
 from viewer.src.main.main_loop import MainLoop
 from viewer.src.menus.event_handler import EventHandler
 from viewer.src.menus.events_handler import EventsHandler
-from viewer.src.imagepathloader import ImagePathLoader
+from viewer.src.images.image_path_loader import ImagePathLoader
 from viewer.src.menus.main_menu import MainMenu
 from viewer.src.menus.menu_handler import MenuHandler
 from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
-from viewer.src.next_image_selector import NextImageSelector
+from viewer.src.images.next_image_selector import NextImageSelector
 from viewer.src.randomiser import Randomiser
 from viewer.src.remote_config_version_loader import RemoteConfigVersionLoader
 from viewer.src.status.application_status import ApplicationStatus

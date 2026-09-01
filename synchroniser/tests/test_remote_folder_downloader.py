@@ -2,7 +2,9 @@ from pathlib import Path
 import unittest
 from unittest.mock import Mock
 
+from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.system_operations import SystemOperations
+from common.unzipper import UnZipper
 from synchroniser.src.remote_folder_downloader import RemoteFolderDownloader
 
 class RemoteFolderDownloaderTests(unittest.TestCase):
@@ -88,11 +90,10 @@ class RemoteFolderDownloaderTests(unittest.TestCase):
         self.system_operations.error.assert_called_once_with(
             'Move folder working path\\unzip_folder to destination path failed')
 
-    @classmethod
     def setUp(self):
         self.system_operations = Mock(spec=SystemOperations)
-        self.remote_files_retriever = Mock()
-        self.unzipper = Mock()
+        self.remote_files_retriever = Mock(spec=RemoteFilesRetriever)
+        self.unzipper = Mock(spec=UnZipper)
         self.out = RemoteFolderDownloader(
             self.system_operations,
             self.remote_files_retriever,

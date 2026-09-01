@@ -1,0 +1,7 @@
+Build the code into a version
+     python utilities/build_viewer_release.py x.x.x
+
+Move the image file into the dropbox folder
+
+Create a drop box link
+add it to the viewer_config.json

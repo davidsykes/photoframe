@@ -1,7 +1,8 @@
 import unittest
 from unittest.mock import Mock
-
+from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.system_operations import SystemOperations
+from common.unzipper import UnZipper
 from updater.src.version_downloader import VersionDownloader
 
 class MockSandbox:
@@ -91,12 +92,11 @@ class VersionDownloaderTests(unittest.TestCase):
         self.system_operations.error.assert_called_once_with(
             'Move folder temporary zip folder failed')
 
-    @classmethod
     def setUp(self):
         self.system_operations = Mock(spec=SystemOperations)
         self.sandbox = MockSandbox()
-        self.remote_files_retriever = Mock()
-        self.unzipper = Mock()
+        self.remote_files_retriever = Mock(spec=RemoteFilesRetriever)
+        self.unzipper = Mock(spec=UnZipper)
         self.out = VersionDownloader(
             self.system_operations,
             self.sandbox,

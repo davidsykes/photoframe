@@ -4,5 +4,5 @@ updater/working/
 synchroniser/working/
 releases
 logs
-images/
+/images/
 remote_viewer_config.json

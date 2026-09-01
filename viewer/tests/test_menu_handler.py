@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import Mock, call
 
+from viewer.src.menus.main_menu import MainMenu
 from viewer.src.menus.menu_handler import MenuHandler
 
 
@@ -14,8 +15,7 @@ class MenuHandlerTests(unittest.TestCase):
             [call(101,201),call(102,202)]
         )
 
-    @classmethod
     def setUp(self):
-        self.main_menu = Mock()
+        self.main_menu = Mock(spec=MainMenu)
         self.out = MenuHandler(
             self.main_menu)

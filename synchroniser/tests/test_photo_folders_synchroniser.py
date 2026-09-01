@@ -2,6 +2,7 @@ from pathlib import Path
 import unittest
 from unittest.mock import Mock, call
 
+from synchroniser.src.photo_folder_synchroniser import PhotoFolderSynchroniser
 from synchroniser.src.photo_folders_synchroniser import PhotoFoldersSynchroniser
 
 
@@ -13,9 +14,8 @@ class TestPhotoFoldersSynchroniser(unittest.TestCase):
             [call(['one']),call(['two'])]
         )
 
-    @classmethod
     def setUp(self):
-        self.photo_folder_synchroniser = Mock()
+        self.photo_folder_synchroniser = Mock(spec=PhotoFolderSynchroniser)
         self.out = PhotoFoldersSynchroniser(
             self.photo_folder_synchroniser
         )

@@ -1,10 +1,6 @@
 import unittest
 
-from viewer.src.image_collection import ImageCollection
-
-class MockSystem:
-    def __init__(self, data):
-        pass
+from viewer.src.images.image_collection import ImageCollection
 
 class ImageCollectionTests(unittest.TestCase):
     def test_images_are_added_and_retrieved_by_id(self):
