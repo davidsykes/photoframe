@@ -25,6 +25,7 @@ class PCSystemDisplay:
 
     def flip(self):
         print('flip')
+        print('')
 
     def sleep(self, seconds):
         print(f"Sleeping for {seconds} seconds")

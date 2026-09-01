@@ -2,11 +2,14 @@ class MainLoop:
     def __init__(self,
                  cycle_stop_detector,
                  next_image_timer,
+                 image_provider,
                  display,
                  events_handler,
                  menu):
+        self.use_new_provider = True
         self._cycle_stop_detector = cycle_stop_detector
         self._next_image_timer = next_image_timer
+        self._image_provider = image_provider
         self._display = display
         self._events_handler = events_handler
         self._menu = menu
@@ -14,7 +17,26 @@ class MainLoop:
 
     def loop(self):
         while True:
-            self.loop_once()
+            if self.use_new_provider:
+                self.loop_once_new()
+            else:
+                self.loop_once()
+
+    def loop_once_new(self):
+        self._cycle_stop_detector.poll()
+        needs_update = self._events_handler.handle_events()
+
+        image_to_show = self._image_provider.provide_image()
+        if image_to_show != self._current_image:
+            self._current_image = image_to_show
+            needs_update = True
+
+        if needs_update:
+            self._display.prepare_screen()
+            self._display.show_image(self._current_image)
+            self._menu.render(self._display)
+            self._display.flip()
+        self._display.tick(60)
 
     def loop_once(self):
         self._cycle_stop_detector.poll()

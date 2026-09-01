@@ -4,7 +4,6 @@ from unittest.mock import Mock
 from viewer.src.action_timer import ActionTimer
 from viewer.src.images.image_loader import ImageLoader
 from viewer.src.images.image_provider import ImageProvider
-from viewer.src.images.next_image_selector import NextImageSelector
 
 
 class ImageProviderTests(unittest.TestCase):

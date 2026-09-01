@@ -5,6 +5,8 @@ from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.config_file_loader import ConfigFileLoader
 from common.src.whole_project_configuration import WholeProjectConfiguration
 from viewer.src.cycle_stop_detector import CycleStopDetector
+from viewer.src.images.image_loader import ImageLoader
+from viewer.src.images.image_provider import ImageProvider
 from viewer.src.main.main_loop import MainLoop
 from viewer.src.menus.event_handler import EventHandler
 from viewer.src.menus.events_handler import EventsHandler
@@ -99,9 +101,14 @@ class PhotoFrameApp:
         events_handler = EventsHandler(display, event_handler)
         image_paths = image_path_loader.load_image_paths(status_updater)
         next_image_selector.set_images(image_paths)
+        image_loader = ImageLoader(display)
+        image_provider = ImageProvider(
+            next_image_timer,
+            image_loader)
         main_loop = MainLoop(
             cycle_stop_detector,
             next_image_timer,
+            image_provider,
             display,
             events_handler,
             menu_handler)
