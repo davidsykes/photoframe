@@ -10,9 +10,9 @@ class ApplicationStatus:
 
     def render(self, display):
         for name, value in self.statuses.items():
-            display.print(f'{name}: {value}')
+            display.print_text(f'{name}: {value}')
         for log in self._logs:
-            display.print(log)
+            display.print_text(log)
 
     def log(self, log):
         self._logs.append(log)

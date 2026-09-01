@@ -9,7 +9,7 @@ class ViewerOpionsLoaderTests(unittest.TestCase):
         self.out.update_status('State 2', 'Value 2')
         self.out.render(self.display)
 
-        self.display.print.assert_has_calls(
+        self.display.print_text.assert_has_calls(
             [call('State 1: Value 1'),
              call('State 2: Value 2')]
         )
@@ -20,7 +20,7 @@ class ViewerOpionsLoaderTests(unittest.TestCase):
         self.out.log('Something happened again')
         self.out.render(self.display)
 
-        self.display.print.assert_has_calls(
+        self.display.print_text.assert_has_calls(
             [call('State 1: Value 1'),
              call('Something happened'),
              call('Something happened again')]

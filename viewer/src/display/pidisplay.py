@@ -17,10 +17,10 @@ class PiSystemDisplay:
     def initialise_display(self):
         print("Initialising Pi System Display.")
         pygame.init()
-        print('Desktop sizes:', pygame.display.get_desktop_sizes())
+        #print('Desktop sizes:', pygame.display.get_desktop_sizes())
         self.screen = pygame.display.set_mode(
             (0,0), pygame.FULLSCREEN)
-        print('Pygame surface:', self.screen.get_size())
+        self._screen_size = self.screen.get_size()
         pygame.display.set_caption("Pi System Display")
         self.my_font = pygame.font.SysFont('Comic Sans MS', 30)
         if self._hide_mouse is True:
@@ -70,7 +70,7 @@ class PiSystemDisplay:
     def tick(self, v):
         self._clock.tick(v)
 
-    def print(self, message):
+    def print_text(self, message):
         text_surface = self.my_font.render(message,
                                            True,
                                            (255, 255, 255))
@@ -126,28 +126,12 @@ class PiSystemDisplay:
                 self.system_operations.log(f"Unrecognised Pygame Event: {event}")
         return events
 
-    # def draw_button(self):
-    #     line_color = (255, 0, 0)
-    #     pygame.draw.line(self.screen, line_color, (60, 80), (130, 100))
-
-    #     play_button = pygame.Rect(300, 300, 140, 50)
-    #     quit_button = pygame.Rect(300, 380, 140, 50)
-
-    #     WHITE = (255,255,255)
-    #     LIGHT = (170,170,170)
-    #     DARK = (100,100,100)
-    #     pygame.draw.rect(self.screen, LIGHT, play_button)
-    #     pygame.draw.rect(self.screen, DARK, quit_button)
-
-    #     play_text = self.my_font.render("Pause", True, WHITE)
-    #     quit_text = self.my_font.render("Resume", True, WHITE)
-
-    #     self.screen.blit(play_text, (335, 305))
-    #     self.screen.blit(quit_text, (335, 385))
-
     def draw_rectangle(self, colour, position):
-        rect = pygame.Rect(position[0], position[1],
-                         position[2], position[3])
+        x = position[0] * self._screen_size[0] / 100
+        y = position[1] * self._screen_size[1] / 100
+        w = position[2] * self._screen_size[0] / 100
+        h = position[3] * self._screen_size[1] / 100
+        rect = pygame.Rect(x,y,w,h)
 
         pygame.draw.rect(self.screen, colour, rect)
 

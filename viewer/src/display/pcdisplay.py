@@ -20,7 +20,7 @@ class PCSystemDisplay:
     def show_image(self, image):
         print(f"Showing image on PC: {image.image_path}")
 
-    def print(self, s):
+    def print_text(self, s):
         print(f'print({s})')
 
     def flip(self):
