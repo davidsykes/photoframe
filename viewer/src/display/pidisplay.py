@@ -93,8 +93,8 @@ class PiSystemDisplay:
                         raise ViewerExitException(101, f"Control-C event received")
                     raise ViewerExitException(100, f"Quit event {event.key} received")
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                x = event.pos[0]
-                y = event.pos[1]
+                x = event.pos[0] * 100 / self._screen_size[0]
+                y = event.pos[1] * 100 / self._screen_size[1]
                 events.append(UIEvent(
                     UIEventType.MOUSE_DOWN,
                     x,
