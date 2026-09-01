@@ -136,5 +136,9 @@ class PiSystemDisplay:
         pygame.draw.rect(self.screen, colour, rect)
 
     def draw_text(self, text, colour, position):
+        scaled_position = (position[0] * self._screen_size[0] / 100,
+                           position[1] * self._screen_size[1] / 100,
+                           position[2] * self._screen_size[0] / 100,
+                           position[3] * self._screen_size[1] / 100)
         pygame_text = self.my_font.render(text, True, colour)
-        self.screen.blit(pygame_text, position)
+        self.screen.blit(pygame_text, scaled_position)
