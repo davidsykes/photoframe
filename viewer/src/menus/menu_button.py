@@ -21,7 +21,7 @@ class MenuButton:
         display.draw_text(
             self._text,
             display.COLOUR_WHITE,
-            (self._x, self._y)
+            (self._x + 1, self._y + 1)
         )
 
     def mouse_down(self, x, y):

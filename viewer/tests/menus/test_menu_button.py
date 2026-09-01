@@ -16,7 +16,7 @@ class MenuButtonTests(unittest.TestCase):
         self.display.draw_text.assert_called_once_with(
             'button text',
             'white colour',
-            (123, 456)
+            (124, 457)
         )
 
     def test_mouse_down_coordinates(self):
