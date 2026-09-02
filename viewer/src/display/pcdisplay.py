@@ -7,6 +7,8 @@ class PCSystemDisplay:
         self._event_emulator = event_emulator
         self.COLOUR_WHITE = 'White colour'
         self.COLOUR_LIGHT = 'Light colour'
+        self._print_value = 0
+        self._print_values = {}
 
     def initialise_display(self):
         print("Initialising PC System Display")
@@ -15,13 +17,18 @@ class PCSystemDisplay:
         return PygameImage(image_path, image_path, 1, 1)
     
     def prepare_screen(self):
-        print('Prep screen')
+        print('Prepare screen')
+        self._print_value = 0
 
     def show_image(self, image):
         print(f"Showing image on PC: {image.image_path}")
 
     def print_text(self, s):
-        print(f'print({s})')
+        i = self._print_value
+        if i not in self._print_values or self._print_values[i] != s:
+            self._print_values[i] = s
+            print(f'Status {i}: {s}')
+        self._print_value += 1
 
     def flip(self):
         print('flip')
@@ -37,7 +44,7 @@ class PCSystemDisplay:
         time.sleep(1)
 
     def draw_rectangle(self, colour, position):
-        print(f'Draw {colour} rectangle {position}')
+        pass
 
     def draw_text(self, text, colour, position):
-        print(f'Draw text {text} in {colour} at {position}')
+        print(f'Draw text >>>{text}<<< in {colour} at {position}')

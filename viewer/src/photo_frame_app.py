@@ -108,7 +108,8 @@ class PhotoFrameApp:
         image_loader = ImageLoader(display)
         image_provider = ImageProvider(
             next_image_timer,
-            image_loader)
+            image_loader,
+            sleep_decider)
         main_loop = MainLoop(
             cycle_stop_detector,
             next_image_timer,
