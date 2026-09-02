@@ -13,7 +13,8 @@ class MainMenu:
             MenuButton(90, 6, 10, 5, 'Pause', self.pause),
             MenuButton(90, 12, 10, 5, 'Resume', self.resume),
             MenuButton(90, 18, 10, 5, 'Sleep', self.sleep),
-            MenuButton(90, 24, 10, 5, 'Quit', self.terminate)
+            MenuButton(90, 24, 10, 5, 'Wake', self.wake),
+            MenuButton(90, 30, 10, 5, 'Quit', self.terminate)
         ]
     
     def render(self, display):
@@ -39,6 +40,11 @@ class MainMenu:
 
     def sleep(self):
         self._sleep_decider.go_to_sleep()
+        self.menu_action = MenuAction.BACK
+
+    def wake(self):
+        self._sleep_decider.wake_up()
+        self.menu_action = MenuAction.BACK
 
     def terminate(self):
         raise ViewerExitException(101, f"Quit by mouse down")

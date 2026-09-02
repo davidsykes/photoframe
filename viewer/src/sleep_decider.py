@@ -7,3 +7,6 @@ class SleepDecider:
 
     def go_to_sleep(self):
         self._awake = False
+
+    def wake_up(self):
+        self._awake = True
