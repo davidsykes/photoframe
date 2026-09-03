@@ -17,3 +17,9 @@ class WholeProjectConfiguration:
         self.hide_mouse = config.get_or_default(
             'hide_mouse',
             True)
+        self.wake_time = config.get_or_default(
+            'wake_time',
+            "10:00")
+        self.sleep_time = config.get_or_default(
+            'sleep_time',
+            "20:00")
