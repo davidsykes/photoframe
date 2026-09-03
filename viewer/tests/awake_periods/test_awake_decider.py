@@ -1,11 +1,10 @@
 import unittest
 from unittest.mock import Mock
 
-from viewer.src.sleep.sleep_decider import SleepDecider
-from viewer.src.sleep.sleep_timer import SleepTimer
+from viewer.src.awake_periods.awake_decider import AwakeDecider
+from viewer.src.awake_periods.awake_schedule import AwakeSchedule
 
-
-class SleepDeciderTests(unittest.TestCase):
+class AwakeDeciderTests(unittest.TestCase):
     def test_we_are_awake_until_a_menu_selection_says_we_are_not(self):
         self.assertEqual(self.out.are_we_awake(), True)
 
@@ -47,6 +46,6 @@ class SleepDeciderTests(unittest.TestCase):
         self.assertEqual(self.out.are_we_awake(), True)
 
     def setUp(self):
-        self.sleep_timer = Mock(spec=SleepTimer)
+        self.sleep_timer = Mock(spec=AwakeSchedule)
         self.sleep_timer.are_we_awake.return_value = True
-        self.out = SleepDecider(self.sleep_timer)
+        self.out = AwakeDecider(self.sleep_timer)

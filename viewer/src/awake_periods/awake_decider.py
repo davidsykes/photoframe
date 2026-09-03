@@ -1,11 +1,11 @@
-class SleepDecider:
-    def __init__(self, sleep_timer):
-        self._sleep_timer = sleep_timer
+class AwakeDecider:
+    def __init__(self, awake_schedule):
+        self._awake_schedule = awake_schedule
         self._awake = True
         self._timer_awake = True
 
     def are_we_awake(self):
-        timer_awake = self._sleep_timer.are_we_awake()
+        timer_awake = self._awake_schedule.are_we_awake()
         if timer_awake != self._timer_awake:
             self._timer_awake = timer_awake
             self._awake = timer_awake

@@ -2,7 +2,7 @@ from datetime import time
 import unittest
 from unittest.mock import Mock
 
-from viewer.src.sleep.awake_period_generator import AwakePeriodGenerator
+from viewer.src.awake_periods.awake_period_generator import AwakePeriodGenerator
 from viewer.src.status.application_status import ApplicationStatus
 
 class AwakePeriodGeneratorTests(unittest.TestCase):

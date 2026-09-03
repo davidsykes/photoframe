@@ -34,9 +34,6 @@ class PCSystemDisplay:
         print('flip')
         print('')
 
-    def sleep(self, seconds):
-        print(f"Sleeping for {seconds} seconds")
-
     def get_events(self):
         return self._event_emulator.get_events()
 

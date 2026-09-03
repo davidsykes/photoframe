@@ -1,6 +1,6 @@
 from datetime import time
 
-from viewer.src.sleep.awake_period import AwakePeriod
+from viewer.src.awake_periods.awake_period import AwakePeriod
 
 
 class AwakePeriodGenerator:
