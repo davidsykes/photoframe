@@ -4,7 +4,9 @@ Where @classmethod occurs apply style changes:
     Add spec to mock
         self.remote_config_loader = Mock(spec=RemoteConfigLoader)
 
-Implement a sleep cycle
+change sleep to awake
+
+Implement an awake cycle
 
 Implement shuffle-without-repeats.
 

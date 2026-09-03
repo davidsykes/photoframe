@@ -1,10 +1,10 @@
 class SleepTimer:
-    def __init__(self, sleep_time, wake_time):
-        self.sleep_time = sleep_time
+    def __init__(self, wake_time, sleep_time):
         self.wake_time = wake_time
+        self.sleep_time = sleep_time
 
     def are_we_awake(self):
-        raise NotImplementedError("This method should be implemented in a subclass.")
+        return True  # TODO: implement this properly
         # now = datetime.now().time()
         # if self.sleep_time < self.wake_time:
         #     return not (self.sleep_time <= now < self.wake_time)

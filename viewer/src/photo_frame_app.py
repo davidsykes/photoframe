@@ -43,7 +43,7 @@ class PhotoFrameApp:
             return 1
         images_folder = whole_project_configuration.images_folder
         image_path_loader = ImagePathLoader(images_folder)
-        sleep_time_seconds = whole_project_configuration.sleep_time_seconds
+        image_display_seconds = whole_project_configuration.image_display_seconds
         randomiser = Randomiser()
         next_image_selector = NextImageSelector(randomiser)
         remote_config_url = whole_project_configuration.remote_config_url
@@ -94,11 +94,11 @@ class PhotoFrameApp:
             'Image change',
             system_operations,
             next_image_selector.select_next_image,
-            sleep_time_seconds
+            image_display_seconds
         )
         sleep_timer = SleepTimer(
-            whole_project_configuration.sleep_time,
-            whole_project_configuration.wake_time
+            whole_project_configuration.wake_time,
+            whole_project_configuration.sleep_time
         )
         sleep_decider = SleepDecider(sleep_timer)
         main_menu = MainMenu(

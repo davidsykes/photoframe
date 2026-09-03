@@ -69,8 +69,5 @@ class SystemOperations:
         self.logger.info(message)
         print(f'{self.log_indent}+++ {message}')
 
-    def sleep(self, seconds):
-        time.sleep(seconds)
-
     def get_time_seconds(self):
         return time.time()
