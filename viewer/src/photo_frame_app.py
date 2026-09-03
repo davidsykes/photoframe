@@ -4,6 +4,7 @@ from common.src.config_file_updater import ConfigFileUpdater
 from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.config_file_loader import ConfigFileLoader
 from common.src.whole_project_configuration import WholeProjectConfiguration
+from viewer.src.awake_periods.awake_decider import AwakeDecider
 from viewer.src.awake_periods.awake_schedule import AwakeSchedule
 from viewer.src.cycle_stop_detector import CycleStopDetector
 from viewer.src.images.image_loader import ImageLoader
@@ -96,10 +97,11 @@ class PhotoFrameApp:
             image_display_seconds
         )
         awake_schedule = AwakeSchedule(
+            system_operations,
             whole_project_configuration.wake_time,
             whole_project_configuration.sleep_time
         )
-        sleep_decider = SleepDecider(awake_schedule)
+        sleep_decider = AwakeDecider(awake_schedule)
         main_menu = MainMenu(
             status_updater,
             next_image_timer,

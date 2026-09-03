@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime, time
 import os
 import shutil
 from pathlib import Path
@@ -47,7 +47,7 @@ class SystemOperations:
         if not os.path.exists(log_folder):
             os.makedirs(log_folder)
         import logging
-        now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+        now = datetime.now().strftime('%Y%m%d_%H%M%S')
         logfile_path = log_folder / f'{log_file_name}-{now}.log'
         logging.basicConfig(
             filename=logfile_path,
@@ -71,3 +71,6 @@ class SystemOperations:
 
     def get_time_seconds(self):
         return time.time()
+
+    def get_current_time(self):
+        return datetime.now().time().isoformat(timespec='minutes')
