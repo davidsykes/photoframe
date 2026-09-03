@@ -9,21 +9,21 @@ class CycleStopDetectorTests(unittest.TestCase):
         stop = self.out.poll()
 
         self.assertFalse(stop)
-        
+
     def test_stop_if_1_wants_to(self):
         self.reason1.run_if_due.return_value = True
 
         stop = self.out.poll()
 
         self.assertTrue(stop)
-        
+
     def test_stop_if_2_wants_to(self):
         self.reason2.run_if_due.return_value = True
 
         stop = self.out.poll()
 
         self.assertTrue(stop)
-        
+
     def test_stop_if_3_wants_to(self):
         self.reason3.run_if_due.return_value = True
 

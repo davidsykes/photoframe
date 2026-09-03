@@ -17,7 +17,8 @@ from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.images.next_image_selector import NextImageSelector
 from viewer.src.randomiser import Randomiser
 from viewer.src.remote_config_version_loader import RemoteConfigVersionLoader
-from viewer.src.sleep_decider import SleepDecider
+from viewer.src.sleep.sleep_decider import SleepDecider
+from viewer.src.sleep.sleep_timer import SleepTimer
 from viewer.src.status.application_status import ApplicationStatus
 from viewer.src.action_timer import ActionTimer
 from viewer.src.status.version_loader import VersionLoader
@@ -26,7 +27,7 @@ from viewer.src.viewer_exit_exception import ViewerExitException
 class DisplayType(Enum):
     PC_TEST_VERSION = auto()
     PI_DISPLAY_VERSION = auto()
-    
+
 class PhotoFrameApp:
     def __init__(self, display_type):
         self._display_type = display_type
@@ -95,7 +96,11 @@ class PhotoFrameApp:
             next_image_selector.select_next_image,
             sleep_time_seconds
         )
-        sleep_decider = SleepDecider()
+        sleep_timer = SleepTimer(
+            whole_project_configuration.sleep_time,
+            whole_project_configuration.wake_time
+        )
+        sleep_decider = SleepDecider(sleep_timer)
         main_menu = MainMenu(
             status_updater,
             next_image_timer,
@@ -118,4 +123,4 @@ class PhotoFrameApp:
             events_handler,
             menu_handler)
         main_loop.loop()
-        
+

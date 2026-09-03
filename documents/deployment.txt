@@ -18,7 +18,7 @@ Log on to the new system
  ssh
 
 Unzip the code
- unzip -o 
+ unzip -o
 
 
 Move release/start-photoframe.sh

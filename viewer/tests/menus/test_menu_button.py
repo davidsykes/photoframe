@@ -23,15 +23,15 @@ class MenuButtonTests(unittest.TestCase):
         self.mouse_miss(self.x-1, self.y)
         self.mouse_miss(self.x, self.y-1)
         self.mouse_hit(self.x, self.y)
-        
+
         self.mouse_miss(self.x2+1, self.y)
         self.mouse_miss(self.x2, self.y-1)
         self.mouse_hit(self.x2, self.y)
-        
+
         self.mouse_miss(self.x-1, self.y2)
         self.mouse_miss(self.x, self.y2+1)
         self.mouse_hit(self.x, self.y2)
-        
+
         self.mouse_miss(self.x2+1, self.y2)
         self.mouse_miss(self.x2, self.y2+1)
         self.mouse_hit(self.x2, self.y2)

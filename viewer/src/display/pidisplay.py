@@ -76,7 +76,7 @@ class PiSystemDisplay:
                                            (255, 255, 255))
         self.screen.blit(text_surface, (8, self._print_y))
         self._print_y += 20
-    
+
     def get_events(self):
         events = []
         for event in pygame.event.get():

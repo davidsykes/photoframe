@@ -9,7 +9,7 @@ class SystemOperations:
         try:
             with open(file_name, 'r') as file:
                 data = file.read()
-            return data        
+            return data
         except FileNotFoundError:
             return None
 

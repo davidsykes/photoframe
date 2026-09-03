@@ -22,7 +22,7 @@ class ImageProviderTests(unittest.TestCase):
         self.assertEqual(self.out.provide_image(), 'image at image')
         self.assertEqual(self.out.provide_image(), 'image at image')
         self.assertEqual(self.out.provide_image(), 'image at image')
-        
+
         self.next_image_timer.run_if_due.return_value = 'new image'
         self.assertEqual(self.out.provide_image(), 'image at new image')
 

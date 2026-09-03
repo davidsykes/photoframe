@@ -16,7 +16,7 @@ class MainMenu:
             MenuButton(90, 24, 10, 5, 'Wake', self.wake),
             MenuButton(90, 30, 10, 5, 'Quit', self.terminate)
         ]
-    
+
     def render(self, display):
         self._statuses.render(display)
         for button in self._buttons:

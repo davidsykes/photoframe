@@ -33,7 +33,7 @@ class VersionRepeaterTests(unittest.TestCase):
         self.version_downloader.download_version.return_value = False
 
         result = self.out.run_version(["name", "url"], 22)
-        
+
         self.assertEqual(result, DownloadResult.REMOTE_VERSION_MISSING)
 
     @classmethod

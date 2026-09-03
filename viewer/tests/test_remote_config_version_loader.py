@@ -13,7 +13,7 @@ class NewAppOrNewPhotosDetectorTests(unittest.TestCase):
             'local_config.json')
         self.config_file_loader.load_config_file.assert_called_once_with(
             'local_config.json')
-        
+
     def test_the_status_is_updated(self):
         version = self.out.get_version()
 

@@ -30,7 +30,7 @@ try:
     sys_operations.log(f"Viewer app working folder: {viewer_app_working_folder}")
     sys_operations.ensure_folder_exists(viewer_app_working_folder)
     viewer_sandbox = Sandbox(viewer_app_working_folder)
-    
+
     remote_config_url = project_config.get('remote_config_url')
     sys_operations.ensure_folder_exists(WORKING_FOLDER)
     viewer_versions_config_local_path = WORKING_FOLDER.joinpath(

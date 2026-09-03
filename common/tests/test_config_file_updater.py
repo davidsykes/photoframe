@@ -44,7 +44,7 @@ class TestConfigFileUpdater(unittest.TestCase):
         self.config_file_loader.load_config_file.return_value = None
 
         self.out.update_config_file("remote_url", self.local_file_path)
-        
+
         self.sys_operations.delete_file.assert_called_once_with(
             self.local_file_path_new
         )
