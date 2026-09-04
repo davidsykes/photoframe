@@ -17,7 +17,7 @@ class PiSystemDisplay:
     def initialise_display(self):
         print("Initialising Pi System Display.")
         pygame.init()
-        #print('Desktop sizes:', pygame.display.get_desktop_sizes())
+        print('Desktop sizes:', pygame.display.get_desktop_sizes())
         self.screen = pygame.display.set_mode(
             (0,0), pygame.FULLSCREEN)
         self._screen_size = self.screen.get_size()
