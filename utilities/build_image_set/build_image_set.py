@@ -2,12 +2,13 @@ import sys
 from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile
 import hashlib
-import json
+
+from process_image import prepare_photo
 
 
 BUILDER_ROOT = Path(__file__).resolve().parent
 PROJECT_ROOT = BUILDER_ROOT.parent
-OUTPUT_FOLDER = PROJECT_ROOT / "releases"
+OUTPUT_FOLDER = PROJECT_ROOT.parent / "releases"
 
 EXCLUDED_FOLDER_NAMES = {
     "__pycache__",
@@ -15,6 +16,7 @@ EXCLUDED_FOLDER_NAMES = {
     ".git",
     ".idea",
     ".vscode",
+    "resized"
 }
 
 EXCLUDED_SUFFIXES = {
@@ -32,6 +34,16 @@ def should_include(path: Path) -> bool:
 
     return path.is_file()
 
+def resize_photo(path: Path) -> Path:
+    photos_folder = path.parent
+    resized_folder = photos_folder / "resized"
+    resized_folder.mkdir(exist_ok=True)
+
+    resized_path = resized_folder / path.name
+    if not resized_path.exists():
+        print(f'Compressing path from {path} to {resized_path}')
+        prepare_photo(path, resized_path)
+    return resized_path
 
 def add_folder(
     archive: ZipFile,
@@ -40,12 +52,19 @@ def add_folder(
     file_count = 0
     for path in source_folder.rglob("*"):
         if not should_include(path):
+            print(f'Excluding file: {path}')
             continue
 
         relative_path = path.relative_to(source_folder)
         archive_path = relative_path
 
-        archive.write(path, archive_path.as_posix())
+        resized_path = resize_photo(path)
+
+        #photos_folder = path.parent
+        #resized_path = photos_folder / "resized" / path.name
+        #prepare_photo(path, resized_path)
+        print(f'Adding file: {resized_path} as {archive_path}')
+        archive.write(resized_path, archive_path.as_posix())
         file_count += 1
 
     return file_count
@@ -64,23 +83,13 @@ def build_release(version: str, set_path: Path) -> Path:
     OUTPUT_FOLDER.mkdir(parents=True, exist_ok=True)
 
     zip_path = OUTPUT_FOLDER / f"images-{version}.zip"
-
-    release_metadata = {
-        "manifest_version": 1,
-        "viewer_version": version,
-    }
+    print(f'Building release: {zip_path}')
 
     with ZipFile(zip_path, "w", compression=ZIP_DEFLATED) as archive:
         file_count = add_folder(
             archive,
             set_path
         )
-
-        #archive.writestr("VERSION", version + "\n")
-        #archive.writestr(
-        #    "release.json",
-        #    json.dumps(release_metadata, indent=2),
-        #)
 
     print(f"Created: {zip_path}")
     print(f"File count: {file_count}")
