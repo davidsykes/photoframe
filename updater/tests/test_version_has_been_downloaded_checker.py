@@ -45,7 +45,6 @@ class VersionHasBeenDownloadedCheckerTests(unittest.TestCase):
             "Version name2 has not been downloaded"
         )
 
-    @classmethod
     def setUp(self):
         self.system_operations = Mock(spec=SystemOperations)
         self.out = VersionHasBeenDownloadedChecker(

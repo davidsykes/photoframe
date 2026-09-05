@@ -1,7 +1,10 @@
 import unittest
 from unittest.mock import Mock
 
+from updater.src.version_downloader import VersionDownloader
+from updater.src.version_has_been_downloaded_checker import VersionHasBeenDownloadedChecker
 from updater.src.version_repeater import DownloadResult, VersionRepeater
+from updater.src.version_runner import VersionRunner
 
 class VersionRepeaterTests(unittest.TestCase):
     def test_the_version_is_run(self):
@@ -36,12 +39,11 @@ class VersionRepeaterTests(unittest.TestCase):
 
         self.assertEqual(result, DownloadResult.REMOTE_VERSION_MISSING)
 
-    @classmethod
     def setUp(self):
-        self.version_runner = Mock()
+        self.version_runner = Mock(spec=VersionRunner)
         self.version_runner.run_version.return_value = DownloadResult.VERSION_APPLICATION_ENDED_UNEXPECTEDLY
-        self.version_downloader = Mock()
-        self.version_has_been_downloaded_checker = Mock()
+        self.version_downloader = Mock(spec=VersionDownloader)
+        self.version_has_been_downloaded_checker = Mock(spec=VersionHasBeenDownloadedChecker)
         self.out = VersionRepeater(
             self.version_has_been_downloaded_checker,
             self.version_downloader,

@@ -2,6 +2,8 @@ import unittest
 from unittest.mock import Mock, call
 
 from common.src.system_operations import SystemOperations
+from updater.src.subprocess_exec import SubprocessExec
+from updater.src.version_has_been_downloaded_checker import VersionHasBeenDownloadedChecker
 from updater.src.version_runner import VersionRunner
 
 class MockSandbox:
@@ -26,12 +28,11 @@ class VersionRunnerTests(unittest.TestCase):
             )]
         )
 
-    @classmethod
     def setUp(self):
         self.system_operations = Mock(spec=SystemOperations)
-        self.subprocess_exec = Mock()
+        self.subprocess_exec = Mock(spec=SubprocessExec)
         self.sandbox = MockSandbox()
-        self.version_has_been_downloaded_checker = Mock()
+        self.version_has_been_downloaded_checker = Mock(spec=VersionHasBeenDownloadedChecker)
         self.out = VersionRunner(
             self.system_operations,
             self.subprocess_exec,
