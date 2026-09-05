@@ -4,21 +4,24 @@ class ConfigFileUpdater:
     def __init__(self,
                  remote_files_retriever,
                  config_file_loader,
-                 sys_operations):
+                 sys_operations,
+                 action_status_updater):
         self._remote_files_retriever = remote_files_retriever
         self._config_file_loader = config_file_loader
         self._sys_operations = sys_operations
+        self._action_status_updater = action_status_updater
 
     def update_config_file(self, remote_url, local_file_path):
-        self._sys_operations.progress(
-            f'Update config file {local_file_path} from {remote_url[:30]}...')
         local_file_path = Path(local_file_path)
         temp_local_file_path = local_file_path.with_suffix('.new')
+        success = False
         if self._remote_files_retriever.download_file_or_return_false(
             remote_url, temp_local_file_path) is True:
             if (self._config_file_loader.load_config_file(
                 temp_local_file_path) is not None):
                 self._sys_operations.replace_file(
                     temp_local_file_path, local_file_path)
+                success = True
             else:
                 self._sys_operations.delete_file(temp_local_file_path)
+        self._action_status_updater.update_status(success)

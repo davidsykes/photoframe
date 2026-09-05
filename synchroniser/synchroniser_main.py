@@ -6,6 +6,7 @@ from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.system_operations import SystemOperations
 from common.src.whole_project_configuration import WholeProjectConfiguration
 from common.unzipper import UnZipper
+from synchroniser.src.action_status_updater import ActionStatusUpdater
 from synchroniser.src.photo_collections.photo_collections import PhotoCollections
 from synchroniser.src.photo_folder_synchroniser import PhotoFolderSynchroniser
 from synchroniser.src.photo_folders_remover import PhotoFoldersRemover
@@ -27,11 +28,12 @@ def main() -> int:
     system_operations.ensure_folder_exists(temp_folder_location)
     config_file_loader = ConfigFileLoader(system_operations)
     remote_files_retriever = RemoteFilesRetriever(system_operations)
+    action_status_updater = ActionStatusUpdater('Download remote config', system_operations)
     config_file_updater = ConfigFileUpdater(
         remote_files_retriever,
         config_file_loader,
-        system_operations)
-    #project_config = config_file_loader.load_config_file('project_config.json')
+        system_operations,
+        action_status_updater)
     project_config = WholeProjectConfiguration(config_file_loader)
     remote_config_loader = RemoteConfigLoader(
         WORKING_FOLDER,
