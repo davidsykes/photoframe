@@ -12,7 +12,7 @@ class PhotoFoldersRemover:
         current_folders = self._system_operations.listdir(
             self._images_path
         )
-        wanted_folders = [folder[0] for folder in filtered_photo_folders]
+        wanted_folders = [folder.name for folder in filtered_photo_folders]
         for folder in current_folders:
             if not folder in wanted_folders:
                 self._system_operations.rmtree(self._images_path / folder)

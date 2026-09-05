@@ -11,11 +11,9 @@ class PhotoFolderSynchroniser:
         self._images_folder = Path(images_folder)
 
     def sync_folder(self, photo_folder):
-        name = photo_folder[0]
-        url = photo_folder[1]
-        images_path = self._images_folder / name
+        images_path = self._images_folder / photo_folder.name
         if self._system_operations.isdir(images_path) == False:
             self._remote_folder_downloader.download_folder(
-                url,
+                photo_folder.url,
                 images_path
             )

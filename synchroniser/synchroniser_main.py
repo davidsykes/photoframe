@@ -6,8 +6,8 @@ from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.system_operations import SystemOperations
 from common.src.whole_project_configuration import WholeProjectConfiguration
 from common.unzipper import UnZipper
+from synchroniser.src.photo_collections.photo_collections import PhotoCollections
 from synchroniser.src.photo_folder_synchroniser import PhotoFolderSynchroniser
-from synchroniser.src.photo_folders_filterer import PhotoFoldersFilterer
 from synchroniser.src.photo_folders_remover import PhotoFoldersRemover
 from synchroniser.src.photo_folders_synchroniser import PhotoFoldersSynchroniser
 from synchroniser.src.remote_config_loader import RemoteConfigLoader
@@ -59,18 +59,19 @@ def main() -> int:
         )
     filter_string = project_config.photo_set_filter
     system_operations.log(f'Photo filter: \'{filter_string}\'')
-    photo_folders_filterer = PhotoFoldersFilterer(system_operations, filter_string)
     photo_folders_synchroniser = PhotoFoldersSynchroniser(
         photo_folder_synchroniser)
     photo_folders_remover = PhotoFoldersRemover(
         system_operations,
         images_folder)
+    photo_collections = PhotoCollections()
 
     app = SynchroniserApp(project_config,
                           remote_config_loader,
-                          photo_folders_filterer,
+                          photo_collections,
                           photo_folders_synchroniser,
-                          photo_folders_remover)
+                          photo_folders_remover,
+                          filter_string)
     app.sync()
 
     return 123

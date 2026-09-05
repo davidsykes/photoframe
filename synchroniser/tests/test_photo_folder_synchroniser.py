@@ -5,13 +5,13 @@ from unittest.mock import Mock
 from common.src.system_operations import SystemOperations
 from synchroniser.src.photo_folder_synchroniser import PhotoFolderSynchroniser
 from synchroniser.src.remote_folder_downloader_wrapper import RemoteFolderDownloaderWrapper
-
+from synchroniser.src.photo_collections.photo_collection import PhotoCollection
 
 class TestPhotoFolderSynchroniser(unittest.TestCase):
     def test_new_folders_are_downloaded_and_uncompressed(self):
         self.system_operations.isdir.return_value = False
 
-        self.out.sync_folder(['name','url'])
+        self.out.sync_folder(PhotoCollection(['name','url']))
 
         self.system_operations.isdir.assert_called_once_with(
             Path('images folder') / 'name'
@@ -24,7 +24,7 @@ class TestPhotoFolderSynchroniser(unittest.TestCase):
     def test_existing_folders_are_not_downloaded(self):
         self.system_operations.isdir.return_value = True
 
-        self.out.sync_folder(['name','url'])
+        self.out.sync_folder(PhotoCollection(['name','url']))
 
         self.system_operations.isdir.assert_called_once_with(
             Path('images folder') / 'name'
