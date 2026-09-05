@@ -19,6 +19,7 @@ from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.images.next_image_selector import NextImageSelector
 from viewer.src.randomiser import Randomiser
 from viewer.src.remote_config_version_loader import RemoteConfigVersionLoader
+from viewer.src.status.action_status_updater import ActionStatusUpdater
 from viewer.src.status.application_status import ApplicationStatus
 from viewer.src.action_timer import ActionTimer
 from viewer.src.status.version_loader import VersionLoader
@@ -48,11 +49,14 @@ class PhotoFrameApp:
         next_image_selector = NextImageSelector(randomiser)
         remote_config_url = whole_project_configuration.remote_config_url
         remote_files_retriever = RemoteFilesRetriever(system_operations)
+        status_updater = ApplicationStatus()
+        action_status_updater = ActionStatusUpdater(
+            'Download remote config', system_operations, status_updater)
         config_file_updater = ConfigFileUpdater(
             remote_files_retriever,
             config_file_loader,
-            system_operations)
-        status_updater = ApplicationStatus()
+            system_operations,
+            action_status_updater)
         status_updater.update_status('Filter', whole_project_configuration.photo_set_filter)
         VersionLoader(system_operations, status_updater)\
             .load_version_details(PROJECT_ROOT / 'VERSION')

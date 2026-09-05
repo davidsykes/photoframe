@@ -8,11 +8,13 @@ from synchroniser.src.action_status_updater import ActionStatusUpdater
 class TestActionStatusUpdater(unittest.TestCase):
     def test_success_is_logged(self):
         self.out.update_status(True)
+
         self.system_operations.log.assert_called_once_with(
             'Status Description: Success Time Now')
 
     def test_failure_is_logged(self):
         self.out.update_status(False)
+
         self.system_operations.log.assert_called_once_with(
             'Status Description: Failure Time Now')
 
