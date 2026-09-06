@@ -24,10 +24,10 @@ class DisplayControllerTests(unittest.TestCase):
         self.out.initialise()
 
         self.system_operations.error.assert_called_with(
-            'Error: wlr-randr Error text'
+            'Display Controller Initialise Error: get display name command Error text'
         )
         self.status_updater.update_status.assert_called_with(
-            'ERROR: wlr-randr', 'Error text'
+            'Display Controller Initialise Error', 'get display name command Error text'
         )
 
     def test_display_on_calls_the_subprocess_module(self):
