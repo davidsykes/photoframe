@@ -23,7 +23,6 @@ from viewer.src.status.action_status_updater import ActionStatusUpdater
 from viewer.src.status.application_status import ApplicationStatus
 from viewer.src.action_timer import ActionTimer
 from viewer.src.status.version_loader import VersionLoader
-from viewer.src.viewer_exit_exception import ViewerExitException
 
 class DisplayType(Enum):
     PC_TEST_VERSION = auto()
@@ -34,6 +33,7 @@ class PhotoFrameApp:
         self._display_type = display_type
 
     def run(self, system_operations, PROJECT_ROOT):
+        print(f"Running PhotoFrameApp from: {PROJECT_ROOT}")
         config_file_loader = ConfigFileLoader(system_operations)
         whole_project_configuration = WholeProjectConfiguration(
             config_file_loader
@@ -80,6 +80,11 @@ class PhotoFrameApp:
         cycle_stop_detector = CycleStopDetector(
             [timed_new_app_or_new_photos_detector]
         )
+        from viewer.src.logs_analyser import LogsAnalyser
+        LogsAnalyser(system_operations,
+                     PROJECT_ROOT,
+                     status_updater,
+                     whole_project_configuration.viewer_app_working_folder).analyse_logs()
 
         display = None
         if self._display_type == DisplayType.PC_TEST_VERSION:

@@ -2,6 +2,8 @@ from pathlib import Path
 import unittest
 from unittest.mock import Mock
 
+from common.src.config_file_loader import ConfigFileLoader
+from common.src.config_file_updater import ConfigFileUpdater
 from updater.src.viewer_versions_config_loader import ViewerVersionsConfigLoader
 
 class ViewerVersionsConfigLoaderTests(unittest.TestCase):
@@ -15,11 +17,9 @@ class ViewerVersionsConfigLoaderTests(unittest.TestCase):
             "viewer config path")
         self.assertEqual(config, {"viewer": "config"})
 
-    @classmethod
     def setUp(self):
-        self.config_file_updater = Mock()
-        self.config_file_loader = Mock()
-        self.config_file_loader.load_config_file = Mock()
+        self.config_file_updater = Mock(spec=ConfigFileUpdater)
+        self.config_file_loader = Mock(spec=ConfigFileLoader)
         self.config_file_loader.load_config_file.return_value = {"viewer": "config"}
         self.out = ViewerVersionsConfigLoader(
             self.config_file_updater,

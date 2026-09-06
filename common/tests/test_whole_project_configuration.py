@@ -9,6 +9,7 @@ from common.src.whole_project_configuration import WholeProjectConfiguration
 class TestWholeProjectConfiguration(unittest.TestCase):
     def test_basic_load(self):
         data = { "images_folder": "images folder",
+                "viewer_app_working_folder": "viewer_app_working_folder",
                 "remote_config_url": "remote config url",
                 "image_display_seconds": 2,
                 "photo_set_filter": 'filter',
@@ -20,9 +21,11 @@ class TestWholeProjectConfiguration(unittest.TestCase):
         self.assertEqual(config.image_display_seconds, 2)
         self.assertEqual(config.photo_set_filter, 'filter')
         self.assertEqual(config.hide_mouse, False)
+        self.assertEqual(config.viewer_app_working_folder, 'viewer_app_working_folder')
 
     def test_basic_load_old_version(self):
         data = { "images_folder": "images folder",
+                "viewer_app_working_folder": "viewer_app_working_folder",
                 "remote_config_url": "remote config url",
                 "sleep_time_seconds": 2 }
         config = self.set_up_config(data)
@@ -52,8 +55,18 @@ class TestWholeProjectConfiguration(unittest.TestCase):
 
         self.assertEqual(config.sleep_time, "20:00")
 
+    def test_missing_viewer_app_working_folder_throws_exception(self):
+        data = { "images_folder": "images folder",
+                "remote_config_url": "remote config url",
+                "image_display_seconds": 2,
+                "viewer_parameters": "pc" }
+        with self.assertRaises(Exception) as context:
+            _ = self.set_up_config(data)
+        self.assertTrue('viewer_app_working_folder' in str(context.exception))
+
     def setUp(self):
         self.minimal_data = { "images_folder": "images folder",
+                "viewer_app_working_folder": "viewer_app_working_folder",
                 "remote_config_url": "remote config url",
                 "image_display_seconds": 2,
                 "viewer_parameters": "pc" }

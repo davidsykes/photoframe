@@ -4,9 +4,6 @@ Where @classmethod occurs apply style changes:
     Add spec to mock
         self.remote_config_loader = Mock(spec=RemoteConfigLoader)
 
-Move to the status screen with success of fail indication:
-    self._sys_operations.progress(f'Update config file
-
 tidy up old logs. Maybe a new version clears logs from previous versions
 
 Implement an awake cycle

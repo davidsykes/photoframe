@@ -31,7 +31,6 @@ class CycleStopDetectorTests(unittest.TestCase):
 
         self.assertTrue(stop)
 
-    @classmethod
     def setUp(self):
         self.reason1 = Mock()
         self.reason1.run_if_due.return_value = False

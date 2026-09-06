@@ -11,6 +11,8 @@ class WholeProjectConfiguration:
         self.remote_config_url = config.get('remote_config_url')
         self.images_folder = config.get('images_folder')
 
+        self.viewer_app_working_folder = config.get('viewer_app_working_folder')
+
         self.image_display_seconds = config.get_or_default(
             'image_display_seconds',
             config.get_or_default('sleep_time_seconds', 2))
