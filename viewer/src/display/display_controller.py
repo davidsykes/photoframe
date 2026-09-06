@@ -10,7 +10,7 @@ class DisplayController:
     def initialise(self):
         try:
             output = self._subprocess_wrapper.run_return_stdout(['wlr-randr'])
-            self._display_name = output.stdout.split(' ', 1)[0]
+            self._display_name = output.split(' ', 1)[0]
             self._status_updater.update_status('Display Name', self._display_name)
         except Exception as e:
             self._system_operations.error('Error: wlr-randr ' + str(e))

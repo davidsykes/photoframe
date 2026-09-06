@@ -91,10 +91,9 @@ class DisplayControllerTests(unittest.TestCase):
         )
 
     def setUp(self):
-        data = Mock()
-        data.stdout = 'DisplayName bla bla\nbla bla'
         self.subprocess_wrapper = Mock(spec=SubprocessWrapper)
-        self.subprocess_wrapper.run_return_stdout.return_value = data
+        self.subprocess_wrapper.run_return_stdout.return_value = (
+            'DisplayName bla bla\nbla bla')
         self.status_updater = Mock(spec=ApplicationStatus)
         self.system_operations = Mock(spec=SystemOperations)
         self.out = DisplayController(
