@@ -48,6 +48,7 @@ class MainMenu:
         import time
         time.sleep(3)
         self._display_controller.display_on()
+        time.sleep(3)
         self._sleep_decider.go_to_sleep()
         self.menu_action = MenuAction.BACK
 
