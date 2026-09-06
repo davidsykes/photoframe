@@ -29,3 +29,6 @@ class WholeProjectConfiguration:
         self.sleep_time = config.get_or_default(
             'sleep_time',
             "20:00")
+        self.viewer_parameters = config.get_or_default(
+            'viewer_parameters',
+            "")

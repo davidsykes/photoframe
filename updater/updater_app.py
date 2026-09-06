@@ -4,6 +4,7 @@ from common.src.config_file_updater import ConfigFileUpdater
 from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.config_file_loader import ConfigFileLoader
 from common.src.system_operations import SystemOperations
+from common.src.whole_project_configuration import WholeProjectConfiguration
 from updater.src.sandbox import Sandbox
 from common.unzipper import UnZipper
 from updater.src.subprocess_exec import SubprocessExec
@@ -23,16 +24,16 @@ sys_operations.set_logger('updater', '')
 try:
     project_config_path = 'project_config.json'
     config_file_loader = ConfigFileLoader(sys_operations)
-    project_config = config_file_loader.load_config_file(project_config_path)
-    if project_config is None:
-        raise RuntimeError(f"Failed to load project config file: {project_config_path}")
-    viewer_app_working_folder = project_config.get(
-        'viewer_app_working_folder')
+
+    whole_project_configuration = WholeProjectConfiguration(
+        config_file_loader
+    )
+    viewer_app_working_folder = whole_project_configuration.viewer_app_working_folder
     sys_operations.log(f"Viewer app working folder: {viewer_app_working_folder}")
     sys_operations.ensure_folder_exists(viewer_app_working_folder)
     viewer_sandbox = Sandbox(viewer_app_working_folder)
 
-    remote_config_url = project_config.get('remote_config_url')
+    remote_config_url = whole_project_configuration.remote_config_url
     sys_operations.ensure_folder_exists(WORKING_FOLDER)
     viewer_versions_config_local_path = WORKING_FOLDER.joinpath(
         'viewer_versions_config.json')
@@ -62,7 +63,7 @@ try:
         project_config_path
     )
     subprocess_exec = SubprocessExec(sys_operations)
-    viewer_parameters = project_config.get('viewer_parameters')
+    viewer_parameters = whole_project_configuration.viewer_parameters
     version_runner = VersionRunner(
         sys_operations,
         subprocess_exec,
