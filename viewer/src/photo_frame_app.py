@@ -7,6 +7,8 @@ from common.src.whole_project_configuration import WholeProjectConfiguration
 from viewer.src.awake_periods.awake_decider import AwakeDecider
 from viewer.src.awake_periods.awake_schedule import AwakeSchedule
 from viewer.src.cycle_stop_detector import CycleStopDetector
+from viewer.src.display.display_controller import DisplayController
+from viewer.src.display.subprocess_wrapper import SubprocessWrapper
 from viewer.src.images.image_loader import ImageLoader
 from viewer.src.images.image_provider import ImageProvider
 from viewer.src.main.main_loop import MainLoop
@@ -111,10 +113,18 @@ class PhotoFrameApp:
             whole_project_configuration.sleep_time
         )
         sleep_decider = AwakeDecider(awake_schedule)
+        subprocess_wrapper = SubprocessWrapper()
+        display_controller = DisplayController(
+            subprocess_wrapper,
+            status_updater,
+            system_operations)
+        display_controller.initialise()
         main_menu = MainMenu(
             status_updater,
             next_image_timer,
-            sleep_decider)
+            sleep_decider,
+            display_controller
+            )
         menu_handler = MenuHandler(main_menu)
         event_handler = EventHandler(menu_handler)
         events_handler = EventsHandler(display, event_handler)
