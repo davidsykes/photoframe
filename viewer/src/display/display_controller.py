@@ -18,6 +18,7 @@ class DisplayController:
 
     def display_on(self):
         try:
+            self._system_operations.log('About to turn display on')
             self._subprocess_wrapper.run_return_stdout(
                 ['wlr-randr', '--output', self._display_name, '--on'])
             self._system_operations.log('Display turned on')
@@ -27,6 +28,7 @@ class DisplayController:
 
     def display_off(self):
         try:
+            self._system_operations.log('About to turn display off')
             self._subprocess_wrapper.run_return_stdout(
                 ['wlr-randr', '--output', self._display_name, '--off'])
             self._system_operations.log('Display turned off')
