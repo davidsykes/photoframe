@@ -11,7 +11,7 @@ class DisplayControllerTests(unittest.TestCase):
         self.out.initialise()
 
         self.subprocess_wrapper.run_return_stdout.assert_called_once_with(
-            ['wlr-randr']
+            'get display name command'
         )
         self.status_updater.update_status.assert_called_with(
             'Display Name', 'DisplayName'
@@ -35,8 +35,9 @@ class DisplayControllerTests(unittest.TestCase):
 
         self.out.display_on()
 
+        self.subprocess_command_generator.get_display_on_command.assert_called_once_with('DisplayName')
         self.subprocess_wrapper.run_return_stdout.assert_called_with(
-            ['wlr-randr', '--output', 'DisplayName', '--on']
+            'turn display on command'
         )
 
     def test_display_on_logs_the_event(self):
@@ -65,8 +66,9 @@ class DisplayControllerTests(unittest.TestCase):
 
         self.out.display_off()
 
+        self.subprocess_command_generator.get_display_off_command.assert_called_once_with('DisplayName')
         self.subprocess_wrapper.run_return_stdout.assert_called_with(
-            ['wlr-randr', '--output', 'DisplayName', '--off']
+            'turn display off command'
         )
 
     def test_display_off_logs_the_event(self):
@@ -94,10 +96,21 @@ class DisplayControllerTests(unittest.TestCase):
         self.subprocess_wrapper = Mock(spec=SubprocessWrapper)
         self.subprocess_wrapper.run_return_stdout.return_value = (
             'DisplayName bla bla\nbla bla')
+        self.subprocess_command_generator = Mock()
+        self.subprocess_command_generator.get_display_name_command.return_value = (
+            'get display name command'
+        )
+        self.subprocess_command_generator.get_display_on_command.return_value = (
+            'turn display on command'
+        )
+        self.subprocess_command_generator.get_display_off_command.return_value = (
+            'turn display off command'
+        )
         self.status_updater = Mock(spec=ApplicationStatus)
         self.system_operations = Mock(spec=SystemOperations)
         self.out = DisplayController(
             self.subprocess_wrapper,
+            self.subprocess_command_generator,
             self.status_updater,
             self.system_operations
         )

@@ -1,26 +1,30 @@
 class DisplayController:
     def __init__(self,
                  subprocess_wrapper,
+                 subprocess_command_generator,
                  status_updater,
                  system_operations):
         self._subprocess_wrapper = subprocess_wrapper
+        self._subprocess_command_generator = subprocess_command_generator
         self._status_updater = status_updater
         self._system_operations = system_operations
 
     def initialise(self):
+        command = None
         try:
-            output = self._subprocess_wrapper.run_return_stdout(['wlr-randr'])
+            command = self._subprocess_command_generator.get_display_name_command()
+            output = self._subprocess_wrapper.run_return_stdout(command)
             self._display_name = output.split(' ', 1)[0]
             self._status_updater.update_status('Display Name', self._display_name)
         except Exception as e:
-            self._system_operations.error('Error: wlr-randr ' + str(e))
-            self._status_updater.update_status('ERROR: wlr-randr', str(e))
+            self._system_operations.error(f'Display Controller Initialise Error: {command} {e}')
+            self._status_updater.update_status('Display Controller Initialise Error', f'{command} {e}')
 
     def display_on(self):
         try:
-            self._system_operations.log('About to turn display on')
-            self._subprocess_wrapper.run_return_stdout(
-                ['wlr-randr', '--output', self._display_name, '--on'])
+            command = self._subprocess_command_generator.get_display_on_command(self._display_name)
+            self._system_operations.log(f'About to turn display on: {command}')
+            self._subprocess_wrapper.run_return_stdout(command)
             self._system_operations.log('Display turned on')
         except Exception as e:
             self._system_operations.error('Error: Display On wlr-randr ' + str(e))
@@ -28,9 +32,9 @@ class DisplayController:
 
     def display_off(self):
         try:
-            self._system_operations.log('About to turn display off')
-            self._subprocess_wrapper.run_return_stdout(
-                ['wlr-randr', '--output', self._display_name, '--off'])
+            command = self._subprocess_command_generator.get_display_off_command(self._display_name)
+            self._system_operations.log(f'About to turn display off: {command}')
+            self._subprocess_wrapper.run_return_stdout(command)
             self._system_operations.log('Display turned off')
         except Exception as e:
             self._system_operations.error('Error: Display Off wlr-randr ' + str(e))

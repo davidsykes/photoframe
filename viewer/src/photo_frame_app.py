@@ -9,6 +9,7 @@ from viewer.src.awake_periods.awake_schedule import AwakeSchedule
 from viewer.src.cycle_stop_detector import CycleStopDetector
 from viewer.src.display.display_controller import DisplayController
 from viewer.src.display.subprocess_wrapper import SubprocessWrapper
+from viewer.src.display.wlr_randr_commands import WlrRandrCommands
 from viewer.src.images.image_loader import ImageLoader
 from viewer.src.images.image_provider import ImageProvider
 from viewer.src.main.main_loop import MainLoop
@@ -114,8 +115,10 @@ class PhotoFrameApp:
         )
         sleep_decider = AwakeDecider(awake_schedule)
         subprocess_wrapper = SubprocessWrapper()
+        subprocess_command_generator = WlrRandrCommands()
         display_controller = DisplayController(
             subprocess_wrapper,
+            subprocess_command_generator,
             status_updater,
             system_operations)
         display_controller.initialise()

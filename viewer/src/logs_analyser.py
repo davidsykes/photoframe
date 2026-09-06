@@ -10,8 +10,9 @@ class LogsAnalyser:
         self._working_folder = working_folder
 
     def analyse_logs(self):
-        try:
-            proc = subprocess.run(['wlr-randr'], encoding='utf-8', stdout=subprocess.PIPE, check=False)
-            self._status_updater.update_status('wlr-randr output', proc.stdout)
-        except Exception as e:
-            self._status_updater.update_status('wlr-randr output', str(e))
+        pass
+        # try:
+        #     proc = subprocess.run(['wlr-randr'], encoding='utf-8', stdout=subprocess.PIPE, check=False)
+        #     self._status_updater.update_status('wlr-randr output', proc.stdout)
+        # except Exception as e:
+        #     self._status_updater.update_status('wlr-randr output', str(e))
