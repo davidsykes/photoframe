@@ -7,7 +7,6 @@ class AwakeDecider:
 
     def are_we_awake(self):
         timer_awake = self._awake_schedule.are_we_awake()
-        print(f'AwakeDecider: timer_awake={timer_awake} _timer_awake={self._timer_awake}')
         if timer_awake != self._timer_awake:
             self._timer_awake = timer_awake
             self._awake = timer_awake
