@@ -6,6 +6,31 @@ from viewer.src.awake_periods.awake_schedule import AwakeSchedule
 from viewer.src.display.display_controller import DisplayController
 
 class AwakeDeciderTests(unittest.TestCase):
+    def test_initially_we_are_awake(self):
+        self.assertEqual(self.out.are_we_awake(), True)
+        self.display_controller.display_on.assert_not_called()
+        self.display_controller.display_off.assert_not_called()
+
+    def test_when_sleeping_the_display_is_turned_off(self):
+        self.sleep_timer.are_we_awake.return_value = False
+
+        self.assertEqual(self.out.are_we_awake(), False)
+        self.display_controller.display_on.assert_not_called()
+        self.display_controller.display_off.assert_called_once()
+
+    def test_when_waking_back_up_the_display_is_turned_on(self):
+        self.sleep_timer.are_we_awake.return_value = False
+
+        self.assertEqual(self.out.are_we_awake(), False)
+        self.display_controller.display_on.assert_not_called()
+        self.display_controller.display_off.assert_called_once()
+
+        self.sleep_timer.are_we_awake.return_value = True
+
+        self.assertEqual(self.out.are_we_awake(), True)
+        self.display_controller.display_on.assert_called_once()
+        self.display_controller.display_off.assert_called_once()
+
     def test_we_are_awake_until_a_menu_selection_says_we_are_not(self):
         self.assertEqual(self.out.are_we_awake(), True)
 

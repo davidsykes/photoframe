@@ -46,7 +46,7 @@ class DisplayControllerTests(unittest.TestCase):
         self.out.display_on()
 
         self.system_operations.log.assert_called_with(
-            'Display turned on'
+            'Turn display on: turn display on command'
         )
 
     def test_if_display_on_fails_the_event_is_logged(self):
@@ -58,7 +58,7 @@ class DisplayControllerTests(unittest.TestCase):
         self.out.display_on()
 
         self.system_operations.error.assert_called_with(
-            'Error: Display On wlr-randr Error text'
+            'Error: Display On Error text'
         )
 
     def test_display_off_calls_the_subprocess_module(self):
@@ -77,7 +77,7 @@ class DisplayControllerTests(unittest.TestCase):
         self.out.display_off()
 
         self.system_operations.log.assert_called_with(
-            'Display turned off'
+            'Turn display off: turn display off command'
         )
 
     def test_if_display_off_fails_the_event_is_logged(self):
@@ -89,7 +89,7 @@ class DisplayControllerTests(unittest.TestCase):
         self.out.display_off()
 
         self.system_operations.error.assert_called_with(
-            'Error: Display Off wlr-randr Error text'
+            'Error: Display Off Error text'
         )
 
     def setUp(self):

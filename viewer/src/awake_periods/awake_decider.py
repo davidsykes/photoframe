@@ -10,12 +10,19 @@ class AwakeDecider:
         if timer_awake != self._timer_awake:
             self._timer_awake = timer_awake
             self._awake = timer_awake
+            self.turn_on_or_off_display(timer_awake)
         return self._awake
 
     def go_to_sleep(self):
         self._awake = False
-        self._display_controller.display_off()
+        self.turn_on_or_off_display(self._awake)
 
     def wake_up(self):
         self._awake = True
-        self._display_controller.display_on()
+        self.turn_on_or_off_display(self._awake)
+
+    def turn_on_or_off_display(self, awake):
+        if awake:
+            self._display_controller.display_on()
+        else:
+            self._display_controller.display_off()

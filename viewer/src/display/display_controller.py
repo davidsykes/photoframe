@@ -23,19 +23,17 @@ class DisplayController:
     def display_on(self):
         try:
             command = self._subprocess_command_generator.get_display_on_command(self._display_name)
-            self._system_operations.log(f'About to turn display on: {command}')
+            self._system_operations.log(f'Turn display on: {command}')
             self._subprocess_wrapper.run_return_stdout(command)
-            self._system_operations.log('Display turned on')
         except Exception as e:
-            self._system_operations.error('Error: Display On wlr-randr ' + str(e))
-            self._status_updater.update_status('ERROR: Display On wlr-randr', str(e))
+            self._system_operations.error('Error: Display On ' + str(e))
+            self._status_updater.update_status('ERROR: Display On ', str(e))
 
     def display_off(self):
         try:
             command = self._subprocess_command_generator.get_display_off_command(self._display_name)
-            self._system_operations.log(f'About to turn display off: {command}')
+            self._system_operations.log(f'Turn display off: {command}')
             self._subprocess_wrapper.run_return_stdout(command)
-            self._system_operations.log('Display turned off')
         except Exception as e:
-            self._system_operations.error('Error: Display Off wlr-randr ' + str(e))
-            self._status_updater.update_status('ERROR: Display Off wlr-randr', str(e))
+            self._system_operations.error('Error: Display Off ' + str(e))
+            self._status_updater.update_status('ERROR: Display Off ', str(e))
