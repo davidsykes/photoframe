@@ -44,11 +44,11 @@ class MainMenu:
         self._next_image_timer.resume()
 
     def sleep(self):
-        self._display_controller.display_off()
-        import time
-        time.sleep(3)
-        self._display_controller.display_on()
-        time.sleep(3)
+        # self._display_controller.display_off()
+        # import time
+        # time.sleep(3)
+        # self._display_controller.display_on()
+        # time.sleep(3)
         self._awake_decider.go_to_sleep()
         self.menu_action = MenuAction.BACK
 
