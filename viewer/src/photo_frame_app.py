@@ -114,7 +114,7 @@ class PhotoFrameApp:
             whole_project_configuration.wake_time,
             whole_project_configuration.sleep_time
         )
-        sleep_decider = AwakeDecider(awake_schedule)
+        awake_decider = AwakeDecider(awake_schedule)
         subprocess_wrapper = SubprocessWrapper()
         subprocess_command_generator = WlrRandrCommands()
         subprocess_command_generator = WlopmCommands()
@@ -127,10 +127,10 @@ class PhotoFrameApp:
         main_menu = MainMenu(
             status_updater,
             next_image_timer,
-            sleep_decider,
+            awake_decider,
             display_controller
             )
-        menu_handler = MenuHandler(main_menu)
+        menu_handler = MenuHandler(main_menu, display_controller)
         event_handler = EventHandler(menu_handler)
         events_handler = EventsHandler(display, event_handler)
         image_paths = image_path_loader.load_image_paths(status_updater)
@@ -139,7 +139,7 @@ class PhotoFrameApp:
         image_provider = ImageProvider(
             next_image_timer,
             image_loader,
-            sleep_decider)
+            awake_decider)
         main_loop = MainLoop(
             cycle_stop_detector,
             next_image_timer,

@@ -3,6 +3,7 @@ from unittest.mock import Mock
 
 from viewer.src.awake_periods.awake_decider import AwakeDecider
 from viewer.src.awake_periods.awake_schedule import AwakeSchedule
+from viewer.src.display.display_controller import DisplayController
 
 class AwakeDeciderTests(unittest.TestCase):
     def test_we_are_awake_until_a_menu_selection_says_we_are_not(self):
@@ -45,7 +46,24 @@ class AwakeDeciderTests(unittest.TestCase):
 
         self.assertEqual(self.out.are_we_awake(), True)
 
+    def test_going_to_sleep_turns_the_display_off(self):
+        self.assertEqual(self.out.are_we_awake(), True)
+
+        self.out.go_to_sleep()
+
+        self.display_controller.display_off.assert_called_once()
+
+    def test_waking_up_turns_the_display_on(self):
+        self.out.go_to_sleep()
+        self.display_controller.display_on.assert_not_called()
+
+        self.out.wake_up()
+
+        self.assertEqual(self.out.are_we_awake(), True)
+        self.display_controller.display_on.assert_called_once()
+
     def setUp(self):
         self.sleep_timer = Mock(spec=AwakeSchedule)
         self.sleep_timer.are_we_awake.return_value = True
-        self.out = AwakeDecider(self.sleep_timer)
+        self.display_controller = Mock(spec=DisplayController)
+        self.out = AwakeDecider(self.sleep_timer, self.display_controller)

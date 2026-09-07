@@ -7,11 +7,11 @@ class MainMenu:
     def __init__(self,
                  statuses,
                  next_image_timer,
-                 sleep_decider,
+                 awake_decider,
                  display_controller):
         self._statuses = statuses
         self._next_image_timer = next_image_timer
-        self._sleep_decider = sleep_decider
+        self._awake_decider = awake_decider
         self._display_controller = display_controller
         self._buttons = [
             MenuButton(90, 0, 10, 5, 'Back', self.back_action),
@@ -49,11 +49,11 @@ class MainMenu:
         time.sleep(3)
         self._display_controller.display_on()
         time.sleep(3)
-        self._sleep_decider.go_to_sleep()
+        self._awake_decider.go_to_sleep()
         self.menu_action = MenuAction.BACK
 
     def wake(self):
-        self._sleep_decider.wake_up()
+        self._awake_decider.wake_up()
         self.menu_action = MenuAction.BACK
 
     def terminate(self):
