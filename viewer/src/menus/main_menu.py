@@ -19,7 +19,8 @@ class MainMenu:
             MenuButton(90, 12, 10, 5, 'Resume', self.resume),
             MenuButton(90, 18, 10, 5, 'Sleep', self.sleep),
             MenuButton(90, 24, 10, 5, 'Wake', self.wake),
-            MenuButton(90, 30, 10, 5, 'Quit', self.terminate)
+            MenuButton(90, 30, 10, 5, 'Crash', self.simulate_crash),
+            MenuButton(90, 36, 10, 5, 'Quit', self.end_program_cleanly)
         ]
 
     def render(self, display):
@@ -44,11 +45,6 @@ class MainMenu:
         self._next_image_timer.resume()
 
     def sleep(self):
-        # self._display_controller.display_off()
-        # import time
-        # time.sleep(3)
-        # self._display_controller.display_on()
-        # time.sleep(3)
         self._awake_decider.go_to_sleep()
         self.menu_action = MenuAction.BACK
 
@@ -56,5 +52,8 @@ class MainMenu:
         self._awake_decider.wake_up()
         self.menu_action = MenuAction.BACK
 
-    def terminate(self):
+    def end_program_cleanly(self):
         raise ViewerExitException(101, f"Quit by mouse down")
+
+    def simulate_crash(self):
+        raise ViewerExitException(102, f"Crash simulated by mouse down")
