@@ -114,7 +114,6 @@ class PhotoFrameApp:
             whole_project_configuration.wake_time,
             whole_project_configuration.sleep_time
         )
-        awake_decider = AwakeDecider(awake_schedule)
         subprocess_wrapper = SubprocessWrapper()
         subprocess_command_generator = WlrRandrCommands()
         subprocess_command_generator = WlopmCommands()
@@ -124,6 +123,7 @@ class PhotoFrameApp:
             status_updater,
             system_operations)
         display_controller.initialise()
+        awake_decider = AwakeDecider(awake_schedule, display_controller)
         main_menu = MainMenu(
             status_updater,
             next_image_timer,
