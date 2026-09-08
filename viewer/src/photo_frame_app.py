@@ -149,5 +149,9 @@ class PhotoFrameApp:
             display,
             events_handler,
             menu_handler)
-        main_loop.loop()
+        try:
+            main_loop.loop()
+        except:
+            display_controller.display_on()
+            raise
 
