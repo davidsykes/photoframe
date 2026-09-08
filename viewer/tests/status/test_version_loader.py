@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import Mock
 
 from common.src.system_operations import SystemOperations
+from viewer.src.status.application_status import ApplicationStatus
 from viewer.src.status.version_loader import VersionLoader
 
 
@@ -33,10 +34,9 @@ class VersionLoaderTests(unittest.TestCase):
             'Version', 'VERSION  Contents  '
         )
 
-    @classmethod
     def setUp(self):
         self.system_operations = Mock(spec=SystemOperations)
-        self.status = Mock()
+        self.status = Mock(spec=ApplicationStatus)
         self.out = VersionLoader(
             self.system_operations,
             self.status)

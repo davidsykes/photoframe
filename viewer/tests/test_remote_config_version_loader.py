@@ -1,6 +1,9 @@
 import unittest
 from unittest.mock import Mock
 
+from common.src.config_file import ConfigFile
+from common.src.config_file_loader import ConfigFileLoader
+from common.src.config_file_updater import ConfigFileUpdater
 from viewer.src.remote_config_version_loader import RemoteConfigVersionLoader
 
 class NewAppOrNewPhotosDetectorTests(unittest.TestCase):
@@ -22,11 +25,10 @@ class NewAppOrNewPhotosDetectorTests(unittest.TestCase):
             'Last Version Check',
             '1.2.3')
 
-    @classmethod
     def setUp(self):
-        self.config_file_updater = Mock()
-        self.config_file_loader = Mock()
-        self.config = Mock()
+        self.config_file_updater = Mock(spec=ConfigFileUpdater)
+        self.config_file_loader = Mock(spec =ConfigFileLoader)
+        self.config = Mock(spec=ConfigFile)
         self.config_file_loader.load_config_file.return_value = self.config
         self.config.get.return_value = '1.2.3'
         self.status_updater = Mock()

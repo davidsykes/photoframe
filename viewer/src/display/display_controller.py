@@ -40,7 +40,7 @@ class DisplayController:
             if self._display_off_enabled:
                 self._subprocess_wrapper.run_return_stdout(command)
             else:
-                self._system_operations.log(f'Turn display off disables')
+                self._system_operations.log(f'Turn display off disabled')
             self._status_updater.update_status('Display Off ', str(command))
         except Exception as e:
             self._system_operations.error('Error: Display Off ' + str(e))

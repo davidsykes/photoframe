@@ -59,10 +59,6 @@ def add_folder(
         archive_path = relative_path
 
         resized_path = resize_photo(path)
-
-        #photos_folder = path.parent
-        #resized_path = photos_folder / "resized" / path.name
-        #prepare_photo(path, resized_path)
         print(f'Adding file: {resized_path} as {archive_path}')
         archive.write(resized_path, archive_path.as_posix())
         file_count += 1

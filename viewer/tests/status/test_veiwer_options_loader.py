@@ -14,6 +14,5 @@ class ViewerOpionsLoaderTests(unittest.TestCase):
 
         self.assertTrue(opts.show_image_names)
 
-    @classmethod
     def setUp(self):
         self.out = ViewerOptionsLoader()

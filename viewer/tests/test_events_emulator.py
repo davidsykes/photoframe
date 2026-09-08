@@ -24,12 +24,11 @@ class EventsEmulatorTests(unittest.TestCase):
         self.assertEqual(self.out.get_events(), 'Set 2')
         self.assertEqual(self.out.get_events(), [])
 
-    @classmethod
     def setUp(self):
         self.system_operations = Mock(spec=SystemOperations)
         self.system_operations.get_time_seconds = Mock()
         self.base_time = 345
-        self.set_time(self, 0)
+        self.set_time(0)
         self.out = EventsEmulator(
             self.system_operations)
 

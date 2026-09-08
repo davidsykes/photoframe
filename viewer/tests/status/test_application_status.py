@@ -26,7 +26,6 @@ class ViewerOpionsLoaderTests(unittest.TestCase):
              call('Something happened again')]
         )
 
-    @classmethod
     def setUp(self):
         self.display = Mock()
         self.out = ApplicationStatus()

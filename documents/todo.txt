@@ -1,10 +1,9 @@
-Where @classmethod occurs apply style changes:
-    Remove @classmethod
-    Change \ to ()
-    Add spec to mock
-        self.remote_config_loader = Mock(spec=RemoteConfigLoader)
+
+Tidy up the image deployment process and allow multiple filters
 
 tidy up old logs. Maybe a new version clears logs from previous versions
+    Currently the number of log files are displayed
+    next step is to delete any log files that are, say, more than 7 days old
 
 Implement an awake cycle
 
