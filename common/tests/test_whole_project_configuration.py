@@ -14,7 +14,8 @@ class TestWholeProjectConfiguration(unittest.TestCase):
                 "image_display_seconds": 2,
                 "photo_set_filter": 'filter',
                 "viewer_parameters": "viewer parameters",
-                 "hide_mouse": False }
+                 "hide_mouse": False,
+                 "display_off_enabled": True }
         config = self.set_up_config(data)
         self.assertEqual(config.remote_config_url, "remote config url")
         self.assertEqual(config.images_folder, "images folder")
@@ -23,6 +24,7 @@ class TestWholeProjectConfiguration(unittest.TestCase):
         self.assertEqual(config.hide_mouse, False)
         self.assertEqual(config.viewer_app_working_folder, 'viewer app working folder')
         self.assertEqual(config.viewer_parameters, "viewer parameters")
+        self.assertTrue(config.display_off_enabled)
 
     def test_basic_load_old_version(self):
         data = { "images_folder": "images folder",
@@ -60,6 +62,11 @@ class TestWholeProjectConfiguration(unittest.TestCase):
         config = self.set_up_config(self.minimal_data)
 
         self.assertEqual(config.viewer_parameters, "")
+
+    def test_display_off_enabled_defaults_to_false(self):
+        config = self.set_up_config(self.minimal_data)
+
+        self.assertFalse(config.display_off_enabled)
 
     def test_missing_viewer_app_working_folder_throws_exception(self):
         data = { "images_folder": "images folder",

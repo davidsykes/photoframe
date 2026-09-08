@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import Mock, call
 
+from common.src.system_operations import SystemOperations
 from viewer.src.display.display_controller import DisplayController
 from viewer.src.menus.main_menu import MainMenu
 from viewer.src.menus.menu_handler import MenuHandler
@@ -16,6 +17,13 @@ class MenuHandlerTests(unittest.TestCase):
             [call(101,201),call(102,202)]
         )
 
+    def test_mouse_downs_are_logged(self):
+        self.out.mouse_down(100,200)
+
+        self.system_operations.log.assert_called_once_with(
+            'Mouse Down 100 200'
+        )
+
     def test_a_mouse_turns_the_display_on(self):
         self.out.mouse_down(100,200)
 
@@ -24,6 +32,8 @@ class MenuHandlerTests(unittest.TestCase):
     def setUp(self):
         self.main_menu = Mock(spec=MainMenu)
         self.display_controller = Mock(spec=DisplayController)
+        self.system_operations = Mock(spec=SystemOperations)
         self.out = MenuHandler(
             self.main_menu,
-            self.display_controller)
+            self.display_controller,
+            self.system_operations)

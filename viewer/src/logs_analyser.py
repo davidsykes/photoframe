@@ -1,4 +1,3 @@
-import subprocess
 from sys import stdout
 
 
@@ -10,9 +9,6 @@ class LogsAnalyser:
         self._working_folder = working_folder
 
     def analyse_logs(self):
-        pass
-        # try:
-        #     proc = subprocess.run(['wlr-randr'], encoding='utf-8', stdout=subprocess.PIPE, check=False)
-        #     self._status_updater.update_status('wlr-randr output', proc.stdout)
-        # except Exception as e:
-        #     self._status_updater.update_status('wlr-randr output', str(e))
+        print(f'LogsAnalyser: project_root={self._project_root} working_folder={self._working_folder}')
+        #self.find_log_files(self._project_root)
+        #self.find_log_files(self._working_folder)

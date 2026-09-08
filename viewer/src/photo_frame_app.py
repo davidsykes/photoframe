@@ -72,7 +72,8 @@ class PhotoFrameApp:
             PROJECT_ROOT / 'remote_viewer_config.json',
             )
         new_app_or_new_photos_detector = NewAppOrNewPhotosDetector(
-            remote_config_version_loader
+            remote_config_version_loader,
+            system_operations
         )
         time_between_version_checks_seconds = viewer_configuration.get(
             "time_between_version_checks_seconds")
@@ -121,7 +122,8 @@ class PhotoFrameApp:
             subprocess_wrapper,
             subprocess_command_generator,
             status_updater,
-            system_operations)
+            system_operations,
+            whole_project_configuration.display_off_enabled)
         display_controller.initialise()
         awake_decider = AwakeDecider(awake_schedule, display_controller)
         main_menu = MainMenu(
@@ -130,7 +132,7 @@ class PhotoFrameApp:
             awake_decider,
             display_controller
             )
-        menu_handler = MenuHandler(main_menu, display_controller)
+        menu_handler = MenuHandler(main_menu, display_controller, system_operations)
         event_handler = EventHandler(menu_handler)
         events_handler = EventsHandler(display, event_handler)
         image_paths = image_path_loader.load_image_paths(status_updater)

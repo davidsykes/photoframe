@@ -112,5 +112,6 @@ class DisplayControllerTests(unittest.TestCase):
             self.subprocess_wrapper,
             self.subprocess_command_generator,
             self.status_updater,
-            self.system_operations
+            self.system_operations,
+            True
         )
