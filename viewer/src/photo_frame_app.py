@@ -151,7 +151,5 @@ class PhotoFrameApp:
             menu_handler)
         try:
             main_loop.loop()
-        except:
+        finally:
             display_controller.display_on()
-            raise
-
