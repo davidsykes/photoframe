@@ -1,14 +1,17 @@
 from viewer.src.viewer_exit_exception import ViewerExitException
 
-
 class NewAppOrNewPhotosDetector:
     def __init__(self,
-                 remote_version_loader):
-        self._version_retriever = remote_version_loader
+                 remote_config_version_loader,
+                 system_operations):
+        self._version_retriever = remote_config_version_loader
+        self._system_operations = system_operations
+        self._last_version = None
 
     def poll(self) -> None:
         current_version = self._version_retriever.get_version()
-        if not hasattr(self, '_last_version'):
+        self._system_operations.log(f"Remote configuration version: {current_version}. Local version: {self._last_version}")
+        if self._last_version is None:
             self._last_version = current_version
         elif self._last_version != current_version:
             raise ViewerExitException(
