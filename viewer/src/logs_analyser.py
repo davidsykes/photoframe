@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from sys import stdout
+import time
 
 
 class LogsAnalyser:
@@ -10,6 +11,7 @@ class LogsAnalyser:
         self._status_updater = status_updater
         self._working_folder = working_folder
         self._log_count = 0
+        self._now = time.time()
 
     def analyse_logs(self):
         print(f'LogsAnalyser: project_root={self._project_root} working_folder={self._working_folder}')
@@ -24,4 +26,7 @@ class LogsAnalyser:
             name = parent.name
             if name == 'logs':
                 self._log_count = self._log_count + 1
-                print(f'path {name} {path}')
+                mtime = os.path.getmtime(path)
+                age_seconds = self._now - mtime
+                age_days = age_seconds / 60 / 60 / 24
+                print(f'path {name} {age_days} {path}')
