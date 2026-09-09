@@ -9,6 +9,8 @@ Implement an awake cycle
 
 Implement shuffle-without-repeats.
 
+Implement a priority system so that recent photos are shown more often
+
 If no photos match the filter the viewer crashes
 
 Test memory usage after running for several hours.
