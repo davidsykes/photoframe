@@ -11,6 +11,7 @@ from viewer.src.display.display_controller import DisplayController
 from viewer.src.display.subprocess_wrapper import SubprocessWrapper
 from viewer.src.display.wlopm_commands import WlopmCommands
 from viewer.src.display.wlr_randr_commands import WlrRandrCommands
+from viewer.src.images.image_selection_wrapper import ImageSelectionWrapper
 from viewer.src.images.old.image_loader import ImageLoader
 from viewer.src.images.old.image_provider import ImageProvider
 from viewer.src.main.main_loop import MainLoop
@@ -20,10 +21,7 @@ from viewer.src.images.old.image_path_loader import ImagePathLoader
 from viewer.src.menus.main_menu import MainMenu
 from viewer.src.menus.menu_handler import MenuHandler
 from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
-from viewer.src.images.next_image_selector import NextImageSelector
-from viewer.src.images.old.next_image_selector import NextImageSelectorOld
-from viewer.src.images.old.randomiser import Randomiser
-from viewer.src.remote_config_version_loader import RemoteConfigVersionLoader
+from viewer.src.data.remote_config_data_loader import RemoteConfigDataLoader
 from viewer.src.status.action_status_updater import ActionStatusUpdater
 from viewer.src.status.application_status import ApplicationStatus
 from viewer.src.action_timer import ActionTimer
@@ -51,11 +49,9 @@ class PhotoFrameApp:
         image_path_loader = ImagePathLoader(images_folder)
         image_display_seconds = whole_project_configuration.image_display_seconds
 
-        randomiser = Randomiser()
-        next_image_selector = NextImageSelectorOld(randomiser)
-        if self._display_type == DisplayType.PC_TEST_VERSION:
-            next_image_selector = NextImageSelector()
-
+        image_selection_wrapper = ImageSelectionWrapper(
+            self._display_type == DisplayType.PC_TEST_VERSION
+        )
 
         remote_config_url = whole_project_configuration.remote_config_url
         remote_files_retriever = RemoteFilesRetriever(system_operations)
@@ -70,7 +66,7 @@ class PhotoFrameApp:
         status_updater.update_status('Filter', whole_project_configuration.photo_set_filter)
         VersionLoader(system_operations, status_updater)\
             .load_version_details(PROJECT_ROOT / 'VERSION')
-        remote_config_version_loader = RemoteConfigVersionLoader(
+        remote_config_version_loader = RemoteConfigDataLoader(
             config_file_updater,
             config_file_loader,
             status_updater,
@@ -113,7 +109,7 @@ class PhotoFrameApp:
         next_image_timer = ActionTimer(
             'Image change',
             system_operations,
-            next_image_selector.select_next_image,
+            image_selection_wrapper.select_next_image,
             image_display_seconds
         )
         awake_schedule = AwakeSchedule(
@@ -142,7 +138,7 @@ class PhotoFrameApp:
         event_handler = EventHandler(menu_handler)
         events_handler = EventsHandler(display, event_handler)
         image_paths = image_path_loader.load_image_paths(status_updater)
-        next_image_selector.set_images(image_paths)
+        image_selection_wrapper.set_images(image_paths)
         image_loader = ImageLoader(display)
         image_provider = ImageProvider(
             next_image_timer,

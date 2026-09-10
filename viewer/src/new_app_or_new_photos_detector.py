@@ -9,7 +9,8 @@ class NewAppOrNewPhotosDetector:
         self._last_version = None
 
     def poll(self) -> None:
-        current_version = self._version_retriever.get_version()
+        config_data = self._version_retriever.get_config_data()
+        current_version = config_data.version
         self._system_operations.log(f"Remote configuration version: {current_version}. Local version: {self._last_version}")
         if self._last_version is None:
             self._last_version = current_version

@@ -34,14 +34,16 @@ class LogsAnalyser:
             parent2_name = parent2.name
             if parent_name == 'logs' and parent2_name[0] != '.':
                 self._log_count = self._log_count + 1
+                size = os.path.getsize(path)
                 mtime = os.path.getmtime(path)
                 age_seconds = self._now - mtime
                 age_days = age_seconds / 60 / 60 / 24
                 #print(f'path {name} {age_days} {path}')
-                self.add_log_count(parent2)
+                self.add_log_count(parent2, size)
 
-    def add_log_count(self, name):
+    def add_log_count(self, name, size):
         if name in self._folders:
-            self._folders[name] = self._folders[name] + 1
+            self._folders[name][0] = self._folders[name][0] + 1
+            self._folders[name][1] = self._folders[name][1] + size
         else:
-            self._folders[name] = 1
+            self._folders[name] = [1, size]
