@@ -11,17 +11,18 @@ from viewer.src.display.display_controller import DisplayController
 from viewer.src.display.subprocess_wrapper import SubprocessWrapper
 from viewer.src.display.wlopm_commands import WlopmCommands
 from viewer.src.display.wlr_randr_commands import WlrRandrCommands
-from viewer.src.images.image_loader import ImageLoader
-from viewer.src.images.image_provider import ImageProvider
+from viewer.src.images.old.image_loader import ImageLoader
+from viewer.src.images.old.image_provider import ImageProvider
 from viewer.src.main.main_loop import MainLoop
 from viewer.src.menus.event_handler import EventHandler
 from viewer.src.menus.events_handler import EventsHandler
-from viewer.src.images.image_path_loader import ImagePathLoader
+from viewer.src.images.old.image_path_loader import ImagePathLoader
 from viewer.src.menus.main_menu import MainMenu
 from viewer.src.menus.menu_handler import MenuHandler
 from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.images.next_image_selector import NextImageSelector
-from viewer.src.randomiser import Randomiser
+from viewer.src.images.old.next_image_selector import NextImageSelectorOld
+from viewer.src.images.old.randomiser import Randomiser
 from viewer.src.remote_config_version_loader import RemoteConfigVersionLoader
 from viewer.src.status.action_status_updater import ActionStatusUpdater
 from viewer.src.status.application_status import ApplicationStatus
@@ -49,8 +50,13 @@ class PhotoFrameApp:
         images_folder = whole_project_configuration.images_folder
         image_path_loader = ImagePathLoader(images_folder)
         image_display_seconds = whole_project_configuration.image_display_seconds
+
         randomiser = Randomiser()
-        next_image_selector = NextImageSelector(randomiser)
+        next_image_selector = NextImageSelectorOld(randomiser)
+        if self._display_type == DisplayType.PC_TEST_VERSION:
+            next_image_selector = NextImageSelector()
+
+
         remote_config_url = whole_project_configuration.remote_config_url
         remote_files_retriever = RemoteFilesRetriever(system_operations)
         status_updater = ApplicationStatus()

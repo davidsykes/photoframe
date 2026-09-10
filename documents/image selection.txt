@@ -1,0 +1,41 @@
+The photos are organised into photo sets.
+Each photo set is given a date, representing the day it is added to the frame.
+Each set is given a randomisation weighting, controlling how often it gets picked for viewing
+
+For example:
+
+Age of set    Weight
+first 7 days  8
+1–4 weeks     5
+1–3 months    3
+older         1
+
+def get_weight(age_days):
+    if age_days < 7:
+        return 8
+
+    if age_days < 30:
+        return 5
+
+    if age_days < 90:
+        return 3
+
+    return 1
+
+
+To select an image first the set is randomly chosen
+
+import random
+selected_set = random.choices(
+    photo_sets,
+    weights=weights,
+    k=1,
+)[0]
+
+Then from the set the image is randomly chosen
+photo = selected_set.choose_photo()
+
+Whenever an image is displayed it is added to a circular queue set to a size of, say, 50
+This is used to ensure that no image is repeated within 50 images
+Also perhaps don't select the same set more than 2 or 3 times consecutively.
+
