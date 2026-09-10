@@ -1,3 +1,4 @@
+from viewer.src.images.next_image_selector import NextImageSelector
 from viewer.src.images.old.next_image_selector import NextImageSelectorOld
 from viewer.src.images.old.randomiser import Randomiser
 
@@ -15,7 +16,7 @@ class ImageSelectionWrapper:
             self._initialise_old_version()
 
     def _initialise_new_version(self, remote_config_data):
-        pass
+        self.next_image_selector = NextImageSelector()
 
     def _initialise_old_version(self):
         randomiser = Randomiser()

@@ -37,13 +37,15 @@ class LogsAnalyser:
                 size = os.path.getsize(path)
                 mtime = os.path.getmtime(path)
                 age_seconds = self._now - mtime
-                age_days = age_seconds / 60 / 60 / 24
+                age_days = int(age_seconds / 60 / 60 / 24)
                 #print(f'path {name} {age_days} {path}')
-                self.add_log_count(parent2, size)
+                self.add_log_count(parent2, size, age_days)
 
-    def add_log_count(self, name, size):
+    def add_log_count(self, name, size, age_days):
         if name in self._folders:
             self._folders[name][0] = self._folders[name][0] + 1
             self._folders[name][1] = self._folders[name][1] + size
+            if age_days > self._folders[name][2]:
+                self._folders[name][2] = age_days
         else:
-            self._folders[name] = [1, size]
+            self._folders[name] = [1, size, age_days]

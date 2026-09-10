@@ -8,7 +8,6 @@ class CommandLineOptions:
         self.always_awake = False
 
         for arg in argv:
-            print(f'-- Command line option: {arg}')
             if arg == 'pc':
                 self.display_type = DisplayType.PC_TEST_VERSION
             if arg == 'new':
