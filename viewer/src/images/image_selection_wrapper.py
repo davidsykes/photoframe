@@ -4,15 +4,16 @@ from viewer.src.images.old.randomiser import Randomiser
 
 class ImageSelectionWrapper:
     def __init__(self,
-                 is_new_version):
-        is_new_version = False
+                 is_new_version,
+                 remote_config_data):
+        #is_new_version = False
 
         if (is_new_version):
-            self._initialise_new_version()
+            self._initialise_new_version(remote_config_data)
         else:
             self._initialise_old_version()
 
-    def _initialise_new_version(self):
+    def _initialise_new_version(self, remote_config_data):
         pass
 
     def _initialise_old_version(self):

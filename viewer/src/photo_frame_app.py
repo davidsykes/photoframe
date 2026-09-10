@@ -48,11 +48,6 @@ class PhotoFrameApp:
         images_folder = whole_project_configuration.images_folder
         image_path_loader = ImagePathLoader(images_folder)
         image_display_seconds = whole_project_configuration.image_display_seconds
-
-        image_selection_wrapper = ImageSelectionWrapper(
-            self._display_type == DisplayType.PC_TEST_VERSION
-        )
-
         remote_config_url = whole_project_configuration.remote_config_url
         remote_files_retriever = RemoteFilesRetriever(system_operations)
         status_updater = ApplicationStatus()
@@ -73,9 +68,11 @@ class PhotoFrameApp:
             remote_config_url,
             PROJECT_ROOT / 'remote_viewer_config.json',
             )
+        initial_remote_config_data = remote_config_version_loader.get_config_data()
         new_app_or_new_photos_detector = NewAppOrNewPhotosDetector(
             remote_config_version_loader,
-            system_operations
+            system_operations,
+            initial_remote_config_data.version
         )
         time_between_version_checks_seconds = viewer_configuration.get(
             "time_between_version_checks_seconds")
@@ -105,6 +102,14 @@ class PhotoFrameApp:
         else:
             raise ValueError(f"Unknown display type: {self._display_type}")
         display.initialise_display()
+
+
+        image_selection_wrapper = ImageSelectionWrapper(
+            self._display_type == DisplayType.PC_TEST_VERSION,
+            initial_remote_config_data
+        )
+
+
 
         next_image_timer = ActionTimer(
             'Image change',
