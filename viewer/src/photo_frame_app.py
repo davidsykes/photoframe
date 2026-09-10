@@ -1,4 +1,5 @@
 from enum import Enum, auto
+from pathlib import Path
 from common.src.config_file_updater import ConfigFileUpdater
 from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.config_file_loader import ConfigFileLoader
@@ -44,7 +45,7 @@ class PhotoFrameApp:
         viewer_configuration = config_file_loader.load_config_file(viewer_config_file_name)
         if viewer_configuration is None:
             return 1
-        images_folder = whole_project_configuration.images_folder
+        images_folder = Path(whole_project_configuration.images_folder)
         image_path_loader = ImagePathLoader(images_folder)
         image_display_seconds = whole_project_configuration.image_display_seconds
         remote_config_url = whole_project_configuration.remote_config_url
@@ -106,7 +107,8 @@ class PhotoFrameApp:
         image_selection_wrapper = ImageSelectionWrapper(
             self._command_line_options.run_new_code,
             initial_remote_config_data,
-            images_folder
+            images_folder,
+            system_operations
         )
 
 

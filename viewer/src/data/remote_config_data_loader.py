@@ -22,7 +22,6 @@ class RemoteConfigDataLoader:
             self._local_config_path)
         version = config.get('version')
         photo_folders = config.get('photo_folders')
-        print(f'photo_folders = {photo_folders}')
         self._status_updater.update_status('Last Version Check', version)
         return RemoteConfigData(
             version,

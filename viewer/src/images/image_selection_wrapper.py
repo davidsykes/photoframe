@@ -9,21 +9,26 @@ class ImageSelectionWrapper:
     def __init__(self,
                  is_new_version,
                  remote_config_data,
-                 path_to_photo_sets):
+                 path_to_photo_sets,
+                 system_operations):
         #is_new_version = False
 
         self.is_new_version = is_new_version
         if (is_new_version):
             self._initialise_new_version(
                 remote_config_data,
-                path_to_photo_sets)
+                path_to_photo_sets,
+                system_operations)
         else:
             self._initialise_old_version()
 
     def _initialise_new_version(self,
                                 remote_config_data,
-                                path_to_photo_sets):
-        photo_sets_loader = PhotoSetsLoader()
+                                path_to_photo_sets,
+                                system_operations):
+        photo_sets_loader = PhotoSetsLoader(
+            system_operations
+        )
         photo_sets = photo_sets_loader.load_photo_sets(
             remote_config_data,
             path_to_photo_sets)

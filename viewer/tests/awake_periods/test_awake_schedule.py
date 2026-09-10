@@ -32,4 +32,4 @@ class AwakeScheduleTests(unittest.TestCase):
         self.system_operations = Mock(spec = SystemOperations)
         wake_time = time.fromisoformat("10:00")
         sleep_time = time.fromisoformat("20:00")
-        self.out = AwakeSchedule(self.system_operations, wake_time, sleep_time)
+        self.out = AwakeSchedule(self.system_operations, wake_time, sleep_time, False)
