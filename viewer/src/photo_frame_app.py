@@ -96,7 +96,7 @@ class PhotoFrameApp:
             from viewer.src.menus.events_emulator import EventsEmulator
             events = EventsEmulator(system_operations)
             display = PCSystemDisplay(events)
-        elif self._display_type == DisplayType.PI_DISPLAY_VERSION:
+        elif self._command_line_options.display_type == DisplayType.PI_DISPLAY_VERSION:
             from viewer.src.display.pidisplay import PiSystemDisplay
             display = PiSystemDisplay(system_operations, status_updater, whole_project_configuration.hide_mouse)
         else:
