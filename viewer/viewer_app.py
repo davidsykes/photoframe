@@ -1,7 +1,8 @@
 from pathlib import Path
 import sys
 from common.src.system_operations import SystemOperations
-from viewer.src.photo_frame_app import DisplayType, PhotoFrameApp
+from viewer.src.data.command_line_options import CommandLineOptions
+from viewer.src.photo_frame_app import PhotoFrameApp
 from viewer.src.viewer_exit_exception import ViewerExitException
 
 
@@ -14,11 +15,12 @@ def main() -> int:
     system_operations.set_logger('viewer', '..')
     system_operations.log('Application Starting')
     try:
-        display_type = DisplayType.PI_DISPLAY_VERSION
-        if len(sys.argv) > 1:
-            if sys.argv[1] == "pc":
-                display_type = DisplayType.PC_TEST_VERSION
-        app = PhotoFrameApp(display_type)
+        command_line_options = CommandLineOptions(sys.argv)
+        # display_type = DisplayType.PI_DISPLAY_VERSION
+        # if len(sys.argv) > 1:
+        #     if sys.argv[1] == "pc":
+        #         display_type = DisplayType.PC_TEST_VERSION
+        app = PhotoFrameApp(command_line_options)
         result = app.run(system_operations, PROJECT_ROOT)
         return result
     except ViewerExitException as e:

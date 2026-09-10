@@ -32,8 +32,8 @@ class DisplayType(Enum):
     PI_DISPLAY_VERSION = auto()
 
 class PhotoFrameApp:
-    def __init__(self, display_type):
-        self._display_type = display_type
+    def __init__(self, command_line_options):
+        self._command_line_options = command_line_options
 
     def run(self, system_operations, PROJECT_ROOT):
         print(f"Running PhotoFrameApp from: {PROJECT_ROOT}")
@@ -91,7 +91,7 @@ class PhotoFrameApp:
                      whole_project_configuration.viewer_app_working_folder).analyse_logs()
 
         display = None
-        if self._display_type == DisplayType.PC_TEST_VERSION:
+        if self._command_line_options.display_type == DisplayType.PC_TEST_VERSION:
             from viewer.src.display.pcdisplay import PCSystemDisplay
             from viewer.src.menus.events_emulator import EventsEmulator
             events = EventsEmulator(system_operations)
@@ -105,7 +105,7 @@ class PhotoFrameApp:
 
 
         image_selection_wrapper = ImageSelectionWrapper(
-            self._display_type == DisplayType.PC_TEST_VERSION,
+            self._command_line_options.run_new_code,
             initial_remote_config_data
         )
 
@@ -120,7 +120,8 @@ class PhotoFrameApp:
         awake_schedule = AwakeSchedule(
             system_operations,
             whole_project_configuration.wake_time,
-            whole_project_configuration.sleep_time
+            whole_project_configuration.sleep_time,
+            self._command_line_options.always_awake
         )
         subprocess_wrapper = SubprocessWrapper()
         subprocess_command_generator = WlrRandrCommands()

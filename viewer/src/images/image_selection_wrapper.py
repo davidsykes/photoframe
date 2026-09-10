@@ -8,6 +8,7 @@ class ImageSelectionWrapper:
                  remote_config_data):
         #is_new_version = False
 
+        self.is_new_version = is_new_version
         if (is_new_version):
             self._initialise_new_version(remote_config_data)
         else:
@@ -24,4 +25,5 @@ class ImageSelectionWrapper:
         return self.next_image_selector.select_next_image()
 
     def set_images(self, image_paths):
-        self.next_image_selector.set_images(image_paths)
+        if not self.is_new_version:
+            self.next_image_selector.set_images(image_paths)
