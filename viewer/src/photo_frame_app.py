@@ -1,5 +1,4 @@
 from enum import Enum, auto
-
 from common.src.config_file_updater import ConfigFileUpdater
 from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.config_file_loader import ConfigFileLoader
@@ -106,9 +105,9 @@ class PhotoFrameApp:
 
         image_selection_wrapper = ImageSelectionWrapper(
             self._command_line_options.run_new_code,
-            initial_remote_config_data
+            initial_remote_config_data,
+            images_folder
         )
-
 
 
         next_image_timer = ActionTimer(
