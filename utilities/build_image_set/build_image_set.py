@@ -101,3 +101,4 @@ if __name__ == "__main__":
         build_release(set_name, set_path)
     else:
         print("Useage: python build_image_set.py <set name> <set_path>")
+        print("E.g.: python build_image_set.py new_photos C:\\Photos\\New")

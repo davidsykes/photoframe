@@ -1,5 +1,7 @@
+Things to Check
+    Check the logs count for the various folders
+    Check the image sets include the new calendar set
 
-Tidy up the image deployment process and allow multiple filters
 
 tidy up old logs. Maybe a new version clears logs from previous versions
     Currently the number of log files are displayed

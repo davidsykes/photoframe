@@ -1,0 +1,3 @@
+
+Build the photo set
+     python utilities/build_image_set/build_image_set.py 
