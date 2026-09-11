@@ -34,6 +34,14 @@ class SystemOperations:
             os.makedirs(folder_path)
             self.log(f'Created folder {folder_path}')
 
+    def list_files_recursive(self, folder_path, excluded_extensions):
+        return [
+            str(path)
+            for path in Path(folder_path).rglob("*")
+            if path.is_file()
+            and path.suffix.lower() not in excluded_extensions
+        ]
+
     def rmtree(self, path):
         print(f'Remove folder {path}')
         shutil.rmtree(path)

@@ -1,7 +1,10 @@
 from viewer.src.images.next_image_selector import NextImageSelector
 from viewer.src.images.old.next_image_selector import NextImageSelectorOld
 from viewer.src.images.old.randomiser import RandomiserOld
+from viewer.src.images.photo_set_date_retriever import PhotoSetDateRetriever
+from viewer.src.images.photo_set_loader import PhotoSetLoader
 from viewer.src.images.photo_sets_loader import PhotoSetsLoader
+from viewer.src.images.random_weighter import RandomWeighter
 from viewer.src.images.randomiser import Randomiser
 
 
@@ -26,8 +29,15 @@ class ImageSelectionWrapper:
                                 remote_config_data,
                                 path_to_photo_sets,
                                 system_operations):
+        random_weighter = RandomWeighter()
+        photo_set_loader = PhotoSetLoader(system_operations,
+                                          random_weighter,
+                                          {'.json', '.txt'})
+        photo_set_date_retriever = PhotoSetDateRetriever()
         photo_sets_loader = PhotoSetsLoader(
-            system_operations
+            system_operations,
+            photo_set_loader,
+            photo_set_date_retriever
         )
         photo_sets = photo_sets_loader.load_photo_sets(
             remote_config_data,
