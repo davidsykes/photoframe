@@ -1,4 +1,4 @@
-from viewer.src.images.next_image_selector import NextImageSelector
+from viewer.src.images.photo_selection.next_image_selector import NextImageSelector
 from viewer.src.images.old.next_image_selector import NextImageSelectorOld
 from viewer.src.images.old.randomiser import RandomiserOld
 from viewer.src.images.photo_set_date_retriever import PhotoSetDateRetriever
