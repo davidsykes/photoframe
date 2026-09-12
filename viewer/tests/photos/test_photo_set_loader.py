@@ -3,8 +3,8 @@ import unittest
 from unittest.mock import Mock
 
 from common.src.system_operations import SystemOperations
-from viewer.src.images.photo_set_loader import PhotoSetLoader
-from viewer.src.images.random_weighter import RandomWeighter
+from viewer.src.photos.photo_set_loader import PhotoSetLoader
+from viewer.src.photos.random_weighter import RandomWeighter
 
 
 class PhotoSetLoaderTests(unittest.TestCase):

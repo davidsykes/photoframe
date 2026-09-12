@@ -1,9 +1,9 @@
 import unittest
 from unittest.mock import Mock
 
-from viewer.src.images.photo_selection.next_image_selector import NextImageSelector
-from viewer.src.images.photo_set_selector import PhotoSetSelector
-from viewer.tests.images.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
+from viewer.src.photos.photo_selection.next_image_selector import NextImageSelector
+from viewer.src.photos.photo_set_selector import PhotoSetSelector
+from viewer.tests.photos.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
 
 
 class NextImageSelectorTests(unittest.TestCase):

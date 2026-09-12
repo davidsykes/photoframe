@@ -5,9 +5,9 @@ from unittest.mock import Mock
 from common.src.system_operations import SystemOperations
 from viewer.src.data.photo_set import PhotoSet
 from viewer.src.data.remote_config_data import RemoteConfigData
-from viewer.src.images.photo_set_date_retriever import PhotoSetDateRetriever
-from viewer.src.images.photo_set_loader import PhotoSetLoader
-from viewer.src.images.photo_sets_loader import PhotoSetsLoader
+from viewer.src.photos.photo_set_date_retriever import PhotoSetDateRetriever
+from viewer.src.photos.photo_set_loader import PhotoSetLoader
+from viewer.src.photos.photo_sets_loader import PhotoSetsLoader
 
 class PhotoSetsLoaderTests(unittest.TestCase):
     def test_photo_sets_images_paths_are_loaded(self):

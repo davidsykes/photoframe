@@ -1,7 +1,7 @@
 import unittest
 from datetime import date
 from viewer.src.data.remote_config_data import RemoteConfigData
-from viewer.src.images.photo_set_date_retriever import PhotoSetDateRetriever
+from viewer.src.photos.photo_set_date_retriever import PhotoSetDateRetriever
 
 class PhotoSetDateRetrieverTests(unittest.TestCase):
     def test_if_set_and_date_exist_the_date_is_returned(self):

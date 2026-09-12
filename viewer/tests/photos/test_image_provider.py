@@ -2,9 +2,8 @@ import unittest
 from unittest.mock import Mock
 
 from viewer.src.action_timer import ActionTimer
-from viewer.src.images.old.image_loader import ImageLoader
-from viewer.src.images.old.image_provider import ImageProvider
-
+from viewer.src.photos.old.image_loader import ImageLoader
+from viewer.src.photos.old.image_provider import ImageProvider
 
 class ImageProviderTests(unittest.TestCase):
     def test_when_a_new_image_is_available_it_is_loaded(self):

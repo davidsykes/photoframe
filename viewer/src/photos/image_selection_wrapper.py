@@ -1,11 +1,13 @@
-from viewer.src.images.photo_selection.next_image_selector import NextImageSelector
-from viewer.src.images.old.next_image_selector import NextImageSelectorOld
-from viewer.src.images.old.randomiser import RandomiserOld
-from viewer.src.images.photo_set_date_retriever import PhotoSetDateRetriever
-from viewer.src.images.photo_set_loader import PhotoSetLoader
-from viewer.src.images.photo_sets_loader import PhotoSetsLoader
-from viewer.src.images.random_weighter import RandomWeighter
-from viewer.src.images.randomiser import Randomiser
+
+
+from viewer.src.photos.old.next_image_selector import NextImageSelectorOld
+from viewer.src.photos.old.randomiser import RandomiserOld
+from viewer.src.photos.photo_selection.next_image_selector import NextImageSelector
+from viewer.src.photos.photo_set_date_retriever import PhotoSetDateRetriever
+from viewer.src.photos.photo_set_loader import PhotoSetLoader
+from viewer.src.photos.photo_sets_loader import PhotoSetsLoader
+from viewer.src.photos.random_weighter import RandomWeighter
+from viewer.src.photos.randomiser import Randomiser
 
 
 class ImageSelectionWrapper:
