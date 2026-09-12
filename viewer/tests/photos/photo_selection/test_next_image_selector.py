@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import Mock
 
 from viewer.src.photos.photo_selection.next_photo_selector import NextPhotoSelector
-from viewer.src.photos.photo_set_selector import PhotoSetSelector
+from viewer.src.photos.photo_selection.photo_set_selector import PhotoSetSelector
 from viewer.tests.photos.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
 
 
