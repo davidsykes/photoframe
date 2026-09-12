@@ -9,7 +9,7 @@ class NextImageSelectorOld:
         self._image_count = len(image_paths)
         self._current_image = -1
 
-    def select_next_image(self):
+    def select_next_photo(self):
         self._current_image += 1
         if self._current_image >= self._image_count:
             self._current_image = 0

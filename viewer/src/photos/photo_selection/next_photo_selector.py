@@ -1,4 +1,4 @@
-class NextImageSelector:
+class NextPhotoSelector:
     def __init__(self,
                  photo_set_selector,
                  photo_from_photo_set_selector):

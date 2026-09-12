@@ -18,7 +18,7 @@ from viewer.src.menus.main_menu import MainMenu
 from viewer.src.menus.menu_handler import MenuHandler
 from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.data.remote_config_data_loader import RemoteConfigDataLoader
-from viewer.src.photos.image_selection_wrapper import ImageSelectionWrapper
+from viewer.src.photos.photo_selection_wrapper import PhotoSelectionWrapper
 from viewer.src.photos.old.image_loader import ImageLoader
 from viewer.src.photos.old.image_path_loader import ImagePathLoader
 from viewer.src.photos.old.image_provider import ImageProvider
@@ -104,7 +104,7 @@ class PhotoFrameApp:
         display.initialise_display()
 
 
-        image_selection_wrapper = ImageSelectionWrapper(
+        photo_selection_wrapper = PhotoSelectionWrapper(
             self._command_line_options.run_new_code,
             initial_remote_config_data,
             images_folder,
@@ -115,7 +115,7 @@ class PhotoFrameApp:
         next_image_timer = ActionTimer(
             'Image change',
             system_operations,
-            image_selection_wrapper.select_next_image,
+            photo_selection_wrapper.select_next_photo,
             image_display_seconds
         )
         awake_schedule = AwakeSchedule(
@@ -145,7 +145,7 @@ class PhotoFrameApp:
         event_handler = EventHandler(menu_handler)
         events_handler = EventsHandler(display, event_handler)
         image_paths = image_path_loader.load_image_paths(status_updater)
-        image_selection_wrapper.set_images(image_paths)
+        photo_selection_wrapper.set_images(image_paths)
         image_loader = ImageLoader(display)
         image_provider = ImageProvider(
             next_image_timer,

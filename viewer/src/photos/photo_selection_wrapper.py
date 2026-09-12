@@ -1,8 +1,6 @@
-
-
 from viewer.src.photos.old.next_image_selector import NextImageSelectorOld
 from viewer.src.photos.old.randomiser import RandomiserOld
-from viewer.src.photos.photo_selection.next_image_selector import NextImageSelector
+from viewer.src.photos.photo_selection.next_photo_selector import NextPhotoSelector
 from viewer.src.photos.photo_set_date_retriever import PhotoSetDateRetriever
 from viewer.src.photos.photo_set_loader import PhotoSetLoader
 from viewer.src.photos.photo_sets_loader import PhotoSetsLoader
@@ -10,7 +8,7 @@ from viewer.src.photos.random_weighter import RandomWeighter
 from viewer.src.photos.randomiser import Randomiser
 
 
-class ImageSelectionWrapper:
+class PhotoSelectionWrapper:
     def __init__(self,
                  is_new_version,
                  remote_config_data,
@@ -45,7 +43,7 @@ class ImageSelectionWrapper:
             remote_config_data,
             path_to_photo_sets)
         randomiser = Randomiser()
-        self.next_image_selector = NextImageSelector(
+        self.next_photo_selector = NextPhotoSelector(
             randomiser,
             photo_sets
         )
@@ -54,8 +52,8 @@ class ImageSelectionWrapper:
         randomiser = RandomiserOld()
         self.next_image_selector = NextImageSelectorOld(randomiser)
 
-    def select_next_image(self):
-        return self.next_image_selector.select_next_image()
+    def select_next_photo(self):
+        return self.next_photo_selector.select_next_photo()
 
     def set_images(self, image_paths):
         if not self.is_new_version:

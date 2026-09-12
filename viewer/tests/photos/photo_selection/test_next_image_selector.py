@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock
 
-from viewer.src.photos.photo_selection.next_image_selector import NextImageSelector
+from viewer.src.photos.photo_selection.next_photo_selector import NextPhotoSelector
 from viewer.src.photos.photo_set_selector import PhotoSetSelector
 from viewer.tests.photos.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
 
@@ -19,7 +19,7 @@ class NextImageSelectorTests(unittest.TestCase):
         self.photo_from_photo_set_selector = Mock(
             spec=PhotoFromPhotoSetSelector)
         self.photo_from_photo_set_selector.select_photo = self.mock_select_photo
-        self.out = NextImageSelector(
+        self.out = NextPhotoSelector(
             self.photo_set_selector,
             self.photo_from_photo_set_selector)
 
