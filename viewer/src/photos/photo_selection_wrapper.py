@@ -63,7 +63,7 @@ class PhotoSelectionWrapper:
         self.next_image_selector = NextImageSelectorOld(randomiser)
 
     def select_next_photo(self):
-        return self.next_photo_selector.select_next_photo()
+        return self.next_image_selector.select_next_photo()
 
     def set_images(self, image_paths):
         if not self.is_new_version:
