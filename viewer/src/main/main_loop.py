@@ -16,9 +16,9 @@ class MainLoop:
 
     def loop(self):
         while True:
-            self.loop_once_new()
+            self.loop_once()
 
-    def loop_once_new(self):
+    def loop_once(self):
         self._cycle_stop_detector.poll()
         needs_update = self._events_handler.handle_events()
 
@@ -34,17 +34,3 @@ class MainLoop:
             self._menu.render(self._display)
             self._display.flip()
         self._display.tick(60)
-
-    # def loop_once(self):
-    #     self._cycle_stop_detector.poll()
-    #     needs_update = self._events_handler.handle_events()
-    #     new_image_path = self._next_image_timer.run_if_due()
-    #     if new_image_path is not None:
-    #         self._current_image = self._display.load_image(new_image_path)
-    #         needs_update = True
-    #     if needs_update:
-    #         self._display.prepare_screen()
-    #         self._display.show_image(self._current_image)
-    #         self._menu.render(self._display)
-    #         self._display.flip()
-    #     self._display.tick(60)

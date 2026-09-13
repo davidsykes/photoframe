@@ -18,10 +18,11 @@ class PhotoSelectionWrapper:
                  is_new_version,
                  remote_config_data,
                  path_to_photo_sets,
-                 system_operations):
-        #is_new_version = False
-
+                 system_operations,
+                 status_updater):
+        is_new_version = not is_new_version
         self.is_new_version = is_new_version
+        status_updater.update_status('New Photo Selector', self.is_new_version)
         if (is_new_version):
             self._initialise_new_version(
                 remote_config_data,
@@ -34,6 +35,7 @@ class PhotoSelectionWrapper:
                                 remote_config_data,
                                 path_to_photo_sets,
                                 system_operations):
+        print('NNNNNNNNNNNNEEEEEEEEEEEEEEEEEEWWWWWWWWWWWWWW')
         random_weighter = RandomWeighter()
         photo_set_loader = PhotoSetLoader(system_operations,
                                           random_weighter,
@@ -59,6 +61,7 @@ class PhotoSelectionWrapper:
         )
 
     def _initialise_old_version(self):
+        print('OOOOOLLLLDDDDDDDDDDDDDDDDD')
         randomiser = RandomiserOld()
         self.next_photo_selector = NextImageSelectorOld(randomiser)
 

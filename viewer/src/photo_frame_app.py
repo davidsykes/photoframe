@@ -108,7 +108,8 @@ class PhotoFrameApp:
             self._command_line_options.run_new_code,
             initial_remote_config_data,
             images_folder,
-            system_operations
+            system_operations,
+            status_updater
         )
 
 
