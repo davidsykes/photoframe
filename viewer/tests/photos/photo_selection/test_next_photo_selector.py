@@ -3,7 +3,7 @@ from unittest.mock import Mock
 
 from viewer.src.photos.photo_selection.next_photo_selector import NextPhotoSelector
 from viewer.src.photos.photo_selection.photo_set_selector import PhotoSetSelector
-from viewer.tests.photos.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
+from viewer.tests.photos.photo_selection.test_photo_from_photo_set_selector import PhotoFromPhotoSetSelector
 
 
 class NextImageSelectorTests(unittest.TestCase):
@@ -23,6 +23,6 @@ class NextImageSelectorTests(unittest.TestCase):
             self.photo_set_selector,
             self.photo_from_photo_set_selector)
 
-    def mock_select_photo(self, set):
-        if set == 'selected set':
+    def mock_select_photo(self, photo_set):
+        if photo_set == 'selected set':
             return 'selected photo'

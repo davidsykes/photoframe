@@ -17,5 +17,5 @@ class PhotoSetLoader:
             photo_set_path,
             self._excluded_extensions)
         weight = self._random_weighter.weigh(photo_set_date)
-        set = PhotoSet(images, weight)
-        return set
+        photo_set = PhotoSet(images, weight)
+        return photo_set

@@ -6,6 +6,6 @@ class NextPhotoSelector:
            self._photo_from_photo_set_selector = photo_from_photo_set_selector
 
     def select_next_photo(self):
-          set = self._photo_set_selector.select_photo_set()
-          photo = self._photo_from_photo_set_selector.select_photo(set)
+          photo_set = self._photo_set_selector.select_photo_set()
+          photo = self._photo_from_photo_set_selector.select_photo(photo_set)
           return photo

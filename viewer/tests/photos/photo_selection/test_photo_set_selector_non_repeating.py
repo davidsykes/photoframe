@@ -59,4 +59,4 @@ class PhotoSetSelectorNonRepeatingTests(unittest.TestCase):
     def setUp(self):
         self.photo_set_selector = Mock(spec=PhotoSetSelector)
         self.out = PhotoSetSelectorNonRepeating(
-            self.photo_set_selector, 3, 10)
+            self.photo_set_selector, 3, 8)

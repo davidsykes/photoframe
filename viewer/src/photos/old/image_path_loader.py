@@ -13,8 +13,8 @@ class ImagePathLoader:
             'Photos', len(image_paths)
         )
         photo_sets = os.listdir(self.image_directory)
-        for set in photo_sets:
-            status_updater.log(f'Set: {set}')
+        for photo_set in photo_sets:
+            status_updater.log(f'Set: {photo_set}')
         return image_paths
 
     def _list_files_recursive(self, path):
