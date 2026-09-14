@@ -24,6 +24,10 @@ class LogsAnalyser:
         for f in self._folders:
             print(f'Logs {f} => {self._folders[f]}')
             self._status_updater.update_status(f'Logs in {f}', self._folders[f])
+            if 'wer-0.1' in str(f):
+                self._status_updater.update_status(f'rm -r {f}', 'Yes')
+            if 'wer-0.2' in str(f):
+                self._status_updater.update_status(f'rm -r {f}', 'Yes')
 
     def find_log_files(self, path):
         source_folder = Path(path)

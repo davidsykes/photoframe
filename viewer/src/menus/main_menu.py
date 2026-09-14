@@ -8,17 +8,20 @@ class MainMenu:
                  statuses,
                  next_image_timer,
                  awake_decider,
-                 display_controller):
+                 display_controller,
+                 random_monitor):
         self._statuses = statuses
         self._next_image_timer = next_image_timer
         self._awake_decider = awake_decider
         self._display_controller = display_controller
+        self._random_monitor = random_monitor
         self._buttons = [
             MenuButton(90, 0, 10, 5, 'Back', self.back_action),
             MenuButton(90, 6, 10, 5, 'Pause', self.pause),
             MenuButton(90, 12, 10, 5, 'Resume', self.resume),
             MenuButton(90, 18, 10, 5, 'Sleep', self.sleep),
             MenuButton(90, 24, 10, 5, 'Wake', self.wake),
+            MenuButton(90, 30, 10, 5, 'Random', self.render_random),
             MenuButton(90, 30, 10, 5, 'Crash', self.simulate_crash),
             MenuButton(90, 36, 10, 5, 'Quit', self.end_program_cleanly)
         ]
@@ -57,3 +60,6 @@ class MainMenu:
 
     def simulate_crash(self):
         raise ViewerExitException(102, f"Crash simulated by mouse down")
+
+    def render_random(self):
+        self._random_monitor.render(self._statuses)

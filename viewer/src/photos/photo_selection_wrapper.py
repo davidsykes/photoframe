@@ -35,7 +35,6 @@ class PhotoSelectionWrapper:
                                 remote_config_data,
                                 path_to_photo_sets,
                                 system_operations):
-        print('NNNNNNNNNNNNEEEEEEEEEEEEEEEEEEWWWWWWWWWWWWWW')
         random_weighter = RandomWeighter()
         photo_set_loader = PhotoSetLoader(system_operations,
                                           random_weighter,
@@ -50,18 +49,18 @@ class PhotoSelectionWrapper:
             remote_config_data,
             path_to_photo_sets)
         randomiser = Randomiser()
-        random_monitor = RandomMonitor()
-        photo_set_selector = PhotoSetSelector(randomiser, photo_sets, random_monitor)
+        self.random_monitor = RandomMonitor(photo_sets)
+        photo_set_selector = PhotoSetSelector(randomiser, photo_sets, self.random_monitor)
         photo_set_selector_non_repeating = PhotoSetSelectorNonRepeating(photo_set_selector, 3, 50)
-        photo_from_photo_set_selector = PhotoFromPhotoSetSelector(randomiser, random_monitor)
+        photo_from_photo_set_selector = PhotoFromPhotoSetSelector(randomiser, self.random_monitor)
         photo_from_photo_set_selector_non_repeating = PhotoFromPhotoSetSelectorNonRepeating(photo_from_photo_set_selector, 50, 100)
         self.next_photo_selector = NextPhotoSelector(
             photo_set_selector_non_repeating,
-            photo_from_photo_set_selector_non_repeating
+            photo_from_photo_set_selector_non_repeating,
+            self.random_monitor
         )
 
     def _initialise_old_version(self):
-        print('OOOOOLLLLDDDDDDDDDDDDDDDDD')
         randomiser = RandomiserOld()
         self.next_photo_selector = NextImageSelectorOld(randomiser)
 

@@ -140,7 +140,8 @@ class PhotoFrameApp:
             status_updater,
             next_image_timer,
             awake_decider,
-            display_controller
+            display_controller,
+            photo_selection_wrapper.random_monitor
             )
         menu_handler = MenuHandler(main_menu, display_controller, system_operations)
         event_handler = EventHandler(menu_handler)
