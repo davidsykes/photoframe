@@ -3,7 +3,8 @@ class RandomMonitor:
         self._set_counts = [
             [0 for _ in photo_set.images]
             for photo_set in photo_sets
-]
+            ]
+        self._set_weightings = [photo_set.random_weighting for photo_set in photo_sets]
 
     def photo_set(self, photo_set_index):
         self._photo_set_index = photo_set_index
@@ -17,4 +18,4 @@ class RandomMonitor:
     def render(self, status_monitor):
         for index, counts in enumerate(self._set_counts):
             text = ' '.join(str(count) for count in counts)
-            status_monitor.update_status(f'Set {index}', text)
+            status_monitor.update_status(f'Set {index} ({self._set_weightings[index]})', text)
