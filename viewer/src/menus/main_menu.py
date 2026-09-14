@@ -22,8 +22,8 @@ class MainMenu:
             MenuButton(90, 18, 10, 5, 'Sleep', self.sleep),
             MenuButton(90, 24, 10, 5, 'Wake', self.wake),
             MenuButton(90, 30, 10, 5, 'Random', self.render_random),
-            MenuButton(90, 30, 10, 5, 'Crash', self.simulate_crash),
-            MenuButton(90, 36, 10, 5, 'Quit', self.end_program_cleanly)
+            MenuButton(90, 36, 10, 5, 'Crash', self.simulate_crash),
+            MenuButton(90, 42, 10, 5, 'Quit', self.end_program_cleanly)
         ]
 
     def render(self, display):
