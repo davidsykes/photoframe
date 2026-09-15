@@ -1,9 +1,10 @@
+from typing import List
+from viewer.src.data.photo_set import PhotoSet
+
+
 class RandomMonitor:
-    def __init__(self, photo_sets):
-        self._set_counts = [
-            [0 for _ in photo_set.images]
-            for photo_set in photo_sets
-            ]
+    def __init__(self, photo_sets: List[PhotoSet]):
+        self._set_names = [photo_set.name for photo_set in photo_sets]
         self._set_weightings = [photo_set.random_weighting for photo_set in photo_sets]
         self._set_count_raw = [0 for _ in photo_sets]
 
@@ -12,14 +13,12 @@ class RandomMonitor:
         self._set_count_raw[photo_set_index] += 1
 
     def photo(self, photo_index):
-        self._photo_index = photo_index
+        pass
 
     def show(self):
-        self._set_counts[self._photo_set_index][self._photo_index] += 1
+        pass
 
     def render(self, status_monitor):
-        raw = ' '.join(str(count) for count in self._set_count_raw)
-        status_monitor.update_status('Raw counts', raw)
-        for index, counts in enumerate(self._set_counts):
-            text = ' '.join(str(count) for count in counts)
-            status_monitor.update_status(f'Set {index} ({self._set_weightings[index]})', text)
+        for index in range(len(self._set_names)):
+            status_monitor.update_status(
+                f'Set {self._set_names[index]}', f'{self._set_weightings[index]} - {self._set_count_raw[index]}')
