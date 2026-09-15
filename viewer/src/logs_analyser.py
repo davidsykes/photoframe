@@ -22,10 +22,10 @@ class LogsAnalyser:
         self.find_log_files(self._working_folder)
         self._status_updater.update_status('Log file count', self._log_count)
         for f in self._folders:
-            print(f'Logs {f} => {self._folders[f]}')
             self._status_updater.update_status(f'Logs in {f}', self._folders[f])
             if 'wer-0.1' in str(f):
                 self._status_updater.update_status(f'rm -r {f}', 'Yes')
+                self._system_operations.rmtree(f)
             if 'wer-0.2' in str(f):
                 self._status_updater.update_status(f'rm -r {f}', 'Yes')
 
