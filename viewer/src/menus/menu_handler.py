@@ -2,11 +2,14 @@ from viewer.src.menus.menu_action import MenuAction
 
 
 class MenuHandler:
-    def __init__(self, main_menu, display_controller, system_operations):
-        self._main_menu = main_menu
+    def __init__(self, display_controller, system_operations):
+        self._main_menu = None
         self._display_controller = display_controller
         self._system_operations = system_operations
         self._menu_enabled = False
+
+    def set_menu(self, menu):
+        self._main_menu = menu
 
     def mouse_down(self, x, y):
         self._system_operations.log(f'Mouse Down {x} {y}')

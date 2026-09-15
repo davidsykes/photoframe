@@ -145,8 +145,9 @@ class PhotoFrameApp:
             display_controller,
             photo_selection_wrapper.random_monitor
             )
-        first_menu = FirstMenu()
-        menu_handler = MenuHandler(first_menu, display_controller, system_operations)
+        menu_handler = MenuHandler(display_controller, system_operations)
+        first_menu = FirstMenu(menu_handler, debug_menu)
+        menu_handler.set_menu(first_menu)
         event_handler = EventHandler(menu_handler)
         events_handler = EventsHandler(display, event_handler)
 
