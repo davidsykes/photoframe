@@ -42,7 +42,6 @@ class LogsAnalyser:
                 mtime = os.path.getmtime(path)
                 age_seconds = self._now - mtime
                 age_days = int(age_seconds / 60 / 60 / 24)
-                #print(f'path {name} {age_days} {path}')
                 self.add_log_count(parent2, size, age_days)
 
     def add_log_count(self, name, size, age_days):

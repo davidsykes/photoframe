@@ -1,6 +1,4 @@
 from viewer.src.logic.random_monitor import RandomMonitor
-from viewer.src.photos.old.next_image_selector import NextImageSelectorOld
-from viewer.src.photos.old.randomiser import RandomiserOld
 from viewer.src.photos.photo_selection.next_photo_selector import NextPhotoSelector
 from viewer.src.photos.photo_selection.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
 from viewer.src.photos.photo_selection.photo_from_photo_set_selector_non_repeating import PhotoFromPhotoSetSelectorNonRepeating
@@ -12,29 +10,11 @@ from viewer.src.photos.photo_set_loader import PhotoSetLoader
 from viewer.src.photos.photo_sets_loader import PhotoSetsLoader
 from viewer.src.photos.random_weighter import RandomWeighter
 
-
 class PhotoSelectionWrapper:
     def __init__(self,
-                 is_new_version,
                  remote_config_data,
                  path_to_photo_sets,
-                 system_operations,
-                 status_updater):
-        is_new_version = not is_new_version
-        self.is_new_version = is_new_version
-        status_updater.update_status('New Photo Selector', self.is_new_version)
-        if (is_new_version):
-            self._initialise_new_version(
-                remote_config_data,
-                path_to_photo_sets,
-                system_operations)
-        else:
-            self._initialise_old_version()
-
-    def _initialise_new_version(self,
-                                remote_config_data,
-                                path_to_photo_sets,
-                                system_operations):
+                 system_operations):
         random_weighter = RandomWeighter()
         photo_set_loader = PhotoSetLoader(system_operations,
                                           random_weighter,
@@ -60,13 +40,5 @@ class PhotoSelectionWrapper:
             self.random_monitor
         )
 
-    def _initialise_old_version(self):
-        randomiser = RandomiserOld()
-        self.next_photo_selector = NextImageSelectorOld(randomiser)
-
     def select_next_photo(self):
         return self.next_photo_selector.select_next_photo()
-
-    def set_images(self, image_paths):
-        if not self.is_new_version:
-            self.next_photo_selector.set_images(image_paths)

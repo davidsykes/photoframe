@@ -13,9 +13,3 @@ class Sandbox:
 
     def get_version_folder(self, version_name):
         return self.root / f"{version_name}"
-
-
-###############################
-    @property
-    def manifest(self) -> Path:
-        return self.root / "manifest.json"

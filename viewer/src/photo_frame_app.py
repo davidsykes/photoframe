@@ -20,9 +20,8 @@ from viewer.src.menus.menu_handler import MenuHandler
 from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.data.remote_config_data_loader import RemoteConfigDataLoader
 from viewer.src.photos.photo_selection_wrapper import PhotoSelectionWrapper
-from viewer.src.photos.old.image_loader import ImageLoader
-from viewer.src.photos.old.image_path_loader import ImagePathLoader
-from viewer.src.photos.old.image_provider import ImageProvider
+from viewer.src.photos.image_from_file_loader import ImageFromFileLoader
+from viewer.src.photos.image_provider import ImageProvider
 from viewer.src.status.action_status_updater import ActionStatusUpdater
 from viewer.src.status.application_status import ApplicationStatus
 from viewer.src.action_timer import ActionTimer
@@ -47,7 +46,6 @@ class PhotoFrameApp:
         if viewer_configuration is None:
             return 1
         images_folder = Path(whole_project_configuration.images_folder)
-        image_path_loader = ImagePathLoader(images_folder)
         image_display_seconds = whole_project_configuration.image_display_seconds
         remote_config_url = whole_project_configuration.remote_config_url
         remote_files_retriever = RemoteFilesRetriever(system_operations)
@@ -106,11 +104,9 @@ class PhotoFrameApp:
 
 
         photo_selection_wrapper = PhotoSelectionWrapper(
-            self._command_line_options.run_new_code,
             initial_remote_config_data,
             images_folder,
-            system_operations,
-            status_updater
+            system_operations
         )
 
 
@@ -151,12 +147,10 @@ class PhotoFrameApp:
         event_handler = EventHandler(menu_handler)
         events_handler = EventsHandler(display, event_handler)
 
-        image_paths = image_path_loader.load_image_paths(status_updater)
-        photo_selection_wrapper.set_images(image_paths)
-        image_loader = ImageLoader(display)
+        image_from_file_loader = ImageFromFileLoader(display)
         image_provider = ImageProvider(
             next_image_timer,
-            image_loader,
+            image_from_file_loader,
             awake_decider)
         main_loop = MainLoop(
             cycle_stop_detector,

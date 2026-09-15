@@ -8,7 +8,7 @@ class FirstMenu:
         self._debug_menu = debug_menu
         self._buttons = [
             MenuButton(90, 0, 10, 5, 'Back', self.back_action),
-            MenuButton(5, 47, 10, 5, 'Previous', self.previous_image),
+            MenuButton(1, 47, 10, 5, 'Previous', self.previous_image),
             MenuButton(90,47, 10, 5, 'Next', self.next_image),
             MenuButton(90,90, 10, 5, 'Debug', self.debug_menu),
         ]

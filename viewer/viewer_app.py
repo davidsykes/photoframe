@@ -16,10 +16,6 @@ def main() -> int:
     system_operations.log('Application Starting')
     try:
         command_line_options = CommandLineOptions(sys.argv)
-        # display_type = DisplayType.PI_DISPLAY_VERSION
-        # if len(sys.argv) > 1:
-        #     if sys.argv[1] == "pc":
-        #         display_type = DisplayType.PC_TEST_VERSION
         app = PhotoFrameApp(command_line_options)
         result = app.run(system_operations, PROJECT_ROOT)
         return result

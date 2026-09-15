@@ -1,5 +1,5 @@
 
-class ImageLoader:
+class ImageFromFileLoader:
     def __init__(self, display):
         self._display = display
 

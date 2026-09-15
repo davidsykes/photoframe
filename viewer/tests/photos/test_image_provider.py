@@ -2,8 +2,8 @@ import unittest
 from unittest.mock import Mock
 
 from viewer.src.action_timer import ActionTimer
-from viewer.src.photos.old.image_loader import ImageLoader
-from viewer.src.photos.old.image_provider import ImageProvider
+from viewer.src.photos.image_from_file_loader import ImageFromFileLoader
+from viewer.src.photos.image_provider import ImageProvider
 
 class ImageProviderTests(unittest.TestCase):
     def test_when_a_new_image_is_available_it_is_loaded(self):
@@ -33,7 +33,7 @@ class ImageProviderTests(unittest.TestCase):
 
     def setUp(self):
         self.next_image_timer = Mock(spec=ActionTimer)
-        self.image_loader = Mock(spec=ImageLoader)
+        self.image_loader = Mock(spec=ImageFromFileLoader)
         self.image_loader.load_image = self.mock_image_loader_load_image
         self.awake_decider = Mock()
         self.awake_decider.are_we_awake.return_value = True

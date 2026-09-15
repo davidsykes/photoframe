@@ -34,6 +34,6 @@ class MenuHandlerTests(unittest.TestCase):
         self.display_controller = Mock(spec=DisplayController)
         self.system_operations = Mock(spec=SystemOperations)
         self.out = MenuHandler(
-            self.main_menu,
             self.display_controller,
             self.system_operations)
+        self.out.set_menu(self.main_menu)
