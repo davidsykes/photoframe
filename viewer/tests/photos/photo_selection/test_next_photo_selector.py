@@ -21,7 +21,8 @@ class NextImageSelectorTests(unittest.TestCase):
         self.photo_from_photo_set_selector.select_photo = self.mock_select_photo
         self.out = NextPhotoSelector(
             self.photo_set_selector,
-            self.photo_from_photo_set_selector)
+            self.photo_from_photo_set_selector,
+            Mock())
 
     def mock_select_photo(self, photo_set):
         if photo_set == 'selected set':

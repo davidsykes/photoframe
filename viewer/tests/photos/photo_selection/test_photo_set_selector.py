@@ -19,9 +19,9 @@ class TestPhotoSetSelector(unittest.TestCase):
 
     def setUp(self):
         self.randomiser = Mock(spec=Randomiser)
-        self.set1 = PhotoSet(1, 10)
-        self.set2 = PhotoSet(2, 20)
-        self.set3 = PhotoSet(3, 30)
+        self.set1 = PhotoSet('set 1', 1, 10)
+        self.set2 = PhotoSet('set 2', 2, 20)
+        self.set3 = PhotoSet('set 3', 3, 30)
         self.sets = [self.set1, self.set2, self.set3]
         self.random_monitor = Mock(spec=RandomMonitor)
         self.out = PhotoSetSelector(

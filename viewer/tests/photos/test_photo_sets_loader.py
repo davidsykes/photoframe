@@ -36,9 +36,9 @@ class PhotoSetsLoaderTests(unittest.TestCase):
             'bla bla')
         self.photo_set_date_retriever = Mock(spec=PhotoSetDateRetriever)
         self.photo_set_date_retriever.get_photo_set_date = self.mock_get_photo_set_date
-        self.photo_set_1 = PhotoSet('Set 1', 1)
-        self.photo_set_2 = PhotoSet('Set 2', 1)
-        self.photo_set_3 = PhotoSet('Set 3', 1)
+        self.photo_set_1 = PhotoSet('Set 1', 'Set 1 images', 1)
+        self.photo_set_2 = PhotoSet('Set 2', 'Set 2 images', 1)
+        self.photo_set_3 = PhotoSet('Set 3', 'Set 3 images', 1)
         self.out = PhotoSetsLoader(
             self.system_operations,
             self.photo_set_loader,

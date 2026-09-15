@@ -8,9 +8,15 @@ from viewer.src.photos.random_weighter import RandomWeighter
 
 
 class PhotoSetLoaderTests(unittest.TestCase):
+    def test_the_photo_set_name_is_set(self):
+        photo_set = self.out.load_photo_set(
+            self.photo_set_path, 'photo_set_date')
+
+        self.assertEqual(photo_set.name, 'set name')
+
     def test_the_photo_set_images_are_loaded(self):
         photo_set = self.out.load_photo_set(
-            'photo_set_path', 'photo_set_date')
+            self.photo_set_path, 'photo_set_date')
 
         self.assertEqual(photo_set.images,
                          ['path/image 1',
@@ -20,7 +26,7 @@ class PhotoSetLoaderTests(unittest.TestCase):
 
     def test_the_set_weighting_is_calculated(self):
         photo_set = self.out.load_photo_set(
-            'photo_set_path', 'photo_set_date')
+            self.photo_set_path, 'photo_set_date')
 
         self.assertEqual(photo_set.random_weighting, 123)
 
@@ -32,9 +38,10 @@ class PhotoSetLoaderTests(unittest.TestCase):
         self.out = PhotoSetLoader(self.system_operations,
                                   self.random_weighter,
                                   'excluded_extensions')
+        self.photo_set_path = Path('set path') / 'set name'
 
     def mock_list_files_recursive(self, path, excluded_extensions):
-        if path == 'photo_set_path' and excluded_extensions == 'excluded_extensions':
+        if path == self.photo_set_path and excluded_extensions == 'excluded_extensions':
             return ['path/image 1',
                     'path/image 2',
                     'path/image 3']
