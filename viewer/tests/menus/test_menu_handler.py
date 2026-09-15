@@ -3,7 +3,7 @@ from unittest.mock import Mock, call
 
 from common.src.system_operations import SystemOperations
 from viewer.src.display.display_controller import DisplayController
-from viewer.src.menus.main_menu import MainMenu
+from viewer.src.menus.debug_menu import DebugMenu
 from viewer.src.menus.menu_handler import MenuHandler
 
 
@@ -30,7 +30,7 @@ class MenuHandlerTests(unittest.TestCase):
         self.display_controller.display_on.assert_called_once()
 
     def setUp(self):
-        self.main_menu = Mock(spec=MainMenu)
+        self.main_menu = Mock(spec=DebugMenu)
         self.display_controller = Mock(spec=DisplayController)
         self.system_operations = Mock(spec=SystemOperations)
         self.out = MenuHandler(

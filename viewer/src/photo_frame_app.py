@@ -14,7 +14,8 @@ from viewer.src.display.wlr_randr_commands import WlrRandrCommands
 from viewer.src.main.main_loop import MainLoop
 from viewer.src.menus.event_handler import EventHandler
 from viewer.src.menus.events_handler import EventsHandler
-from viewer.src.menus.main_menu import MainMenu
+from viewer.src.menus.first_menu import FirstMenu
+from viewer.src.menus.debug_menu import DebugMenu
 from viewer.src.menus.menu_handler import MenuHandler
 from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.data.remote_config_data_loader import RemoteConfigDataLoader
@@ -136,16 +137,19 @@ class PhotoFrameApp:
             whole_project_configuration.display_off_enabled)
         display_controller.initialise()
         awake_decider = AwakeDecider(awake_schedule, display_controller)
-        main_menu = MainMenu(
+
+        debug_menu = DebugMenu(
             status_updater,
             next_image_timer,
             awake_decider,
             display_controller,
             photo_selection_wrapper.random_monitor
             )
-        menu_handler = MenuHandler(main_menu, display_controller, system_operations)
+        first_menu = FirstMenu()
+        menu_handler = MenuHandler(first_menu, display_controller, system_operations)
         event_handler = EventHandler(menu_handler)
         events_handler = EventsHandler(display, event_handler)
+
         image_paths = image_path_loader.load_image_paths(status_updater)
         photo_selection_wrapper.set_images(image_paths)
         image_loader = ImageLoader(display)

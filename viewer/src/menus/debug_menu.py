@@ -3,7 +3,7 @@ from viewer.src.menus.menu_button import MenuButton
 from viewer.src.viewer_exit_exception import ViewerExitException
 
 
-class MainMenu:
+class DebugMenu:
     def __init__(self,
                  statuses,
                  next_image_timer,
