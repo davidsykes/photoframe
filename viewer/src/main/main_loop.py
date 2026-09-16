@@ -20,7 +20,7 @@ class MainLoop:
         self._cycle_stop_detector.poll()
         needs_update = self._events_handler.handle_events()
 
-        image_to_show = self._image_provider.choose_photo()
+        image_to_show = self._image_provider.fetch_image()
         if image_to_show != self._current_image:
             self._current_image = image_to_show
             needs_update = True

@@ -12,6 +12,16 @@ class SequentialPhotoChooserTests(unittest.TestCase):
 
         self.assertEqual(photo, 'next photo')
 
+    def test_choose_next_photo_caches_the_last_timer_result(self):
+        self.next_image_timer.run_if_due.side_effect = [
+            'photo 1', None, None, 'photo 2', None]
+
+        self.assertEqual(self.out.choose_next_photo(), 'photo 1')
+        self.assertEqual(self.out.choose_next_photo(), 'photo 1')
+        self.assertEqual(self.out.choose_next_photo(), 'photo 1')
+        self.assertEqual(self.out.choose_next_photo(), 'photo 2')
+        self.assertEqual(self.out.choose_next_photo(), 'photo 2')
+
     def setUp(self):
         self.next_image_timer = Mock(spec=ActionTimer)
         # self.image_loader = Mock(spec=ImageFromFileLoader)

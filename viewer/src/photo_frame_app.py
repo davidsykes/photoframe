@@ -8,6 +8,7 @@ from viewer.src.awake_periods.awake_decider import AwakeDecider
 from viewer.src.awake_periods.awake_schedule import AwakeSchedule
 from viewer.src.cycle_stop_detector import CycleStopDetector
 from viewer.src.display.display_controller import DisplayController
+from viewer.src.display.image_provider import ImageProvider
 from viewer.src.display.subprocess_wrapper import SubprocessWrapper
 from viewer.src.display.wlopm_commands import WlopmCommands
 from viewer.src.display.wlr_randr_commands import WlrRandrCommands
@@ -152,12 +153,14 @@ class PhotoFrameApp:
         image_from_file_loader = ImageFromFileLoader(display)
         historic_photo_chooser = HistoricPhotoChooser()
         sequential_photo_chooser = SequentialPhotoChooser(next_image_timer2)
-        image_provider = PhotoToDisplayChooser(
+        photo_path_provider = PhotoToDisplayChooser(
             awake_decider,
             historic_photo_chooser,
-            sequential_photo_chooser,
-            image_from_file_loader
+            sequential_photo_chooser
             )
+        image_provider = ImageProvider(
+            photo_path_provider,
+            image_from_file_loader)
         main_loop = MainLoop(
             cycle_stop_detector,
             image_provider,

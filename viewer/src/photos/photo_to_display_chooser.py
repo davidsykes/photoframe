@@ -2,8 +2,7 @@ class PhotoToDisplayChooser:
     def __init__(self,
                  awake_decider,
                  historic_photo_chooser,
-                 sequential_photo_chooser,
-                 image_from_file_loader
+                 sequential_photo_chooser
                  ):
         self._awake_decider = awake_decider
         self._historic_photo_chooser = historic_photo_chooser
