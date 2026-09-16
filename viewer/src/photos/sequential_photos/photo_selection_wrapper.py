@@ -5,10 +5,10 @@ from viewer.src.photos.photo_selection.photo_from_photo_set_selector_non_repeati
 from viewer.src.photos.photo_selection.photo_set_selector import PhotoSetSelector
 from viewer.src.photos.photo_selection.photo_set_selector_non_repeating import PhotoSetSelectorNonRepeating
 from viewer.src.photos.photo_selection.randomiser import Randomiser
-from viewer.src.photos.photo_set_date_retriever import PhotoSetDateRetriever
-from viewer.src.photos.photo_set_loader import PhotoSetLoader
-from viewer.src.photos.photo_sets_loader import PhotoSetsLoader
-from viewer.src.photos.random_weighter import RandomWeighter
+from viewer.src.photos.loading_photo_sets.photo_set_date_retriever import PhotoSetDateRetriever
+from viewer.src.photos.loading_photo_sets.photo_set_loader import PhotoSetLoader
+from viewer.src.photos.loading_photo_sets.photo_sets_loader import PhotoSetsLoader
+from viewer.src.photos.loading_photo_sets.random_weighter import RandomWeighter
 
 class PhotoSelectionWrapper:
     def __init__(self,

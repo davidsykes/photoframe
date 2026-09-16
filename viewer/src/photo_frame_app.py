@@ -19,9 +19,11 @@ from viewer.src.menus.debug_menu import DebugMenu
 from viewer.src.menus.menu_handler import MenuHandler
 from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.data.remote_config_data_loader import RemoteConfigDataLoader
-from viewer.src.photos.photo_selection_wrapper import PhotoSelectionWrapper
-from viewer.src.photos.image_from_file_loader import ImageFromFileLoader
-from viewer.src.photos.image_provider import ImageProvider
+from viewer.src.photos.historic_photo_chooser import HistoricPhotoChooser
+from viewer.src.photos.sequential_photos.sequential_photo_chooser import SequentialPhotoChooser
+from viewer.src.photos.sequential_photos.photo_selection_wrapper import PhotoSelectionWrapper
+from viewer.src.photos.loading_photo_sets.image_from_file_loader import ImageFromFileLoader
+from viewer.src.photos.photo_to_display_chooser import PhotoToDisplayChooser
 from viewer.src.status.action_status_updater import ActionStatusUpdater
 from viewer.src.status.application_status import ApplicationStatus
 from viewer.src.action_timer import ActionTimer
@@ -110,7 +112,7 @@ class PhotoFrameApp:
         )
 
 
-        next_image_timer = ActionTimer(
+        next_image_timer2 = ActionTimer(
             'Image change',
             system_operations,
             photo_selection_wrapper.select_next_photo,
@@ -136,7 +138,7 @@ class PhotoFrameApp:
 
         debug_menu = DebugMenu(
             status_updater,
-            next_image_timer,
+            next_image_timer2,
             awake_decider,
             display_controller,
             photo_selection_wrapper.random_monitor
@@ -148,13 +150,16 @@ class PhotoFrameApp:
         events_handler = EventsHandler(display, event_handler)
 
         image_from_file_loader = ImageFromFileLoader(display)
-        image_provider = ImageProvider(
-            next_image_timer,
-            image_from_file_loader,
-            awake_decider)
+        historic_photo_chooser = HistoricPhotoChooser()
+        sequential_photo_chooser = SequentialPhotoChooser(next_image_timer2)
+        image_provider = PhotoToDisplayChooser(
+            awake_decider,
+            historic_photo_chooser,
+            sequential_photo_chooser,
+            image_from_file_loader
+            )
         main_loop = MainLoop(
             cycle_stop_detector,
-            next_image_timer,
             image_provider,
             display,
             events_handler,
