@@ -1,4 +1,4 @@
-from viewer.src.menus.uievent import UIEventType
+from viewer.src.menus.framework.uievent import UIEventType
 from viewer.src.viewer_exit_exception import ViewerExitException
 
 

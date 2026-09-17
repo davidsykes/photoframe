@@ -1,4 +1,4 @@
-from viewer.src.menus.uievent import UIEvent, UIEventType
+from viewer.src.menus.framework.uievent import UIEvent, UIEventType
 
 
 class EventsEmulator:

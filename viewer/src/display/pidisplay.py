@@ -1,6 +1,6 @@
 import pygame # pyright: ignore[reportMissingImports]
 from viewer.src.display.pygame_image import PygameImage
-from viewer.src.menus.uievent import UIEvent, UIEventType
+from viewer.src.menus.framework.uievent import UIEvent, UIEventType
 from viewer.src.viewer_exit_exception import ViewerExitException
 
 class PiSystemDisplay:

@@ -13,11 +13,11 @@ from viewer.src.display.subprocess_wrapper import SubprocessWrapper
 from viewer.src.display.wlopm_commands import WlopmCommands
 from viewer.src.display.wlr_randr_commands import WlrRandrCommands
 from viewer.src.main.main_loop import MainLoop
-from viewer.src.menus.event_handler import EventHandler
-from viewer.src.menus.events_handler import EventsHandler
-from viewer.src.menus.first_menu import FirstMenu
-from viewer.src.menus.debug_menu import DebugMenu
-from viewer.src.menus.menu_handler import MenuHandler
+from viewer.src.menus.framework.event_handler import EventHandler
+from viewer.src.menus.framework.events_handler import EventsHandler
+from viewer.src.menus.definitions.first_menu import FirstMenu
+from viewer.src.menus.definitions.debug_menu import DebugMenu
+from viewer.src.menus.framework.menu_handler import MenuHandler
 from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.data.remote_config_data_loader import RemoteConfigDataLoader
 from viewer.src.photos.historic_photo_chooser import HistoricPhotoChooser
@@ -95,7 +95,7 @@ class PhotoFrameApp:
         display = None
         if self._command_line_options.display_type == DisplayType.PC_TEST_VERSION:
             from viewer.src.display.pcdisplay import PCSystemDisplay
-            from viewer.src.menus.events_emulator import EventsEmulator
+            from viewer.src.menus.framework.events_emulator import EventsEmulator
             events = EventsEmulator(system_operations)
             display = PCSystemDisplay(events)
         elif self._command_line_options.display_type == DisplayType.PI_DISPLAY_VERSION:

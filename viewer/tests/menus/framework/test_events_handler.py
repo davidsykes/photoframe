@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import Mock, call
 
-from viewer.src.menus.event_handler import EventHandler
-from viewer.src.menus.events_handler import EventsHandler
+from viewer.src.menus.framework.event_handler import EventHandler
+from viewer.src.menus.framework.events_handler import EventsHandler
 
 class EventsHandlerTests(unittest.TestCase):
     def test_events_are_passed_from_display_to_event_handler(self):

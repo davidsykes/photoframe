@@ -3,8 +3,8 @@ from unittest.mock import Mock, call
 
 from common.src.system_operations import SystemOperations
 from viewer.src.display.display_controller import DisplayController
-from viewer.src.menus.debug_menu import DebugMenu
-from viewer.src.menus.menu_handler import MenuHandler
+from viewer.src.menus.definitions.debug_menu import DebugMenu
+from viewer.src.menus.framework.menu_handler import MenuHandler
 
 
 class MenuHandlerTests(unittest.TestCase):

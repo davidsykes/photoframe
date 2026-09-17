@@ -1,4 +1,4 @@
-from viewer.src.menus.menu_action import MenuAction
+from viewer.src.menus.framework.menu_action import MenuAction
 
 
 class MenuHandler:
@@ -27,4 +27,3 @@ class MenuHandler:
         result = self._main_menu.mouse_down(x, y)
         if result == MenuAction.BACK:
             self._menu_enabled = False
-

@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import Mock
 
 from common.src.system_operations import SystemOperations
-from viewer.src.menus.events_emulator import EventsEmulator
+from viewer.src.menus.framework.events_emulator import EventsEmulator
 
 
 class EventsEmulatorTests(unittest.TestCase):

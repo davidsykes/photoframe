@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock, call
 
-from viewer.src.menus.menu_button import MenuButton
+from viewer.src.menus.framework.menu_button import MenuButton
 
 
 class MenuButtonTests(unittest.TestCase):
