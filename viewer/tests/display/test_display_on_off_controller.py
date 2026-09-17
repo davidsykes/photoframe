@@ -2,11 +2,11 @@ import unittest
 from unittest.mock import Mock
 
 from common.src.system_operations import SystemOperations
-from viewer.src.display.display_controller import DisplayController
+from viewer.src.display.display_on_off_controller import DisplayOnOffController
 from viewer.src.display.subprocess_wrapper import SubprocessWrapper
 from viewer.src.status.application_status import ApplicationStatus
 
-class DisplayControllerTests(unittest.TestCase):
+class DisplayOnOffControllerTests(unittest.TestCase):
     def test_initialise_fetches_the_display_name(self):
         self.out.initialise()
 
@@ -108,7 +108,7 @@ class DisplayControllerTests(unittest.TestCase):
         )
         self.status_updater = Mock(spec=ApplicationStatus)
         self.system_operations = Mock(spec=SystemOperations)
-        self.out = DisplayController(
+        self.out = DisplayOnOffController(
             self.subprocess_wrapper,
             self.subprocess_command_generator,
             self.status_updater,

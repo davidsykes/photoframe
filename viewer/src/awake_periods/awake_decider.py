@@ -1,7 +1,7 @@
 class AwakeDecider:
-    def __init__(self, awake_schedule, display_controller):
+    def __init__(self, awake_schedule, display_on_off_controller):
         self._awake_schedule = awake_schedule
-        self._display_controller = display_controller
+        self._display_on_off_controller = display_on_off_controller
         self._awake = True
         self._timer_awake = True
 
@@ -23,6 +23,6 @@ class AwakeDecider:
 
     def turn_on_or_off_display(self, awake):
         if awake:
-            self._display_controller.display_on()
+            self._display_on_off_controller.display_on()
         else:
-            self._display_controller.display_off()
+            self._display_on_off_controller.display_off()

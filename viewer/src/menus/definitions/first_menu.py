@@ -34,4 +34,4 @@ class FirstMenu:
         raise 'oops'
 
     def debug_menu(self):
-        self._menu_handler.set_menu(self._debug_menu)
+        self._menu_handler.set_current_menu(self._debug_menu)

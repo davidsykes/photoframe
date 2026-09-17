@@ -3,33 +3,33 @@ from unittest.mock import Mock
 
 from viewer.src.awake_periods.awake_decider import AwakeDecider
 from viewer.src.awake_periods.awake_schedule import AwakeSchedule
-from viewer.src.display.display_controller import DisplayController
+from viewer.src.display.display_on_off_controller import DisplayOnOffController
 
 class AwakeDeciderTests(unittest.TestCase):
     def test_initially_we_are_awake(self):
         self.assertEqual(self.out.are_we_awake(), True)
-        self.display_controller.display_on.assert_not_called()
-        self.display_controller.display_off.assert_not_called()
+        self.display_on_off_controller.display_on.assert_not_called()
+        self.display_on_off_controller.display_off.assert_not_called()
 
     def test_when_sleeping_the_display_is_turned_off(self):
         self.sleep_timer.are_we_awake.return_value = False
 
         self.assertEqual(self.out.are_we_awake(), False)
-        self.display_controller.display_on.assert_not_called()
-        self.display_controller.display_off.assert_called_once()
+        self.display_on_off_controller.display_on.assert_not_called()
+        self.display_on_off_controller.display_off.assert_called_once()
 
     def test_when_waking_back_up_the_display_is_turned_on(self):
         self.sleep_timer.are_we_awake.return_value = False
 
         self.assertEqual(self.out.are_we_awake(), False)
-        self.display_controller.display_on.assert_not_called()
-        self.display_controller.display_off.assert_called_once()
+        self.display_on_off_controller.display_on.assert_not_called()
+        self.display_on_off_controller.display_off.assert_called_once()
 
         self.sleep_timer.are_we_awake.return_value = True
 
         self.assertEqual(self.out.are_we_awake(), True)
-        self.display_controller.display_on.assert_called_once()
-        self.display_controller.display_off.assert_called_once()
+        self.display_on_off_controller.display_on.assert_called_once()
+        self.display_on_off_controller.display_off.assert_called_once()
 
     def test_we_are_awake_until_a_menu_selection_says_we_are_not(self):
         self.assertEqual(self.out.are_we_awake(), True)
@@ -76,19 +76,19 @@ class AwakeDeciderTests(unittest.TestCase):
 
         self.out.go_to_sleep()
 
-        self.display_controller.display_off.assert_called_once()
+        self.display_on_off_controller.display_off.assert_called_once()
 
     def test_waking_up_turns_the_display_on(self):
         self.out.go_to_sleep()
-        self.display_controller.display_on.assert_not_called()
+        self.display_on_off_controller.display_on.assert_not_called()
 
         self.out.wake_up()
 
         self.assertEqual(self.out.are_we_awake(), True)
-        self.display_controller.display_on.assert_called_once()
+        self.display_on_off_controller.display_on.assert_called_once()
 
     def setUp(self):
         self.sleep_timer = Mock(spec=AwakeSchedule)
         self.sleep_timer.are_we_awake.return_value = True
-        self.display_controller = Mock(spec=DisplayController)
-        self.out = AwakeDecider(self.sleep_timer, self.display_controller)
+        self.display_on_off_controller = Mock(spec=DisplayOnOffController)
+        self.out = AwakeDecider(self.sleep_timer, self.display_on_off_controller)

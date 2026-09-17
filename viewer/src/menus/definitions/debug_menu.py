@@ -8,12 +8,12 @@ class DebugMenu:
                  statuses,
                  next_image_timer,
                  awake_decider,
-                 display_controller,
+                 display_on_off_controller,
                  random_monitor):
         self._statuses = statuses
         self._next_image_timer = next_image_timer
         self._awake_decider = awake_decider
-        self._display_controller = display_controller
+        self._display_on_off_controller = display_on_off_controller
         self._random_monitor = random_monitor
         self._buttons = [
             MenuButton(90, 0, 10, 5, 'Back', self.back_action),

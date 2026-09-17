@@ -11,8 +11,10 @@ class EventsEmulator:
 
     def _set_initial_events(self):
         self.set_events([
-            (11.5, [UIEvent(UIEventType.MOUSE_DOWN, 20, 20)]),
-            (14, [UIEvent(UIEventType.MOUSE_DOWN, 92, 92)])
+            (2, [UIEvent(UIEventType.MOUSE_DOWN, 20, 20)]),
+            (4, [UIEvent(UIEventType.MOUSE_DOWN, 92, 92)]),
+            (6, [UIEvent(UIEventType.MOUSE_DOWN, 92,  2)]),
+            (8, [UIEvent(UIEventType.MOUSE_DOWN, 92, 92)])
             ]
         )
 

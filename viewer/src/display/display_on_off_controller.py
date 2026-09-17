@@ -1,4 +1,4 @@
-class DisplayController:
+class DisplayOnOffController:
     def __init__(self,
                  subprocess_wrapper,
                  subprocess_command_generator,

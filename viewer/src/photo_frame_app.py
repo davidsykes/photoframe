@@ -7,7 +7,7 @@ from common.src.whole_project_configuration import WholeProjectConfiguration
 from viewer.src.awake_periods.awake_decider import AwakeDecider
 from viewer.src.awake_periods.awake_schedule import AwakeSchedule
 from viewer.src.cycle_stop_detector import CycleStopDetector
-from viewer.src.display.display_controller import DisplayController
+from viewer.src.display.display_on_off_controller import DisplayOnOffController
 from viewer.src.display.image_provider import ImageProvider
 from viewer.src.display.subprocess_wrapper import SubprocessWrapper
 from viewer.src.display.wlopm_commands import WlopmCommands
@@ -128,25 +128,25 @@ class PhotoFrameApp:
         subprocess_wrapper = SubprocessWrapper()
         subprocess_command_generator = WlrRandrCommands()
         subprocess_command_generator = WlopmCommands()
-        display_controller = DisplayController(
+        display_on_off_controller = DisplayOnOffController(
             subprocess_wrapper,
             subprocess_command_generator,
             status_updater,
             system_operations,
             whole_project_configuration.display_off_enabled)
-        display_controller.initialise()
-        awake_decider = AwakeDecider(awake_schedule, display_controller)
+        display_on_off_controller.initialise()
+        awake_decider = AwakeDecider(awake_schedule, display_on_off_controller)
 
         debug_menu = DebugMenu(
             status_updater,
             next_image_timer2,
             awake_decider,
-            display_controller,
+            display_on_off_controller,
             photo_selection_wrapper.random_monitor
             )
-        menu_handler = MenuHandler(display_controller, system_operations)
+        menu_handler = MenuHandler(display_on_off_controller, system_operations)
         first_menu = FirstMenu(menu_handler, debug_menu)
-        menu_handler.set_menu(first_menu)
+        menu_handler.set_main_menu(first_menu)
         event_handler = EventHandler(menu_handler)
         events_handler = EventsHandler(display, event_handler)
 
@@ -170,4 +170,4 @@ class PhotoFrameApp:
         try:
             main_loop.loop()
         finally:
-            display_controller.display_on()
+            display_on_off_controller.display_on()
