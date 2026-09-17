@@ -21,6 +21,7 @@ from viewer.src.menus.framework.menu_handler import MenuHandler
 from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.data.remote_config_data_loader import RemoteConfigDataLoader
 from viewer.src.photos.historic_photo_chooser import HistoricPhotoChooser
+from viewer.src.photos.photo_history import PhotoHistory
 from viewer.src.photos.sequential_photos.sequential_photo_chooser import SequentialPhotoChooser
 from viewer.src.photos.sequential_photos.photo_selection_wrapper import PhotoSelectionWrapper
 from viewer.src.photos.loading_photo_sets.image_from_file_loader import ImageFromFileLoader
@@ -113,10 +114,10 @@ class PhotoFrameApp:
         )
 
 
-        next_image_timer2 = ActionTimer(
+        next_image_timer = ActionTimer(
             'Image change',
             system_operations,
-            photo_selection_wrapper.select_next_photo,
+            photo_selection_wrapper.select_random_photo,
             image_display_seconds
         )
         awake_schedule = AwakeSchedule(
@@ -139,20 +140,21 @@ class PhotoFrameApp:
 
         debug_menu = DebugMenu(
             status_updater,
-            next_image_timer2,
+            next_image_timer,
             awake_decider,
             display_on_off_controller,
             photo_selection_wrapper.random_monitor
             )
         menu_handler = MenuHandler(display_on_off_controller, system_operations)
-        first_menu = FirstMenu(menu_handler, debug_menu)
+        photo_history = PhotoHistory(50)
+        first_menu = FirstMenu(menu_handler, debug_menu, photo_history)
         menu_handler.set_main_menu(first_menu)
         event_handler = EventHandler(menu_handler)
         events_handler = EventsHandler(display, event_handler)
 
         image_from_file_loader = ImageFromFileLoader(display)
         historic_photo_chooser = HistoricPhotoChooser()
-        sequential_photo_chooser = SequentialPhotoChooser(next_image_timer2)
+        sequential_photo_chooser = SequentialPhotoChooser(next_image_timer)
         photo_path_provider = PhotoToDisplayChooser(
             awake_decider,
             historic_photo_chooser,

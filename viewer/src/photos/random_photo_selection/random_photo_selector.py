@@ -1,4 +1,4 @@
-class NextPhotoSelector:
+class RandomPhotoSelector:
     def __init__(self,
                  photo_set_selector,
                  photo_from_photo_set_selector,
@@ -7,7 +7,7 @@ class NextPhotoSelector:
            self._photo_from_photo_set_selector = photo_from_photo_set_selector
            self._random_monitor = random_monitor
 
-    def select_next_photo(self):
+    def select_random_photo(self):
           photo_set = self._photo_set_selector.select_photo_set()
           photo = self._photo_from_photo_set_selector.select_photo(photo_set)
           self._random_monitor.show()

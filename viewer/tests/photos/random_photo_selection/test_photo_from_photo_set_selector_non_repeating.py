@@ -1,8 +1,9 @@
 import unittest
 from unittest.mock import Mock
 
-from viewer.src.photos.photo_selection.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
-from viewer.src.photos.photo_selection.photo_from_photo_set_selector_non_repeating import PhotoFromPhotoSetSelectorNonRepeating
+from viewer.src.photos.random_photo_selection.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
+from viewer.src.photos.random_photo_selection.photo_from_photo_set_selector_non_repeating import PhotoFromPhotoSetSelectorNonRepeating
+
 
 
 class TestPhotoFromPhotoSetSelectorNonRepeating(unittest.TestCase):
