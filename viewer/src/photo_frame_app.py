@@ -154,7 +154,9 @@ class PhotoFrameApp:
 
         image_from_file_loader = ImageFromFileLoader(display)
         historic_photo_chooser = HistoricPhotoChooser()
-        sequential_photo_chooser = SequentialPhotoChooser(next_image_timer)
+        sequential_photo_chooser = SequentialPhotoChooser(
+            next_image_timer,
+            photo_history)
         photo_path_provider = PhotoToDisplayChooser(
             awake_decider,
             historic_photo_chooser,

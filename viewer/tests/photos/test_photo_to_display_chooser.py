@@ -47,13 +47,8 @@ class PhotoToDisplayChooserTests(unittest.TestCase):
         self.awake_decider = Mock(spec=AwakeDecider)
         self.historic_photo_chooser = Mock(spec=HistoricPhotoChooser)
         self.sequential_photo_chooser = Mock(spec=SequentialPhotoChooser)
-        #self.image_loader = Mock(spec=ImageFromFileLoader)
-        #self.image_loader.load_image = self.mock_image_loader_load_image
         self.out = PhotoToDisplayChooser(
             self.awake_decider,
             self.historic_photo_chooser,
             self.sequential_photo_chooser
             )
-
-    # def mock_image_loader_load_image(self, path):
-    #     return 'image at ' + path

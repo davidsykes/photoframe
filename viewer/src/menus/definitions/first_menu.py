@@ -9,12 +9,19 @@ class FirstMenu:
                  photo_history):
         self._menu_handler = menu_handler
         self._debug_menu = debug_menu
+        self._photo_history = photo_history
         self._buttons = [
             MenuButton(90, 0, 10, 5, 'Back', self.back_action),
             MenuButton(1, 47, 10, 5, 'Previous', self.previous_image),
             MenuButton(90,47, 10, 5, 'Next', self.next_image),
             MenuButton(90,90, 10, 5, 'Debug', self.debug_menu),
         ]
+
+    def on_enter(self):
+        self._photo_history.begin()
+
+    def on_exit(self):
+        self._photo_history.reset()
 
     def render(self, display):
         for button in self._buttons:
