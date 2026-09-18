@@ -13,22 +13,25 @@ class MenuHandler:
         self._main_menu = menu
 
     def set_current_menu(self, menu):
+        if (self._current_menu is not None):
+            self._current_menu.on_exit()
         self._current_menu = menu
+        if (self._current_menu is not None):
+            self._current_menu.on_enter()
 
     def mouse_down(self, x, y):
         self._system_operations.log(f'Mouse Down {x} {y}')
         self._display_on_off_controller.display_on()
         if self._current_menu is None:
-            self._current_menu = self._main_menu
+            self.set_current_menu(self._main_menu)
         else:
             self.handle_mouse_down(x,y)
 
     def render(self, display):
-        pass
         if self._current_menu is not None:
             self._current_menu.render(display)
 
     def handle_mouse_down(self, x, y):
         result = self._current_menu.mouse_down(x, y)
         if result == MenuAction.BACK:
-            self._current_menu = None
+            self.set_current_menu(None)

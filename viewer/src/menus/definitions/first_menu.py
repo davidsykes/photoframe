@@ -3,7 +3,10 @@ from viewer.src.menus.framework.menu_button import MenuButton
 
 
 class FirstMenu:
-    def __init__(self, menu_handler, debug_menu):
+    def __init__(self,
+                 menu_handler,
+                 debug_menu,
+                 photo_history):
         self._menu_handler = menu_handler
         self._debug_menu = debug_menu
         self._buttons = [

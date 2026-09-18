@@ -18,6 +18,11 @@ class MenuHandlerTests(unittest.TestCase):
             [call(101,201),call(102,202)]
         )
 
+    def test_enabling_menu_initialises_main_menu(self):
+        self.out.mouse_down(100,200)
+
+        self.main_menu.on_enter.assert_called_once()
+
     def test_if_mouse_down_returns_BACK_the_menu_is_disabled(self):
         self.out.mouse_down(100,200)
         self.main_menu.mouse_down.side_effect = [MenuAction.BACK, None]
@@ -28,6 +33,14 @@ class MenuHandlerTests(unittest.TestCase):
         self.main_menu.mouse_down.assert_has_calls(
             [call(101,201),call(103,203)]
         )
+
+    def test_if_mouse_down_returns_BACK_the_main_menu_is_exited(self):
+        self.out.mouse_down(100,200)
+        self.main_menu.on_exit.assert_not_called()
+
+        self.main_menu.mouse_down.side_effect = [MenuAction.BACK, None]
+        self.out.mouse_down(101,201)
+        self.main_menu.on_exit.assert_called_once()
 
     def test_alternative_menus_can_be_set(self):
         self.out.mouse_down(100,200)
