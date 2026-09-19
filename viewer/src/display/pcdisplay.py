@@ -17,7 +17,6 @@ class PCSystemDisplay:
         return PygameImage(image_path, image_path, 1, 1)
 
     def prepare_screen(self):
-        print('Prepare screen')
         self._print_value = 0
 
     def show_image(self, image):
