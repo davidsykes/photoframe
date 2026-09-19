@@ -26,6 +26,12 @@ class DebugMenu:
             MenuButton(90, 42, 10, 5, 'Quit', self.end_program_cleanly)
         ]
 
+    def on_enter(self):
+        pass
+
+    def on_exit(self):
+        pass
+
     def render(self, display):
         self._statuses.render(display)
         for button in self._buttons:

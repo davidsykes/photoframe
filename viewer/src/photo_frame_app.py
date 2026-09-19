@@ -147,13 +147,13 @@ class PhotoFrameApp:
             )
         menu_handler = MenuHandler(display_on_off_controller, system_operations)
         photo_history = PhotoHistory(50)
-        first_menu = FirstMenu(menu_handler, debug_menu, photo_history)
+        historic_photo_chooser = HistoricPhotoChooser(photo_history)
+        first_menu = FirstMenu(menu_handler, debug_menu, historic_photo_chooser)
         menu_handler.set_main_menu(first_menu)
         event_handler = EventHandler(menu_handler)
         events_handler = EventsHandler(display, event_handler)
 
         image_from_file_loader = ImageFromFileLoader(display)
-        historic_photo_chooser = HistoricPhotoChooser()
         sequential_photo_chooser = SequentialPhotoChooser(
             next_image_timer,
             photo_history)

@@ -6,10 +6,10 @@ class FirstMenu:
     def __init__(self,
                  menu_handler,
                  debug_menu,
-                 photo_history):
+                 historic_photo_chooser):
         self._menu_handler = menu_handler
         self._debug_menu = debug_menu
-        self._photo_history = photo_history
+        self._historic_photo_chooser = historic_photo_chooser
         self._buttons = [
             MenuButton(90, 0, 10, 5, 'Back', self.back_action),
             MenuButton(1, 47, 10, 5, 'Previous', self.previous_image),
@@ -18,10 +18,10 @@ class FirstMenu:
         ]
 
     def on_enter(self):
-        self._photo_history.begin()
+        self._historic_photo_chooser.enable()
 
     def on_exit(self):
-        self._photo_history.reset()
+        self._historic_photo_chooser.disable()
 
     def render(self, display):
         for button in self._buttons:
