@@ -112,6 +112,5 @@ class DisplayOnOffControllerTests(unittest.TestCase):
             self.subprocess_wrapper,
             self.subprocess_command_generator,
             self.status_updater,
-            self.system_operations,
-            True
+            self.system_operations
         )

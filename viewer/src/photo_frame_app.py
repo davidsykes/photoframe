@@ -133,8 +133,7 @@ class PhotoFrameApp:
             subprocess_wrapper,
             subprocess_command_generator,
             status_updater,
-            system_operations,
-            whole_project_configuration.display_off_enabled)
+            system_operations)
         display_on_off_controller.initialise()
         awake_decider = AwakeDecider(awake_schedule, display_on_off_controller)
 

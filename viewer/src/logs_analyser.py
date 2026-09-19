@@ -28,6 +28,7 @@ class LogsAnalyser:
                 self._system_operations.rmtree(f)
             if 'wer-0.2' in str(f):
                 self._status_updater.update_status(f'rm -r {f}', 'Yes')
+                self._system_operations.rmtree(f)
 
     def find_log_files(self, path):
         source_folder = Path(path)
