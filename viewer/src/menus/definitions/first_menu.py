@@ -16,6 +16,7 @@ class FirstMenu:
             MenuButton(90, 47, 10, 5, 'Next', self.next_image),
             MenuButton(90, 90, 10, 5, 'Debug', self.debug_menu),
         ]
+        self._debug_menu_enabled = False
 
     def on_enter(self):
         self._historic_photo_chooser.enable()
@@ -26,12 +27,16 @@ class FirstMenu:
     def render(self, display):
         for button in self._buttons:
             button.render(display)
+        if self._debug_menu_enabled:
+            self._debug_menu.render(display)
 
     def mouse_down(self, x, y):
         self.menu_action = MenuAction.NONE
         for button in self._buttons:
             if button.mouse_down(x, y):
                 return self.menu_action
+        if self._debug_menu_enabled:
+            return self._debug_menu.mouse_down(x, y)
         return self.menu_action
 
     def back_action(self):
@@ -44,4 +49,5 @@ class FirstMenu:
         self._historic_photo_chooser.forward()
 
     def debug_menu(self):
-        self._menu_handler.set_current_menu(self._debug_menu)
+        #self._menu_handler.set_current_menu(self._debug_menu)
+        self._debug_menu_enabled = not self._debug_menu_enabled

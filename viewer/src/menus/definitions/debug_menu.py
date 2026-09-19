@@ -17,13 +17,13 @@ class DebugMenu:
         self._random_monitor = random_monitor
         self._buttons = [
             MenuButton(90, 0, 10, 5, 'Back', self.back_action),
-            MenuButton(90, 6, 10, 5, 'Pause', self.pause),
-            MenuButton(90, 12, 10, 5, 'Resume', self.resume),
-            MenuButton(90, 18, 10, 5, 'Sleep', self.sleep),
-            MenuButton(90, 24, 10, 5, 'Wake', self.wake),
-            MenuButton(90, 30, 10, 5, 'Random', self.render_random),
-            MenuButton(90, 36, 10, 5, 'Crash', self.simulate_crash),
-            MenuButton(90, 42, 10, 5, 'Quit', self.end_program_cleanly)
+            MenuButton(90, 6,  9, 4, 'Pause', self.pause),
+            MenuButton(90, 11, 9, 4, 'Resume', self.resume),
+            MenuButton(90, 16, 9, 4, 'Sleep', self.sleep),
+            MenuButton(90, 21, 9, 4, 'Wake', self.wake),
+            MenuButton(90, 26, 9, 4, 'Random', self.render_random),
+            MenuButton(90, 31, 9, 4, 'Crash', self.simulate_crash),
+            MenuButton(90, 36, 9, 4, 'Quit', self.end_program_cleanly)
         ]
 
     def on_enter(self):
