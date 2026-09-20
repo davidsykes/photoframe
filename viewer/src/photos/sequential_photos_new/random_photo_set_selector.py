@@ -15,7 +15,6 @@ class RandomPhotoSetSelector:
         self._indices = []
         self._weights = []
         count = 0
-        print(f'XXXXXXXXXXXXXXXXXXX {photo_sets}')
         for photo_set in photo_sets:
             self._indices.append(count)
             self._weights.append(photo_set.random_weighting)
