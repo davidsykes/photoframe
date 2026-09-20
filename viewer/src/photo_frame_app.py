@@ -22,7 +22,7 @@ from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.data.remote_config_data_loader import RemoteConfigDataLoader
 from viewer.src.photos.historic_photo_chooser import HistoricPhotoChooser
 from viewer.src.photos.photo_history import PhotoHistory
-from viewer.src.photos.random_photo_selection.random_photo_selector import RandomPhotoSelector
+from viewer.src.photos.random_photo_selection.randomiser import Randomiser
 from viewer.src.photos.sequential_photos_new.next_photo_to_show_cache import NextPhotoToShowCache
 from viewer.src.photos.sequential_photos_new.next_photo_to_show_generator import NextPhotoToShowGenerator
 from viewer.src.photos.sequential_photos_new.random_photo_selector_new import RandomPhotoSelectorNew
@@ -30,6 +30,7 @@ from viewer.src.photos.sequential_photos.sequential_photo_chooser import Sequent
 from viewer.src.photos.sequential_photos.photo_selection_wrapper import PhotoSelectionWrapper
 from viewer.src.photos.loading_photo_sets.image_from_file_loader import ImageFromFileLoader
 from viewer.src.photos.photo_to_display_chooser import PhotoToDisplayChooser
+from viewer.src.photos.sequential_photos_new.random_photo_set_selector import RandomPhotoSetSelector
 from viewer.src.status.action_status_updater import ActionStatusUpdater
 from viewer.src.status.application_status import ApplicationStatus
 from viewer.src.action_timer import ActionTimer
@@ -111,6 +112,7 @@ class PhotoFrameApp:
         display.initialise_display()
 
         photo_history = PhotoHistory(50)
+        randomiser = Randomiser()
 
         ##########################
 
@@ -123,6 +125,7 @@ class PhotoFrameApp:
             sequential_photo_chooser = self.build_random_photo_selector_module(
                 system_operations,
                 image_display_seconds,
+                randomiser,
                 photo_sets,
                 photo_history
             )
@@ -130,7 +133,8 @@ class PhotoFrameApp:
             photo_selection_wrapper = PhotoSelectionWrapper(
                 initial_remote_config_data,
                 images_folder,
-                system_operations
+                system_operations,
+                randomiser
             )
             next_image_timer = ActionTimer(
                 'Image change',
@@ -205,9 +209,14 @@ class PhotoFrameApp:
     def build_random_photo_selector_module(self,
                                            system_operations,
                                            image_display_seconds,
+                                           randomiser,
                                            photo_sets,
                                            photo_history):
-        random_photo_selector = RandomPhotoSelectorNew(photo_sets)
+        random_photo_set_selector = RandomPhotoSetSelector(
+            randomiser,
+            photo_sets)
+        random_photo_selector = RandomPhotoSelectorNew(
+            random_photo_set_selector)
         next_photo_to_show_generator = NextPhotoToShowGenerator(
             random_photo_selector,
             photo_history
@@ -215,8 +224,9 @@ class PhotoFrameApp:
         next_photo_to_show_timer = ActionTimer(
                 'Image change new',
                 system_operations,
-                random_photo_selector.select_random_photo,
+                next_photo_to_show_generator.generate_next_photo,
                 image_display_seconds
             )
 
-        return NextPhotoToShowCache(next_photo_to_show_timer)
+        return NextPhotoToShowCache(next_photo_to_show_timer,
+                                    photo_history)

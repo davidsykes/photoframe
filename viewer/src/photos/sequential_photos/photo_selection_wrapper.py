@@ -14,7 +14,8 @@ class PhotoSelectionWrapper:
     def __init__(self,
                  remote_config_data,
                  path_to_photo_sets,
-                 system_operations):
+                 system_operations,
+                 randomiser):
         random_weighter = RandomWeighter()
         photo_set_loader = PhotoSetLoader(system_operations,
                                           random_weighter,
@@ -28,7 +29,6 @@ class PhotoSelectionWrapper:
         photo_sets = photo_sets_loader.load_photo_sets(
             remote_config_data,
             path_to_photo_sets)
-        randomiser = Randomiser()
         self.random_monitor = RandomMonitor(photo_sets)
         photo_set_selector = PhotoSetSelector(randomiser, photo_sets, self.random_monitor)
         photo_set_selector_non_repeating = PhotoSetSelectorNonRepeating(photo_set_selector, 3, 50)
