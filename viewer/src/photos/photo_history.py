@@ -15,4 +15,6 @@ class PhotoHistory:
         self._history.append(photo)
 
     def has_photo_been_shown_recently(self, photo):
-        raise 'has_photo_been_shown_recently'
+        if photo in self._history:
+            return True
+        return False

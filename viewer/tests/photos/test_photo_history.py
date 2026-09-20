@@ -25,5 +25,28 @@ class PhotoHistoryTests(unittest.TestCase):
         self.out.new_photo('Photo 6')
         self.assertEqual(5, len(self.out))
 
+    def test_has_photo_been_shown_recently(self):
+        self.out.new_photo('Photo 1')
+        self.out.new_photo('Photo 2')
+        self.out.new_photo('Photo 3')
+        self.out.new_photo('Photo 4')
+        self.out.new_photo('Photo 5')
+
+        self.assertTrue(self.out.has_photo_been_shown_recently('Photo 1'))
+        self.assertTrue(self.out.has_photo_been_shown_recently('Photo 5'))
+        self.assertFalse(self.out.has_photo_been_shown_recently('Photo 6'))
+
+    def test_has_photo_been_shown_recently_loops(self):
+        self.out.new_photo('Photo 1')
+        self.out.new_photo('Photo 2')
+        self.out.new_photo('Photo 3')
+        self.out.new_photo('Photo 4')
+        self.out.new_photo('Photo 5')
+        self.out.new_photo('Photo 6')
+
+        self.assertFalse(self.out.has_photo_been_shown_recently('Photo 1'))
+        self.assertTrue(self.out.has_photo_been_shown_recently('Photo 5'))
+        self.assertTrue(self.out.has_photo_been_shown_recently('Photo 6'))
+
     def setUp(self):
         self.out = PhotoHistory(5)
