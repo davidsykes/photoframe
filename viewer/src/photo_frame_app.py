@@ -125,7 +125,12 @@ class PhotoFrameApp:
             random_monitor = None
             next_image_timer = None
             sequential_photo_chooser = None
-            photo_sets = self.load_photo_sets()
+
+
+
+            photo_sets = self.load_photo_sets(system_operations,
+                                              initial_remote_config_data,
+                                              images_folder)
             sequential_photo_chooser = self.build_random_photo_selector_module(
                 system_operations,
                 image_display_seconds,
@@ -223,9 +228,6 @@ class PhotoFrameApp:
         photo_sets = photo_sets_loader.load_photo_sets(
             remote_config_data,
             path_to_photo_sets)
-
-
-        photo_sets = 'adasd sf asdf '
         return photo_sets
 
     def build_random_photo_selector_module(self,
@@ -241,7 +243,8 @@ class PhotoFrameApp:
             random_photo_set_selector)
         next_photo_to_show_generator = NextPhotoToShowGenerator(
             random_photo_selector,
-            photo_history
+            photo_history,
+            50
         )
         next_photo_to_show_timer = ActionTimer(
                 'Image change new',
