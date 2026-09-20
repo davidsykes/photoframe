@@ -55,5 +55,5 @@ class PhotoSetsLoaderTests(unittest.TestCase):
             if set_date == 'Set 3 Date':
                 return self.photo_set_3
 
-    def mock_get_photo_set_date(self, set_name, config):
+    def mock_get_photo_set_date(self, set_name, photo_folders):
         return set_name + ' Date'

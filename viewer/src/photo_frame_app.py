@@ -21,6 +21,10 @@ from viewer.src.menus.framework.menu_handler import MenuHandler
 from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.data.remote_config_data_loader import RemoteConfigDataLoader
 from viewer.src.photos.historic_photo_chooser import HistoricPhotoChooser
+from viewer.src.photos.loading_photo_sets.photo_set_date_retriever import PhotoSetDateRetriever
+from viewer.src.photos.loading_photo_sets.photo_set_loader import PhotoSetLoader
+from viewer.src.photos.loading_photo_sets.photo_sets_loader import PhotoSetsLoader
+from viewer.src.photos.loading_photo_sets.random_weighter import RandomWeighter
 from viewer.src.photos.photo_history import PhotoHistory
 from viewer.src.photos.random_photo_selection.randomiser import Randomiser
 from viewer.src.photos.sequential_photos_new.next_photo_to_show_cache import NextPhotoToShowCache
@@ -202,8 +206,26 @@ class PhotoFrameApp:
         finally:
             display_on_off_controller.display_on()
 
-    def load_photo_sets(self):
-        photo_sets = 'adasd'
+    def load_photo_sets(self,
+                        system_operations,
+                        remote_config_data,
+                        path_to_photo_sets):
+        random_weighter = RandomWeighter()
+        photo_set_loader = PhotoSetLoader(system_operations,
+                                          random_weighter,
+                                          {'.json', '.txt'})
+        photo_set_date_retriever = PhotoSetDateRetriever()
+        photo_sets_loader = PhotoSetsLoader(
+            system_operations,
+            photo_set_loader,
+            photo_set_date_retriever
+        )
+        photo_sets = photo_sets_loader.load_photo_sets(
+            remote_config_data,
+            path_to_photo_sets)
+
+
+        photo_sets = 'adasd sf asdf '
         return photo_sets
 
     def build_random_photo_selector_module(self,

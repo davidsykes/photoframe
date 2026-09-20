@@ -16,7 +16,7 @@ class PhotoSetsLoader:
             photo_set_path = photo_sets_path / photo_set
             photo_set_date = self._photo_set_date_retriever.get_photo_set_date(
                 photo_set,
-                remote_config_data)
+                remote_config_data.photo_folders)
             photo_set = self._photo_set_loader.load_photo_set(
                 photo_set_path,
                 photo_set_date
