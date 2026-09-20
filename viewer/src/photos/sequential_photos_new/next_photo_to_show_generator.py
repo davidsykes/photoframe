@@ -9,7 +9,7 @@ class NextPhotoToShowGenerator:
 
     def generate_next_photo(self):
         for _ in range(self._maximum_selection_attempts):
-            photo = self._random_photo_selector.select_random_photo()
+            photo = self._random_photo_selector.select_photo()
             if not self._photo_history.has_photo_been_shown_recently(
                 photo):
                 break

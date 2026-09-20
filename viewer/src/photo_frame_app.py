@@ -29,6 +29,7 @@ from viewer.src.photos.photo_history import PhotoHistory
 from viewer.src.photos.random_photo_selection.randomiser import Randomiser
 from viewer.src.photos.sequential_photos_new.next_photo_to_show_cache import NextPhotoToShowCache
 from viewer.src.photos.sequential_photos_new.next_photo_to_show_generator import NextPhotoToShowGenerator
+from viewer.src.photos.sequential_photos_new.photo_from_photo_set_selector import PhotoFromPhotoSetSelectorNew
 from viewer.src.photos.sequential_photos_new.random_photo_selector_new import RandomPhotoSelectorNew
 from viewer.src.photos.sequential_photos.sequential_photo_chooser import SequentialPhotoChooser
 from viewer.src.photos.sequential_photos.photo_selection_wrapper import PhotoSelectionWrapper
@@ -239,8 +240,12 @@ class PhotoFrameApp:
         random_photo_set_selector = RandomPhotoSetSelector(
             randomiser,
             photo_sets)
+        photo_from_photo_set_selecter = PhotoFromPhotoSetSelectorNew(
+            randomiser
+        )
         random_photo_selector = RandomPhotoSelectorNew(
-            random_photo_set_selector)
+            random_photo_set_selector,
+            photo_from_photo_set_selecter)
         next_photo_to_show_generator = NextPhotoToShowGenerator(
             random_photo_selector,
             photo_history,
