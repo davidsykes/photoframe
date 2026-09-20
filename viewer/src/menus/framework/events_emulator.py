@@ -11,14 +11,14 @@ class EventsEmulator:
 
     def _set_initial_events(self):
         self.set_events([
-            (12, [UIEvent(UIEventType.MOUSE_DOWN, 20, 20)]),
-            (14, [UIEvent(UIEventType.MOUSE_DOWN,  2, 50)]),
-            (16, [UIEvent(UIEventType.MOUSE_DOWN,  2, 50)]),
-            (18, [UIEvent(UIEventType.MOUSE_DOWN,  2, 50)]),
-            (20, [UIEvent(UIEventType.MOUSE_DOWN, 92, 50)]),
-            (22, [UIEvent(UIEventType.MOUSE_DOWN, 92, 50)]),
-            (24, [UIEvent(UIEventType.MOUSE_DOWN, 92, 50)]),
-            (26, [UIEvent(UIEventType.MOUSE_DOWN, 92, 50)]),
+            (912, [UIEvent(UIEventType.MOUSE_DOWN, 20, 20)]),
+            # (14, [UIEvent(UIEventType.MOUSE_DOWN,  2, 50)]),
+            # (16, [UIEvent(UIEventType.MOUSE_DOWN,  2, 50)]),
+            # (18, [UIEvent(UIEventType.MOUSE_DOWN,  2, 50)]),
+            # (20, [UIEvent(UIEventType.MOUSE_DOWN, 92, 50)]),
+            # (22, [UIEvent(UIEventType.MOUSE_DOWN, 92, 50)]),
+            # (24, [UIEvent(UIEventType.MOUSE_DOWN, 92, 50)]),
+            # (26, [UIEvent(UIEventType.MOUSE_DOWN, 92, 50)]),
             ]
         )
 

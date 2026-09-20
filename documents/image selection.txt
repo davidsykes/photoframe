@@ -23,19 +23,8 @@ def get_weight(age_days):
     return 1
 
 
-To select an image first the set is randomly chosen
-
-import random
-selected_set = random.choices(
-    photo_sets,
-    weights=weights,
-    k=1,
-)[0]
-
-Then from the set the image is randomly chosen
-photo = selected_set.choose_photo()
-
-Whenever an image is displayed it is added to a circular queue set to a size of, say, 50
-This is used to ensure that no image is repeated within 50 images
-Also perhaps don't select the same set more than 2 or 3 times consecutively.
+Selecting an image:
+A random set is chosen, then a random photo from that set.
+If that photo has been shown in the last 50 photos another is chosen
+The check is repeated up to 100 times, if it fails on the 100th time the repeated photo is shown
 
