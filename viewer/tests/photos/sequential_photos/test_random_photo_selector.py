@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import Mock
-from viewer.src.photos.random_photo_selection.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
+from viewer.src.photos.random_photo_selection_old.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
 from viewer.src.photos.sequential_photos_new.random_photo_selector_new import RandomPhotoSelectorNew
 from viewer.src.photos.sequential_photos_new.random_photo_set_selector import RandomPhotoSetSelector
 

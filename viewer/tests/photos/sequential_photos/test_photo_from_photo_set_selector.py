@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import Mock
 
 from viewer.src.data.photo_set import PhotoSet
-from viewer.src.photos.random_photo_selection.randomiser import Randomiser
+from viewer.src.logic.randomiser import Randomiser
 from viewer.src.photos.sequential_photos_new.photo_from_photo_set_selector import PhotoFromPhotoSetSelectorNew
 
 class TestPhotoFromPhotoSetSelector(unittest.TestCase):

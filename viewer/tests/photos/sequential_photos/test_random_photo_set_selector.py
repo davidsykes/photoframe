@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock
 from viewer.src.data.photo_set import PhotoSet
-from viewer.src.photos.random_photo_selection.randomiser import Randomiser
+from viewer.src.logic.randomiser import Randomiser
 from viewer.src.photos.sequential_photos_new.random_photo_set_selector import RandomPhotoSetSelector
 
 class RandomPhotoSetSelectorTests(unittest.TestCase):

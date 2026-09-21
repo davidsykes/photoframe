@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import Mock
 
-from viewer.src.photos.random_photo_selection.photo_set_selector import PhotoSetSelector
-from viewer.src.photos.random_photo_selection.random_photo_selector import RandomPhotoSelector
+from viewer.src.photos.random_photo_selection_old.photo_set_selector import PhotoSetSelector
+from viewer.src.photos.random_photo_selection_old.random_photo_selector import RandomPhotoSelector
 from viewer.tests.photos.random_photo_selection.test_photo_from_photo_set_selector import PhotoFromPhotoSetSelector
 
 

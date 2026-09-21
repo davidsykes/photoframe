@@ -27,20 +27,20 @@ from viewer.src.photos.loading_photo_sets.photo_set_loader import PhotoSetLoader
 from viewer.src.photos.loading_photo_sets.photo_sets_loader import PhotoSetsLoader
 from viewer.src.photos.loading_photo_sets.random_weighter import RandomWeighter
 from viewer.src.photos.photo_history import PhotoHistory
-from viewer.src.photos.random_photo_selection.randomiser import Randomiser
 from viewer.src.photos.sequential_photos_new.next_photo_to_show_cache import NextPhotoToShowCache
 from viewer.src.photos.sequential_photos_new.next_photo_to_show_generator import NextPhotoToShowGenerator
 from viewer.src.photos.sequential_photos_new.photo_from_photo_set_selector import PhotoFromPhotoSetSelectorNew
 from viewer.src.photos.sequential_photos_new.random_photo_selector_new import RandomPhotoSelectorNew
-from viewer.src.photos.sequential_photos.sequential_photo_chooser import SequentialPhotoChooser
-from viewer.src.photos.sequential_photos.photo_selection_wrapper import PhotoSelectionWrapper
 from viewer.src.photos.loading_photo_sets.image_from_file_loader import ImageFromFileLoader
 from viewer.src.photos.photo_to_display_chooser import PhotoToDisplayChooser
 from viewer.src.photos.sequential_photos_new.random_photo_set_selector import RandomPhotoSetSelector
+from viewer.src.photos.sequential_photos_old.photo_selection_wrapper import PhotoSelectionWrapper
+from viewer.src.photos.sequential_photos_old.sequential_photo_chooser import SequentialPhotoChooser
 from viewer.src.status.action_status_updater import ActionStatusUpdater
 from viewer.src.status.application_status import ApplicationStatus
 from viewer.src.action_timer import ActionTimer
 from viewer.src.status.version_loader import VersionLoader
+from viewer.src.logic.randomiser import Randomiser
 
 class DisplayType(Enum):
     PC_TEST_VERSION = auto()

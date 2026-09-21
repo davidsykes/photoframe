@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import Mock, call
 from viewer.src.action_timer import ActionTimer
 from viewer.src.photos.photo_history import PhotoHistory
-from viewer.src.photos.sequential_photos.sequential_photo_chooser import SequentialPhotoChooser
+from viewer.src.photos.sequential_photos_old.sequential_photo_chooser import SequentialPhotoChooser
 
 
 class SequentialPhotoChooserTests(unittest.TestCase):

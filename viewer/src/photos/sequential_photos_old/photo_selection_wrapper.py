@@ -3,12 +3,11 @@ from viewer.src.photos.loading_photo_sets.photo_set_date_retriever import PhotoS
 from viewer.src.photos.loading_photo_sets.photo_set_loader import PhotoSetLoader
 from viewer.src.photos.loading_photo_sets.photo_sets_loader import PhotoSetsLoader
 from viewer.src.photos.loading_photo_sets.random_weighter import RandomWeighter
-from viewer.src.photos.random_photo_selection.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
-from viewer.src.photos.random_photo_selection.photo_from_photo_set_selector_non_repeating import PhotoFromPhotoSetSelectorNonRepeating
-from viewer.src.photos.random_photo_selection.photo_set_selector import PhotoSetSelector
-from viewer.src.photos.random_photo_selection.photo_set_selector_non_repeating import PhotoSetSelectorNonRepeating
-from viewer.src.photos.random_photo_selection.random_photo_selector import RandomPhotoSelector
-from viewer.src.photos.random_photo_selection.randomiser import Randomiser
+from viewer.src.photos.random_photo_selection_old.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
+from viewer.src.photos.random_photo_selection_old.photo_from_photo_set_selector_non_repeating import PhotoFromPhotoSetSelectorNonRepeating
+from viewer.src.photos.random_photo_selection_old.photo_set_selector import PhotoSetSelector
+from viewer.src.photos.random_photo_selection_old.photo_set_selector_non_repeating import PhotoSetSelectorNonRepeating
+from viewer.src.photos.random_photo_selection_old.random_photo_selector import RandomPhotoSelector
 
 class PhotoSelectionWrapper:
     def __init__(self,
