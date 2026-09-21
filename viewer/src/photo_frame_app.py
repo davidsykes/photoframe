@@ -12,6 +12,7 @@ from viewer.src.display.image_provider import ImageProvider
 from viewer.src.display.subprocess_wrapper import SubprocessWrapper
 from viewer.src.display.wlopm_commands import WlopmCommands
 from viewer.src.display.wlr_randr_commands import WlrRandrCommands
+from viewer.src.logic.random_monitor import RandomMonitor
 from viewer.src.main.main_loop import MainLoop
 from viewer.src.menus.framework.event_handler import EventHandler
 from viewer.src.menus.framework.events_handler import EventsHandler
@@ -121,9 +122,11 @@ class PhotoFrameApp:
 
         ##########################
 
-        if self._command_line_options.run_new_code:
+        run_new_code = not self._command_line_options.run_new_code
+
+        status_updater.update_status('Running new photo selector', run_new_code)
+        if run_new_code:
             photo_selection_wrapper = None
-            random_monitor = None
             next_image_timer = None
             sequential_photo_chooser = None
 
@@ -132,6 +135,9 @@ class PhotoFrameApp:
             photo_sets = self.load_photo_sets(system_operations,
                                               initial_remote_config_data,
                                               images_folder)
+
+            random_monitor = RandomMonitor(photo_sets)
+
             sequential_photo_chooser = self.build_random_photo_selector_module(
                 system_operations,
                 image_display_seconds,
