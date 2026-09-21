@@ -34,8 +34,6 @@ from viewer.src.photos.sequential_photos_new.random_photo_selector_new import Ra
 from viewer.src.photos.loading_photo_sets.image_from_file_loader import ImageFromFileLoader
 from viewer.src.photos.photo_to_display_chooser import PhotoToDisplayChooser
 from viewer.src.photos.sequential_photos_new.random_photo_set_selector import RandomPhotoSetSelector
-from viewer.src.photos.sequential_photos_old.photo_selection_wrapper import PhotoSelectionWrapper
-from viewer.src.photos.sequential_photos_old.sequential_photo_chooser import SequentialPhotoChooser
 from viewer.src.status.action_status_updater import ActionStatusUpdater
 from viewer.src.status.application_status import ApplicationStatus
 from viewer.src.action_timer import ActionTimer
@@ -120,52 +118,19 @@ class PhotoFrameApp:
         photo_history = PhotoHistory(50)
         randomiser = Randomiser()
 
-        ##########################
+        photo_sets = self.load_photo_sets(system_operations,
+                                            initial_remote_config_data,
+                                            images_folder)
 
-        run_new_code = not self._command_line_options.run_new_code
+        random_monitor = RandomMonitor(photo_sets)
 
-        status_updater.update_status('Running new photo selector', run_new_code)
-        if run_new_code:
-            photo_selection_wrapper = None
-            next_image_timer = None
-            sequential_photo_chooser = None
-
-
-
-            photo_sets = self.load_photo_sets(system_operations,
-                                              initial_remote_config_data,
-                                              images_folder)
-
-            random_monitor = RandomMonitor(photo_sets)
-
-            sequential_photo_chooser = self.build_random_photo_selector_module(
-                system_operations,
-                image_display_seconds,
-                randomiser,
-                photo_sets,
-                photo_history
-            )
-        else:
-            photo_selection_wrapper = PhotoSelectionWrapper(
-                initial_remote_config_data,
-                images_folder,
-                system_operations,
-                randomiser
-            )
-            next_image_timer = ActionTimer(
-                'Image change',
-                system_operations,
-                photo_selection_wrapper.select_random_photo,
-                image_display_seconds
-            )
-            random_monitor = photo_selection_wrapper.random_monitor
-            sequential_photo_chooser = SequentialPhotoChooser(
-                next_image_timer,
-                photo_history)
-
-
-        ##############################
-
+        sequential_photo_chooser = self.build_random_photo_selector_module(
+            system_operations,
+            image_display_seconds,
+            randomiser,
+            photo_sets,
+            photo_history
+        )
 
         awake_schedule = AwakeSchedule(
             system_operations,
@@ -186,7 +151,6 @@ class PhotoFrameApp:
 
         debug_menu = DebugMenu(
             status_updater,
-            next_image_timer,
             awake_decider,
             display_on_off_controller,
             random_monitor

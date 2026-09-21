@@ -6,19 +6,15 @@ from viewer.src.viewer_exit_exception import ViewerExitException
 class DebugMenu:
     def __init__(self,
                  statuses,
-                 next_image_timer,
                  awake_decider,
                  display_on_off_controller,
                  random_monitor):
         self._statuses = statuses
-        self._next_image_timer = next_image_timer
         self._awake_decider = awake_decider
         self._display_on_off_controller = display_on_off_controller
         self._random_monitor = random_monitor
         self._buttons = [
             MenuButton(90, 0, 10, 5, 'Back', self.back_action),
-            MenuButton(90, 6,  9, 4, 'Pause', self.pause),
-            MenuButton(90, 11, 9, 4, 'Resume', self.resume),
             MenuButton(90, 16, 9, 4, 'Sleep', self.sleep),
             MenuButton(90, 21, 9, 4, 'Wake', self.wake),
             MenuButton(90, 26, 9, 4, 'Random', self.render_random),
@@ -46,12 +42,6 @@ class DebugMenu:
 
     def back_action(self):
         self.menu_action = MenuAction.BACK
-
-    def pause(self):
-        self._next_image_timer.pause()
-
-    def resume(self):
-        self._next_image_timer.resume()
 
     def sleep(self):
         self._awake_decider.go_to_sleep()
