@@ -1,4 +1,4 @@
-from datetime import datetime, time
+from datetime import date, datetime, time
 import os
 import shutil
 from pathlib import Path
@@ -82,3 +82,6 @@ class SystemOperations:
 
     def get_current_time(self):
         return datetime.now().time().isoformat(timespec='minutes')
+
+    def get_today(self):
+        return date.today()

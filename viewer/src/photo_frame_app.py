@@ -29,8 +29,8 @@ from viewer.src.photos.loading_photo_sets.random_weighter import RandomWeighter
 from viewer.src.photos.photo_history import PhotoHistory
 from viewer.src.photos.sequential_photos_new.next_photo_to_show_cache import NextPhotoToShowCache
 from viewer.src.photos.sequential_photos_new.next_photo_to_show_generator import NextPhotoToShowGenerator
-from viewer.src.photos.sequential_photos_new.photo_from_photo_set_selector import PhotoFromPhotoSetSelectorNew
-from viewer.src.photos.sequential_photos_new.random_photo_selector_new import RandomPhotoSelectorNew
+from viewer.src.photos.sequential_photos_new.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
+from viewer.src.photos.sequential_photos_new.random_photo_selector import RandomPhotoSelector
 from viewer.src.photos.loading_photo_sets.image_from_file_loader import ImageFromFileLoader
 from viewer.src.photos.photo_to_display_chooser import PhotoToDisplayChooser
 from viewer.src.photos.sequential_photos_new.random_photo_set_selector import RandomPhotoSetSelector
@@ -128,7 +128,8 @@ class PhotoFrameApp:
             image_display_seconds,
             randomiser,
             photo_sets,
-            photo_history
+            photo_history,
+            random_monitor
         )
 
         awake_schedule = AwakeSchedule(
@@ -185,7 +186,7 @@ class PhotoFrameApp:
                         system_operations,
                         remote_config_data,
                         path_to_photo_sets):
-        random_weighter = RandomWeighter()
+        random_weighter = RandomWeighter(system_operations.get_today())
         photo_set_loader = PhotoSetLoader(system_operations,
                                           random_weighter,
                                           {'.json', '.txt'})
@@ -205,14 +206,17 @@ class PhotoFrameApp:
                                            image_display_seconds,
                                            randomiser,
                                            photo_sets,
-                                           photo_history):
+                                           photo_history,
+                                           random_monitor):
         random_photo_set_selector = RandomPhotoSetSelector(
             randomiser,
-            photo_sets)
-        photo_from_photo_set_selecter = PhotoFromPhotoSetSelectorNew(
-            randomiser
+            photo_sets,
+            random_monitor)
+        photo_from_photo_set_selecter = PhotoFromPhotoSetSelector(
+            randomiser,
+            random_monitor
         )
-        random_photo_selector = RandomPhotoSelectorNew(
+        random_photo_selector = RandomPhotoSelector(
             random_photo_set_selector,
             photo_from_photo_set_selecter)
         next_photo_to_show_generator = NextPhotoToShowGenerator(

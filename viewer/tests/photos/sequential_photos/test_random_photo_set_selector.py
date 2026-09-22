@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import Mock
 from viewer.src.data.photo_set import PhotoSet
+from viewer.src.logic.random_monitor import RandomMonitor
 from viewer.src.logic.randomiser import Randomiser
 from viewer.src.photos.sequential_photos_new.random_photo_set_selector import RandomPhotoSetSelector
 
@@ -24,5 +25,6 @@ class RandomPhotoSetSelectorTests(unittest.TestCase):
         self.sets = [self.set1, self.set2, self.set3]
         self.out = RandomPhotoSetSelector(
             self.randomiser,
-            self.sets)
+            self.sets,
+            Mock(spec=RandomMonitor))
 

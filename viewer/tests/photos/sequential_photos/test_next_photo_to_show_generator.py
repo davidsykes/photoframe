@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock
 from viewer.src.photos.photo_history import PhotoHistory
-from viewer.src.photos.sequential_photos_new.random_photo_selector_new import RandomPhotoSelectorNew
+from viewer.src.photos.sequential_photos_new.random_photo_selector import RandomPhotoSelector
 from viewer.src.photos.sequential_photos_new.next_photo_to_show_generator import NextPhotoToShowGenerator
 
 class NextPhotoToShowGeneratorTests(unittest.TestCase):
@@ -49,7 +49,7 @@ class NextPhotoToShowGeneratorTests(unittest.TestCase):
         self.assertEqual('Repeated Photo', self.out.generate_next_photo())
 
     def setUp(self):
-        self.random_photo_selector = Mock(spec=RandomPhotoSelectorNew)
+        self.random_photo_selector = Mock(spec=RandomPhotoSelector)
         self.photo_history = Mock(spec=PhotoHistory)
         self.photo_history.has_photo_been_shown_recently.return_value = False
         self.out = NextPhotoToShowGenerator(

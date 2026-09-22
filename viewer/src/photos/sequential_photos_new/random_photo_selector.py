@@ -1,4 +1,4 @@
-class RandomPhotoSelectorNew:
+class RandomPhotoSelector:
     def __init__(self,
                  random_photo_set_selector,
                  photo_from_photo_set_selecter):
