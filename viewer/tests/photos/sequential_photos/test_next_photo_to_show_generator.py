@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import Mock
 from viewer.src.photos.photo_history import PhotoHistory
-from viewer.src.photos.sequential_photos_new.random_photo_selector import RandomPhotoSelector
-from viewer.src.photos.sequential_photos_new.next_photo_to_show_generator import NextPhotoToShowGenerator
+from viewer.src.photos.sequential_photos.random_photo_selector import RandomPhotoSelector
+from viewer.src.photos.sequential_photos.next_photo_to_show_generator import NextPhotoToShowGenerator
 
 class NextPhotoToShowGeneratorTests(unittest.TestCase):
     def test_the_next_selected_photos_are_shown(self):

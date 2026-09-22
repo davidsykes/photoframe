@@ -27,13 +27,13 @@ from viewer.src.photos.loading_photo_sets.photo_set_loader import PhotoSetLoader
 from viewer.src.photos.loading_photo_sets.photo_sets_loader import PhotoSetsLoader
 from viewer.src.photos.loading_photo_sets.random_weighter import RandomWeighter
 from viewer.src.photos.photo_history import PhotoHistory
-from viewer.src.photos.sequential_photos_new.next_photo_to_show_cache import NextPhotoToShowCache
-from viewer.src.photos.sequential_photos_new.next_photo_to_show_generator import NextPhotoToShowGenerator
-from viewer.src.photos.sequential_photos_new.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
-from viewer.src.photos.sequential_photos_new.random_photo_selector import RandomPhotoSelector
+from viewer.src.photos.sequential_photos.next_photo_to_show_cache import NextPhotoToShowCache
+from viewer.src.photos.sequential_photos.next_photo_to_show_generator import NextPhotoToShowGenerator
+from viewer.src.photos.sequential_photos.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
+from viewer.src.photos.sequential_photos.random_photo_selector import RandomPhotoSelector
 from viewer.src.photos.loading_photo_sets.image_from_file_loader import ImageFromFileLoader
 from viewer.src.photos.photo_to_display_chooser import PhotoToDisplayChooser
-from viewer.src.photos.sequential_photos_new.random_photo_set_selector import RandomPhotoSetSelector
+from viewer.src.photos.sequential_photos.random_photo_set_selector import RandomPhotoSetSelector
 from viewer.src.status.action_status_updater import ActionStatusUpdater
 from viewer.src.status.application_status import ApplicationStatus
 from viewer.src.action_timer import ActionTimer
@@ -109,7 +109,9 @@ class PhotoFrameApp:
             display = PCSystemDisplay(events)
         elif self._command_line_options.display_type == DisplayType.PI_DISPLAY_VERSION:
             from viewer.src.display.pidisplay import PiSystemDisplay
-            display = PiSystemDisplay(system_operations, status_updater, whole_project_configuration.hide_mouse)
+            display = PiSystemDisplay(system_operations,
+                                      status_updater,
+                                      whole_project_configuration.hide_mouse)
         else:
             raise ValueError(f"Unknown display type: {self._display_type}")
         display.initialise_display()
@@ -119,7 +121,9 @@ class PhotoFrameApp:
 
         photo_sets = self.load_photo_sets(system_operations,
                                             initial_remote_config_data,
-                                            images_folder)
+                                            images_folder,
+                                            status_updater,
+                                            whole_project_configuration.photo_set_filter)
 
         random_monitor = RandomMonitor(photo_sets)
 
@@ -185,7 +189,9 @@ class PhotoFrameApp:
     def load_photo_sets(self,
                         system_operations,
                         remote_config_data,
-                        path_to_photo_sets):
+                        path_to_photo_sets,
+                        application_status,
+                        photo_set_filter):
         random_weighter = RandomWeighter(system_operations.get_today())
         photo_set_loader = PhotoSetLoader(system_operations,
                                           random_weighter,
@@ -194,7 +200,9 @@ class PhotoFrameApp:
         photo_sets_loader = PhotoSetsLoader(
             system_operations,
             photo_set_loader,
-            photo_set_date_retriever
+            photo_set_date_retriever,
+            application_status,
+            photo_set_filter
         )
         photo_sets = photo_sets_loader.load_photo_sets(
             remote_config_data,

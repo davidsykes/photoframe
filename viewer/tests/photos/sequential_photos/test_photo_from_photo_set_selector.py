@@ -4,7 +4,7 @@ from unittest.mock import Mock
 from viewer.src.data.photo_set import PhotoSet
 from viewer.src.logic.random_monitor import RandomMonitor
 from viewer.src.logic.randomiser import Randomiser
-from viewer.src.photos.sequential_photos_new.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
+from viewer.src.photos.sequential_photos.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
 
 class TestPhotoFromPhotoSetSelector(unittest.TestCase):
     def test_random_is_called_to_choose_the_photo(self):

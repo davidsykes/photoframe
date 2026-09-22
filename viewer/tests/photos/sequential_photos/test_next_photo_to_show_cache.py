@@ -3,7 +3,7 @@ from unittest.mock import Mock, call
 
 from viewer.src.action_timer import ActionTimer
 from viewer.src.photos.photo_history import PhotoHistory
-from viewer.src.photos.sequential_photos_new.next_photo_to_show_cache import NextPhotoToShowCache
+from viewer.src.photos.sequential_photos.next_photo_to_show_cache import NextPhotoToShowCache
 
 
 class NextPhotoToShowCacheTests(unittest.TestCase):

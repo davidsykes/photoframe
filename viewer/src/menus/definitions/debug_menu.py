@@ -52,10 +52,10 @@ class DebugMenu:
         self.menu_action = MenuAction.BACK
 
     def end_program_cleanly(self):
-        raise ViewerExitException(101, f"Quit by mouse down")
+        raise ViewerExitException(101, "Quit by mouse down")
 
     def simulate_crash(self):
-        raise ViewerExitException(102, f"Crash simulated by mouse down")
+        raise ViewerExitException(102, "Crash simulated by mouse down")
 
     def render_random(self):
         self._random_monitor.render(self._statuses)

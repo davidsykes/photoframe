@@ -90,7 +90,7 @@ class PiSystemDisplay:
                     )
                 if event.key in (pygame.K_ESCAPE, pygame.K_q) or ctrl_c:
                     if event.key == pygame.K_c:
-                        raise ViewerExitException(101, f"Control-C event received")
+                        raise ViewerExitException(101, "Control-C event received")
                     raise ViewerExitException(100, f"Quit event {event.key} received")
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 x = event.pos[0] * 100 / self._screen_size[0]

@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import Mock
-from viewer.src.photos.sequential_photos_new.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
-from viewer.src.photos.sequential_photos_new.random_photo_selector import RandomPhotoSelector
-from viewer.src.photos.sequential_photos_new.random_photo_set_selector import RandomPhotoSetSelector
+from viewer.src.photos.sequential_photos.photo_from_photo_set_selector import PhotoFromPhotoSetSelector
+from viewer.src.photos.sequential_photos.random_photo_selector import RandomPhotoSelector
+from viewer.src.photos.sequential_photos.random_photo_set_selector import RandomPhotoSetSelector
 
 class RandomPhotoSelectorTests(unittest.TestCase):
     def test_a_random_photo_is_chosen_from_a_random_set(self):
