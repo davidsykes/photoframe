@@ -6,5 +6,5 @@ class PhotoSetDateRetriever:
         for folder in config_photo_folders:
             if folder[0] == set_name:
                 if len(folder) > 3:
-                    return folder[3]
+                    return date.fromisoformat(folder[3])
         return date.min
