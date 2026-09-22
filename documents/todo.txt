@@ -1,8 +1,4 @@
 
-Implement an awake cycle
-
-Implement shuffle-without-repeats.
-
 Implement a priority system so that recent photos are shown more often
 
 If no photos match the filter the viewer crashes
@@ -10,12 +6,5 @@ If no photos match the filter the viewer crashes
 Test memory usage after running for several hours.
 The long-duration test is particularly worthwhile because photo frames have a habit of running continuously for months. If memory usage stays stable over 24 hours you've largely proven the viewer is production ready.
 
-One thing you may discover is that preloading the next image removes even the slight pause that can occur while loading from the SD card:
+Implement a user settable awake cycle
 
-Display image N
-↓
-Background load image N+1
-↓
-Swap instantly when timer expires
-
-With 20-second display times this probably won't matter, but it is a nice refinement.

@@ -10,10 +10,9 @@ APP_ROOT = Path(__file__).resolve().parent
 PROJECT_ROOT = APP_ROOT.parent
 
 def main() -> int:
-    print(f"Starting Photo Frame Viewer from {PROJECT_ROOT}")
     system_operations = SystemOperations()
     system_operations.set_logger('viewer', '..')
-    system_operations.log('Application Starting')
+    system_operations.log(f"Starting Photo Frame Viewer from {PROJECT_ROOT}")
     try:
         command_line_options = CommandLineOptions(sys.argv)
         app = PhotoFrameApp(command_line_options)

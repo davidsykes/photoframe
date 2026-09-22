@@ -49,7 +49,6 @@ class PhotoFrameApp:
         self._command_line_options = command_line_options
 
     def run(self, system_operations, PROJECT_ROOT):
-        print(f"Running PhotoFrameApp from: {PROJECT_ROOT}")
         config_file_loader = ConfigFileLoader(system_operations)
         whole_project_configuration = WholeProjectConfiguration(
             config_file_loader
