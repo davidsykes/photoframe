@@ -4,7 +4,7 @@ from unittest.mock import Mock
 from viewer.src.awake_periods.awake_decider import AwakeDecider
 from viewer.src.photos.historic_photo_chooser import HistoricPhotoChooser
 from viewer.src.photos.photo_to_display_chooser import PhotoToDisplayChooser
-from viewer.src.photos.sequential_photos_new.next_photo_to_show_cache import NextPhotoToShowCache
+from viewer.src.photos.sequential_photos.next_photo_to_show_cache import NextPhotoToShowCache
 
 class PhotoToDisplayChooserTests(unittest.TestCase):
     def test_not_being_awake_is_the_primary_decider(self):

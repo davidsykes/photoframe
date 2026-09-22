@@ -26,6 +26,7 @@ from viewer.src.photos.loading_photo_sets.photo_set_date_retriever import PhotoS
 from viewer.src.photos.loading_photo_sets.photo_set_loader import PhotoSetLoader
 from viewer.src.photos.loading_photo_sets.photo_sets_loader import PhotoSetsLoader
 from viewer.src.photos.loading_photo_sets.random_weighter import RandomWeighter
+from viewer.src.photos.loading_photo_sets.no_photos_to_show_handler import NoPhotosToProvideHandler
 from viewer.src.photos.photo_history import PhotoHistory
 from viewer.src.photos.sequential_photos.next_photo_to_show_cache import NextPhotoToShowCache
 from viewer.src.photos.sequential_photos.next_photo_to_show_generator import NextPhotoToShowGenerator
@@ -121,9 +122,7 @@ class PhotoFrameApp:
 
         photo_sets = self.load_photo_sets(system_operations,
                                             initial_remote_config_data,
-                                            images_folder,
-                                            status_updater,
-                                            whole_project_configuration.photo_set_filter)
+                                            images_folder)
 
         random_monitor = RandomMonitor(photo_sets)
 
@@ -167,11 +166,14 @@ class PhotoFrameApp:
         events_handler = EventsHandler(display, event_handler)
 
         image_from_file_loader = ImageFromFileLoader(display)
-        photo_path_provider = PhotoToDisplayChooser(
-            awake_decider,
-            historic_photo_chooser,
-            sequential_photo_chooser
-            )
+        if len(photo_sets) > 0:
+            photo_path_provider = PhotoToDisplayChooser(
+                awake_decider,
+                historic_photo_chooser,
+                sequential_photo_chooser
+                )
+        else:
+            photo_path_provider = NoPhotosToProvideHandler(PROJECT_ROOT)
         image_provider = ImageProvider(
             photo_path_provider,
             image_from_file_loader)
@@ -189,9 +191,7 @@ class PhotoFrameApp:
     def load_photo_sets(self,
                         system_operations,
                         remote_config_data,
-                        path_to_photo_sets,
-                        application_status,
-                        photo_set_filter):
+                        path_to_photo_sets):
         random_weighter = RandomWeighter(system_operations.get_today())
         photo_set_loader = PhotoSetLoader(system_operations,
                                           random_weighter,
@@ -200,9 +200,7 @@ class PhotoFrameApp:
         photo_sets_loader = PhotoSetsLoader(
             system_operations,
             photo_set_loader,
-            photo_set_date_retriever,
-            application_status,
-            photo_set_filter
+            photo_set_date_retriever
         )
         photo_sets = photo_sets_loader.load_photo_sets(
             remote_config_data,
