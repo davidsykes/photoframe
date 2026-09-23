@@ -1,8 +1,6 @@
 
 Implement a priority system so that recent photos are shown more often
 
-If no photos match the filter the viewer crashes
-
 Test memory usage after running for several hours.
 The long-duration test is particularly worthwhile because photo frames have a habit of running continuously for months. If memory usage stays stable over 24 hours you've largely proven the viewer is production ready.
 

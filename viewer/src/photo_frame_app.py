@@ -19,6 +19,7 @@ from viewer.src.menus.framework.events_handler import EventsHandler
 from viewer.src.menus.definitions.first_menu import FirstMenu
 from viewer.src.menus.definitions.debug_menu import DebugMenu
 from viewer.src.menus.framework.menu_handler import MenuHandler
+from viewer.src.monitoring.memory_monitor import MemoryMonitor
 from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.data.remote_config_data_loader import RemoteConfigDataLoader
 from viewer.src.photos.historic_photo_chooser import HistoricPhotoChooser
@@ -37,7 +38,7 @@ from viewer.src.photos.photo_to_display_chooser import PhotoToDisplayChooser
 from viewer.src.photos.sequential_photos.random_photo_set_selector import RandomPhotoSetSelector
 from viewer.src.status.action_status_updater import ActionStatusUpdater
 from viewer.src.status.application_status import ApplicationStatus
-from viewer.src.action_timer import ActionTimer
+from viewer.src.logic.action_timer import ActionTimer
 from viewer.src.status.version_loader import VersionLoader
 from viewer.src.logic.randomiser import Randomiser
 
@@ -96,7 +97,7 @@ class PhotoFrameApp:
         cycle_stop_detector = CycleStopDetector(
             [timed_new_app_or_new_photos_detector]
         )
-        from viewer.src.logs_analyser import LogsAnalyser
+        from viewer.src.monitoring.logs_analyser import LogsAnalyser
         LogsAnalyser(system_operations,
                      PROJECT_ROOT,
                      status_updater,
@@ -151,12 +152,16 @@ class PhotoFrameApp:
             system_operations)
         display_on_off_controller.initialise()
         awake_decider = AwakeDecider(awake_schedule, display_on_off_controller)
-
+        memory_monitor = MemoryMonitor(
+            subprocess_wrapper,
+            status_updater)
+        memory_monitor.check_memory_usage()
         debug_menu = DebugMenu(
             status_updater,
             awake_decider,
             display_on_off_controller,
-            random_monitor
+            random_monitor,
+            memory_monitor
             )
         menu_handler = MenuHandler(display_on_off_controller, system_operations)
         historic_photo_chooser = HistoricPhotoChooser(photo_history)

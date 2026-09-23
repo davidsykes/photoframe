@@ -8,7 +8,8 @@ class DebugMenu:
                  statuses,
                  awake_decider,
                  display_on_off_controller,
-                 random_monitor):
+                 random_monitor,
+                 memory_monitor):
         self._statuses = statuses
         self._awake_decider = awake_decider
         self._display_on_off_controller = display_on_off_controller

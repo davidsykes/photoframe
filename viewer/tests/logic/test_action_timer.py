@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import Mock
 
 from common.src.system_operations import SystemOperations
-from viewer.src.action_timer import ActionTimer
+from viewer.src.logic.action_timer import ActionTimer
 
 
 class ActionTimerTests(unittest.TestCase):
