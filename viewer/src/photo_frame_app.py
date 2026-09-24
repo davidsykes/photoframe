@@ -20,6 +20,7 @@ from viewer.src.menus.definitions.first_menu import FirstMenu
 from viewer.src.menus.definitions.debug_menu import DebugMenu
 from viewer.src.menus.framework.menu_handler import MenuHandler
 from viewer.src.monitoring.memory_monitor import MemoryMonitor
+from viewer.src.monitoring.rss_extractor import RSSExtractor
 from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
 from viewer.src.data.remote_config_data_loader import RemoteConfigDataLoader
 from viewer.src.photos.historic_photo_chooser import HistoricPhotoChooser
@@ -152,9 +153,11 @@ class PhotoFrameApp:
             system_operations)
         display_on_off_controller.initialise()
         awake_decider = AwakeDecider(awake_schedule, display_on_off_controller)
+        rss_extractor = RSSExtractor()
         memory_monitor = MemoryMonitor(
             subprocess_wrapper,
-            status_updater)
+            status_updater,
+            rss_extractor)
         memory_monitor.check_memory_usage()
         debug_menu = DebugMenu(
             status_updater,

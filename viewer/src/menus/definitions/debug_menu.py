@@ -14,6 +14,7 @@ class DebugMenu:
         self._awake_decider = awake_decider
         self._display_on_off_controller = display_on_off_controller
         self._random_monitor = random_monitor
+        self._memory_monitor = memory_monitor
         self._buttons = [
             MenuButton(90, 0, 10, 5, 'Back', self.back_action),
             MenuButton(90, 16, 9, 4, 'Sleep', self.sleep),
@@ -60,3 +61,4 @@ class DebugMenu:
 
     def render_random(self):
         self._random_monitor.render(self._statuses)
+        self._memory_monitor.check_memory_usage()
