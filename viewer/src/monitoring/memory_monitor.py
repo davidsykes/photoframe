@@ -27,3 +27,5 @@ class MemoryMonitor:
         command = ['ps', '-p', pid, '-o', 'pid,rss,vsz,%mem,cmd']
         output = self._subprocess_wrapper.run_return_stdout(command)
         output = output.splitlines()
+        output = output[1].splitlines()
+        self.status_print(output)
