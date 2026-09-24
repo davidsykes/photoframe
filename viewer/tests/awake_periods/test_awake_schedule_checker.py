@@ -5,6 +5,7 @@ from unittest.mock import Mock
 
 from common.src.system_operations import SystemOperations
 from viewer.src.awake_periods.awake_schedule import AwakeSchedule
+from viewer.src.awake_periods.awake_schedule_checker import AwakeScheduleChecker
 
 
 class AwakeScheduleTests(unittest.TestCase):
@@ -30,6 +31,7 @@ class AwakeScheduleTests(unittest.TestCase):
 
     def setUp(self):
         self.system_operations = Mock(spec = SystemOperations)
-        wake_time = time.fromisoformat("10:00")
-        sleep_time = time.fromisoformat("20:00")
-        self.out = AwakeSchedule(self.system_operations, wake_time, sleep_time, False)
+        awake_schedule = Mock(spec=AwakeSchedule,
+                              wake_time = time.fromisoformat("10:00"),
+                              sleep_time = time.fromisoformat("20:00"))
+        self.out = AwakeScheduleChecker(self.system_operations, awake_schedule, False)

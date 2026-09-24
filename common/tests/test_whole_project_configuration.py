@@ -1,3 +1,4 @@
+from pathlib import Path
 import unittest
 from unittest.mock import Mock
 
@@ -8,7 +9,7 @@ from common.src.whole_project_configuration import WholeProjectConfiguration
 
 class TestWholeProjectConfiguration(unittest.TestCase):
     def test_basic_load(self):
-        data = { "images_folder": "images folder",
+        data = { "images_folder": "frame_folder/images folder",
                 "viewer_app_working_folder": "viewer app working folder",
                 "remote_config_url": "remote config url",
                 "image_display_seconds": 2,
@@ -17,7 +18,7 @@ class TestWholeProjectConfiguration(unittest.TestCase):
                  "hide_mouse": False}
         config = self.set_up_config(data)
         self.assertEqual(config.remote_config_url, "remote config url")
-        self.assertEqual(config.images_folder, "images folder")
+        self.assertEqual(config.images_folder, Path('frame_folder/images folder'))
         self.assertEqual(config.image_display_seconds, 2)
         self.assertEqual(config.photo_set_filter, 'filter')
         self.assertEqual(config.hide_mouse, False)
@@ -25,13 +26,13 @@ class TestWholeProjectConfiguration(unittest.TestCase):
         self.assertEqual(config.viewer_parameters, "viewer parameters")
 
     def test_basic_load_old_version(self):
-        data = { "images_folder": "images folder",
+        data = { "images_folder": "frame_folder/images folder",
                 "viewer_app_working_folder": "viewer_app_working_folder",
                 "remote_config_url": "remote config url",
                 "sleep_time_seconds": 2 }
         config = self.set_up_config(data)
         self.assertEqual(config.remote_config_url, "remote config url")
-        self.assertEqual(config.images_folder, "images folder")
+        self.assertEqual(config.images_folder, Path('frame_folder/images folder'))
         self.assertEqual(config.image_display_seconds, 2)
         self.assertEqual(config.photo_set_filter, 'ava')
         self.assertEqual(config.hide_mouse, True)
@@ -61,6 +62,11 @@ class TestWholeProjectConfiguration(unittest.TestCase):
 
         self.assertEqual(config.viewer_parameters, "")
 
+    def test_the_images_path_is_used_as_a_base_for_the_database_path(self):
+        config = self.set_up_config(self.minimal_data)
+
+        self.assertEqual(config.database_path, Path("frame_folder/photoframe.db"))
+
     def test_missing_viewer_app_working_folder_throws_exception(self):
         data = { "images_folder": "images folder",
                 "remote_config_url": "remote config url",
@@ -71,7 +77,7 @@ class TestWholeProjectConfiguration(unittest.TestCase):
         self.assertTrue('viewer_app_working_folder' in str(context.exception))
 
     def setUp(self):
-        self.minimal_data = { "images_folder": "images folder",
+        self.minimal_data = { "images_folder": "frame_folder/images folder",
                 "viewer_app_working_folder": "viewer_app_working_folder",
                 "remote_config_url": "remote config url",
                 "image_display_seconds": 2}

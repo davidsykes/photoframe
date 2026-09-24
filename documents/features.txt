@@ -1,0 +1,16 @@
+Show a varied, continuously changing sequence of photos from a collection
+Automatically check a shared location for new and updated photo collections.
+Automatically check for and install software updates.
+Prioritise newer photo collections so recently added photos are seen more often.
+Avoid excessive repetition of individual photos and photo collections.
+Allow recently displayed photos to be revisited.
+Automatically synchronise changes without interrupting normal photo display unnecessarily.
+Continue displaying existing photos when the network or shared location is unavailable.
+Start automatically when the Raspberry Pi boots and normally require no user intervention.
+Recover automatically from viewer failures and continue displaying photos.
+Scale and position photographs appropriately for the display while preserving their aspect ratio
+
+To be developed:
+Automatically sleep and wake the display according to a configurable daily schedule.
+Provide an on-screen menu for controlling frame behaviour and settings.
+Show useful status information, including update/synchronisation status.

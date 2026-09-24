@@ -5,8 +5,9 @@ from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.config_file_loader import ConfigFileLoader
 from common.src.whole_project_configuration import WholeProjectConfiguration
 from viewer.src.awake_periods.awake_decider import AwakeDecider
-from viewer.src.awake_periods.awake_schedule import AwakeSchedule
+from viewer.src.awake_periods.awake_schedule_checker import AwakeScheduleChecker
 from viewer.src.cycle_stop_detector import CycleStopDetector
+from viewer.src.database.photo_frame_database import PhotoFrameDatabase
 from viewer.src.display.display_on_off_controller import DisplayOnOffController
 from viewer.src.display.image_provider import ImageProvider
 from viewer.src.display.subprocess_wrapper import SubprocessWrapper
@@ -125,7 +126,10 @@ class PhotoFrameApp:
         photo_sets = self.load_photo_sets(system_operations,
                                             initial_remote_config_data,
                                             images_folder)
-
+        photo_frame_database = PhotoFrameDatabase(
+            whole_project_configuration.database_path
+        )
+        photo_frame_database.initialise()
         random_monitor = RandomMonitor(photo_sets)
 
         sequential_photo_chooser = self.build_random_photo_selector_module(
@@ -138,9 +142,12 @@ class PhotoFrameApp:
         )
 
         awake_schedule = AwakeSchedule(
-            system_operations,
             whole_project_configuration.wake_time,
             whole_project_configuration.sleep_time,
+            photo_frame_database)
+        awake_schedule_checker = AwakeScheduleChecker(
+            system_operations,
+            awake_schedule,
             self._command_line_options.always_awake
         )
         subprocess_wrapper = SubprocessWrapper()
@@ -152,7 +159,7 @@ class PhotoFrameApp:
             status_updater,
             system_operations)
         display_on_off_controller.initialise()
-        awake_decider = AwakeDecider(awake_schedule, display_on_off_controller)
+        awake_decider = AwakeDecider(awake_schedule_checker, display_on_off_controller)
         rss_extractor = RSSExtractor()
         memory_monitor = MemoryMonitor(
             subprocess_wrapper,

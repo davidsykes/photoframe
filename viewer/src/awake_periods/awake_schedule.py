@@ -1,15 +1,13 @@
 class AwakeSchedule:
     def __init__(self,
-                 system_operations,
                  wake_time,
                  sleep_time,
-                 always_awake):
-        self._system_operations = system_operations
+                 database):
+        self._database = database
         self.wake_time = wake_time
         self.sleep_time = sleep_time
-        self.always_awake = always_awake
 
-    def are_we_awake(self):
+    def defuncts(self):
         if self.always_awake:
             return True
         current_time = self._system_operations.get_current_time()

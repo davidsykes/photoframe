@@ -1,3 +1,6 @@
+from pathlib import Path
+
+
 class WholeProjectConfiguration:
     def __init__(self, config_file_loader):
         self._config_file_loader = config_file_loader
@@ -9,7 +12,7 @@ class WholeProjectConfiguration:
             self._configuration_file_name
         )
         self.remote_config_url = config.get('remote_config_url')
-        self.images_folder = config.get('images_folder')
+        self.images_folder = Path(config.get('images_folder'))
 
         self.viewer_app_working_folder = config.get('viewer_app_working_folder')
 
@@ -32,3 +35,4 @@ class WholeProjectConfiguration:
         self.viewer_parameters = config.get_or_default(
             'viewer_parameters',
             "")
+        self.database_path = self.images_folder.parent / 'photoframe.db'

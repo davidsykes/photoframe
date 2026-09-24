@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import Mock
 
 from viewer.src.awake_periods.awake_decider import AwakeDecider
-from viewer.src.awake_periods.awake_schedule import AwakeSchedule
+from viewer.src.awake_periods.awake_schedule_checker import AwakeScheduleChecker
 from viewer.src.display.display_on_off_controller import DisplayOnOffController
 
 class AwakeDeciderTests(unittest.TestCase):
@@ -88,7 +88,7 @@ class AwakeDeciderTests(unittest.TestCase):
         self.display_on_off_controller.display_on.assert_called_once()
 
     def setUp(self):
-        self.sleep_timer = Mock(spec=AwakeSchedule)
+        self.sleep_timer = Mock(spec=AwakeScheduleChecker)
         self.sleep_timer.are_we_awake.return_value = True
         self.display_on_off_controller = Mock(spec=DisplayOnOffController)
         self.out = AwakeDecider(self.sleep_timer, self.display_on_off_controller)
