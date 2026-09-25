@@ -130,7 +130,7 @@ class PiSystemDisplay:
         h = position[3] * self._screen_size[1] / 100
         rect = pygame.Rect(x,y,w,h)
 
-        pygame.draw.rect(self.screen, colour, rect)
+        pygame.draw.rect(self.screen, colour, rect, border_radius=12)
 
     def draw_text(self, text, colour, position):
         scaled_position = (position[0] * self._screen_size[0] / 100,
