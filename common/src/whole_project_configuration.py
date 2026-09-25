@@ -1,6 +1,5 @@
 from pathlib import Path
 
-
 class WholeProjectConfiguration:
     def __init__(self, config_file_loader):
         self._config_file_loader = config_file_loader
@@ -26,12 +25,6 @@ class WholeProjectConfiguration:
         self.hide_mouse = config.get_or_default(
             'hide_mouse',
             True)
-        self.wake_time = config.get_or_default(
-            'wake_time',
-            "10:00")
-        self.sleep_time = config.get_or_default(
-            'sleep_time',
-            "20:00")
         self.viewer_parameters = config.get_or_default(
             'viewer_parameters',
             "")

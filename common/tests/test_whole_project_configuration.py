@@ -47,16 +47,6 @@ class TestWholeProjectConfiguration(unittest.TestCase):
 
         self.assertEqual(config.hide_mouse, True)
 
-    def test_wake_time_defaults_to_1000(self):
-        config = self.set_up_config(self.minimal_data)
-
-        self.assertEqual(config.wake_time, "10:00")
-
-    def test_sleep_time_defaults_to_2000(self):
-        config = self.set_up_config(self.minimal_data)
-
-        self.assertEqual(config.sleep_time, "20:00")
-
     def test_viewer_parameters_defaults_to_empty_string(self):
         config = self.set_up_config(self.minimal_data)
 

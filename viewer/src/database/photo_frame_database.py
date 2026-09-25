@@ -19,36 +19,30 @@ class PhotoFrameDatabase:
                 '''
                 )
 
-def set_setting(self, name, value):
-    with self._connect() as connection:
-        connection.execute(
-            '''
-            INSERT INTO settings (name, value)
-            VALUES (?, ?)
-            ON CONFLICT(name)
-            DO UPDATE SET value = excluded.value
-            ''',
-            (name, value),
-        )
+    def set_setting(self, name, value):
+        with self._connect() as connection:
+            connection.execute(
+                '''
+                INSERT INTO settings (name, value)
+                VALUES (?, ?)
+                ON CONFLICT(name)
+                DO UPDATE SET value = excluded.value
+                ''',
+                (name, value),
+            )
 
-def get_setting(self, name):
-    with self._connect() as connection:
-        row = connection.execute(
-            '''
-            SELECT value
-            FROM settings
-            WHERE name = ?
-            ''',
-            (name,),
-        ).fetchone()
+    def get_setting(self, name):
+        with self._connect() as connection:
+            row = connection.execute(
+                '''
+                SELECT value
+                FROM settings
+                WHERE name = ?
+                ''',
+                (name,),
+            ).fetchone()
 
-    if row is None:
-        return None
+        if row is None:
+            return None
 
-    return row[0]
-
-def get_wake_time(self):
-    wake_time = (
-    local_state.get_setting('wake_time')
-    or DEFAULT_WAKE_TIME
-)
+        return row[0]

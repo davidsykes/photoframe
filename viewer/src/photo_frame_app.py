@@ -142,10 +142,9 @@ class PhotoFrameApp:
             random_monitor
         )
 
-        awake_schedule = AwakeSchedule(
-            whole_project_configuration.wake_time,
-            whole_project_configuration.sleep_time,
-            photo_frame_database)
+        awake_schedule = AwakeSchedule(photo_frame_database)
+        status_updater.update_status('Wake time', awake_schedule.wake_time)
+        status_updater.update_status('Sleep time', awake_schedule.sleep_time)
         awake_schedule_checker = AwakeScheduleChecker(
             system_operations,
             awake_schedule,
