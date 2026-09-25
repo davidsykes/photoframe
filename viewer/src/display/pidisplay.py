@@ -10,7 +10,6 @@ class PiSystemDisplay:
         self._hide_mouse = hide_mouse
         self.event_count = 0
         self._clock = pygame.time.Clock()
-        self._flip_count = 0
         self.COLOUR_WHITE = (255,255,255)
         self.COLOUR_LIGHT = (170,170,170)
 
@@ -64,8 +63,6 @@ class PiSystemDisplay:
 
     def flip(self):
         pygame.display.flip()
-        self._flip_count = self._flip_count + 1
-        self._status_updater.update_status('Flip count', self._flip_count)
 
     def tick(self, v):
         self._clock.tick(v)

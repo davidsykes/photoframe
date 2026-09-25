@@ -15,7 +15,6 @@ class DisplayOnOffController:
             command = self._subprocess_command_generator.get_display_name_command()
             output = self._subprocess_wrapper.run_return_stdout(command)
             self._display_name = output.split(' ', 1)[0]
-            self._status_updater.update_status('Display Name', self._display_name)
         except Exception as e:
             self._system_operations.error(f'Display Controller Initialise Error: {command} {e}')
             self._status_updater.update_status('Display Controller Initialise Error', f'{command} {e}')
@@ -25,7 +24,6 @@ class DisplayOnOffController:
             command = self._subprocess_command_generator.get_display_on_command(self._display_name)
             self._system_operations.log(f'Turn display on: {command}')
             self._subprocess_wrapper.run_return_stdout(command)
-            self._status_updater.update_status('Display On ', str(command))
         except Exception as e:
             self._system_operations.error('Error: Display On ' + str(e))
             self._status_updater.update_status('ERROR: Display On ', str(e))

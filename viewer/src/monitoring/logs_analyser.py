@@ -15,8 +15,6 @@ class LogsAnalyser:
         self._folders = {}
 
     def analyse_logs(self):
-        self._status_updater.update_status('project_root', self._project_root)
-        self._status_updater.update_status('working_folder', self._working_folder)
         return
         self.find_log_files(self._project_root, )
         self.find_log_files(self._working_folder)
