@@ -27,6 +27,6 @@ class MemoryMonitor:
     def process_pid_rss(self, pid):
         command = ['ps', '-p', pid, '-o', 'pid,rss,vsz,%mem,cmd']
         output = self._subprocess_wrapper.run_return_stdout(command)
-        rss = self._rss_extractor.extract_rss(output)
+        rss = self._pid_rss_extractor.extract_rss(output)
         self._rss = self._rss + ' ' + rss
         self._status_updater.update_status('RSS', self._rss)
