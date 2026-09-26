@@ -20,7 +20,6 @@ class MenuHandler:
             self._current_menu.on_enter()
 
     def mouse_down(self, x, y):
-        self._system_operations.log(f'Mouse Down {x} {y}')
         self._display_on_off_controller.display_on()
         if self._current_menu is None:
             self.set_current_menu(self._main_menu)

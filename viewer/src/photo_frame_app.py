@@ -22,6 +22,7 @@ from viewer.src.menus.framework.events_handler import EventsHandler
 from viewer.src.menus.definitions.first_menu import FirstMenu
 from viewer.src.menus.definitions.debug_menu import DebugMenu
 from viewer.src.menus.framework.menu_handler import MenuHandler
+from viewer.src.menus.framework.menu_navigator import MenuNavigator
 from viewer.src.monitoring.memory_monitor import MemoryMonitor
 from viewer.src.monitoring.pid_rss_extractor import PIDRSSExtractor
 from viewer.src.new_app_or_new_photos_detector import NewAppOrNewPhotosDetector
@@ -271,8 +272,9 @@ class PhotoFrameApp:
             random_monitor,
             memory_monitor
             )
-        settings_menu = SettingsMenu()
         menu_handler = MenuHandler(display_on_off_controller, system_operations)
+        menu_navigator = MenuNavigator(menu_handler)
+        settings_menu = SettingsMenu(menu_navigator)
 
         first_menu = FirstMenu(menu_handler, settings_menu, debug_menu, historic_photo_chooser)
         menu_handler.set_main_menu(first_menu)

@@ -15,7 +15,7 @@ class EventsEmulator:
             (1, [UIEvent(UIEventType.MOUSE_DOWN, 20, 20)]),
             (2, [UIEvent(UIEventType.MOUSE_DOWN, UIConstants.BUTTON_RIGHT+1, 91)]),
             
-            (8, [UIEvent(UIEventType.MOUSE_DOWN, 91, 27)]),
+            (3, [UIEvent(UIEventType.MOUSE_DOWN, 22, 7)]),
             ]
         )
 
