@@ -1,6 +1,7 @@
 from viewer.src.menus.framework.menu_action import MenuAction
 from viewer.src.menus.framework.menu_button import MenuButton
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
+from viewer.src.menus.framework.ui_constants import UIConstants
 from viewer.src.viewer_exit_exception import ViewerExitException
 
 
@@ -11,14 +12,15 @@ class DebugMenu(PhotoFrameMenu):
                  display_on_off_controller,
                  random_monitor,
                  memory_monitor):
-        buttons = [
-            MenuButton(90, 0, 10, 5, 'Back', self.back_action),
-            MenuButton(90, 16, 9, 4, 'Sleep', self.sleep),
-            MenuButton(90, 21, 9, 4, 'Wake', self.wake),
-            MenuButton(90, 26, 9, 4, 'Random', self.render_random),
-            MenuButton(90, 31, 9, 4, 'Crash', self.simulate_crash),
-            MenuButton(90, 36, 9, 4, 'Quit', self.end_program_cleanly)
-        ]
+        self.button_x = UIConstants.BUTTON_RIGHT
+        self.button_y = UIConstants.MENU_MARGIN
+        buttons = []
+        buttons.append(self.create_button('Back', self.back_action))
+        buttons.append(self.create_button('Sleep', self.sleep))
+        buttons.append(self.create_button('Wake', self.wake))
+        buttons.append(self.create_button('Random', self.render_random))
+        buttons.append(self.create_button('Crash', self.simulate_crash))
+        buttons.append(self.create_button('Quit', self.end_program_cleanly))
         PhotoFrameMenu.__init__(self, buttons)
 
         self._statuses = statuses
@@ -26,6 +28,11 @@ class DebugMenu(PhotoFrameMenu):
         self._display_on_off_controller = display_on_off_controller
         self._random_monitor = random_monitor
         self._memory_monitor = memory_monitor
+
+    def create_button(self, text, action):
+        button = MenuButton(self.button_x, self.button_y, UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, text, action)
+        self.button_x += UIConstants.BUTTON_HEIGHT + 1
+        return button
 
     def on_enter(self):
         pass
