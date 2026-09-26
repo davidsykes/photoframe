@@ -3,7 +3,6 @@ from pathlib import Path
 from sys import stdout
 import time
 
-
 class LogsAnalyser:
     def __init__(self, system_operations, project_root, status_updater, working_folder):
         self._system_operations = system_operations

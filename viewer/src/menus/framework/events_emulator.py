@@ -1,3 +1,4 @@
+from viewer.src.menus.framework.ui_constants import UIConstants
 from viewer.src.menus.framework.uievent import UIEvent, UIEventType
 
 
@@ -11,8 +12,8 @@ class EventsEmulator:
 
     def _set_initial_events(self):
         self.set_events([
-            (6, [UIEvent(UIEventType.MOUSE_DOWN, 20, 20)]),
-            (7, [UIEvent(UIEventType.MOUSE_DOWN, 91, 91)]),
+            (1, [UIEvent(UIEventType.MOUSE_DOWN, 20, 20)]),
+            (2, [UIEvent(UIEventType.MOUSE_DOWN, UIConstants.BUTTON_RIGHT+1, 91)]),
             
             (8, [UIEvent(UIEventType.MOUSE_DOWN, 91, 27)]),
             ]

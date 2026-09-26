@@ -1,5 +1,6 @@
 from viewer.src.menus.framework.menu_action import MenuAction
 from viewer.src.menus.framework.menu_button import MenuButton
+from viewer.src.menus.framework.ui_constants import UIConstants
 
 
 class FirstMenu:
@@ -11,10 +12,11 @@ class FirstMenu:
         self._debug_menu = debug_menu
         self._historic_photo_chooser = historic_photo_chooser
         self._buttons = [
-            MenuButton(90, 0,  10, 5, 'Back', self.back_action),
-            MenuButton( 1, 47, 10, 5, 'Previous', self.previous_image),
-            MenuButton(90, 47, 10, 5, 'Next', self.next_image),
-            MenuButton(90, 90, 10, 5, 'Debug', self.debug_menu),
+            MenuButton(UIConstants.BUTTON_RIGHT, 0,  UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, 'Back', self.back_action),
+            MenuButton(UIConstants.BUTTON_LEFT , 47, UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, 'Previous', self.previous_image),
+            MenuButton(UIConstants.BUTTON_RIGHT, 47, UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, 'Next', self.next_image),
+            MenuButton(UIConstants.BUTTON_LEFT , 90, UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, 'Debug', self.debug_menu),
+            MenuButton(UIConstants.BUTTON_RIGHT, 90, UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, 'Settings', self.settings_menu),
         ]
         self._debug_menu_enabled = False
 
@@ -51,3 +53,6 @@ class FirstMenu:
     def debug_menu(self):
         #self._menu_handler.set_current_menu(self._debug_menu)
         self._debug_menu_enabled = not self._debug_menu_enabled
+
+    def settings_menu(self):
+        pass

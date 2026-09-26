@@ -1,5 +1,6 @@
 import pygame # pyright: ignore[reportMissingImports]
 from viewer.src.display.pygame_image import PygameImage
+from viewer.src.menus.framework.ui_constants import UIConstants
 from viewer.src.menus.framework.uievent import UIEvent, UIEventType
 from viewer.src.viewer_exit_exception import ViewerExitException
 
@@ -130,7 +131,7 @@ class PiSystemDisplay:
         h = position[3] * self._screen_size[1] / 100
         rect = pygame.Rect(x,y,w,h)
 
-        pygame.draw.rect(self.screen, colour, rect, border_radius=12)
+        pygame.draw.rect(self.screen, colour, rect, border_radius=UIConstants.CORNER_RADIUS)
 
     def draw_text(self, text, colour, position):
         scaled_position = (position[0] * self._screen_size[0] / 100,
