@@ -11,20 +11,18 @@ class FirstMenu(PhotoFrameMenu):
                  debug_menu,
                  historic_photo_chooser):
         buttons = [
-            MenuButton(UIConstants.BUTTON_RIGHT, UIConstants.MENU_MARGIN,  UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, 'Back', self.back_action),
             MenuButton(UIConstants.BUTTON_LEFT , 47, UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, 'Previous', self.previous_image),
             MenuButton(UIConstants.BUTTON_RIGHT, 47, UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, 'Next', self.next_image),
             MenuButton(UIConstants.BUTTON_LEFT , 90, UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, 'Debug', self.debug_menu),
             MenuButton(UIConstants.BUTTON_RIGHT, 90, UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, 'Settings', self.settings_menu),
         ]
-        PhotoFrameMenu.__init__(self, buttons)
+        PhotoFrameMenu.__init__(self, buttons, True)
 
         self._menu_handler = menu_handler
         self._settings_menu = settings_menu
         self._debug_menu = debug_menu
         self._historic_photo_chooser = historic_photo_chooser
         self._debug_menu_enabled = False
-        self.is_image_enabled = True
 
     def on_enter(self):
         self._historic_photo_chooser.enable()
@@ -42,9 +40,6 @@ class FirstMenu(PhotoFrameMenu):
         if self._debug_menu_enabled:
             return self._debug_menu.mouse_down(x, y)
         return self.menu_action
-
-    def back_action(self):
-        self.menu_action = MenuAction.BACK
 
     def previous_image(self):
         self._historic_photo_chooser.back()

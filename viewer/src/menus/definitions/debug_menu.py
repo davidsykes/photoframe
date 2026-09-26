@@ -15,13 +15,12 @@ class DebugMenu(PhotoFrameMenu):
         self.button_x = UIConstants.BUTTON_RIGHT
         self.button_y = UIConstants.MENU_MARGIN
         buttons = []
-        buttons.append(self.create_button('Back', self.back_action))
         buttons.append(self.create_button('Sleep', self.sleep))
         buttons.append(self.create_button('Wake', self.wake))
         buttons.append(self.create_button('Random', self.render_random))
         buttons.append(self.create_button('Crash', self.simulate_crash))
         buttons.append(self.create_button('Quit', self.end_program_cleanly))
-        PhotoFrameMenu.__init__(self, buttons)
+        PhotoFrameMenu.__init__(self, buttons, True)
 
         self._statuses = statuses
         self._awake_decider = awake_decider
@@ -31,21 +30,12 @@ class DebugMenu(PhotoFrameMenu):
 
     def create_button(self, text, action):
         button = MenuButton(self.button_x, self.button_y, UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, text, action)
-        self.button_x += UIConstants.BUTTON_HEIGHT + 1
+        self.button_y += UIConstants.BUTTON_HEIGHT + 1
         return button
-
-    def on_enter(self):
-        pass
-
-    def on_exit(self):
-        pass
 
     def render(self, display):
         self._statuses.render(display)
         PhotoFrameMenu.render(self, display)
-
-    def back_action(self):
-        self.menu_action = MenuAction.BACK
 
     def sleep(self):
         self._awake_decider.go_to_sleep()

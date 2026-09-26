@@ -24,13 +24,13 @@ class MenuHandler:
         if self._current_menu is None:
             self.set_current_menu(self._main_menu)
         else:
-            self.handle_mouse_down(x,y)
+            self._handle_mouse_down(x,y)
 
     def render(self, display):
         if self._current_menu is not None:
             self._current_menu.render(display)
 
-    def handle_mouse_down(self, x, y):
+    def _handle_mouse_down(self, x, y):
         result = self._current_menu.mouse_down(x, y)
         if result == MenuAction.BACK:
             self.set_current_menu(None)
