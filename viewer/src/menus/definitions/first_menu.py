@@ -14,7 +14,7 @@ class FirstMenu:
         self._debug_menu = debug_menu
         self._historic_photo_chooser = historic_photo_chooser
         self._buttons = [
-            MenuButton(UIConstants.BUTTON_RIGHT, 0,  UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, 'Back', self.back_action),
+            MenuButton(UIConstants.BUTTON_RIGHT, UIConstants.MENU_MARGIN,  UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, 'Back', self.back_action),
             MenuButton(UIConstants.BUTTON_LEFT , 47, UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, 'Previous', self.previous_image),
             MenuButton(UIConstants.BUTTON_RIGHT, 47, UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, 'Next', self.next_image),
             MenuButton(UIConstants.BUTTON_LEFT , 90, UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, 'Debug', self.debug_menu),

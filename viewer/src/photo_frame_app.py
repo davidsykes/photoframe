@@ -123,6 +123,7 @@ class PhotoFrameApp:
         display.initialise_display()
 
         photo_history = PhotoHistory(50)
+        historic_photo_chooser = HistoricPhotoChooser(photo_history)
         randomiser = Randomiser()
 
         photo_sets = self.load_photo_sets(system_operations,
@@ -161,26 +162,17 @@ class PhotoFrameApp:
             system_operations)
         display_on_off_controller.initialise()
         awake_decider = AwakeDecider(awake_schedule_checker, display_on_off_controller)
-        pid_rss_extractor = PIDRSSExtractor()
-        memory_monitor = MemoryMonitor(
+
+        events_handler, menu_handler = self.set_up_menu_system(
             subprocess_wrapper,
-            status_updater,
-            pid_rss_extractor)
-        memory_monitor.check_memory_usage()
-        debug_menu = DebugMenu(
             status_updater,
             awake_decider,
             display_on_off_controller,
             random_monitor,
-            memory_monitor
-            )
-        settings_menu = SettingsMenu()
-        menu_handler = MenuHandler(display_on_off_controller, system_operations)
-        historic_photo_chooser = HistoricPhotoChooser(photo_history)
-        first_menu = FirstMenu(menu_handler, settings_menu, debug_menu, historic_photo_chooser)
-        menu_handler.set_main_menu(first_menu)
-        event_handler = EventHandler(menu_handler)
-        events_handler = EventsHandler(display, event_handler)
+            display,
+            system_operations,
+            historic_photo_chooser
+        )
 
         image_from_file_loader = ImageFromFileLoader(display)
         if len(photo_sets) > 0:
@@ -256,3 +248,34 @@ class PhotoFrameApp:
 
         return NextPhotoToShowCache(next_photo_to_show_timer,
                                     photo_history)
+
+    def set_up_menu_system(self,
+                           subprocess_wrapper,
+                           status_updater,
+                           awake_decider,
+                           display_on_off_controller,
+                           random_monitor,
+                           display,
+                           system_operations,
+                           historic_photo_chooser):
+        pid_rss_extractor = PIDRSSExtractor()
+        memory_monitor = MemoryMonitor(
+            subprocess_wrapper,
+            status_updater,
+            pid_rss_extractor)
+        memory_monitor.check_memory_usage()
+        debug_menu = DebugMenu(
+            status_updater,
+            awake_decider,
+            display_on_off_controller,
+            random_monitor,
+            memory_monitor
+            )
+        settings_menu = SettingsMenu()
+        menu_handler = MenuHandler(display_on_off_controller, system_operations)
+
+        first_menu = FirstMenu(menu_handler, settings_menu, debug_menu, historic_photo_chooser)
+        menu_handler.set_main_menu(first_menu)
+        event_handler = EventHandler(menu_handler)
+        events_handler = EventsHandler(display, event_handler)
+        return events_handler, menu_handler
