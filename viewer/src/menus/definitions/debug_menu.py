@@ -1,21 +1,17 @@
 from viewer.src.menus.framework.menu_action import MenuAction
 from viewer.src.menus.framework.menu_button import MenuButton
+from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
 from viewer.src.viewer_exit_exception import ViewerExitException
 
 
-class DebugMenu:
+class DebugMenu(PhotoFrameMenu):
     def __init__(self,
                  statuses,
                  awake_decider,
                  display_on_off_controller,
                  random_monitor,
                  memory_monitor):
-        self._statuses = statuses
-        self._awake_decider = awake_decider
-        self._display_on_off_controller = display_on_off_controller
-        self._random_monitor = random_monitor
-        self._memory_monitor = memory_monitor
-        self._buttons = [
+        buttons = [
             MenuButton(90, 0, 10, 5, 'Back', self.back_action),
             MenuButton(90, 16, 9, 4, 'Sleep', self.sleep),
             MenuButton(90, 21, 9, 4, 'Wake', self.wake),
@@ -23,6 +19,13 @@ class DebugMenu:
             MenuButton(90, 31, 9, 4, 'Crash', self.simulate_crash),
             MenuButton(90, 36, 9, 4, 'Quit', self.end_program_cleanly)
         ]
+        PhotoFrameMenu.__init__(self, buttons)
+
+        self._statuses = statuses
+        self._awake_decider = awake_decider
+        self._display_on_off_controller = display_on_off_controller
+        self._random_monitor = random_monitor
+        self._memory_monitor = memory_monitor
 
     def on_enter(self):
         pass
@@ -32,15 +35,7 @@ class DebugMenu:
 
     def render(self, display):
         self._statuses.render(display)
-        for button in self._buttons:
-            button.render(display)
-
-    def mouse_down(self, x, y):
-        self.menu_action = MenuAction.NONE
-        for button in self._buttons:
-            if button.mouse_down(x, y):
-                return self.menu_action
-        return self.menu_action
+        PhotoFrameMenu.render(self, display)
 
     def back_action(self):
         self.menu_action = MenuAction.BACK
