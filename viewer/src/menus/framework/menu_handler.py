@@ -35,3 +35,9 @@ class MenuHandler:
         result = self._current_menu.mouse_down(x, y)
         if result == MenuAction.BACK:
             self.set_current_menu(None)
+
+    @property
+    def is_image_enabled(self):
+        if self._current_menu is not None:
+            return self._current_menu.is_image_enabled
+        return True

@@ -16,6 +16,7 @@ from viewer.src.display.wlopm_commands import WlopmCommands
 from viewer.src.display.wlr_randr_commands import WlrRandrCommands
 from viewer.src.logic.random_monitor import RandomMonitor
 from viewer.src.main.main_loop import MainLoop
+from viewer.src.menus.definitions.settings_menu import SettingsMenu
 from viewer.src.menus.framework.event_handler import EventHandler
 from viewer.src.menus.framework.events_handler import EventsHandler
 from viewer.src.menus.definitions.first_menu import FirstMenu
@@ -173,9 +174,10 @@ class PhotoFrameApp:
             random_monitor,
             memory_monitor
             )
+        settings_menu = SettingsMenu()
         menu_handler = MenuHandler(display_on_off_controller, system_operations)
         historic_photo_chooser = HistoricPhotoChooser(photo_history)
-        first_menu = FirstMenu(menu_handler, debug_menu, historic_photo_chooser)
+        first_menu = FirstMenu(menu_handler, settings_menu, debug_menu, historic_photo_chooser)
         menu_handler.set_main_menu(first_menu)
         event_handler = EventHandler(menu_handler)
         events_handler = EventsHandler(display, event_handler)

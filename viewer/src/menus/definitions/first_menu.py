@@ -6,9 +6,11 @@ from viewer.src.menus.framework.ui_constants import UIConstants
 class FirstMenu:
     def __init__(self,
                  menu_handler,
+                 settings_menu,
                  debug_menu,
                  historic_photo_chooser):
         self._menu_handler = menu_handler
+        self._settings_menu = settings_menu
         self._debug_menu = debug_menu
         self._historic_photo_chooser = historic_photo_chooser
         self._buttons = [
@@ -19,6 +21,7 @@ class FirstMenu:
             MenuButton(UIConstants.BUTTON_RIGHT, 90, UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, 'Settings', self.settings_menu),
         ]
         self._debug_menu_enabled = False
+        self.is_image_enabled = True
 
     def on_enter(self):
         self._historic_photo_chooser.enable()
@@ -55,4 +58,4 @@ class FirstMenu:
         self._debug_menu_enabled = not self._debug_menu_enabled
 
     def settings_menu(self):
-        pass
+        self._menu_handler.set_current_menu(self._settings_menu)
