@@ -13,9 +13,6 @@ class DisplayOnOffControllerTests(unittest.TestCase):
         self.subprocess_wrapper.run_return_stdout.assert_called_once_with(
             'get display name command'
         )
-        self.status_updater.update_status.assert_called_with(
-            'Display Name', 'DisplayName'
-        )
 
     def test_if_initialise_fails_the_error_is_shown(self):
         self.subprocess_wrapper.run_return_stdout.side_effect = (

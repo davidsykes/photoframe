@@ -1,5 +1,6 @@
 from enum import Enum, auto
 from pathlib import Path
+from common.src.action_result_recorder import ActionResultRecorder
 from common.src.config_file_updater import ConfigFileUpdater
 from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.config_file_loader import ConfigFileLoader
@@ -42,7 +43,7 @@ from viewer.src.photos.sequential_photos.random_photo_selector import RandomPhot
 from viewer.src.photos.loading_photo_sets.image_from_file_loader import ImageFromFileLoader
 from viewer.src.photos.photo_to_display_chooser import PhotoToDisplayChooser
 from viewer.src.photos.sequential_photos.random_photo_set_selector import RandomPhotoSetSelector
-from viewer.src.status.action_status_updater import ActionStatusUpdater
+from viewer.src.status.action_status_result_status_updater import ActionStatusResultStatusUpdater
 from viewer.src.status.application_status import ApplicationStatus
 from viewer.src.logic.action_timer import ActionTimer
 from viewer.src.status.version_loader import VersionLoader
@@ -70,13 +71,16 @@ class PhotoFrameApp:
         remote_config_url = whole_project_configuration.remote_config_url
         remote_files_retriever = RemoteFilesRetriever(system_operations)
         status_updater = ApplicationStatus()
-        action_status_updater = ActionStatusUpdater(
-            'Download remote config', system_operations, status_updater)
+        action_status_result_status_updater = ActionStatusResultStatusUpdater(
+            status_updater,
+            system_operations)
+        action_result_recorder = ActionResultRecorder(
+            'Download remote config', action_status_result_status_updater)
         config_file_updater = ConfigFileUpdater(
             remote_files_retriever,
             config_file_loader,
             system_operations,
-            action_status_updater)
+            action_result_recorder)
         status_updater.update_status('Filter', whole_project_configuration.photo_set_filter)
         VersionLoader(system_operations, status_updater)\
             .load_version_details(PROJECT_ROOT / 'VERSION')

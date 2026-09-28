@@ -10,23 +10,23 @@ from viewer.src.awake_periods.awake_schedule_checker import AwakeScheduleChecker
 
 class AwakeScheduleTests(unittest.TestCase):
     def test_we_are_awake_when_it_is_time(self):
-        self.system_operations.get_current_time.return_value = datetime.time(0, 0)
+        self.set_current_time(datetime.time(0, 0))
         self.assertFalse(self.out.are_we_awake())
-        self.system_operations.get_current_time.return_value = datetime.time(7, 30)
+        self.set_current_time(datetime.time(7, 30))
         self.assertFalse(self.out.are_we_awake())
-        self.system_operations.get_current_time.return_value = datetime.time(9, 59)
+        self.set_current_time(datetime.time(9, 59))
         self.assertFalse(self.out.are_we_awake())
-        self.system_operations.get_current_time.return_value = datetime.time(10, 00)
+        self.set_current_time(datetime.time(10, 00))
         self.assertTrue(self.out.are_we_awake())
-        self.system_operations.get_current_time.return_value = datetime.time(10, 1)
+        self.set_current_time(datetime.time(10, 1))
         self.assertTrue(self.out.are_we_awake())
-        self.system_operations.get_current_time.return_value = datetime.time(15, 00)
+        self.set_current_time(datetime.time(15, 00))
         self.assertTrue(self.out.are_we_awake())
-        self.system_operations.get_current_time.return_value = datetime.time(19, 59)
+        self.set_current_time(datetime.time(19, 59))
         self.assertTrue(self.out.are_we_awake())
-        self.system_operations.get_current_time.return_value = datetime.time(20, 00)
+        self.set_current_time(datetime.time(20, 00))
         self.assertFalse(self.out.are_we_awake())
-        self.system_operations.get_current_time.return_value = datetime.time(23, 59)
+        self.set_current_time(datetime.time(23, 59))
         self.assertFalse(self.out.are_we_awake())
 
     def setUp(self):
@@ -35,3 +35,6 @@ class AwakeScheduleTests(unittest.TestCase):
                               wake_time = time.fromisoformat("10:00"),
                               sleep_time = time.fromisoformat("20:00"))
         self.out = AwakeScheduleChecker(self.system_operations, awake_schedule, False)
+
+    def set_current_time(self, current_time):
+        self.system_operations.get_current_time_of_day.return_value = current_time

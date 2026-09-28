@@ -1,12 +1,13 @@
 from pathlib import Path
 
+from common.src.action_result_logger import ActionResultLogger
+from common.src.action_result_recorder import ActionResultRecorder
 from common.src.config_file_loader import ConfigFileLoader
 from common.src.config_file_updater import ConfigFileUpdater
 from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.system_operations import SystemOperations
 from common.src.whole_project_configuration import WholeProjectConfiguration
 from common.unzipper import UnZipper
-from synchroniser.src.action_status_updater import ActionStatusUpdater
 from synchroniser.src.photo_collections.photo_collections import PhotoCollections
 from synchroniser.src.photo_folder_synchroniser import PhotoFolderSynchroniser
 from synchroniser.src.photo_folders_remover import PhotoFoldersRemover
@@ -28,12 +29,15 @@ def main() -> int:
     system_operations.ensure_folder_exists(temp_folder_location)
     config_file_loader = ConfigFileLoader(system_operations)
     remote_files_retriever = RemoteFilesRetriever(system_operations)
-    action_status_updater = ActionStatusUpdater('Download remote config', system_operations)
+    action_result_logger = ActionResultLogger(system_operations)
+    action_status_recorder = ActionResultRecorder(
+        'Download remote config',
+        action_result_logger)
     config_file_updater = ConfigFileUpdater(
         remote_files_retriever,
         config_file_loader,
         system_operations,
-        action_status_updater)
+        action_status_recorder)
     project_config = WholeProjectConfiguration(config_file_loader)
     remote_config_loader = RemoteConfigLoader(
         WORKING_FOLDER,

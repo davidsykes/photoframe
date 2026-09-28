@@ -10,7 +10,7 @@ class AwakeScheduleChecker:
     def are_we_awake(self):
         if self.always_awake:
             return True
-        current_time = self._system_operations.get_current_time()
+        current_time = self._system_operations.get_current_time_of_day()
         if current_time >= self._awake_schedule.wake_time and current_time < self._awake_schedule.sleep_time:
             return True
         return False

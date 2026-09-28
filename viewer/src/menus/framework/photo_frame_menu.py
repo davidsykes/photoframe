@@ -26,6 +26,11 @@ class PhotoFrameMenu:
                 return self.menu_action
         return self.menu_action
 
+    def press(self, button_text):
+        for button in self._buttons:
+            if button.name == button_text:
+                button.press()
+
     def on_enter(self):
         pass
 

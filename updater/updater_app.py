@@ -1,5 +1,7 @@
 from pathlib import Path
 import traceback
+from common.src.action_result_logger import ActionResultLogger
+from common.src.action_result_recorder import ActionResultRecorder
 from common.src.config_file_updater import ConfigFileUpdater
 from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.config_file_loader import ConfigFileLoader
@@ -13,7 +15,6 @@ from updater.src.version_has_been_downloaded_checker import VersionHasBeenDownlo
 from updater.src.version_runner import VersionRunner
 from updater.src.viewer_versions_config_loader import ViewerVersionsConfigLoader
 from updater.src.version_repeater import DownloadResult, VersionRepeater
-from updater.src.action_status_updater import ActionStatusUpdater
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 WORKING_FOLDER = PROJECT_ROOT / "working"
@@ -39,13 +40,14 @@ try:
         'viewer_versions_config.json')
 
     remote_files_retriever = RemoteFilesRetriever(sys_operations)
-    config_download_action_status_updater = ActionStatusUpdater(
-        'Download remote config', sys_operations)
+    action_result_logger = ActionResultLogger(sys_operations)
+    config_download_action_result_recorder = ActionResultRecorder(
+        'Download remote config', action_result_logger)
     config_file_updater = ConfigFileUpdater(
         remote_files_retriever,
         config_file_loader,
         sys_operations,
-        config_download_action_status_updater)
+        config_download_action_result_recorder)
     viewer_versions_config_loader = ViewerVersionsConfigLoader(
         config_file_updater,
         config_file_loader,

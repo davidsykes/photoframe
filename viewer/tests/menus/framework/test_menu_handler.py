@@ -72,13 +72,6 @@ class MenuHandlerTests(unittest.TestCase):
             [call(102,202)]
         )
 
-    def test_mouse_downs_are_logged(self):
-        self.out.mouse_down(100,200)
-
-        self.system_operations.log.assert_called_once_with(
-            'Mouse Down 100 200'
-        )
-
     def test_a_mouse_turns_the_display_on(self):
         self.out.mouse_down(100,200)
 

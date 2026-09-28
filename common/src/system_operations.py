@@ -80,8 +80,11 @@ class SystemOperations:
     def get_time_seconds(self):
         return time.time()
 
-    def get_current_time(self):
-        return datetime.now().time().isoformat(timespec='minutes')
+    def get_current_time_of_day(self):
+        return datetime.now().time()
+
+    def get_current_time_hh_mm(self):
+        return self.get_current_time_of_day().isoformat(timespec='minutes')
 
     def get_today(self):
         return date.today()

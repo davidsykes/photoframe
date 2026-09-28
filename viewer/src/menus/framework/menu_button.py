@@ -1,6 +1,7 @@
 
 class MenuButton:
-    def __init__(self, x, y, w, h, text, action):
+    def __init__(self, x, y, w, h, text, action, alt_name = None):
+        self.name = text if alt_name is None else alt_name
         self._x = x
         self._y = y
         self._w = w
@@ -29,6 +30,9 @@ class MenuButton:
             y >= self._y and
             x <= self._x2 and
             y <= self._y2):
-            self._action()
+            self.press()
             return True
         return False
+
+    def press(self):
+        self._action()
