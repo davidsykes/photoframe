@@ -279,8 +279,9 @@ class PhotoFrameApp:
             )
         menu_handler = MenuHandler(display_on_off_controller, system_operations)
         time_modifier_menu = TimeModifierMenu()
-        menu_navigator = MenuNavigator(menu_handler,
-                                       time_modifier_menu)
+        menu_navigator = MenuNavigator(menu_handler)
+        #menu_navigator.add_menu(menu_handler)
+        menu_navigator.add_menu('time_modifier', time_modifier_menu)
         settings_menu = SettingsMenu(menu_navigator)
 
         first_menu = FirstMenu(menu_handler, settings_menu, debug_menu, historic_photo_chooser)
