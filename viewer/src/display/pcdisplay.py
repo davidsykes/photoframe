@@ -7,6 +7,7 @@ class PCSystemDisplay:
         self._event_emulator = event_emulator
         self.COLOUR_WHITE = 'White colour'
         self.COLOUR_LIGHT = 'Light colour'
+        self.COLOUR_DARK = 'Dark colour'
         self._print_value = 0
         self._print_values = {}
 

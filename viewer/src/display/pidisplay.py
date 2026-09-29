@@ -13,6 +13,7 @@ class PiSystemDisplay:
         self._clock = pygame.time.Clock()
         self.COLOUR_WHITE = (255,255,255)
         self.COLOUR_LIGHT = (170,170,170)
+        self.COLOUR_DARK = (70,70,70)
 
     def initialise_display(self):
         print("Initialising Pi System Display.")

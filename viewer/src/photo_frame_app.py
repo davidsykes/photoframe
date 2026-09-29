@@ -177,7 +177,8 @@ class PhotoFrameApp:
             random_monitor,
             display,
             system_operations,
-            historic_photo_chooser
+            historic_photo_chooser,
+            awake_schedule
         )
 
         image_from_file_loader = ImageFromFileLoader(display)
@@ -200,6 +201,8 @@ class PhotoFrameApp:
             menu_handler)
         try:
             main_loop.loop()
+        except Exception as e:
+            system_operations.error(f'Main Loop Exception: {e}')
         finally:
             display_on_off_controller.display_on()
 
@@ -263,7 +266,8 @@ class PhotoFrameApp:
                            random_monitor,
                            display,
                            system_operations,
-                           historic_photo_chooser):
+                           historic_photo_chooser,
+                           awake_schedule):
         pid_rss_extractor = PIDRSSExtractor()
         memory_monitor = MemoryMonitor(
             subprocess_wrapper,
@@ -279,7 +283,7 @@ class PhotoFrameApp:
             )
         menu_handler = MenuHandler(display_on_off_controller, system_operations)
         time_modifier_menu = TimeModifierMenu()
-        menu_navigator = MenuNavigator(menu_handler)
+        menu_navigator = MenuNavigator(menu_handler, awake_schedule)
         #menu_navigator.add_menu(menu_handler)
         menu_navigator.add_menu('time_modifier', time_modifier_menu)
         settings_menu = SettingsMenu(menu_navigator)

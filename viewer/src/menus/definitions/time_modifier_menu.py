@@ -1,13 +1,19 @@
 from datetime import time
 
 from viewer.src.menus.framework.menu_button import MenuButton
+from viewer.src.menus.framework.menu_coordinates_generator import MenuCoordinatesGenerator
+from viewer.src.menus.framework.menu_item import MenuItem
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
 from viewer.src.menus.framework.ui_constants import UIConstants
 
 
 class TimeModifierMenu(PhotoFrameMenu):
     def __init__(self):
+        mc = MenuCoordinatesGenerator()
         buttons = [
+            MenuItem('display_text',
+                     mc.wide(20),
+                     '--:--'),
             MenuButton(20,
                        20,
                        UIConstants.BUTTON_WIDTH,
