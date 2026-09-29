@@ -24,14 +24,5 @@ class MenuItem:
              self._coordinates[1] + 1)
         )
 
-    # def mouse_down(self, x, y):
-    #     if (x >= self._x and
-    #         y >= self._y and
-    #         x <= self._x2 and
-    #         y <= self._y2):
-    #         self.press()
-    #         return True
-    #     return False
-
-    # def press(self):
-    #     self._action()
+    def mouse_down(self, x, y):
+        pass

@@ -22,7 +22,7 @@ class DisplayOnOffController:
     def display_on(self):
         try:
             command = self._subprocess_command_generator.get_display_on_command(self._display_name)
-            self._system_operations.log(f'Turn display on: {command}')
+            #self._system_operations.log(f'Turn display on: {command}')
             self._subprocess_wrapper.run_return_stdout(command)
         except Exception as e:
             self._system_operations.error('Error: Display On ' + str(e))
