@@ -20,19 +20,16 @@ class PhotoFrameMenu:
             button.render(display)
 
     def mouse_down(self, x, y):
-        self.menu_action = MenuAction.NONE
         for button in self._buttons:
             v = button.mouse_down(x, y)
             if v is not None:
-                print(f'MMSDMSMDMSAMDM {v}')
-                raise 'booo'
-                return self.menu_action
-        return self.menu_action
+                return v
+        return None
 
     def press(self, button_text):
         for button in self._buttons:
             if button.name == button_text:
-                button.press()
+                return button.press()
 
     def on_enter(self):
         pass
@@ -41,4 +38,4 @@ class PhotoFrameMenu:
         pass
 
     def back_action(self):
-        self.menu_action = MenuAction.BACK
+        return MenuAction.BACK
