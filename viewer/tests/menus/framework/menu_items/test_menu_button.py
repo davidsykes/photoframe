@@ -36,9 +36,9 @@ class MenuButtonTests(unittest.TestCase):
         self.mouse_miss(self.x2, self.y2+1)
         self.mouse_hit(self.x2, self.y2)
 
-    def test_mouse_hits_return_true(self):
-        self.assertFalse(self.out.mouse_down(self.x-1, self.y))
-        self.assertTrue(self.out.mouse_down(self.x, self.y))
+    def test_mouse_hits_return_action_value(self):
+        self.assertIsNone(self.out.mouse_down(self.x-1, self.y))
+        self.assertEqual('value', self.out.mouse_down(self.x, self.y))
 
     def setUp(self):
         self.display = Mock()
@@ -58,6 +58,7 @@ class MenuButtonTests(unittest.TestCase):
 
     def action(self):
         self.action_count += 1
+        return 'value'
 
     def mouse_miss(self, x, y):
         expected = self.action_count

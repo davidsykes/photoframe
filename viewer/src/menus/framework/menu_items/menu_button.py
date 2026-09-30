@@ -30,9 +30,7 @@ class MenuButton:
             y >= self._y and
             x <= self._x2 and
             y <= self._y2):
-            self.press()
-            return True
-        return False
+            return self.press()
 
     def press(self):
-        self._action()
+        return self._action()

@@ -1,5 +1,5 @@
 from viewer.src.menus.framework.menu_action import MenuAction
-from viewer.src.menus.framework.menu_button import MenuButton
+from viewer.src.menus.framework.menu_items.menu_button import MenuButton
 from viewer.src.menus.framework.ui_constants import UIConstants
 
 
@@ -22,7 +22,10 @@ class PhotoFrameMenu:
     def mouse_down(self, x, y):
         self.menu_action = MenuAction.NONE
         for button in self._buttons:
-            if button.mouse_down(x, y):
+            v = button.mouse_down(x, y)
+            if v is not None:
+                print(f'MMSDMSMDMSAMDM {v}')
+                raise 'booo'
                 return self.menu_action
         return self.menu_action
 
