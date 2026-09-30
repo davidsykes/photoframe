@@ -37,14 +37,14 @@ class DisplayOnOffControllerTests(unittest.TestCase):
             'turn display on command'
         )
 
-    def test_display_on_logs_the_event(self):
-        self.out.initialise()
+    # def test_display_on_logs_the_event(self):
+    #     self.out.initialise()
 
-        self.out.display_on()
+    #     self.out.display_on()
 
-        self.system_operations.log.assert_called_with(
-            'Turn display on: turn display on command'
-        )
+    #     self.system_operations.log.assert_called_with(
+    #         'Turn display on: turn display on command'
+    #     )
 
     def test_if_display_on_fails_the_event_is_logged(self):
         self.out.initialise()

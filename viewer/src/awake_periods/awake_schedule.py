@@ -9,15 +9,21 @@ class AwakeSchedule:
         self._initialise_schedule_times(DEFAULT_WAKE_TIME, DEFAULT_SLEEP_TIME)
 
     def _initialise_schedule_times(self, wake_time, sleep_time):
-        self.wake_time = time.fromisoformat(
+        self._wake_time = time.fromisoformat(
             self._database.get_setting('wake_time')
             or wake_time)
-        self.sleep_time = time.fromisoformat(
+        self._sleep_time = time.fromisoformat(
             self._database.get_setting('sleep_time')
             or sleep_time)
 
     def get_wake_time(self):
-        return self.wake_time
+        return self._wake_time
 
     def set_wake_time(self, wake_time):
+        raise 'ssdfafdsf'
+
+    def get_sleep_time(self):
+        return self._sleep_time
+
+    def set_sleep_time(self, wake_time):
         raise 'ssdfafdsf'

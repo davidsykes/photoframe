@@ -1,5 +1,6 @@
 from enum import Enum, auto
 from pathlib import Path
+import traceback
 from common.src.action_result_recorder import ActionResultRecorder
 from common.src.config_file_updater import ConfigFileUpdater
 from common.src.remote_files_retriever import RemoteFilesRetriever
@@ -151,8 +152,8 @@ class PhotoFrameApp:
         )
 
         awake_schedule = AwakeSchedule(photo_frame_database)
-        status_updater.update_status('Wake time', awake_schedule.wake_time)
-        status_updater.update_status('Sleep time', awake_schedule.sleep_time)
+        status_updater.update_status('Wake time', awake_schedule.get_wake_time())
+        status_updater.update_status('Sleep time', awake_schedule.get_sleep_time())
         awake_schedule_checker = AwakeScheduleChecker(
             system_operations,
             awake_schedule,
@@ -203,8 +204,14 @@ class PhotoFrameApp:
             main_loop.loop()
         except Exception as e:
             system_operations.error(f'Main Loop Exception: {e}')
+            self.log_trace(system_operations,
+                           traceback.format_exc().splitlines())
         finally:
             display_on_off_controller.display_on()
+
+    def log_trace(self, system_operations, trace):
+        for t in trace:
+            system_operations.error(t)
 
     def load_photo_sets(self,
                         system_operations,

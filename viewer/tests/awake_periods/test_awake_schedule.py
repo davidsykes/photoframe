@@ -10,32 +10,32 @@ class AwakeScheduleTests(unittest.TestCase):
 
         self.create_test_object()
         
-        self.assertEqual(time.fromisoformat('08:30'), self.out.wake_time)
-        self.assertEqual(time.fromisoformat('19:45'), self.out.sleep_time)
+        self.assertEqual(time.fromisoformat('08:30'), self.out.get_wake_time())
+        self.assertEqual(time.fromisoformat('19:45'), self.out.get_sleep_time())
 
     def test_database_wake_settings_are_taken_if_they_exist(self):
         self.database_data = {'wake_time': '11:11'}
 
         self.create_test_object()
         
-        self.assertEqual(time.fromisoformat('11:11'), self.out.wake_time)
-        self.assertEqual(time.fromisoformat('19:45'), self.out.sleep_time)
+        self.assertEqual(time.fromisoformat('11:11'), self.out.get_wake_time())
+        self.assertEqual(time.fromisoformat('19:45'), self.out.get_sleep_time())
 
     def test_database_sleep_settings_are_taken_if_they_exist(self):
         self.database_data = {'sleep_time': '22:22'}
 
         self.create_test_object()
         
-        self.assertEqual(time.fromisoformat('08:30'), self.out.wake_time)
-        self.assertEqual(time.fromisoformat('22:22'), self.out.sleep_time)
+        self.assertEqual(time.fromisoformat('08:30'), self.out.get_wake_time())
+        self.assertEqual(time.fromisoformat('22:22'), self.out.get_sleep_time())
 
     def test_both_database_settings_are_taken_if_they_exist(self):
         self.database_data = {'wake_time': '11:11', 'sleep_time': '22:22'}
 
         self.create_test_object()
         
-        self.assertEqual(time.fromisoformat('11:11'), self.out.wake_time)
-        self.assertEqual(time.fromisoformat('22:22'), self.out.sleep_time)
+        self.assertEqual(time.fromisoformat('11:11'), self.out.get_wake_time())
+        self.assertEqual(time.fromisoformat('22:22'), self.out.get_sleep_time())
 
     def setUp(self):
         self.database = Mock()

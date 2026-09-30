@@ -11,7 +11,8 @@ class AwakeScheduleChecker:
         if self.always_awake:
             return True
         current_time = self._system_operations.get_current_time_of_day()
-        if current_time >= self._awake_schedule.wake_time and current_time < self._awake_schedule.sleep_time:
+        if current_time >= self._awake_schedule.get_wake_time() and \
+            current_time < self._awake_schedule.get_sleep_time():
             return True
         return False
     

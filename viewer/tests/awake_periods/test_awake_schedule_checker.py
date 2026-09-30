@@ -31,10 +31,12 @@ class AwakeScheduleTests(unittest.TestCase):
 
     def setUp(self):
         self.system_operations = Mock(spec = SystemOperations)
-        awake_schedule = Mock(spec=AwakeSchedule,
-                              wake_time = time.fromisoformat("10:00"),
-                              sleep_time = time.fromisoformat("20:00"))
-        self.out = AwakeScheduleChecker(self.system_operations, awake_schedule, False)
+        awake_schedule = Mock(spec=AwakeSchedule)
+        awake_schedule.get_wake_time.return_value = time.fromisoformat("10:00")
+        awake_schedule.get_sleep_time.return_value = time.fromisoformat("20:00")
+        self.out = AwakeScheduleChecker(self.system_operations,
+                                        awake_schedule,
+                                        False)
 
     def set_current_time(self, current_time):
         self.system_operations.get_current_time_of_day.return_value = current_time
