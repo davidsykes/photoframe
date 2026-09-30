@@ -1,16 +1,11 @@
+from viewer.src.menus.framework.menu_items.menu_item import MenuItem
 
-class MenuItem:
+
+class DisplayMenuItem(MenuItem):
     def __init__(self, name, coordinates, display_text):
         self.name = name
         self._coordinates = coordinates
-    #     self._x = x
-    #     self._y = y
-    #     self._w = w
-    #     self._h = h
-    #     self._x2 = x + w - 1
-    #     self._y2 = y + h - 1
         self._display_text = display_text
-    #     self._action = action
 
     def render(self, display):
         display.draw_rectangle(
@@ -24,5 +19,5 @@ class MenuItem:
              self._coordinates[1] + 1)
         )
 
-    def mouse_down(self, x, y):
-        pass
+    def update_text(self, text):
+        self._display_text = text

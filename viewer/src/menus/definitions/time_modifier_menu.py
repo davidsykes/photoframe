@@ -1,8 +1,7 @@
 from datetime import time
-
 from viewer.src.menus.framework.menu_button import MenuButton
 from viewer.src.menus.framework.menu_coordinates_generator import MenuCoordinatesGenerator
-from viewer.src.menus.framework.menu_item import MenuItem
+from viewer.src.menus.framework.menu_items.display_menu_item import DisplayMenuItem
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
 from viewer.src.menus.framework.ui_constants import UIConstants
 
@@ -10,8 +9,8 @@ from viewer.src.menus.framework.ui_constants import UIConstants
 class TimeModifierMenu(PhotoFrameMenu):
     def __init__(self):
         mc = MenuCoordinatesGenerator()
-        buttons = [
-            MenuItem('display_text',
+        self._buttons = [
+            DisplayMenuItem('display_text',
                      mc.wide(20),
                      '--:--'),
             MenuButton(20,
@@ -49,11 +48,10 @@ class TimeModifierMenu(PhotoFrameMenu):
                        'Ok',
                        self.ok)
         ]
-        PhotoFrameMenu.__init__(self, buttons, False)
+        PhotoFrameMenu.__init__(self, self._buttons, False)
         self.get_value = None
         self.set_value = None
         self.display_time = time(12,0)
-        self.display_time_text = '--.--'
 
     def setup(self, getter, setter):
         self.get_value = getter
@@ -65,31 +63,34 @@ class TimeModifierMenu(PhotoFrameMenu):
         self.update_display_time_text()
 
     def update_display_time_text(self):
-        self.display_time_text = self.display_time.isoformat(timespec='minutes')
+        text = self.display_time.isoformat(timespec='minutes')
+        self._buttons[0].update_text(text)
 
     def hour_up(self):
+        print('HHOOOUUURR UUUOOOO')
         if self.display_time.hour < 23:
-            self.display_time = time(
+            self.update_display_time(time(
                 self.display_time.hour + 1,
-                self.display_time.minute)
+                self.display_time.minute))
 
     def minute_up(self):
+        print('MMMMMMMMMMMMMMMM UUUOOOO')
         if self.display_time.minute < 59:
-            self.display_time = time(
+            self.update_display_time(time(
                 self.display_time.hour,
-                self.display_time.minute + 1)
+                self.display_time.minute + 1))
 
     def hour_down(self):
         if self.display_time.hour > 0:
-            self.display_time = time(
+            self.update_display_time(time(
                 self.display_time.hour - 1,
-                self.display_time.minute)
+                self.display_time.minute))
 
     def minute_down(self):
         if self.display_time.minute > 0:
-            self.display_time = time(
+            self.update_display_time(time(
                 self.display_time.hour,
-                self.display_time.minute - 1)
+                self.display_time.minute - 1))
 
     def ok(self):
         self.set_value(self.display_time)

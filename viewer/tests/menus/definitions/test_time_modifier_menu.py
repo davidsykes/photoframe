@@ -10,6 +10,8 @@ class TimeModifierMenuTests(unittest.TestCase):
 
         self.assertEqual(self.out.display_time,
                          time.fromisoformat('11:21'))
+        self.assertEqual(self.get_display_time(),
+                         '11:21')
 
     def test_display_time_can_be_decreased(self):
         self.out.press('hour down')
@@ -17,6 +19,8 @@ class TimeModifierMenuTests(unittest.TestCase):
 
         self.assertEqual(self.out.display_time,
                          time.fromisoformat('09:19'))
+        self.assertEqual(self.get_display_time(),
+                         '09:19')
 
     def test_changing_display_time_does_no_affect_set_time(self):
         self.out.press('hour up')
@@ -39,7 +43,7 @@ class TimeModifierMenuTests(unittest.TestCase):
     def test_if_get_and_set_not_set_time_display_defaults_to_undefined(self):
         self.out = TimeModifierMenu()
 
-        self.assertEqual(self.out.display_time_text, '--.--')
+        self.assertEqual(self.get_display_time(), '--:--')
 
     def test_if_get_and_set_not_set_time_defaults_internally_to_mid_day(self):
         self.out = TimeModifierMenu()
@@ -59,3 +63,6 @@ class TimeModifierMenuTests(unittest.TestCase):
 
     def set_time(self, new_time):
         self.time = new_time
+
+    def get_display_time(self):
+        return self.out._buttons[0]._display_text
