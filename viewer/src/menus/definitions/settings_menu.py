@@ -1,4 +1,4 @@
-from viewer.src.menus.framework.menu_button import MenuButton
+from viewer.src.menus.framework.menu_items.menu_button import MenuButton
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
 from viewer.src.menus.framework.ui_constants import UIConstants
 

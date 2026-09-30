@@ -1,5 +1,6 @@
 from datetime import time
-from viewer.src.menus.framework.menu_button import MenuButton
+from viewer.src.menus.framework.menu_action import MenuAction
+from viewer.src.menus.framework.menu_items.menu_button import MenuButton
 from viewer.src.menus.framework.menu_coordinates_generator import MenuCoordinatesGenerator
 from viewer.src.menus.framework.menu_items.display_menu_item import DisplayMenuItem
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
@@ -67,14 +68,12 @@ class TimeModifierMenu(PhotoFrameMenu):
         self._buttons[0].update_text(text)
 
     def hour_up(self):
-        print('HHOOOUUURR UUUOOOO')
         if self.display_time.hour < 23:
             self.update_display_time(time(
                 self.display_time.hour + 1,
                 self.display_time.minute))
 
     def minute_up(self):
-        print('MMMMMMMMMMMMMMMM UUUOOOO')
         if self.display_time.minute < 59:
             self.update_display_time(time(
                 self.display_time.hour,
@@ -94,3 +93,4 @@ class TimeModifierMenu(PhotoFrameMenu):
 
     def ok(self):
         self.set_value(self.display_time)
+        return MenuAction.BACK
