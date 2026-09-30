@@ -1,5 +1,6 @@
 from pathlib import Path
 import sys
+import traceback
 from common.src.system_operations import SystemOperations
 from viewer.src.data.command_line_options import CommandLineOptions
 from viewer.src.photo_frame_app import PhotoFrameApp
@@ -24,6 +25,14 @@ def main() -> int:
     except KeyboardInterrupt as e:
         system_operations.log('Exiting due to keyboard interrupt')
         return 1
+    except Exception as e:
+        system_operations.error(f'Main Loop Exception: {e}')
+        log_trace(system_operations,
+                  traceback.format_exc().splitlines())
+
+def log_trace(system_operations, trace):
+    for t in trace:
+        system_operations.error(t)
 
 if __name__ == '__main__':
     raise SystemExit(main())
