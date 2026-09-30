@@ -6,8 +6,6 @@ from viewer.src.awake_periods.awake_schedule import AwakeSchedule
 
 class AwakeScheduleTests(unittest.TestCase):
     def test_if_database_settings_are_missing_the_defaults_are_used(self):
-        self.database_data = {}
-
         self.create_test_object()
         
         self.assertEqual(time.fromisoformat('08:30'), self.out.get_wake_time())
@@ -37,9 +35,40 @@ class AwakeScheduleTests(unittest.TestCase):
         self.assertEqual(time.fromisoformat('11:11'), self.out.get_wake_time())
         self.assertEqual(time.fromisoformat('22:22'), self.out.get_sleep_time())
 
+    def test_set_wake_time_updates_local_value(self):
+        self.create_test_object()
+
+        self.out.set_wake_time(time.fromisoformat('12:34'))
+        
+        self.assertEqual(time.fromisoformat('12:34'), self.out.get_wake_time())
+
+    def test_set_wake_time_updates_database_value(self):
+        self.create_test_object()
+
+        self.out.set_wake_time(time.fromisoformat('12:34'))
+
+        self.database.set_setting.assert_called_once_with(
+            'wake time', '12:34')
+
+    def test_set_sleep_time_updates_local_value(self):
+        self.create_test_object()
+
+        self.out.set_sleep_time(time.fromisoformat('12:34'))
+        
+        self.assertEqual(time.fromisoformat('12:34'), self.out.get_sleep_time())
+
+    def test_set_sleep_time_updates_database_value(self):
+        self.create_test_object()
+
+        self.out.set_sleep_time(time.fromisoformat('12:34'))
+
+        self.database.set_setting.assert_called_once_with(
+            'sleep time', '12:34')
+
     def setUp(self):
         self.database = Mock()
         self.database.get_setting = self.get_setting
+        self.database_data = {}
 
     def create_test_object(self):
         self.out = AwakeSchedule(self.database)

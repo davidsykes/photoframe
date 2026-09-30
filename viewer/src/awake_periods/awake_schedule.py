@@ -20,10 +20,14 @@ class AwakeSchedule:
         return self._wake_time
 
     def set_wake_time(self, wake_time):
-        raise 'ssdfafdsf'
+        self._wake_time = wake_time
+        self._database.set_setting('wake time',
+                                   wake_time.isoformat(timespec='minutes'))
 
     def get_sleep_time(self):
         return self._sleep_time
 
-    def set_sleep_time(self, wake_time):
-        raise 'ssdfafdsf'
+    def set_sleep_time(self, sleep_time):
+        self._sleep_time = sleep_time
+        self._database.set_setting('sleep time',
+                                   sleep_time.isoformat(timespec='minutes'))
