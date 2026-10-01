@@ -21,7 +21,7 @@ class AwakeSchedule:
 
     def set_wake_time(self, wake_time):
         self._wake_time = wake_time
-        self._database.set_setting('wake time',
+        self._database.set_setting('wake_time',
                                    wake_time.isoformat(timespec='minutes'))
 
     def get_sleep_time(self):
@@ -29,5 +29,5 @@ class AwakeSchedule:
 
     def set_sleep_time(self, sleep_time):
         self._sleep_time = sleep_time
-        self._database.set_setting('sleep time',
+        self._database.set_setting('sleep_time',
                                    sleep_time.isoformat(timespec='minutes'))

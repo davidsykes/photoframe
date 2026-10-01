@@ -1,15 +1,17 @@
+from contextlib import closing
+from pathlib import Path
 import sqlite3
 
 
 class PhotoFrameDatabase:
     def __init__(self, database_path):
-        self._database_path = database_path
+        self._database_path = Path(database_path)
 
     def _connect(self):
         return sqlite3.connect(self._database_path)
 
     def initialise(self):
-        with self._connect() as connection:
+        with closing(self._connect()) as connection:
             connection.execute(
                 '''
                 CREATE TABLE IF NOT EXISTS settings (
@@ -18,9 +20,10 @@ class PhotoFrameDatabase:
                 )
                 '''
                 )
+            connection.commit()
 
     def set_setting(self, name, value):
-        with self._connect() as connection:
+        with closing(self._connect()) as connection:
             connection.execute(
                 '''
                 INSERT INTO settings (name, value)
@@ -30,9 +33,10 @@ class PhotoFrameDatabase:
                 ''',
                 (name, value),
             )
+            connection.commit()
 
     def get_setting(self, name):
-        with self._connect() as connection:
+        with closing(self._connect()) as connection:
             row = connection.execute(
                 '''
                 SELECT value
