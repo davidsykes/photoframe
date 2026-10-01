@@ -48,5 +48,8 @@ class PhotoHistoryTests(unittest.TestCase):
         self.assertTrue(self.out.has_photo_been_shown_recently('Photo 5'))
         self.assertTrue(self.out.has_photo_been_shown_recently('Photo 6'))
 
+    def test_an_empty_history_returns_none(self):
+        self.assertIsNone(self.out[0])
+
     def setUp(self):
         self.out = PhotoHistory(5)

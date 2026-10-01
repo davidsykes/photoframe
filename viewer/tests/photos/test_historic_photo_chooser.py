@@ -55,6 +55,11 @@ class HistoricPhotoChooserTests(unittest.TestCase):
         self.out.disable()
         self.assertEqual(None, self.out.choose_previous_photo())
 
+    def test_if_chooser_is_enabled_before_any_photos_are_added_none_is_returned(self):
+        out = HistoricPhotoChooser(PhotoHistory(3))
+        out.enable()
+        self.assertEqual(None, out.choose_previous_photo())
+
     def setUp(self):
         self.photo_history = PhotoHistory(3)
         self.photo_history.new_photo('Photo 1')
