@@ -11,10 +11,10 @@ class TimeModifierMenu(PhotoFrameMenu):
     def __init__(self):
         mc = MenuCoordinatesGenerator()
         self._title =  DisplayMenuItem('title_text',
-                                       mc.wide(20),
+                                       mc.wide(10),
                                        '----------')
         self._time_display = DisplayMenuItem('time_display_text',
-                                             mc.wide(10),
+                                             mc.button(30, 35),
                                              '--:--')
         buttons = [
             self._title,
@@ -37,7 +37,7 @@ class TimeModifierMenu(PhotoFrameMenu):
                      mc.button(20, 35),
                      'Hour'),
             DisplayMenuItem('minute_text',
-                     mc.button(30, 35),
+                     mc.button(40, 35),
                      'Minute'),
             MenuButton(20,
                        40,
@@ -46,14 +46,14 @@ class TimeModifierMenu(PhotoFrameMenu):
                        '-',
                        self.hour_down,
                        'hour down'),
-            MenuButton(30,
+            MenuButton(40,
                        40,
                        UIConstants.BUTTON_WIDTH,
                        UIConstants.BUTTON_HEIGHT,
                        '-',
                        self.minute_down,
                        'minute down'),
-            MenuButton(25,
+            MenuButton(30,
                        50,
                        UIConstants.BUTTON_WIDTH,
                        UIConstants.BUTTON_HEIGHT,
