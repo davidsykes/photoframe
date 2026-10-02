@@ -10,10 +10,15 @@ from viewer.src.menus.framework.ui_constants import UIConstants
 class TimeModifierMenu(PhotoFrameMenu):
     def __init__(self):
         mc = MenuCoordinatesGenerator()
-        self._buttons = [
-            DisplayMenuItem('display_text',
-                     mc.wide(20),
-                     '--:--'),
+        self._title =  DisplayMenuItem('title_text',
+                                       mc.wide(20),
+                                       '----------')
+        self._time_display = DisplayMenuItem('time_display_text',
+                                             mc.wide(10),
+                                             '--:--')
+        buttons = [
+            self._title,
+            self._time_display,
             MenuButton(20,
                        30,
                        UIConstants.BUTTON_WIDTH,
@@ -28,6 +33,12 @@ class TimeModifierMenu(PhotoFrameMenu):
                        '+',
                        self.minute_up,
                        'minute up'),
+            DisplayMenuItem('hour_text',
+                     mc.button(20, 35),
+                     'Hour'),
+            DisplayMenuItem('minute_text',
+                     mc.button(30, 35),
+                     'Minute'),
             MenuButton(20,
                        40,
                        UIConstants.BUTTON_WIDTH,
@@ -49,12 +60,13 @@ class TimeModifierMenu(PhotoFrameMenu):
                        'Ok',
                        self.ok)
         ]
-        PhotoFrameMenu.__init__(self, self._buttons, False)
+        PhotoFrameMenu.__init__(self, buttons, False)
         self.get_value = None
         self.set_value = None
         self.display_time = time(12,0)
 
-    def setup(self, getter, setter):
+    def setup(self, title, getter, setter):
+        self._title.update_text(title)
         self.get_value = getter
         self.set_value = setter
         self.update_display_time(getter())
@@ -65,7 +77,7 @@ class TimeModifierMenu(PhotoFrameMenu):
 
     def update_display_time_text(self):
         text = self.display_time.isoformat(timespec='minutes')
-        self._buttons[0].update_text(text)
+        self._time_display.update_text(text)
 
     def hour_up(self):
         if self.display_time.hour < 23:

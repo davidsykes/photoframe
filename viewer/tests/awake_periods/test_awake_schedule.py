@@ -48,7 +48,7 @@ class AwakeScheduleTests(unittest.TestCase):
         self.out.set_wake_time(time.fromisoformat('12:34'))
 
         self.database.set_setting.assert_called_once_with(
-            'wake time', '12:34')
+            'wake_time', '12:34')
 
     def test_set_sleep_time_updates_local_value(self):
         self.create_test_object()
@@ -63,7 +63,7 @@ class AwakeScheduleTests(unittest.TestCase):
         self.out.set_sleep_time(time.fromisoformat('12:34'))
 
         self.database.set_setting.assert_called_once_with(
-            'sleep time', '12:34')
+            'sleep_time', '12:34')
 
     def setUp(self):
         self.database = Mock()
