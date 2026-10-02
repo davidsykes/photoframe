@@ -13,3 +13,10 @@ class MenuNavigator:
         menu.setup('Wake Time',
                    self._awake_schedule.get_wake_time,
                    self._awake_schedule.set_wake_time)
+
+    def push_sleep_time_modifier(self):
+        menu = self._menus['time_modifier']
+        self._menu_handler.set_current_menu(menu)
+        menu.setup('Sleep Time',
+                   self._awake_schedule.get_sleep_time,
+                   self._awake_schedule.set_sleep_time)

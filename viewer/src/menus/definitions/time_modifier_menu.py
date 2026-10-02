@@ -26,7 +26,7 @@ class TimeModifierMenu(PhotoFrameMenu):
                        '+',
                        self.hour_up,
                        'hour up'),
-            MenuButton(30,
+            MenuButton(40,
                        30,
                        UIConstants.BUTTON_WIDTH,
                        UIConstants.BUTTON_HEIGHT,
