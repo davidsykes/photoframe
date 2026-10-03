@@ -1,7 +1,4 @@
 
-from synchroniser.src.photo_collections.photo_collections import PhotoCollections
-
-
 class SynchroniserApp:
     def __init__(self,
                  whole_project_config,

@@ -88,3 +88,9 @@ class SystemOperations:
 
     def get_today(self):
         return date.today()
+
+    def time_monotonic(self):
+        return time.monotonic()
+
+    def sleep(self, seconds):
+        time.sleep(seconds)

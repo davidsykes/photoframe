@@ -5,8 +5,10 @@ from common.src.action_result_recorder import ActionResultRecorder
 from common.src.config_file_updater import ConfigFileUpdater
 from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.config_file_loader import ConfigFileLoader
+from common.src.retrying_action import RetryingAction
 from common.src.system_operations import SystemOperations
 from common.src.whole_project_configuration import WholeProjectConfiguration
+from updater.src.retrying_action_downloader import RetryingActionDownloader
 from updater.src.sandbox import Sandbox
 from common.unzipper import UnZipper
 from updater.src.subprocess_exec import SubprocessExec
@@ -39,12 +41,21 @@ try:
     viewer_versions_config_local_path = WORKING_FOLDER.joinpath(
         'viewer_versions_config.json')
 
-    remote_files_retriever = RemoteFilesRetriever(sys_operations)
+    remote_files_retriever_once = RemoteFilesRetriever(sys_operations)
+    remote_files_retriever_retry = RetryingActionDownloader(
+        RetryingAction(
+            remote_files_retriever_once.download_file_or_return_false,
+            sys_operations,
+            'Download remote file',
+            30,
+            5
+        )
+    )
     action_result_logger = ActionResultLogger(sys_operations)
     config_download_action_result_recorder = ActionResultRecorder(
         'Download remote config', action_result_logger)
     config_file_updater = ConfigFileUpdater(
-        remote_files_retriever,
+        remote_files_retriever_retry,
         config_file_loader,
         sys_operations,
         config_download_action_result_recorder)
@@ -60,7 +71,7 @@ try:
     version_downloader = VersionDownloader(
         sys_operations,
         viewer_sandbox,
-        remote_files_retriever,
+        remote_files_retriever_retry,
         unzipper,
         project_config_path
     )
