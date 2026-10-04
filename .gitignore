@@ -7,3 +7,4 @@ logs
 /images/
 remote_viewer_config.json
 photoframe.db
+photo_set_builder/photo_set_builder_config.json
