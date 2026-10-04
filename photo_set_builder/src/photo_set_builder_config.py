@@ -11,3 +11,7 @@ class PhotosetBuilderConfig:
     @property
     def photo_sets_path(self):
         return Path(self._config.get('photo_sets_path'))
+
+    @property
+    def viewer_config_path(self):
+        return Path(self._config.get('viewer_config_path'))

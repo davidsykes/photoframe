@@ -13,11 +13,18 @@ class PhotosetBuilderConfigTests(unittest.TestCase):
             Path('images folder')
         )
 
+    def test_viewer_config_path(self):
+        self.assertEqual(
+            self.out.viewer_config_path,
+            Path('viewer config file path')
+        )
+
     def setUp(self):
         self.config_file_loader = Mock(spec=ConfigFileLoader)
         self.config = ConfigFile(
             {
-                'photo_sets_path': 'images folder'
+                'photo_sets_path': 'images folder',
+                'viewer_config_path': 'viewer config file path'
             },
             'config file path'
         )
