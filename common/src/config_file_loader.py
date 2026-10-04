@@ -1,5 +1,4 @@
 import json
-
 from common.src.config_file import ConfigFile
 
 class ConfigFileLoader:

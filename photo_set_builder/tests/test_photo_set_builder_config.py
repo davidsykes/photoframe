@@ -1,0 +1,32 @@
+from pathlib import Path
+import unittest
+from unittest.mock import Mock
+
+from common.src.config_file import ConfigFile
+from common.src.config_file_loader import ConfigFileLoader
+from photo_set_builder.src.photo_set_builder_config import PhotosetBuilderConfig
+
+class PhotosetBuilderConfigTests(unittest.TestCase):
+    def test_photo_sets_location(self):
+        self.assertEqual(
+            self.out.photo_sets_location,
+            Path('images folder')
+        )
+
+    def setUp(self):
+        self.config_file_loader = Mock(spec=ConfigFileLoader)
+        self.config = ConfigFile(
+            {
+                'photo_sets_location': 'images folder'
+            },
+            'config file path'
+        )
+        self.config_file_loader.load_config_file = self.load_config_file
+        self.out = PhotosetBuilderConfig(
+            self.config_file_loader,
+            'config file path'
+            )
+
+    def load_config_file(self, config_file_path):
+        self.assertEqual(config_file_path, 'config file path')
+        return self.config
