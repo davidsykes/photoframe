@@ -9,7 +9,7 @@ from photo_set_builder.src.photo_set_builder_config import PhotosetBuilderConfig
 class PhotosetBuilderConfigTests(unittest.TestCase):
     def test_photo_sets_location(self):
         self.assertEqual(
-            self.out.photo_sets_location,
+            self.out.photo_sets_path,
             Path('images folder')
         )
 
@@ -17,7 +17,7 @@ class PhotosetBuilderConfigTests(unittest.TestCase):
         self.config_file_loader = Mock(spec=ConfigFileLoader)
         self.config = ConfigFile(
             {
-                'photo_sets_location': 'images folder'
+                'photo_sets_path': 'images folder'
             },
             'config file path'
         )

@@ -1,4 +1,5 @@
 from pathlib import Path
+from common.src.config_file_loader import ConfigFileLoader
 from common.src.system_operations import SystemOperations
 from photo_set_builder.src.photo_set_builder_config import PhotosetBuilderConfig
 from photo_set_builder.src.photo_sets_lister import PhotoSetsLister
@@ -8,17 +9,19 @@ from photo_set_builder.src.viewer_config_manager import ViewerConfigManager
 
 
 APP_ROOT = Path(__file__).resolve().parent
-PROJECT_ROOT = APP_ROOT.parent
 
 def main() -> int:
     system_operations = SystemOperations()
     system_operations.set_logger('photo_set_builder', '')
     system_operations.log(f"Starting Photo Set Builder from {APP_ROOT}")
-    system_operations.log(f"Starting Photo Set Builder from {PROJECT_ROOT}")
 
-    config_file_path = PROJECT_ROOT / 'photo_set_builder_config.json'
-    config_data = PhotosetBuilderConfig(config_file_path)
-    photo_sets_definitions = PhotoSetsLister(system_operations).list_photo_sets(config_data.photo_sets_path)
+    config_file_path = APP_ROOT / 'photo_set_builder_config.json'
+    config_file_loader = ConfigFileLoader(system_operations)
+    config_data = PhotosetBuilderConfig(config_file_loader,
+                                        config_file_path)
+    photo_sets_lister = PhotoSetsLister(system_operations)
+    photo_sets_definitions = photo_sets_lister.list_photo_sets(
+        config_data.photo_sets_path)
     photo_sets_processor = PhotoSetsProcessor(system_operations)
     photo_sets_processor.process_photo_sets(photo_sets_definitions)
     viewer_config_manager = ViewerConfigManager(config_data.viewer_config_path)

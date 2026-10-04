@@ -9,5 +9,5 @@ class PhotosetBuilderConfig:
             config_file_path)
 
     @property
-    def photo_sets_location(self):
-        return Path(self._config.get('photo_sets_location'))
+    def photo_sets_path(self):
+        return Path(self._config.get('photo_sets_path'))
