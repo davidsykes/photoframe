@@ -2,8 +2,11 @@ from pathlib import Path
 from common.src.config_file_loader import ConfigFileLoader
 from common.src.system_operations import SystemOperations
 from photo_set_builder.src.photo_set_builder_config import PhotosetBuilderConfig
+from photo_set_builder.src.photo_set_processing.photo_lister import PhotoLister
+from photo_set_builder.src.photo_set_processing.photo_set_processor import PhotoSetProcessor
+from photo_set_builder.src.photo_set_processing.photos_synchroniser import PhotosSynchroniser
 from photo_set_builder.src.photo_sets_lister import PhotoSetsLister
-from photo_set_builder.src.photo_sets_processor import PhotoSetsProcessor
+from photo_set_builder.src.photo_set_processing.photo_sets_processor import PhotoSetsProcessor
 from photo_set_builder.src.photo_sets_synchroniser import PhotoSetsSynchroniser
 from photo_set_builder.src.viewer_config_manager import ViewerConfigManager
 
@@ -22,7 +25,12 @@ def main() -> int:
     photo_sets_lister = PhotoSetsLister(system_operations)
     photo_sets_definitions = photo_sets_lister.list_photo_sets(
         config_data.photo_sets_path)
-    photo_sets_processor = PhotoSetsProcessor(system_operations)
+    photo_lister = PhotoLister(system_operations)
+    photos_synchroniser = PhotosSynchroniser()
+    photo_set_processor = PhotoSetProcessor(system_operations,
+                                            photo_lister,
+                                            photos_synchroniser)
+    photo_sets_processor = PhotoSetsProcessor(photo_set_processor)
     photo_sets_processor.process_photo_sets(photo_sets_definitions)
     viewer_config_manager = ViewerConfigManager(config_data.viewer_config_path)
     photo_set_synchroniser = PhotoSetsSynchroniser(system_operations)

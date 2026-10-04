@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import Mock
 
-from photo_set_builder.src.photo_set_processor import PhotoSetProcessor
-from photo_set_builder.src.photo_sets_processor import PhotoSetsProcessor
+from photo_set_builder.src.photo_set_processing.photo_set_processor import PhotoSetProcessor
+from photo_set_builder.src.photo_set_processing.photo_sets_processor import PhotoSetsProcessor
 
 
 class PhotoSetsProcessorTests(unittest.TestCase):
