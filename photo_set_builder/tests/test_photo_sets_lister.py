@@ -31,11 +31,11 @@ class PhotoSetsListerTests(unittest.TestCase):
 
     def setUp(self):
         self.system_operations = Mock(spec=SystemOperations)
-        self.system_operations.listdir = self.listdir
+        self.system_operations.list_sub_directories = self.list_sub_directories
         self.out = PhotoSetsLister(self.system_operations)
         self.images_folder_path = Path('test_images_folder')
 
-    def listdir(self, photo_sets_path):
+    def list_sub_directories(self, photo_sets_path):
         self.assertEqual(photo_sets_path, self.images_folder_path)
         return [
             'photo set 1',

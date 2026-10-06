@@ -1,3 +1,4 @@
+
 from photo_set_builder.src.data.photo_set_definition import PhotoSetDefinition
 
 
@@ -7,7 +8,7 @@ class PhotoSetsLister:
 
     def list_photo_sets(self, photo_sets_path):
         self._system_operations.log(f"Listing photo sets from {photo_sets_path}")
-        folders = self._system_operations.listdir(photo_sets_path)
+        folders = self._system_operations.list_sub_directories(photo_sets_path)
         return [
             PhotoSetDefinition(
                 name=folder_name,

@@ -42,6 +42,9 @@ class SystemOperations:
             and path.suffix.lower() not in excluded_extensions
         ]
 
+    def list_sub_directories(self, path):
+        return [f for f in path.iterdir() if f.is_dir()]
+
     def rmtree(self, path):
         print(f'Remove folder {path}')
         shutil.rmtree(path)

@@ -1,2 +1,8 @@
 
-Fix the issue when rebooting starts before wifi is enabled
+#Fix the issue when rebooting starts before wifi is enabled
+
+Fades and other effects
+
+A clock
+
+Bluetooth controller

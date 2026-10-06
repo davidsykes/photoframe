@@ -15,3 +15,7 @@ class PhotosetBuilderConfig:
     @property
     def viewer_config_path(self):
         return Path(self._config.get('viewer_config_path'))
+
+    @property
+    def compressed_folder_name(self):
+        return self._config.get('compressed_folder_name')
