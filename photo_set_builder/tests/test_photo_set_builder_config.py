@@ -22,7 +22,7 @@ class PhotosetBuilderConfigTests(unittest.TestCase):
     def test_compressed_folder_name(self):
         self.assertEqual(
             self.out.compressed_folder_name,
-            Path('compressed')
+            'compressed'
         )
 
     def setUp(self):
