@@ -16,13 +16,13 @@ class ListToDictConverterTests(unittest.TestCase):
         self.list_to_convert = [
             PhotoEntry(source_path=Path('path/to/source1.jpg'),
                        relative_path=Path('relative/path1.jpg'),
-                       output_name='output1'),
+                       photo_name='output1'),
             PhotoEntry(source_path=Path('path/to/source2.jpg'),
                        relative_path=Path('relative/path2.jpg'),
-                       output_name='output2'),
+                       photo_name='output2'),
             PhotoEntry(source_path=Path('path/to/source3.jpg'),
                        relative_path=Path('relative/path3.jpg'),
-                       output_name='output3')
+                       photo_name='output3')
         ]
         self.expected_dictionary = {
             'output1': self.list_to_convert[0],
