@@ -20,5 +20,5 @@ class RetryingAction:
                 return True
             if self._sys_operations.time_monotonic() >= deadline:
                     return False
-            
+
             self._sys_operations.sleep(self._retry_interval_seconds)

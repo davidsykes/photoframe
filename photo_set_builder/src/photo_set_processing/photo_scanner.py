@@ -1,4 +1,3 @@
-from pathlib import Path
 from photo_set_builder.src.data.photo_entry import PhotoEntry
 
 
@@ -17,4 +16,4 @@ class PhotoScanner:
                     relative_path += item.name + '_'
                     yield from self._scan(item, relative_path)
             elif item.is_file():
-                yield PhotoEntry(item, relative_path, relative_path + item.name)
+                yield PhotoEntry(item, relative_path + item.name)

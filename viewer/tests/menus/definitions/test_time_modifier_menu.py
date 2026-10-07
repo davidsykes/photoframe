@@ -49,7 +49,7 @@ class TimeModifierMenuTests(unittest.TestCase):
         self.out.press('minute up')
         self.assertEqual(self.time,
                          time.fromisoformat('10:20'))
-        
+
         self.out.press('hour down')
         self.out.press('minute down')
         self.assertEqual(self.time,

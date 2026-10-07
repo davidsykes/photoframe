@@ -7,7 +7,7 @@ class PhotoHistory:
 
     def __len__(self) -> int:
         return len(self._history)
-    
+
     def __getitem__(self, index):
         if index < len(self._history):
             return self._history[-index-1]

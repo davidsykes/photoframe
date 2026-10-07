@@ -7,7 +7,7 @@ from viewer.src.awake_periods.awake_schedule import AwakeSchedule
 class AwakeScheduleTests(unittest.TestCase):
     def test_if_database_settings_are_missing_the_defaults_are_used(self):
         self.create_test_object()
-        
+
         self.assertEqual(time.fromisoformat('08:30'), self.out.get_wake_time())
         self.assertEqual(time.fromisoformat('19:45'), self.out.get_sleep_time())
 
@@ -15,7 +15,7 @@ class AwakeScheduleTests(unittest.TestCase):
         self.database_data = {'wake_time': '11:11'}
 
         self.create_test_object()
-        
+
         self.assertEqual(time.fromisoformat('11:11'), self.out.get_wake_time())
         self.assertEqual(time.fromisoformat('19:45'), self.out.get_sleep_time())
 
@@ -23,7 +23,7 @@ class AwakeScheduleTests(unittest.TestCase):
         self.database_data = {'sleep_time': '22:22'}
 
         self.create_test_object()
-        
+
         self.assertEqual(time.fromisoformat('08:30'), self.out.get_wake_time())
         self.assertEqual(time.fromisoformat('22:22'), self.out.get_sleep_time())
 
@@ -31,7 +31,7 @@ class AwakeScheduleTests(unittest.TestCase):
         self.database_data = {'wake_time': '11:11', 'sleep_time': '22:22'}
 
         self.create_test_object()
-        
+
         self.assertEqual(time.fromisoformat('11:11'), self.out.get_wake_time())
         self.assertEqual(time.fromisoformat('22:22'), self.out.get_sleep_time())
 
@@ -39,7 +39,7 @@ class AwakeScheduleTests(unittest.TestCase):
         self.create_test_object()
 
         self.out.set_wake_time(time.fromisoformat('12:34'))
-        
+
         self.assertEqual(time.fromisoformat('12:34'), self.out.get_wake_time())
 
     def test_set_wake_time_updates_database_value(self):
@@ -54,7 +54,7 @@ class AwakeScheduleTests(unittest.TestCase):
         self.create_test_object()
 
         self.out.set_sleep_time(time.fromisoformat('12:34'))
-        
+
         self.assertEqual(time.fromisoformat('12:34'), self.out.get_sleep_time())
 
     def test_set_sleep_time_updates_database_value(self):

@@ -18,7 +18,7 @@ class PhotosSynchroniserTests(unittest.TestCase):
             self.compressed_photos_dictionary,
             self.compressed_photos_path
         )
-        
+
     def test_the_compressed_photos_remover_is_called(self):
         self.out.synchronise_photos(self.photos,
                                     self.compressed_photos,

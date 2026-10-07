@@ -26,7 +26,7 @@ class NewAppOrNewPhotosDetectorTests(unittest.TestCase):
         self.system_operations.log.assert_called_once_with(
             'Remote configuration version: 1.2.3. Local version: 1.2.3'
         )
- 
+
         self.system_operations.log.reset_mock()
         self.remote_config_version_loader.get_config_data.return_value =(
             RemoteConfigData('4.5.6', 'photo folders'))

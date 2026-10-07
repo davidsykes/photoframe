@@ -20,5 +20,5 @@ class TestPhotoFromPhotoSetSelector(unittest.TestCase):
         self.out = PhotoFromPhotoSetSelector(
             self.randomiser,
             Mock(spec=RandomMonitor))
-        self.photo_set = PhotoSet('name', 
+        self.photo_set = PhotoSet('name',
             ['Photo 1', 'Photo 2', 'Photo 3', 'Photo 4'], 1)
