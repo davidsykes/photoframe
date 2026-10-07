@@ -1,10 +1,10 @@
 class PhotosSynchroniser:
     def __init__(self,
                  list_to_dict_converter,
-                 photo_compressor,
+                 photos_compressor,
                  compressed_photos_remover):
            self._list_to_dict_converter = list_to_dict_converter
-           self._photo_compressor = photo_compressor
+           self._photos_compressor = photos_compressor
            self._compressed_photos_remover = compressed_photos_remover
 
     def synchronise_photos(self,
@@ -15,7 +15,7 @@ class PhotosSynchroniser:
                 photos_list)
           compressed_photos_dictionary = self._list_to_dict_converter.convert(
                 compressed_photos_list)
-          self._photo_compressor.compress_photos(
+          self._photos_compressor.compress_photos(
                 photos_list,
                 compressed_photos_dictionary,
                 compressed_photos_folder

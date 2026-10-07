@@ -3,6 +3,7 @@ from common.src.config_file_loader import ConfigFileLoader
 from common.src.system_operations import SystemOperations
 from photo_set_builder.src.logic.list_to_dict_converter import ListToDictConverter
 from photo_set_builder.src.logic.photo_compressor import PhotoCompressor
+from photo_set_builder.src.logic.photo_zipper import PhotoZipper
 from photo_set_builder.src.photo_set_builder_config import PhotosetBuilderConfig
 from photo_set_builder.src.photo_set_processing.compressed_photos_remover import CompressedPhotosRemover
 from photo_set_builder.src.photo_set_processing.photos_compressor import PhotosCompressor
@@ -32,7 +33,8 @@ def main() -> int:
     photo_scanner = PhotoScanner(system_operations,
                                  config_data.compressed_folder_name)
     list_to_dict_converter = ListToDictConverter()
-    photo_compressor = PhotoCompressor()
+    photo_zipper = PhotoZipper()
+    photo_compressor = PhotoCompressor(photo_zipper)
     photos_compressor = PhotosCompressor(photo_compressor)
     compressed_photos_remover = CompressedPhotosRemover()
     photos_synchroniser = PhotosSynchroniser(

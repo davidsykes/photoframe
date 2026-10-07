@@ -9,7 +9,9 @@ class PhotosCompressor:
                         compressed_photos_path):
         for photo in photo_definitions:
             if photo.photo_name not in compressed_photos:
-                self._photo_compressor.compress_photos(
+                self._photo_compressor.compress_photo(
                     photo,
                     compressed_photos_path
-                )        
+                )
+            else:
+                print(f'Already compressed: {photo.photo_name}')

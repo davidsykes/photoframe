@@ -1,4 +1,3 @@
-from pathlib import Path
 import unittest
 from unittest.mock import Mock, call
 
@@ -27,9 +26,9 @@ class PhotosCompressorTests(unittest.TestCase):
                                    'compressed_photos_path')
 
         self.assertEqual(
-            self.photo_compressor.compress_photos.call_count, 3
+            self.photo_compressor.compress_photo.call_count, 3
         )
-        self.photo_compressor.compress_photos.assert_has_calls(
+        self.photo_compressor.compress_photo.assert_has_calls(
             [call(photos_to_compress[0], 'compressed_photos_path'),
              call(photos_to_compress[2], 'compressed_photos_path'),
              call(photos_to_compress[4], 'compressed_photos_path'),]
