@@ -22,6 +22,7 @@ class PhotosSynchroniser:
           )
           self._compressed_photos_remover.remove_compressed_photos(
                 compressed_photos_list,
-                photos_dictionary
+                photos_dictionary,
+                compressed_photos_folder
           )
         

@@ -1,4 +1,11 @@
+from dataclasses import dataclass
+from pathlib import Path
+
+from common.src.config_file import ConfigFile
+
+
+@dataclass(frozen=True)
 class PhotoSetDefinition:
-    def __init__(self, name, path):
-        self.name = name
-        self.path = path
+    name: str
+    photo_set_path: Path
+    configuration: ConfigFile

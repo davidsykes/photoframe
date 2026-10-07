@@ -36,7 +36,7 @@ def main() -> int:
     photo_zipper = PhotoZipper()
     photo_compressor = PhotoCompressor(photo_zipper)
     photos_compressor = PhotosCompressor(photo_compressor)
-    compressed_photos_remover = CompressedPhotosRemover()
+    compressed_photos_remover = CompressedPhotosRemover(system_operations)
     photos_synchroniser = PhotosSynchroniser(
         list_to_dict_converter,
         photos_compressor,

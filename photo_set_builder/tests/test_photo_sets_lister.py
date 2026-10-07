@@ -6,27 +6,22 @@ from common.src.system_operations import SystemOperations
 from photo_set_builder.src.photo_sets_lister import PhotoSetsLister
 
 class PhotoSetsListerTests(unittest.TestCase):
-    def test_list_photo_sets_creates_photo_sets_for_each_folder(self):
+    def test_list_photo_sets_creates_photo_set_defenitions_for_each_folder(self):
         photo_sets = self.out.list_photo_sets(self.images_folder_path)
 
         self.assertEqual(len(photo_sets), 3)
+
+        self.check_set(photo_sets[0],
+                       'photo set 1')
+        self.check_set(photo_sets[1],
+                       'photo set 2')
+        self.check_set(photo_sets[2],
+                       'photo set 3')
+
+    def check_set(self, photo_set, name):
+        self.assertEqual(photo_set.name, name)
         self.assertEqual(
-            photo_sets[0].name, 'photo set 1'
-        )
-        self.assertEqual(
-            photo_sets[0].path, self.images_folder_path / 'photo set 1'
-        )
-        self.assertEqual(
-            photo_sets[1].name, 'photo set 2'
-        )
-        self.assertEqual(
-            photo_sets[1].path, self.images_folder_path / 'photo set 2'
-        )
-        self.assertEqual(
-            photo_sets[2].name, 'photo set 3'
-        )
-        self.assertEqual(
-            photo_sets[2].path, self.images_folder_path / 'photo set 3'
+            photo_set.photo_set_path, self.images_folder_path / name
         )
 
     def setUp(self):
