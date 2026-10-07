@@ -26,10 +26,13 @@ class PhotosCompressorTests(unittest.TestCase):
                                    compressed_photos,
                                    'compressed_photos_path')
 
+        self.assertEqual(
+            self.photo_compressor.compress_photos.call_count, 3
+        )
         self.photo_compressor.compress_photos.assert_has_calls(
-            [call(['image1.jpg', 'compressed_photos_path', 'image1']),
-             call(['image3.jpg', 'compressed_photos_path', 'image3']),
-             call(['image5.jpg', 'compressed_photos_path', 'image5']),]
+            [call(photos_to_compress[0], 'compressed_photos_path'),
+             call(photos_to_compress[2], 'compressed_photos_path'),
+             call(photos_to_compress[4], 'compressed_photos_path'),]
         )
 
     def setUp(self):

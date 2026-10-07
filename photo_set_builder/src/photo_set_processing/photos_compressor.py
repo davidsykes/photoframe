@@ -1,0 +1,15 @@
+class PhotosCompressor:
+    def __init__(self,
+                 photo_compressor):
+        self._photo_compressor = photo_compressor
+
+    def compress_photos(self,
+                        photo_definitions,
+                        compressed_photos,
+                        compressed_photos_path):
+        for photo in photo_definitions:
+            if photo.photo_name not in compressed_photos:
+                self._photo_compressor.compress_photos(
+                    photo,
+                    compressed_photos_path
+                )        
