@@ -3,6 +3,7 @@ from common.src.config_file_loader import ConfigFileLoader
 from common.src.system_operations import SystemOperations
 from photo_set_builder.src.logic.list_to_dict_converter import ListToDictConverter
 from photo_set_builder.src.logic.photo_compressor import PhotoCompressor
+from photo_set_builder.src.logic.photo_set_builder_exception import PhotoSetBuilderException
 from photo_set_builder.src.logic.photo_set_config_loader import PhotoSetConfigLoader
 from photo_set_builder.src.logic.photo_zipper import PhotoZipper
 from photo_set_builder.src.photo_set_builder_config import PhotosetBuilderConfig
@@ -55,5 +56,11 @@ def main() -> int:
     photo_set_synchroniser.synchronise_photo_sets(photo_sets_definitions, viewer_config_manager.photo_folders)
     viewer_config_manager.save_viewer_config()
 
+def main2():
+    try:
+        return main()
+    except PhotoSetBuilderException as e:
+        print(f"Error: {e}")
+
 if __name__ == '__main__':
-    raise SystemExit(main())
+    raise SystemExit(main2())

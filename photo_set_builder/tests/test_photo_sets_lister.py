@@ -53,9 +53,9 @@ class PhotoSetsListerTests(unittest.TestCase):
         ]
 
     def load_photo_set_config(self, config_path):
-        if config_path == Path('test_images_folder/photo set 1'):
+        if config_path == Path('test_images_folder/photo set 1/config.json'):
             return self.photo_set_configs[0]
-        if config_path == Path('test_images_folder/photo set 2'):
+        if config_path == Path('test_images_folder/photo set 2/config.json'):
             return self.photo_set_configs[1]
-        if config_path == Path('test_images_folder/photo set 3'):
+        if config_path == Path('test_images_folder/photo set 3/config.json'):
             return self.photo_set_configs[2]

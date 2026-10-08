@@ -3,6 +3,7 @@ import unittest
 from unittest.mock import Mock
 
 from common.src.system_operations import SystemOperations
+from photo_set_builder.src.data.photo_set_definition import PhotoSetDefinition
 from photo_set_builder.src.photo_set_processing.photo_scanner import PhotoScanner
 from photo_set_builder.src.photo_set_processing.photo_set_processor import PhotoSetProcessor
 from photo_set_builder.src.photo_set_processing.photos_synchroniser import PhotosSynchroniser
@@ -17,7 +18,10 @@ class PhotoSetProcessorTests(unittest.TestCase):
         )
 
     def setUp(self):
-        self.photo_set = Mock(name='PhotoSet1', path=Path('path/to/photo_set1'))
+        self.photo_set = PhotoSetDefinition(
+            'PhotoSet1',
+            Path('path/to/photo_set1'),
+            None)
         self.system_operations = Mock(spec=SystemOperations)
         self.photo_scanner = Mock(spec=PhotoScanner)
         self.photo_scanner.scan = self.scan_photos
@@ -32,7 +36,6 @@ class PhotoSetProcessorTests(unittest.TestCase):
 
     def scan_photos(self, photo_set_path):
         if photo_set_path == Path('path/to/photo_set1'):
-            #self.assertEqual(photo_set_path, Path('path/to/photo_set1'))
             return 'list of photos'
         if photo_set_path == Path('path/to/photo_set1/compressed'):
             return 'list of compressed photos'

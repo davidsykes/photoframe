@@ -1,0 +1,2 @@
+class PhotoSetBuilderException(Exception):
+    pass

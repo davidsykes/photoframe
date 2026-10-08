@@ -1,4 +1,3 @@
-
 from photo_set_builder.src.data.photo_set_definition import PhotoSetDefinition
 
 
@@ -19,4 +18,5 @@ class PhotoSetsLister:
         ]
 
     def load_config(self, photo_set_path):
-        return self._photo_set_config_loader.load_config(photo_set_path)
+        return self._photo_set_config_loader.load_config(
+            photo_set_path / 'config.json')

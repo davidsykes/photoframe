@@ -10,7 +10,7 @@ class PhotoSetProcessor:
         self._compressed_folder_name = compressed_folder_name
 
     def process_photo_set(self, photo_set):
-        photo_set_path = photo_set.path
+        photo_set_path = photo_set.photo_set_path
         print(f"Processing photo set: {photo_set.name} at {photo_set_path}")
         photo_definitions = self._photo_scanner.scan(
             photo_set_path)
