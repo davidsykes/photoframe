@@ -17,6 +17,6 @@ class PhotoSetProcessor:
         compressed_photos_path = photo_set_path / self._compressed_folder_name
         compressed_photos = self._photo_scanner.scan(
             compressed_photos_path)
-        sync_result = self._photos_synchroniser.synchronise_photos(
+        photo_set_has_changed = self._photos_synchroniser.synchronise_photos(
             photo_definitions, compressed_photos, compressed_photos_path)
-        photo_set.synchronisation_result = sync_result
+        photo_set.photo_set_has_changed = photo_set_has_changed

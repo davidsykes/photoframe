@@ -12,10 +12,12 @@ class PhotoSetProcessorTests(unittest.TestCase):
     def test_the_photo_set_is_processed(self):
         self.out.process_photo_set(self.photo_set)
 
-        self.assertEqual(
-            self.synchronisation_result,
-            'processed'
-        )
+        self.assertTrue(self.synchronise_photos_correctly_run)
+
+    def test_the_photo_set_dirty_flag_is_set(self):
+        self.out.process_photo_set(self.photo_set)
+
+        self.assertTrue(self.photo_set.photo_set_has_changed)
 
     def setUp(self):
         self.photo_set = PhotoSetDefinition(
@@ -43,6 +45,7 @@ class PhotoSetProcessorTests(unittest.TestCase):
     def synchronise_photos(self, photo_definitions, compressed_photos, compressed_photos_path):
         self.assertEqual(photo_definitions, 'list of photos')
         self.assertEqual(compressed_photos, 'list of compressed photos')
-        self.assertEqual(compressed_photos_path, Path('path/to/photo_set1/compressed'))
-        self.synchronisation_result = 'processed'
-        return self.synchronisation_result
+        self.assertEqual(compressed_photos_path,
+                         Path('path/to/photo_set1/compressed'))
+        self.synchronise_photos_correctly_run = True
+        return True
