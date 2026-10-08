@@ -7,7 +7,7 @@ from photo_set_builder.src.data.photo_entry import PhotoEntry
 from photo_set_builder.src.photo_set_processing.compressed_photos_remover import CompressedPhotosRemover
 
 class CompressedPhotosRemoverTests(unittest.TestCase):
-    def test_photos_not_compressed_are_compressed(self):
+    def test_compressed_photos_with_no_original_are_removed(self):
         compressed_photos = [
             PhotoEntry('image1.jpg', 'image1'),
             PhotoEntry('image2.jpg', 'image2'),
@@ -42,6 +42,45 @@ class CompressedPhotosRemoverTests(unittest.TestCase):
         #      call(self.compressed_photos_path / 'image3'),
         #      call(self.compressed_photos_path / 'image5')]
         )
+    
+    def test_if_photos_are_removed_true_is_returned(self):
+        compressed_photos = [
+            PhotoEntry('image1.jpg', 'image1'),
+            PhotoEntry('image2.jpg', 'image2'),
+            PhotoEntry('image3.jpg', 'image3'),
+            PhotoEntry('image4.jpg', 'image4'),
+            PhotoEntry('image5.jpg', 'image5')
+        ]
+
+        photos_dictionary = {
+            'image2': 'compressed_image2.jpg',
+            'image4': 'compressed_image4.jpg',
+        }
+
+        result = self.out.remove_compressed_photos(
+            compressed_photos,
+            photos_dictionary,
+            self.compressed_photos_path)
+
+        self.assertTrue(result)
+    
+    def test_if_no_photos_are_removed_false_is_returned(self):
+        compressed_photos = [
+            PhotoEntry('image2.jpg', 'image2'),
+            PhotoEntry('image4.jpg', 'image4'),
+        ]
+
+        photos_dictionary = {
+            'image2': 'compressed_image2.jpg',
+            'image4': 'compressed_image4.jpg',
+        }
+
+        result = self.out.remove_compressed_photos(
+            compressed_photos,
+            photos_dictionary,
+            self.compressed_photos_path)
+
+        self.assertFalse(result)
 
     def setUp(self):
         self.system_operations = Mock(spec=SystemOperations)
