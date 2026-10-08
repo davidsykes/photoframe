@@ -30,6 +30,21 @@ class PhotosSynchroniserTests(unittest.TestCase):
             self.compressed_photos_path
         )
 
+    def test_the_synchroniser_ors_the_return_values(self):
+        self.check_result(False, False, False)
+        self.check_result(True, False, True)
+        self.check_result(False, True, True)
+        self.check_result(True, True, True)
+
+    def check_result(self, a, b, c):
+        self.photo_compressor.compress_photos.return_value = a
+        self.compressed_photos_remover.remove_compressed_photos.return_value = b
+        self.assertEqual(c,
+                         self.out.synchronise_photos(
+                             self.photos,
+                             self.compressed_photos,
+                             self.compressed_photos_path))
+
     def setUp(self):
         self.photos = 'photos'
         self.photos_dictionary = 'photos_dictionary'

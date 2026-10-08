@@ -15,14 +15,15 @@ class PhotosSynchroniser:
                 photos_list)
           compressed_photos_dictionary = self._list_to_dict_converter.convert(
                 compressed_photos_list)
-          self._photos_compressor.compress_photos(
+          a = self._photos_compressor.compress_photos(
                 photos_list,
                 compressed_photos_dictionary,
                 compressed_photos_folder
           )
-          self._compressed_photos_remover.remove_compressed_photos(
+          b = self._compressed_photos_remover.remove_compressed_photos(
                 compressed_photos_list,
                 photos_dictionary,
                 compressed_photos_folder
           )
+          return a or b
         
