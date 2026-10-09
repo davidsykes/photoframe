@@ -11,7 +11,7 @@ class CompressedPhotosRemover:
             if photo.photo_name not in photos_dictionary:
                 path = compressed_photos_path / photo.photo_name
                 self._system_operations.log(
-                    f'Delete zipped file {path}')
+                    f'Delete compressed file {path}')
                 #self._system_operations.delete_file(path)
                 photos_have_been_removed = True
         return photos_have_been_removed

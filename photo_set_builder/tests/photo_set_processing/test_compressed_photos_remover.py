@@ -30,9 +30,9 @@ class CompressedPhotosRemoverTests(unittest.TestCase):
             self.system_operations.log.call_count, 3
         )
         self.system_operations.log.assert_has_calls(
-            [call('Delete zipped file compressed_photos_path\\image1'),
-             call('Delete zipped file compressed_photos_path\\image3'),
-             call('Delete zipped file compressed_photos_path\\image5')]
+            [call('Delete compressed file compressed_photos_path\\image1'),
+             call('Delete compressed file compressed_photos_path\\image3'),
+             call('Delete compressed file compressed_photos_path\\image5')]
 
         # self.assertEqual(
         #     self.system_operations.delete_file.call_count, 3
