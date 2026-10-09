@@ -5,7 +5,7 @@ from unittest.mock import Mock
 from common.src.system_operations import SystemOperations
 from photo_set_builder.src.data.photo_set_configuration import PhotoSetConfiguration
 from photo_set_builder.src.logic.photo_set_config_loader import PhotoSetConfigLoader
-from photo_set_builder.src.photo_sets_lister import PhotoSetsLister
+from photo_set_builder.src.photo_set_processing.photo_sets_lister import PhotoSetsLister
 
 class PhotoSetsListerTests(unittest.TestCase):
     def test_list_photo_sets_creates_photo_set_defenitions_for_each_folder(self):
@@ -28,7 +28,7 @@ class PhotoSetsListerTests(unittest.TestCase):
         self.assertEqual(
             photo_set.photo_set_path, self.images_folder_path / name
         )
-        self.assertEqual(photo_set.configuration, config)
+        self.assertEqual(photo_set.config, config)
 
     def setUp(self):
         self.system_operations = Mock(spec=SystemOperations)
