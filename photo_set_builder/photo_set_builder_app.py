@@ -12,7 +12,7 @@ from photo_set_builder.src.photo_set_processing.photos_compressor import PhotosC
 from photo_set_builder.src.photo_set_processing.photo_scanner import PhotoScanner
 from photo_set_builder.src.photo_set_processing.photo_set_processor import PhotoSetProcessor
 from photo_set_builder.src.photo_set_processing.photos_synchroniser import PhotosSynchroniser
-from photo_set_builder.src.photo_sets_lister import PhotoSetsLister
+from photo_set_builder.src.photo_set_processing.photo_sets_lister import PhotoSetsLister
 from photo_set_builder.src.photo_set_processing.photo_sets_processor import PhotoSetsProcessor
 from photo_set_builder.src.photo_sets_synchroniser import PhotoSetsSynchroniser
 from photo_set_builder.src.viewer_config_manager import ViewerConfigManager

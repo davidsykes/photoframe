@@ -15,6 +15,4 @@ class PhotosCompressor:
                     compressed_photos_path
                 )
                 photos_have_been_compressed = True
-            else:
-                print(f'Already compressed: {photo.photo_name}')
         return photos_have_been_compressed
