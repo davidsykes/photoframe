@@ -3,27 +3,40 @@ import unittest
 from unittest.mock import Mock
 
 from common.src.system_operations import SystemOperations
+from photo_set_builder.src.data.photo_set_configuration import PhotoSetConfiguration
 from photo_set_builder.src.data.photo_set_definition import PhotoSetDefinition
 from photo_set_builder.src.photo_set_processing.photo_scanner import PhotoScanner
 from photo_set_builder.src.photo_set_processing.photo_set_processor import PhotoSetProcessor
 from photo_set_builder.src.photo_set_processing.photos_synchroniser import PhotosSynchroniser
 
 class PhotoSetProcessorTests(unittest.TestCase):
-    def test_the_photo_set_is_processed(self):
+    def test_the_photo_set_is_processed_when_include_in_sets_is_true(self):
         self.out.process_photo_set(self.photo_set)
 
         self.assertTrue(self.synchronise_photos_correctly_run)
 
-    def test_the_photo_set_dirty_flag_is_set(self):
+    def test_the_photo_set_dirty_flag_is_set_when_include_in_sets_is_true(self):
         self.out.process_photo_set(self.photo_set)
 
         self.assertTrue(self.photo_set.photo_set_has_changed)
+        
+    def test_the_photo_set_is_not_processed_when_include_in_sets_is_false(self):
+        photo_set = PhotoSetDefinition(
+            'PhotoSet1',
+            Path('path/to/photo_set1'),
+            PhotoSetConfiguration(False, 'filter'))
+        self.synchronise_photos_correctly_run = False
+
+        self.out.process_photo_set(photo_set)
+
+        self.assertFalse(self.synchronise_photos_correctly_run)
+        self.assertFalse(photo_set.photo_set_has_changed)
 
     def setUp(self):
         self.photo_set = PhotoSetDefinition(
             'PhotoSet1',
             Path('path/to/photo_set1'),
-            None)
+            PhotoSetConfiguration(True, 'filter'))
         self.system_operations = Mock(spec=SystemOperations)
         self.photo_scanner = Mock(spec=PhotoScanner)
         self.photo_scanner.scan = self.scan_photos

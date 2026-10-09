@@ -10,8 +10,12 @@ class PhotoSetProcessor:
         self._compressed_folder_name = compressed_folder_name
 
     def process_photo_set(self, photo_set):
+        if photo_set.config.include_in_sets:
+            self._process_photo_set(photo_set)
+
+    def _process_photo_set(self, photo_set):
         photo_set_path = photo_set.photo_set_path
-        print(f"Processing photo set: {photo_set.name} at {photo_set_path}")
+        print(f"Processing photo set: {photo_set.name} at {photo_set_path} {photo_set.config.include_in_sets}")
         photo_definitions = self._photo_scanner.scan(
             photo_set_path)
         compressed_photos_path = photo_set_path / self._compressed_folder_name
