@@ -39,7 +39,15 @@ class TestConfigFileLoader(unittest.TestCase):
             self.system_operations.logs,
             ["Failed to parse JSON file 'config.ini': Expecting value: line 1 column 1 (char 0)"])
 
+    def test_bool_values_are_supported(self):
+        self.system_operations.data = '{ "image_directory": "images", "flag": true }'
+
+        ini_file = self.out.load_config_file("config.ini")
+
+        self.assertTrue(ini_file.get('flag'))
+        self.assertTrue(isinstance(ini_file.get('flag'), bool))
+
     def setUp(self):
-        data = "{ \"image_directory\": \"images\" }"
+        data = '{ "image_directory": "images" }'
         self.system_operations = MockSystemOperations(data)
         self.out = ConfigFileLoader(self.system_operations)
