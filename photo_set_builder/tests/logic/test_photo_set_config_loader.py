@@ -30,6 +30,18 @@ class PhotoSetConfigLoaderTests(unittest.TestCase):
         with self.assertRaises(Exception):
             self.out.load_config('config file path')
 
+    def test_if_include_in_photo_sets_is_not_a_bool_an_exception_is_thrown(self):
+        self.config = ConfigFile(
+            {
+                'include_in_photo_sets': 'True',
+                'filter': 'filter',
+            },
+            'config file path'
+        )
+
+        with self.assertRaises(Exception):
+            self.out.load_config('config file path')
+
     def setUp(self):
         self.config_file_loader = Mock(spec=ConfigFileLoader)
         self.config_file_loader.load_config_file = self.load_config_file

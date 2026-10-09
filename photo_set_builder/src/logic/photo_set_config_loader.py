@@ -12,7 +12,11 @@ class PhotoSetConfigLoader:
         if config is None:
             raise PhotoSetBuilderException(f'Could not open config file {config_path}')
 
+        include_in_photo_sets = config.get('include_in_photo_sets')
+        if not isinstance(include_in_photo_sets, bool):
+            raise PhotoSetBuilderException(f'Invalid include_in_photo_sets value: {config_path}')
+
         return PhotoSetConfiguration(
-            config.get('include_in_photo_sets'),
+            include_in_photo_sets,
             config.get('filter'),
         )
