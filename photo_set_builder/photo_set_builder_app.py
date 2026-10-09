@@ -8,6 +8,7 @@ from photo_set_builder.src.logic.photo_set_config_loader import PhotoSetConfigLo
 from photo_set_builder.src.logic.photo_zipper import PhotoZipper
 from photo_set_builder.src.photo_set_builder_config import PhotosetBuilderConfig
 from photo_set_builder.src.photo_set_processing.compressed_photos_remover import CompressedPhotosRemover
+from photo_set_builder.src.photo_set_processing.photo_set_zipper import PhotoSetZipper
 from photo_set_builder.src.photo_set_processing.photos_compressor import PhotosCompressor
 from photo_set_builder.src.photo_set_processing.photo_scanner import PhotoScanner
 from photo_set_builder.src.photo_set_processing.photo_set_processor import PhotoSetProcessor
@@ -45,9 +46,11 @@ def main() -> int:
         list_to_dict_converter,
         photos_compressor,
         compressed_photos_remover)
+    photo_set_zipper = PhotoSetZipper()
     photo_set_processor = PhotoSetProcessor(system_operations,
                                             photo_scanner,
                                             photos_synchroniser,
+                                            photo_set_zipper,
                                             config_data.compressed_folder_name)
     photo_sets_processor = PhotoSetsProcessor(photo_set_processor)
     photo_sets_processor.process_photo_sets(photo_sets_definitions)
