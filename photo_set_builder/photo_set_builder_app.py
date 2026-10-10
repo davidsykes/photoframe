@@ -54,9 +54,14 @@ def main() -> int:
                                             config_data.compressed_folder_name)
     photo_sets_processor = PhotoSetsProcessor(photo_set_processor)
     photo_sets_processor.process_photo_sets(photo_sets_definitions)
-    viewer_config_manager = ViewerConfigManager(config_data.viewer_config_path)
-    photo_set_synchroniser = PhotoSetsSynchroniser(system_operations)
-    photo_set_synchroniser.synchronise_photo_sets(photo_sets_definitions, viewer_config_manager.photo_folders)
+    viewer_config_manager = ViewerConfigManager(
+        config_file_loader,
+        config_data.viewer_config_path)
+    photo_set_synchroniser = PhotoSetsSynchroniser(
+        system_operations,
+        viewer_config_manager)
+    photo_set_synchroniser.synchronise_photo_sets(
+        photo_sets_definitions)
     viewer_config_manager.save_viewer_config()
 
 def main2():
