@@ -50,6 +50,7 @@ class PhotoSetProcessorTests(unittest.TestCase):
         self.out.process_photo_set(self.photo_set)
 
         self.photo_set_zipper.zip_photo_set.assert_called_with(
+            'PhotoSet1',
             self.compressed_photos_path
         )
 
