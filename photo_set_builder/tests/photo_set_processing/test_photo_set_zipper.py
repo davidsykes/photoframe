@@ -10,7 +10,7 @@ class PhotoSetZipperTests(unittest.TestCase):
         self.out.zip_photo_set('set name', 'files path')
 
         self.zipper_implementation.zip.assert_called_once_with(
-            'set name.zip',
+            'set name',
             'files path'
         )
 

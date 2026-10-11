@@ -9,6 +9,7 @@ class PhotoScanner:
     }
     EXCLUDED_EXTENSIONS = {
         '.json',
+        '.zip'
     }
 
     def __init__(self, system_operations, excluded_folder):
@@ -37,4 +38,4 @@ class PhotoScanner:
                         relative_path + item.name,
                     )
                 elif item.suffix.lower() not in self.EXCLUDED_EXTENSIONS:
-                    print(f'Excluded file {item}')
+                    print(f'Exclude file from photo scan {item}')
