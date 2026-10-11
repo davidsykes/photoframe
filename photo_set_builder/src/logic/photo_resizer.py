@@ -1,7 +1,7 @@
 from PIL import Image, ImageOps
 
-class PhotoZipper:
-    def zip_photo(self, source_path, destination_path):
+class PhotoResizer:
+    def resize_photo(self, source_path, destination_path):
         print(f'Zip photo {source_path} to {destination_path}')
         with Image.open(source_path) as image:
             image = ImageOps.exif_transpose(image)

@@ -5,7 +5,7 @@ from photo_set_builder.src.logic.list_to_dict_converter import ListToDictConvert
 from photo_set_builder.src.logic.photo_compressor import PhotoCompressor
 from photo_set_builder.src.logic.photo_set_builder_exception import PhotoSetBuilderException
 from photo_set_builder.src.logic.photo_set_config_loader import PhotoSetConfigLoader
-from photo_set_builder.src.logic.photo_zipper import PhotoZipper
+from photo_set_builder.src.logic.photo_resizer import PhotoResizer
 from photo_set_builder.src.photo_set_builder_config import PhotosetBuilderConfig
 from photo_set_builder.src.photo_set_processing.compressed_photos_remover import CompressedPhotosRemover
 from photo_set_builder.src.photo_set_processing.photo_set_zipper import PhotoSetZipper
@@ -17,6 +17,7 @@ from photo_set_builder.src.photo_set_processing.photo_sets_lister import PhotoSe
 from photo_set_builder.src.photo_set_processing.photo_sets_processor import PhotoSetsProcessor
 from photo_set_builder.src.photo_sets_synchroniser import PhotoSetsSynchroniser
 from photo_set_builder.src.viewer_config_manager import ViewerConfigManager
+from photo_set_builder.src.zipper.zipper_implementation import ZipperImplementation
 
 
 APP_ROOT = Path(__file__).resolve().parent
@@ -38,15 +39,16 @@ def main() -> int:
     photo_scanner = PhotoScanner(system_operations,
                                  config_data.compressed_folder_name)
     list_to_dict_converter = ListToDictConverter()
-    photo_zipper = PhotoZipper()
-    photo_compressor = PhotoCompressor(photo_zipper)
+    photo_resizer = PhotoResizer()
+    photo_compressor = PhotoCompressor(photo_resizer)
     photos_compressor = PhotosCompressor(photo_compressor)
     compressed_photos_remover = CompressedPhotosRemover(system_operations)
     photos_synchroniser = PhotosSynchroniser(
         list_to_dict_converter,
         photos_compressor,
         compressed_photos_remover)
-    photo_set_zipper = PhotoSetZipper()
+    zipper_implementation = ZipperImplementation()
+    photo_set_zipper = PhotoSetZipper(zipper_implementation)
     photo_set_processor = PhotoSetProcessor(system_operations,
                                             photo_scanner,
                                             photos_synchroniser,
