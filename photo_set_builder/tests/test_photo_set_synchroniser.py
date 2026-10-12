@@ -1,4 +1,5 @@
 from datetime import date
+from pathlib import Path
 import unittest
 from unittest.mock import Mock
 from common.src.system_operations import SystemOperations
@@ -8,14 +9,19 @@ from photo_set_builder.src.photo_set_synchroniser import PhotoSetSynchroniser
 from photo_set_builder.src.viewer_config_manager import ViewerConfigManager
 
 class PhotoSetsSynchroniserTests(unittest.TestCase):
-    @unittest.skip
     def test_the_set_zip_file_is_copied_to_dropbox(self):
         self.out.synchronise_photo_set(self.photo_set)
 
         self.system_operations.shutil_copy.assert_called_once_with(
-            'set zip path',
-            'set dropbox target'
+            Path('zip path'),
+            Path('dropbox path/set name.zip')
         )
+
+    def test_if_the_set_zip_has_not_been_set_an_exception_is_thrown(self):
+        self.photo_set.zip_path = None
+
+        with self.assertRaises(Exception):
+            self.out.synchronise_photo_set(self.photo_set)
 
     def test_the_local_base_name_is_updated(self):        
         self.out.synchronise_photo_set(self.photo_set)
@@ -34,7 +40,8 @@ class PhotoSetsSynchroniserTests(unittest.TestCase):
     def setUp(self):
         self.photo_set = PhotoSetDefinition('set name',
                                             'set path',
-                                            None)
+                                            None,
+                                            Path('zip path'))
         self.viewer_config_manager = Mock(ViewerConfigManager)
         self.viewer_config_manager.find_photo_set_config = self.find_photo_set_config
         self.viewer_config_manager.config_entry = [
@@ -50,7 +57,8 @@ class PhotoSetsSynchroniserTests(unittest.TestCase):
         self.out = PhotoSetSynchroniser(
             self.system_operations,
             self.viewer_config_manager,
-            self.set_name_on_frame_disk_updater
+            self.set_name_on_frame_disk_updater,
+            Path('dropbox path')
             )
 
     def find_photo_set_config(self, name):

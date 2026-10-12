@@ -8,4 +8,5 @@ class PhotoSetDefinition:
     name: str
     photo_set_path: Path
     config: PhotoSetConfiguration
+    zip_path: Path = None
     photo_set_has_changed: bool = False

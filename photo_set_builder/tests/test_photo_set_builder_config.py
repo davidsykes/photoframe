@@ -25,13 +25,20 @@ class PhotosetBuilderConfigTests(unittest.TestCase):
             'compressed'
         )
 
+    def test_dropbox_path(self):
+        self.assertEqual(
+            self.out.dropbox_path,
+            'dropbox_path'
+        )
+
     def setUp(self):
         self.config_file_loader = Mock(spec=ConfigFileLoader)
         self.config = ConfigFile(
             {
                 'photo_sets_path': 'images folder',
                 'viewer_config_path': 'viewer config file path',
-                'compressed_folder_name': 'compressed'
+                'compressed_folder_name': 'compressed',
+                'dropbox_path': 'dropbox_path'
             },
             'config file path'
         )

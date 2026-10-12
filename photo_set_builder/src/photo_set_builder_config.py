@@ -19,3 +19,7 @@ class PhotosetBuilderConfig:
     @property
     def compressed_folder_name(self):
         return self._config.get('compressed_folder_name')
+
+    @property
+    def dropbox_path(self):
+        return self._config.get('dropbox_path')

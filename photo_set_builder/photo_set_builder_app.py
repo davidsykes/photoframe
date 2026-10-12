@@ -6,6 +6,7 @@ from photo_set_builder.src.logic.photo_compressor import PhotoCompressor
 from photo_set_builder.src.logic.photo_set_builder_exception import PhotoSetBuilderException
 from photo_set_builder.src.logic.photo_set_config_loader import PhotoSetConfigLoader
 from photo_set_builder.src.logic.photo_resizer import PhotoResizer
+from photo_set_builder.src.logic.set_name_on_frame_disk_updater import SetNameOnFrameDiskUpdater
 from photo_set_builder.src.photo_set_builder_config import PhotosetBuilderConfig
 from photo_set_builder.src.photo_set_processing.compressed_photos_remover import CompressedPhotosRemover
 from photo_set_builder.src.photo_set_processing.photo_set_zipper import PhotoSetZipper
@@ -60,10 +61,14 @@ def main() -> int:
     viewer_config_manager = ViewerConfigManager(
         config_file_loader,
         config_data.viewer_config_path)
-    photo_set_synchroniser = PhotoSetSynchroniser('a','b')
-    photo_sets_synchroniser = PhotoSetsSynchroniser(
-        photo_set_synchroniser,
-        viewer_config_manager)
+    set_name_on_frame_disk_updater = SetNameOnFrameDiskUpdater()
+    photo_set_synchroniser = PhotoSetSynchroniser(
+        system_operations,
+        viewer_config_manager,
+        set_name_on_frame_disk_updater,
+        config_data.dropbox_path
+    )
+    photo_sets_synchroniser = PhotoSetsSynchroniser(photo_set_synchroniser)
     photo_sets_synchroniser.synchronise_photo_sets(
         photo_sets_definitions)
     viewer_config_manager.save_viewer_config()
