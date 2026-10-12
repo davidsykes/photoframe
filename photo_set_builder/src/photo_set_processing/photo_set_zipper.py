@@ -4,7 +4,7 @@ class PhotoSetZipper:
 
     def zip_photo_set(self, set_name, compressed_photos_path):
         print(f'Call zipper implementation with {set_name} {compressed_photos_path}')
-        self._zipper_implementation.zip(
+        return self._zipper_implementation.zip(
             set_name,
             compressed_photos_path
         )

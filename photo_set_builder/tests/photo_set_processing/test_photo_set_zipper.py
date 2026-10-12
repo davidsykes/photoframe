@@ -14,6 +14,14 @@ class PhotoSetZipperTests(unittest.TestCase):
             'files path'
         )
 
+    def test_the_zip_file_path_is_returned(self):
+        self.zipper_implementation.zip.return_value = 'zip file path'
+
+        path = self.out.zip_photo_set('set name', 'files path')
+
+        self.assertEqual(path,
+                         'zip file path')
+
     def setUp(self):
         self.zipper_implementation = Mock(spec=ZipperImplementation)
         self.out = PhotoSetZipper(self.zipper_implementation)
