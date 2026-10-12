@@ -11,39 +11,27 @@ from photo_set_builder.src.photo_set_processing.photo_set_zipper import PhotoSet
 from photo_set_builder.src.photo_set_processing.photos_synchroniser import PhotosSynchroniser
 
 class PhotoSetProcessorTests(unittest.TestCase):
-    def test_the_photo_set_is_processed_when_include_in_sets_is_true(self):
+    def test_the_photo_set_is_processed(self):
         self.synchronise_photos_return_value = True
 
         self.out.process_photo_set(self.photo_set)
 
         self.assertTrue(self.synchronise_photos_correctly_run)
 
-    def test_the_photo_set_dirty_flag_is_set_when_include_in_sets_is_true_1(self):
+    def test_the_photo_set_dirty_flag_is_set(self):
         self.synchronise_photos_return_value = True
 
         self.out.process_photo_set(self.photo_set)
 
         self.assertTrue(self.photo_set.photo_set_has_changed)
 
-    def test_the_photo_set_dirty_flag_is_set_when_include_in_sets_is_true_2(self):
+    def test_the_photo_set_dirty_flag_is_set_2(self):
         self.synchronise_photos_return_value = False
 
         self.out.process_photo_set(self.photo_set)
 
         self.assertFalse(self.photo_set.photo_set_has_changed)
         
-    def test_the_photo_set_is_not_processed_when_include_in_sets_is_false(self):
-        photo_set = PhotoSetDefinition(
-            'PhotoSet1',
-            Path('path/to/photo_set1'),
-            PhotoSetConfiguration(False, 'filter'))
-        self.synchronise_photos_correctly_run = False
-
-        self.out.process_photo_set(photo_set)
-
-        self.assertFalse(self.synchronise_photos_correctly_run)
-        self.assertFalse(photo_set.photo_set_has_changed)
-
     def test_if_a_set_is_found_to_be_dirty_it_is_zipped(self):
         self.synchronise_photos_return_value = True
 

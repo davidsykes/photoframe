@@ -4,4 +4,5 @@ class PhotoSetsProcessor:
 
     def process_photo_sets(self, photo_sets):
         for photo_set in photo_sets:
-            self.photo_set_processor.process_photo_set(photo_set)
+            if photo_set.config.include_in_sets:
+                self.photo_set_processor.process_photo_set(photo_set)
