@@ -15,9 +15,10 @@ class PhotoSetProcessor:
         compressed_photos_path = photo_set.photo_set_path / self._compressed_folder_name
         self._process_photo_set(photo_set, compressed_photos_path)
         if photo_set.photo_set_has_changed:
-            self._photo_set_zipper.zip_photo_set(
+            zip_path = self._photo_set_zipper.zip_photo_set(
                 photo_set.name,
                 compressed_photos_path)
+            photo_set.zip_path = zip_path
 
     def _process_photo_set(self, photo_set, compressed_photos_path):
         self._system_operations.log(f"Process photo set: {photo_set.name} at {photo_set.photo_set_path} {photo_set.config.include_in_sets}")

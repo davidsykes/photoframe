@@ -49,6 +49,21 @@ class PhotoSetProcessorTests(unittest.TestCase):
 
         self.photo_set_zipper.zip_photo_set.assert_not_called()
 
+    def test_if_a_set_has_changed_the_zip_path_is_updated(self):
+        self.synchronise_photos_return_value = True
+
+        self.out.process_photo_set(self.photo_set)
+
+        self.assertEqual(self.photo_set.zip_path,
+                         'photo set zip path')
+
+    def test_if_a_set_has_not_changed_the_zip_path_is_not_updated(self):
+        self.synchronise_photos_return_value = False
+
+        self.out.process_photo_set(self.photo_set)
+
+        self.assertIsNone(self.photo_set.zip_path)
+
     def setUp(self):
         self.photos_path = Path('path/to/photo_set1')
         self.compressed_photos_path = Path('path/to/photo_set1/compressed')
@@ -62,6 +77,7 @@ class PhotoSetProcessorTests(unittest.TestCase):
         self.photos_synchroniser = Mock(spec=PhotosSynchroniser)
         self.photos_synchroniser.synchronise_photos = self.synchronise_photos
         self.photo_set_zipper = Mock(spec=PhotoSetZipper)
+        self.photo_set_zipper.zip_photo_set.return_value = 'photo set zip path'
         self.out = PhotoSetProcessor(
             self.system_operations,
             self.photo_scanner,
