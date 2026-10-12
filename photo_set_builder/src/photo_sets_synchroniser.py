@@ -4,6 +4,7 @@ class PhotoSetsSynchroniser:
 
     def synchronise_photo_sets(self, photo_sets_definitions):
         for photo_set in photo_sets_definitions:
-            self._photo_set_synchroniser.synchronise_photo_set(
-                photo_set
-            )
+            if photo_set.photo_set_has_changed:
+                self._photo_set_synchroniser.synchronise_photo_set(
+                    photo_set
+                )
