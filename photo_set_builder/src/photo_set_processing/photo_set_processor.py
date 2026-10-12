@@ -21,7 +21,7 @@ class PhotoSetProcessor:
                     compressed_photos_path)
 
     def _process_photo_set(self, photo_set, compressed_photos_path):
-        print(f"Processing photo set: {photo_set.name} at {photo_set.photo_set_path} {photo_set.config.include_in_sets}")
+        self._system_operations.log(f"Process photo set: {photo_set.name} at {photo_set.photo_set_path} {photo_set.config.include_in_sets}")
         photo_definitions = self._photo_scanner.scan(
             photo_set.photo_set_path)
         compressed_photos = self._photo_scanner.scan(

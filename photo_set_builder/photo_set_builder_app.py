@@ -15,6 +15,7 @@ from photo_set_builder.src.photo_set_processing.photo_set_processor import Photo
 from photo_set_builder.src.photo_set_processing.photos_synchroniser import PhotosSynchroniser
 from photo_set_builder.src.photo_set_processing.photo_sets_lister import PhotoSetsLister
 from photo_set_builder.src.photo_set_processing.photo_sets_processor import PhotoSetsProcessor
+from photo_set_builder.src.photo_set_synchroniser import PhotoSetSynchroniser
 from photo_set_builder.src.photo_sets_synchroniser import PhotoSetsSynchroniser
 from photo_set_builder.src.viewer_config_manager import ViewerConfigManager
 from photo_set_builder.src.zipper.zipper_implementation import ZipperImplementation
@@ -59,10 +60,11 @@ def main() -> int:
     viewer_config_manager = ViewerConfigManager(
         config_file_loader,
         config_data.viewer_config_path)
-    photo_set_synchroniser = PhotoSetsSynchroniser(
-        system_operations,
+    photo_set_synchroniser = PhotoSetSynchroniser('a','b')
+    photo_sets_synchroniser = PhotoSetsSynchroniser(
+        photo_set_synchroniser,
         viewer_config_manager)
-    photo_set_synchroniser.synchronise_photo_sets(
+    photo_sets_synchroniser.synchronise_photo_sets(
         photo_sets_definitions)
     viewer_config_manager.save_viewer_config()
 
