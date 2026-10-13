@@ -1,3 +1,4 @@
+import json
 from photo_set_builder.src.logic.photo_set_builder_exception import PhotoSetBuilderException
 
 
@@ -7,15 +8,15 @@ class ViewerConfigManager:
                  config_file_path):
         self._config_file_loader = config_file_loader
         self.config_file_path = config_file_path
+        self._config_version_name = 'version2'
+        self._photo_folders_config_name = 'photo_folders2'
         self.load_config()
 
     def load_config(self):
-        #print(f'MAMMDSDM {self.config_file_path}')
-
         self._config = self._config_file_loader.load_config_file(
             self.config_file_path
         )
-        self._photo_folders = self._config.get('photo_folders')
+        self._photo_folders = self._config.get(self._photo_folders_config_name)
 
     def find_photo_set_config(self, photo_set_name):
         for photo_set in self._photo_folders:
@@ -24,3 +25,10 @@ class ViewerConfigManager:
 
         raise PhotoSetBuilderException(
             f'Photo set {photo_set_name} not found in viewer config file')
+
+    def save_viewer_config(self):
+        save_path = self.config_file_path
+        with open(save_path, 'w') as f:
+            f.write(
+                json.dumps(self._config.config, indent=4)
+            )

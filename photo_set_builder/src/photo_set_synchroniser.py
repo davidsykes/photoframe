@@ -13,7 +13,6 @@ class PhotoSetSynchroniser:
         self._dropbox_path = dropbox_path
 
     def synchronise_photo_set(self, photo_set):
-        print(f'SSPPSS1 {photo_set}')
         config_entry = self._viewer_config_manager.find_photo_set_config(
             photo_set.name
         )
