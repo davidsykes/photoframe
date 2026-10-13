@@ -22,4 +22,4 @@ class PhotosetBuilderConfig:
 
     @property
     def dropbox_path(self):
-        return self._config.get('dropbox_path')
+        return Path(self._config.get('dropbox_path'))

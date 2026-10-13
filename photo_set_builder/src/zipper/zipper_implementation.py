@@ -77,4 +77,4 @@ def build_photo_set_zip(photo_set_name: str, set_path: Path) -> Path:
 
 class ZipperImplementation:
     def zip(self, photo_set_name, zip_files_path):
-        build_photo_set_zip(photo_set_name, zip_files_path)
+        return build_photo_set_zip(photo_set_name, zip_files_path)

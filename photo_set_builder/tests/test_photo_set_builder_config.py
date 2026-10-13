@@ -28,7 +28,7 @@ class PhotosetBuilderConfigTests(unittest.TestCase):
     def test_dropbox_path(self):
         self.assertEqual(
             self.out.dropbox_path,
-            'dropbox_path'
+            Path('dropbox_path')
         )
 
     def setUp(self):

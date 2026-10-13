@@ -26,7 +26,7 @@ class ViewerConfigManagerTests(unittest.TestCase):
                 [
                     [ 'viewer-0.4.6', 'url'],
                     ],
-                    'photo_folders':
+                    'photo_folders2':
                     [
                         [ 'Set 1', '1a', '43 ava', '2026-09-01'],
                         [ 'Set 2', '2a'],
