@@ -17,7 +17,19 @@ class PhotoSetsSynchroniserTests(unittest.TestCase):
             Path('dropbox path/set name.zip')
         )
 
-    def test_if_the_set_zip_has_not_been_set_an_exception_is_thrown(self):
+    def test_if_viewer_config_manager_find_photo_set_config_raises_an_exception_the_zip_file_is_still_copied(self):
+        self.viewer_config_manager.find_photo_set_config = Mock()
+        self.viewer_config_manager.find_photo_set_config.side_effect = Exception("Test")
+        
+        with self.assertRaises(Exception):
+            self.out.synchronise_photo_set(self.photo_set)
+
+        self.system_operations.shutil_copy.assert_called_once_with(
+            Path('zip path'),
+            Path('dropbox path/set name.zip')
+        )
+
+    def test_if_the_zip_path_has_not_been_set_an_exception_is_thrown(self):
         self.photo_set.zip_path = None
 
         with self.assertRaises(Exception):
