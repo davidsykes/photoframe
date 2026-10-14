@@ -13,10 +13,10 @@ class PhotoSetSynchroniser:
         self._dropbox_path = dropbox_path
 
     def synchronise_photo_set(self, photo_set):
+        self.copy_zip_file(photo_set)
         config_entry = self._viewer_config_manager.find_photo_set_config(
             photo_set.name
         )
-        self.copy_zip_file(photo_set)
         self.update_set_name_on_frame(config_entry)
         self.update_date(config_entry)
 

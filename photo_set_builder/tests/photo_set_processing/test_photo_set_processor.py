@@ -18,6 +18,15 @@ class PhotoSetProcessorTests(unittest.TestCase):
 
         self.assertTrue(self.synchronise_photos_correctly_run)
 
+    def test_the_compressed_folder_is_created_if_it_doesnt_exist(self):
+        self.synchronise_photos_return_value = True
+
+        self.out.process_photo_set(self.photo_set)
+
+        self.system_operations.ensure_folder_exists.assert_called_once_with(
+            self.compressed_photos_path
+        )
+
     def test_the_photo_set_dirty_flag_is_set(self):
         self.synchronise_photos_return_value = True
 
