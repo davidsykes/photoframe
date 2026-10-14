@@ -17,7 +17,7 @@ class TestConfigFileUpdater(unittest.TestCase):
             Path('local_file_path.new'))
         self.sys_operations.replace_file.assert_called_once_with(
             Path('local_file_path.new'), Path('local_file_path'))
-        self.action_status_updater.update_status.assert_called_once_with(
+        self.status_updater.update_status.assert_called_once_with(
             True)
 
     def test_if_retrieve_fails_the_file_is_not_updated(self):
@@ -30,7 +30,7 @@ class TestConfigFileUpdater(unittest.TestCase):
             "remote_url", self.local_file_path_new)
         self.config_file_loader.load_config_file.assert_not_called()
         self.sys_operations.replace_file.assert_not_called()
-        self.action_status_updater.update_status.assert_called_once_with(
+        self.status_updater.update_status.assert_called_once_with(
             False)
 
     def test_if_downloaded_config_is_invalid_the_file_is_not_updated(self):
@@ -43,7 +43,7 @@ class TestConfigFileUpdater(unittest.TestCase):
         self.config_file_loader.load_config_file.assert_called_once_with(
             self.local_file_path_new)
         self.sys_operations.replace_file.assert_not_called()
-        self.action_status_updater.update_status.assert_called_once_with(
+        self.status_updater.update_status.assert_called_once_with(
             False)
 
     def test_if_downloaded_config_is_invalid_the_temp_file_is_deleted(self):
@@ -54,7 +54,7 @@ class TestConfigFileUpdater(unittest.TestCase):
         self.sys_operations.delete_file.assert_called_once_with(
             self.local_file_path_new
         )
-        self.action_status_updater.update_status.assert_called_once_with(
+        self.status_updater.update_status.assert_called_once_with(
             False)
 
     def setUp(self):
@@ -66,9 +66,9 @@ class TestConfigFileUpdater(unittest.TestCase):
         self.config_file_loader = Mock(spec = ConfigFileLoader)
         self.config_file_loader.load_config_file.return_value = { "a": "b" }
         self.sys_operations = Mock(spec = SystemOperations)
-        self.action_status_updater = Mock()
+        self.status_updater = Mock()
         self.out = ConfigFileUpdater(
             self.remote_files_retriever,
             self.config_file_loader,
             self.sys_operations,
-            self.action_status_updater)
+            self.status_updater)

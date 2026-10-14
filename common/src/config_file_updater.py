@@ -5,11 +5,11 @@ class ConfigFileUpdater:
                  remote_files_retriever,
                  config_file_loader,
                  sys_operations,
-                 action_status_updater):
+                 status_updater):
         self._remote_files_retriever = remote_files_retriever
         self._config_file_loader = config_file_loader
         self._sys_operations = sys_operations
-        self._action_status_updater = action_status_updater
+        self._status_updater = status_updater
 
     def update_config_file(self, remote_url, local_file_path):
         local_file_path = Path(local_file_path)
@@ -24,4 +24,4 @@ class ConfigFileUpdater:
                 success = True
             else:
                 self._sys_operations.delete_file(temp_local_file_path)
-        self._action_status_updater.update_status(success)
+        self._status_updater.update_status(success)

@@ -134,7 +134,8 @@ class PhotoFrameApp:
 
         photo_sets = self.load_photo_sets(system_operations,
                                             initial_remote_config_data,
-                                            images_folder)
+                                            images_folder,
+                                            status_updater)
         photo_frame_database = PhotoFrameDatabase(
             whole_project_configuration.database_path
         )
@@ -207,10 +208,12 @@ class PhotoFrameApp:
     def load_photo_sets(self,
                         system_operations,
                         remote_config_data,
-                        path_to_photo_sets):
+                        path_to_photo_sets,
+                        status_updater):
         random_weighter = RandomWeighter(system_operations.get_today())
         photo_set_loader = PhotoSetLoader(system_operations,
                                           random_weighter,
+                                          status_updater,
                                           {'.json', '.txt'})
         photo_set_date_retriever = PhotoSetDateRetriever()
         photo_sets_loader = PhotoSetsLoader(

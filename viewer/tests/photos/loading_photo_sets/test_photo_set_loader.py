@@ -37,6 +37,7 @@ class PhotoSetLoaderTests(unittest.TestCase):
         self.random_weighter.weigh = self.mock_weigh
         self.out = PhotoSetLoader(self.system_operations,
                                   self.random_weighter,
+                                  Mock(),
                                   'excluded_extensions')
         self.photo_set_path = Path('set path') / 'set name'
 
