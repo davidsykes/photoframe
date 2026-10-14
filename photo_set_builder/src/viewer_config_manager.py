@@ -8,8 +8,8 @@ class ViewerConfigManager:
                  config_file_path):
         self._config_file_loader = config_file_loader
         self.config_file_path = config_file_path
-        self._config_version_name = 'version2'
-        self._photo_folders_config_name = 'photo_folders2'
+        self._config_version_name = 'version'
+        self._photo_folders_config_name = 'photo_folders'
         self.load_config()
 
     def load_config(self):
