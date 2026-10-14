@@ -1,6 +1,7 @@
 from pathlib import Path
 from common.src.config_file_loader import ConfigFileLoader
 from common.src.system_operations import SystemOperations
+from photo_set_builder.src.logic.json_wrapper import JsonWrapper
 from photo_set_builder.src.logic.list_to_dict_converter import ListToDictConverter
 from photo_set_builder.src.logic.photo_compressor import PhotoCompressor
 from photo_set_builder.src.logic.photo_set_builder_exception import PhotoSetBuilderException
@@ -58,9 +59,11 @@ def main() -> int:
                                             config_data.compressed_folder_name)
     photo_sets_processor = PhotoSetsProcessor(photo_set_processor)
     photo_sets_processor.process_photo_sets(photo_sets_definitions)
+    json_wrapper = JsonWrapper()
     viewer_config_manager = ViewerConfigManager(
         config_file_loader,
-        config_data.viewer_config_path)
+        config_data.viewer_config_path,
+        json_wrapper)
     set_name_on_frame_disk_updater = SetNameOnFrameDiskUpdater()
     photo_set_synchroniser = PhotoSetSynchroniser(
         system_operations,

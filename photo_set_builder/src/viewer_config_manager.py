@@ -1,13 +1,14 @@
-import json
 from photo_set_builder.src.logic.photo_set_builder_exception import PhotoSetBuilderException
 
 
 class ViewerConfigManager:
     def __init__(self,
                  config_file_loader,
-                 config_file_path):
+                 config_file_path,
+                 json_wrapper):
         self._config_file_loader = config_file_loader
         self.config_file_path = config_file_path
+        self._json_wrapper = json_wrapper
         self._config_version_name = 'version'
         self._photo_folders_config_name = 'photo_folders'
         self.load_config()
@@ -28,7 +29,4 @@ class ViewerConfigManager:
 
     def save_viewer_config(self):
         save_path = self.config_file_path
-        with open(save_path, 'w') as f:
-            f.write(
-                json.dumps(self._config.config, indent=4)
-            )
+        self._json_wrapper.dumps(save_path, self._config.config)
