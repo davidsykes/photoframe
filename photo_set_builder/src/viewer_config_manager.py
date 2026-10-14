@@ -1,3 +1,4 @@
+from photo_set_builder.src.data.viewer_config_photo_folder_configuration import ViewerConfigPhotoFolderConfiguration
 from photo_set_builder.src.logic.photo_set_builder_exception import PhotoSetBuilderException
 
 
@@ -21,8 +22,9 @@ class ViewerConfigManager:
 
     def find_photo_set_config(self, photo_set_name):
         for photo_set in self._photo_folders:
-            if photo_set[0] == photo_set_name:
-                return photo_set
+            photo_set_config = ViewerConfigPhotoFolderConfiguration(photo_set)
+            if photo_set_config.name == photo_set_name:
+                return photo_set_config
 
         raise PhotoSetBuilderException(
             f'Photo set {photo_set_name} not found in viewer config file')
