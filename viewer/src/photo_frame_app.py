@@ -16,6 +16,7 @@ from viewer.src.display.subprocess_wrapper import SubprocessWrapper
 from viewer.src.display.wlopm_commands import WlopmCommands
 from viewer.src.display.wlr_randr_commands import WlrRandrCommands
 from viewer.src.logic.random_monitor import RandomMonitor
+from viewer.src.logic.repeated_photo_checker import RepeatedPhotoChecker
 from viewer.src.main.main_loop import MainLoop
 from viewer.src.menus.definitions.settings_menu import SettingsMenu
 from viewer.src.menus.definitions.time_modifier_menu import TimeModifierMenu
@@ -194,12 +195,14 @@ class PhotoFrameApp:
         image_provider = ImageProvider(
             photo_path_provider,
             image_from_file_loader)
+        repeated_photo_checker = RepeatedPhotoChecker()
         main_loop = MainLoop(
             cycle_stop_detector,
             image_provider,
             display,
             events_handler,
-            menu_handler)
+            menu_handler,
+            repeated_photo_checker)
         try:
             main_loop.loop()
         finally:

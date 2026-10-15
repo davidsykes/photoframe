@@ -4,12 +4,14 @@ class MainLoop:
                  image_provider,
                  display,
                  events_handler,
-                 menu):
+                 menu,
+                 repeated_photo_checker):
         self._cycle_stop_detector = cycle_stop_detector
         self._image_provider = image_provider
         self._display = display
         self._events_handler = events_handler
         self._menu = menu
+        self._repeated_photo_checker = repeated_photo_checker
         self._current_image = None
 
     def loop(self):
@@ -22,6 +24,7 @@ class MainLoop:
 
         image_to_show = self._image_provider.fetch_image()
         if image_to_show != self._current_image:
+            self._repeated_photo_checker.check_for_repeats(image_to_show.image_path)
             self._current_image = image_to_show
             needs_update = True
 
