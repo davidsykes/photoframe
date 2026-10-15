@@ -13,6 +13,8 @@ class ViewerConfigManager:
         self._config_version_name = 'version'
         self._photo_folders_config_name = 'photo_folders'
         self.load_config()
+        self._current_version = int(self._config.get(self._config_version_name))
+        self._config_has_changed = False
 
     def load_config(self):
         self._config = self._config_file_loader.load_config_file(
@@ -29,6 +31,11 @@ class ViewerConfigManager:
         raise PhotoSetBuilderException(
             f'Photo set {photo_set_name} not found in viewer config file')
 
-    def save_viewer_config(self):
-        save_path = self.config_file_path
-        self._json_wrapper.dumps(save_path, self._config.config)
+    def mark_as_changed(self):
+        self._config_has_changed = True
+
+    def save_viewer_config_if_changed(self):
+        if self._config_has_changed:
+            self._config.config[self._config_version_name] = self._current_version + 1
+            save_path = self.config_file_path
+            self._json_wrapper.dumps(save_path, self._config.config)

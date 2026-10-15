@@ -68,10 +68,12 @@ def main() -> int:
         viewer_config_manager,
         config_data.dropbox_path
     )
-    photo_sets_synchroniser = PhotoSetsSynchroniser(photo_set_synchroniser)
+    photo_sets_synchroniser = PhotoSetsSynchroniser(
+        photo_set_synchroniser,
+        viewer_config_manager)
     photo_sets_synchroniser.synchronise_photo_sets(
         photo_sets_definitions)
-    viewer_config_manager.save_viewer_config()
+    viewer_config_manager.save_viewer_config_if_changed()
 
 def main2():
     try:

@@ -28,24 +28,32 @@ class ViewerConfigManagerTests(unittest.TestCase):
         with self.assertRaises(Exception):
             self.out.find_photo_set_config('set 1')
 
-    def test_save_viewer_config_json_dumps_the_data(self):
-        self.out.save_viewer_config()
-
-        self.json.dumps.assert_called_once_with(
-            self.config_file_path,
-            {'version': '30', 'version_list': [['viewer-0.4.6', 'url']], 'photo_folders': [['Set 1', '1a', '43 ava', '2026-09-01'], ['Set 2-22', '2a', 'filter', 'date'], ['Set 3', '3a', '999', 'date']]}
-        )
-
     def test_photo_set_configuration_versions_can_be_modified(self):
         config = self.out.find_photo_set_config('Set 2')
         config.update_version()
+        self.out.mark_as_changed()
 
-        self.out.save_viewer_config()
+        self.out.save_viewer_config_if_changed()
 
         self.json.dumps.assert_called_once_with(
             self.config_file_path,
-            {'version': '30', 'version_list': [['viewer-0.4.6', 'url']], 'photo_folders': [['Set 1', '1a', '43 ava', '2026-09-01'], ['Set 2-23', '2a', 'filter', 'date'], ['Set 3', '3a', '999', 'date']]}
+            {'version': 31, 'version_list': [['viewer-0.4.6', 'url']], 'photo_folders': [['Set 1', '1a', '43 ava', '2026-09-01'], ['Set 2-23', '2a', 'filter', 'date'], ['Set 3', '3a', '999', 'date']]}
         )
+
+    def test_if_the_config_has_changed_it_is_written_to_file_with_a_new_version(self):
+        self.out.mark_as_changed()
+
+        self.out.save_viewer_config_if_changed()
+
+        self.json.dumps.assert_called_once_with(
+            self.config_file_path,
+            {'version': 31, 'version_list': [['viewer-0.4.6', 'url']], 'photo_folders': [['Set 1', '1a', '43 ava', '2026-09-01'], ['Set 2-22', '2a', 'filter', 'date'], ['Set 3', '3a', '999', 'date']]}
+        )
+
+    def test_if_the_config_has_not_changed_it_is_not_written(self):
+        self.out.save_viewer_config_if_changed()
+
+        self.json.dumps.assert_not_called()
 
     def setUp(self):
         self.config_file_loader = Mock(spec=ConfigFileLoader)
@@ -79,5 +87,4 @@ class ViewerConfigManagerTests(unittest.TestCase):
         return self.config
 
     def compare_configs(self, one, two):
-        print(f'111 {type(one)} {one}')
         self.assertEqual(one.name, two.name)
