@@ -12,14 +12,14 @@ class TestWholeProjectConfiguration(unittest.TestCase):
         data = { "images_folder": "frame_folder/images folder",
                 "viewer_app_working_folder": "viewer app working folder",
                 "remote_config_url": "remote config url",
-                "image_display_seconds": 2,
+                "image_display_duration_seconds": 2,
                 "photo_set_filter": 'filter',
                 "viewer_parameters": "viewer parameters",
                  "hide_mouse": False}
         config = self.set_up_config(data)
         self.assertEqual(config.remote_config_url, "remote config url")
         self.assertEqual(config.images_folder, Path('frame_folder/images folder'))
-        self.assertEqual(config.image_display_seconds, 2)
+        self.assertEqual(config.image_display_duration_seconds, 2)
         self.assertEqual(config.photo_set_filter, 'filter')
         self.assertEqual(config.hide_mouse, False)
         self.assertEqual(config.viewer_app_working_folder, 'viewer app working folder')
@@ -29,11 +29,11 @@ class TestWholeProjectConfiguration(unittest.TestCase):
         data = { "images_folder": "frame_folder/images folder",
                 "viewer_app_working_folder": "viewer_app_working_folder",
                 "remote_config_url": "remote config url",
-                "sleep_time_seconds": 2 }
+                "image_display_duration_seconds": 2 }
         config = self.set_up_config(data)
         self.assertEqual(config.remote_config_url, "remote config url")
         self.assertEqual(config.images_folder, Path('frame_folder/images folder'))
-        self.assertEqual(config.image_display_seconds, 2)
+        self.assertEqual(config.image_display_duration_seconds, 2)
         self.assertEqual(config.photo_set_filter, 'ava')
         self.assertEqual(config.hide_mouse, True)
 
@@ -60,7 +60,7 @@ class TestWholeProjectConfiguration(unittest.TestCase):
     def test_missing_viewer_app_working_folder_throws_exception(self):
         data = { "images_folder": "images folder",
                 "remote_config_url": "remote config url",
-                "image_display_seconds": 2,
+                "image_display_duration_seconds": 2,
                 "viewer_parameters": "pc" }
         with self.assertRaises(Exception) as context:
             _ = self.set_up_config(data)
@@ -70,7 +70,7 @@ class TestWholeProjectConfiguration(unittest.TestCase):
         self.minimal_data = { "images_folder": "frame_folder/images folder",
                 "viewer_app_working_folder": "viewer_app_working_folder",
                 "remote_config_url": "remote config url",
-                "image_display_seconds": 2}
+                "image_display_duration_seconds": 2}
 
     def set_up_config(self, data):
         config = ConfigFile(data, 'test config file')

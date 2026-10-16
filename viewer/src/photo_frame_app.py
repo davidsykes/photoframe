@@ -20,6 +20,7 @@ from viewer.src.logic.repeated_photo_checker import RepeatedPhotoChecker
 from viewer.src.main.main_loop import MainLoop
 from viewer.src.menus.definitions.settings_menu import SettingsMenu
 from viewer.src.menus.definitions.time_modifier_menu import TimeModifierMenu
+from viewer.src.menus.definitions.value_modifier_menu import ValueModifierMenu
 from viewer.src.menus.framework.event_handler import EventHandler
 from viewer.src.menus.framework.events_handler import EventsHandler
 from viewer.src.menus.definitions.first_menu import FirstMenu
@@ -288,8 +289,8 @@ class PhotoFrameApp:
         menu_handler = MenuHandler(display_on_off_controller, system_operations)
         time_modifier_menu = TimeModifierMenu()
         menu_navigator = MenuNavigator(menu_handler, awake_schedule)
-        #menu_navigator.add_menu(menu_handler)
         menu_navigator.add_menu('time_modifier', time_modifier_menu)
+        menu_navigator.add_menu('value_modifier', ValueModifierMenu)
         settings_menu = SettingsMenu(menu_navigator)
 
         first_menu = FirstMenu(menu_handler, settings_menu, debug_menu, historic_photo_chooser)

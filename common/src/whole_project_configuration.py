@@ -15,9 +15,9 @@ class WholeProjectConfiguration:
 
         self.viewer_app_working_folder = config.get('viewer_app_working_folder')
 
-        self.image_display_seconds = config.get_or_default(
-            'image_display_seconds',
-            config.get_or_default('sleep_time_seconds', 2))
+        self.image_display_duration_seconds = config.get_or_default(
+            'image_display_duration_seconds',
+            config.get_or_default('image_display_duration_seconds', 20))
 
         self.photo_set_filter = config.get_or_default(
             'photo_set_filter',

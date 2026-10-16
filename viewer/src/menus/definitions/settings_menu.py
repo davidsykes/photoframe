@@ -20,7 +20,7 @@ class SettingsMenu(PhotoFrameMenu):
                        40,
                        UIConstants.LONG_BUTTON_WIDTH,
                        UIConstants.BUTTON_HEIGHT,
-                       'Set Sleep Time', self.set_image_display_duration_seconds_action)
+                       'Set Image Display Time', self.set_image_display_duration_seconds_action)
         ]
         PhotoFrameMenu.__init__(self, buttons, False)
 
