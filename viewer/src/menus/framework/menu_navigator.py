@@ -1,7 +1,11 @@
 class MenuNavigator:
-    def __init__(self, menu_handler, awake_schedule):
+    def __init__(self,
+                 menu_handler,
+                 awake_schedule,
+                 image_display_duration_value):
         self._menu_handler = menu_handler
         self._awake_schedule = awake_schedule
+        self._image_display_duration_value = image_display_duration_value
         self._menus = {}
 
     def add_menu(self, name, menu):
@@ -22,4 +26,7 @@ class MenuNavigator:
                    self._awake_schedule.set_sleep_time)
 
     def push_image_display_duration_second_modifier(self):
-        raise 'boo'
+        menu = self._menus['value_modifier']
+        self._menu_handler.set_current_menu(menu)
+        menu.setup('Image Display Time',
+                   self._image_display_duration_value)

@@ -9,6 +9,7 @@ from viewer.src.awake_periods.awake_decider import AwakeDecider
 from viewer.src.awake_periods.awake_schedule import AwakeSchedule
 from viewer.src.awake_periods.awake_schedule_checker import AwakeScheduleChecker
 from viewer.src.cycle_stop_detector import CycleStopDetector
+from viewer.src.database.database_value import DatabaseValue
 from viewer.src.database.photo_frame_database import PhotoFrameDatabase
 from viewer.src.display.display_on_off_controller import DisplayOnOffController
 from viewer.src.display.image_provider import ImageProvider
@@ -69,7 +70,16 @@ class PhotoFrameApp:
         if viewer_configuration is None:
             return 1
         images_folder = Path(whole_project_configuration.images_folder)
-        image_display_seconds = whole_project_configuration.image_display_seconds
+        photo_frame_database = PhotoFrameDatabase(
+            whole_project_configuration.database_path
+        )
+        photo_frame_database.initialise()
+        image_display_duration_seconds_default = whole_project_configuration.image_display_duration_seconds
+        image_display_duration_seconds_value = DatabaseValue(
+            photo_frame_database,
+            'image_display_duration_seconds',
+            image_display_duration_seconds_default
+        )
         remote_config_url = whole_project_configuration.remote_config_url
         remote_files_retriever = RemoteFilesRetriever(system_operations)
         status_updater = ApplicationStatus()
@@ -138,15 +148,11 @@ class PhotoFrameApp:
                                             initial_remote_config_data,
                                             images_folder,
                                             status_updater)
-        photo_frame_database = PhotoFrameDatabase(
-            whole_project_configuration.database_path
-        )
-        photo_frame_database.initialise()
         random_monitor = RandomMonitor(photo_sets)
 
         sequential_photo_chooser = self.build_random_photo_selector_module(
             system_operations,
-            image_display_seconds,
+            image_display_duration_seconds_value,
             randomiser,
             photo_sets,
             photo_history,
@@ -181,7 +187,8 @@ class PhotoFrameApp:
             display,
             system_operations,
             historic_photo_chooser,
-            awake_schedule
+            awake_schedule,
+            image_display_duration_seconds_value
         )
 
         image_from_file_loader = ImageFromFileLoader(display)
@@ -232,7 +239,7 @@ class PhotoFrameApp:
 
     def build_random_photo_selector_module(self,
                                            system_operations,
-                                           image_display_seconds,
+                                           image_display_duration_seconds_value,
                                            randomiser,
                                            photo_sets,
                                            photo_history,
@@ -257,7 +264,7 @@ class PhotoFrameApp:
                 'Image change new',
                 system_operations,
                 next_photo_to_show_generator.generate_next_photo,
-                image_display_seconds
+                image_display_duration_seconds_value.get_int()
             )
 
         return NextPhotoToShowCache(next_photo_to_show_timer,
@@ -272,7 +279,8 @@ class PhotoFrameApp:
                            display,
                            system_operations,
                            historic_photo_chooser,
-                           awake_schedule):
+                           awake_schedule,
+                           image_display_duration_seconds_value):
         pid_rss_extractor = PIDRSSExtractor()
         memory_monitor = MemoryMonitor(
             subprocess_wrapper,
@@ -288,7 +296,9 @@ class PhotoFrameApp:
             )
         menu_handler = MenuHandler(display_on_off_controller, system_operations)
         time_modifier_menu = TimeModifierMenu()
-        menu_navigator = MenuNavigator(menu_handler, awake_schedule)
+        menu_navigator = MenuNavigator(menu_handler,
+                                       awake_schedule,
+                                       image_display_duration_seconds_value)
         menu_navigator.add_menu('time_modifier', time_modifier_menu)
         menu_navigator.add_menu('value_modifier', ValueModifierMenu)
         settings_menu = SettingsMenu(menu_navigator)
