@@ -1,7 +1,6 @@
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import Mock
 
 from viewer.src.database.photo_frame_database import PhotoFrameDatabase
 

@@ -44,7 +44,7 @@ class TimeModifierMenuTests(unittest.TestCase):
         self.assertEqual(self.get_display_time(),
                          '09:19')
 
-    def test_changing_display_time_does_no_affect_set_time(self):
+    def test_changing_display_time_does_not_affect_set_time(self):
         self.out.press('hour up')
         self.out.press('minute up')
         self.assertEqual(self.time,

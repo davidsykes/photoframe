@@ -19,9 +19,9 @@ from viewer.src.display.wlr_randr_commands import WlrRandrCommands
 from viewer.src.logic.random_monitor import RandomMonitor
 from viewer.src.logic.repeated_photo_checker import RepeatedPhotoChecker
 from viewer.src.main.main_loop import MainLoop
+from viewer.src.menus.definitions.integer_value_modifier_menu import IntegerValueModifierMenu
 from viewer.src.menus.definitions.settings_menu import SettingsMenu
 from viewer.src.menus.definitions.time_modifier_menu import TimeModifierMenu
-from viewer.src.menus.definitions.value_modifier_menu import ValueModifierMenu
 from viewer.src.menus.framework.event_handler import EventHandler
 from viewer.src.menus.framework.events_handler import EventsHandler
 from viewer.src.menus.definitions.first_menu import FirstMenu
@@ -300,7 +300,7 @@ class PhotoFrameApp:
                                        awake_schedule,
                                        image_display_duration_seconds_value)
         menu_navigator.add_menu('time_modifier', time_modifier_menu)
-        menu_navigator.add_menu('value_modifier', ValueModifierMenu)
+        menu_navigator.add_menu('value_modifier', IntegerValueModifierMenu())
         settings_menu = SettingsMenu(menu_navigator)
 
         first_menu = FirstMenu(menu_handler, settings_menu, debug_menu, historic_photo_chooser)
