@@ -70,11 +70,16 @@ class PhotoFrameApp:
         if viewer_configuration is None:
             return 1
         images_folder = Path(whole_project_configuration.images_folder)
+        status_updater = ApplicationStatus()
         photo_frame_database = PhotoFrameDatabase(
             whole_project_configuration.database_path
         )
         photo_frame_database.initialise()
         image_display_duration_seconds_default = whole_project_configuration.image_display_duration_seconds
+
+        status_updater.update_status('Image display time',
+                                     image_display_duration_seconds_default)
+
         image_display_duration_seconds_value = DatabaseValue(
             photo_frame_database,
             'image_display_duration_seconds',
@@ -82,7 +87,6 @@ class PhotoFrameApp:
         )
         remote_config_url = whole_project_configuration.remote_config_url
         remote_files_retriever = RemoteFilesRetriever(system_operations)
-        status_updater = ApplicationStatus()
         action_status_result_status_updater = ActionStatusResultStatusUpdater(
             status_updater,
             system_operations)
