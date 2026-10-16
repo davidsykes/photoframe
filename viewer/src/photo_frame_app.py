@@ -195,7 +195,7 @@ class PhotoFrameApp:
         image_provider = ImageProvider(
             photo_path_provider,
             image_from_file_loader)
-        repeated_photo_checker = RepeatedPhotoChecker(system_operations)
+        repeated_photo_checker = RepeatedPhotoChecker(system_operations, status_updater)
         main_loop = MainLoop(
             cycle_stop_detector,
             image_provider,

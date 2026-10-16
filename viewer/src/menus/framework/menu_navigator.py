@@ -20,3 +20,6 @@ class MenuNavigator:
         menu.setup('Sleep Time',
                    self._awake_schedule.get_sleep_time,
                    self._awake_schedule.set_sleep_time)
+
+    def push_image_display_duration_second_modifier(self):
+        raise 'boo'
