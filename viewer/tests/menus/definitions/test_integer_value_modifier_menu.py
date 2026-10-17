@@ -5,13 +5,12 @@ from viewer.src.menus.definitions.integer_value_modifier_menu import IntegerValu
 
 class IntegerValueModifierMenuTests(unittest.TestCase):
     def test_menu_items_are_created(self):
-        self.assertEqual(len(self.out._buttons), 7)
+        self.assertEqual(len(self.out._buttons), 6)
         self.assertEqual(self.out._buttons[0].name, 'title_text')
         self.assertEqual(self.out._buttons[1].name, 'value_display_text')
         self.assertEqual(self.out._buttons[2].name, 'value up')
-        self.assertEqual(self.out._buttons[3].name, 'value_text')
-        self.assertEqual(self.out._buttons[4].name, 'value down')
-        self.assertEqual(self.out._buttons[5].name, 'Ok')
+        self.assertEqual(self.out._buttons[3].name, 'value down')
+        self.assertEqual(self.out._buttons[4].name, 'Ok')
 
     def test_menu_items_are_displayed(self):
         self.out.render(self.display)

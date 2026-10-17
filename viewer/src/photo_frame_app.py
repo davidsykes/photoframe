@@ -16,6 +16,7 @@ from viewer.src.display.image_provider import ImageProvider
 from viewer.src.display.subprocess_wrapper import SubprocessWrapper
 from viewer.src.display.wlopm_commands import WlopmCommands
 from viewer.src.display.wlr_randr_commands import WlrRandrCommands
+from viewer.src.logic.image_display_duration_seconds_value_wrapper import ImageDisplayDurationSecondsWrapper
 from viewer.src.logic.random_monitor import RandomMonitor
 from viewer.src.logic.repeated_photo_checker import RepeatedPhotoChecker
 from viewer.src.main.main_loop import MainLoop
@@ -71,20 +72,6 @@ class PhotoFrameApp:
             return 1
         images_folder = Path(whole_project_configuration.images_folder)
         status_updater = ApplicationStatus()
-        photo_frame_database = PhotoFrameDatabase(
-            whole_project_configuration.database_path
-        )
-        photo_frame_database.initialise()
-        image_display_duration_seconds_default = whole_project_configuration.image_display_duration_seconds
-
-        status_updater.update_status('Image display time',
-                                     image_display_duration_seconds_default)
-
-        image_display_duration_seconds_value = DatabaseValue(
-            photo_frame_database,
-            'image_display_duration_seconds',
-            image_display_duration_seconds_default
-        )
         remote_config_url = whole_project_configuration.remote_config_url
         remote_files_retriever = RemoteFilesRetriever(system_operations)
         action_status_result_status_updater = ActionStatusResultStatusUpdater(
@@ -153,10 +140,18 @@ class PhotoFrameApp:
                                             images_folder,
                                             status_updater)
         random_monitor = RandomMonitor(photo_sets)
+        photo_frame_database = PhotoFrameDatabase(
+            whole_project_configuration.database_path
+        )
+        photo_frame_database.initialise()
+        image_display_duration_seconds_value_wrapper = ImageDisplayDurationSecondsWrapper(
+            photo_frame_database,
+            whole_project_configuration.image_display_duration_seconds
+        )
 
         sequential_photo_chooser = self.build_random_photo_selector_module(
             system_operations,
-            image_display_duration_seconds_value,
+            image_display_duration_seconds_value_wrapper,
             randomiser,
             photo_sets,
             photo_history,
@@ -192,7 +187,7 @@ class PhotoFrameApp:
             system_operations,
             historic_photo_chooser,
             awake_schedule,
-            image_display_duration_seconds_value
+            image_display_duration_seconds_value_wrapper
         )
 
         image_from_file_loader = ImageFromFileLoader(display)
@@ -243,7 +238,7 @@ class PhotoFrameApp:
 
     def build_random_photo_selector_module(self,
                                            system_operations,
-                                           image_display_duration_seconds_value,
+                                           image_display_duration_seconds_value_wrapper,
                                            randomiser,
                                            photo_sets,
                                            photo_history,
@@ -268,7 +263,7 @@ class PhotoFrameApp:
                 'Image change new',
                 system_operations,
                 next_photo_to_show_generator.generate_next_photo,
-                image_display_duration_seconds_value.get_int()
+                image_display_duration_seconds_value_wrapper.get
             )
 
         return NextPhotoToShowCache(next_photo_to_show_timer,
@@ -284,7 +279,7 @@ class PhotoFrameApp:
                            system_operations,
                            historic_photo_chooser,
                            awake_schedule,
-                           image_display_duration_seconds_value):
+                           image_display_duration_seconds_value_wrapper):
         pid_rss_extractor = PIDRSSExtractor()
         memory_monitor = MemoryMonitor(
             subprocess_wrapper,
@@ -302,7 +297,7 @@ class PhotoFrameApp:
         time_modifier_menu = TimeModifierMenu()
         menu_navigator = MenuNavigator(menu_handler,
                                        awake_schedule,
-                                       image_display_duration_seconds_value)
+                                       image_display_duration_seconds_value_wrapper)
         menu_navigator.add_menu('time_modifier', time_modifier_menu)
         menu_navigator.add_menu('value_modifier', IntegerValueModifierMenu())
         settings_menu = SettingsMenu(menu_navigator)

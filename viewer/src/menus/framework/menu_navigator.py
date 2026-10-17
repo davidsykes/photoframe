@@ -29,5 +29,5 @@ class MenuNavigator:
         menu = self._menus['value_modifier']
         self._menu_handler.set_current_menu(menu)
         menu.setup('Image Display Time',
-                   self._image_display_duration_value.get_int,
+                   self._image_display_duration_value.get,
                    self._image_display_duration_value.set)
