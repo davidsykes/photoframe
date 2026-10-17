@@ -37,13 +37,27 @@ class ActionTimerTests(unittest.TestCase):
         self.assert_call_at_time_returns(110, 4)
 
     def test_duration_can_be_a_callable(self):
+        self.duration = 15
         self.out = ActionTimer(
             'name',
             self.system_operations,
             self.action,
-            self.get_value_15)
+            self.get_duration)
 
         self.assert_call_at_time_returns(0, 1)
+        self.assert_call_at_time_returns(14, None)
+        self.assert_call_at_time_returns(15, 2)
+
+    def test_if_callable_duration_is_updated_mid_wait_the_new_duration_is_used(self):
+        self.duration = 50
+        self.out = ActionTimer(
+            'name',
+            self.system_operations,
+            self.action,
+            self.get_duration)
+
+        self.assert_call_at_time_returns(0, 1)
+        self.duration = 15
         self.assert_call_at_time_returns(14, None)
         self.assert_call_at_time_returns(15, 2)
 
@@ -64,5 +78,5 @@ class ActionTimerTests(unittest.TestCase):
         v = self.out.run_if_due()
         self.assertEqual(v, return_value)
 
-    def get_value_15(self):
-        return 15
+    def get_duration(self):
+        return self.duration

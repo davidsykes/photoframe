@@ -14,17 +14,14 @@ class ActionTimer:
         else:
             self._get_time_between_checks = lambda: time_between_checks
 
-        self._next_time = 0
+        self._last_time = 0
         self._paused = False
-
-# class ActionTimer:
-#     def __init__(self, interval):
 
     def run_if_due(self):
         if self._paused is False:
             now = self._system_operations.get_time_seconds()
-            if now >= self._next_time:
-                self._next_time = now + self._get_time_between_checks()
+            if now >= self._last_time + self._get_time_between_checks():
+                self._last_time = now
                 return self._action()
         return None
 
