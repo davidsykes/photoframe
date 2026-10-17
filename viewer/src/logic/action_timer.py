@@ -8,15 +8,23 @@ class ActionTimer:
         self._name = name
         self._system_operations = system_operations
         self._action = action
-        self._time_between_checks = time_between_checks
+
+        if callable(time_between_checks):
+            self._get_time_between_checks = time_between_checks
+        else:
+            self._get_time_between_checks = lambda: time_between_checks
+
         self._next_time = 0
         self._paused = False
+
+# class ActionTimer:
+#     def __init__(self, interval):
 
     def run_if_due(self):
         if self._paused is False:
             now = self._system_operations.get_time_seconds()
             if now >= self._next_time:
-                self._next_time = now + self._time_between_checks
+                self._next_time = now + self._get_time_between_checks()
                 return self._action()
         return None
 

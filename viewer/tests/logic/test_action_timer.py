@@ -36,6 +36,17 @@ class ActionTimerTests(unittest.TestCase):
         self.assert_call_at_time_returns(109, None)
         self.assert_call_at_time_returns(110, 4)
 
+    def test_duration_can_be_a_callable(self):
+        self.out = ActionTimer(
+            'name',
+            self.system_operations,
+            self.action,
+            self.get_value_15)
+
+        self.assert_call_at_time_returns(0, 1)
+        self.assert_call_at_time_returns(14, None)
+        self.assert_call_at_time_returns(15, 2)
+
     def setUp(self):
         self.system_operations = Mock(spec=SystemOperations)
         self.start_of_time = 123
@@ -46,9 +57,12 @@ class ActionTimerTests(unittest.TestCase):
             self.system_operations,
             self.action,
             10)
-
+        
     def assert_call_at_time_returns(self, current_time, return_value):
         self.current_time = self.start_of_time + current_time
         self.system_operations.get_time_seconds.return_value = self.current_time
         v = self.out.run_if_due()
         self.assertEqual(v, return_value)
+
+    def get_value_15(self):
+        return 15
