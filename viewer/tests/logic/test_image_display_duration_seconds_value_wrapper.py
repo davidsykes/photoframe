@@ -6,7 +6,7 @@ from viewer.src.logic.image_display_duration_seconds_value_wrapper import ImageD
 
 class ImageDisplayDurationSecondsWrapperTests(unittest.TestCase):
     def test_the_value_is_taken_from_the_database(self):
-        self.database_value = 123
+        self.database_value = '123'
 
         duration = ImageDisplayDurationSecondsWrapper(
             self.database,
@@ -17,6 +17,26 @@ class ImageDisplayDurationSecondsWrapperTests(unittest.TestCase):
         
     def test_the_default_value_is_taken_if_no_database_value_exists(self):
         self.database_value = None
+
+        duration = ImageDisplayDurationSecondsWrapper(
+            self.database,
+            999
+        )
+
+        self.assertEqual(999, duration.get())
+        
+    def test_the_default_value_is_taken_if_no_valid_database_value_exists(self):
+        self.database_value = 'nonsense'
+
+        duration = ImageDisplayDurationSecondsWrapper(
+            self.database,
+            999
+        )
+
+        self.assertEqual(999, duration.get())
+        
+    def test_a_part_valid_value_is_not_taken_as_a_valid_value(self):
+        self.database_value = '234nonsense'
 
         duration = ImageDisplayDurationSecondsWrapper(
             self.database,
