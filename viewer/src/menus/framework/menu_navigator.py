@@ -31,3 +31,8 @@ class MenuNavigator:
         menu.setup('Image Display Time',
                    self._image_display_duration_value.get,
                    self._image_display_duration_value.set)
+
+    def push_wifi_menu(self):
+        menu = self._menus['wifi_menu']
+        self._menu_handler.set_current_menu(menu)
+        menu.initialise()

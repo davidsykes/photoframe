@@ -12,15 +12,20 @@ class SettingsMenu(PhotoFrameMenu):
                        UIConstants.BUTTON_HEIGHT,
                        'Set Wake Time', self.set_wake_time_action),
             MenuButton(UIConstants.LONG_BUTTON_LEFT,
-                       30,
+                       40,
                        UIConstants.LONG_BUTTON_WIDTH,
                        UIConstants.BUTTON_HEIGHT,
                        'Set Sleep Time', self.set_sleep_time_action),
             MenuButton(UIConstants.LONG_BUTTON_LEFT,
-                       40,
+                       60,
                        UIConstants.LONG_BUTTON_WIDTH,
                        UIConstants.BUTTON_HEIGHT,
-                       'Set Image Display Time', self.set_image_display_duration_seconds_action)
+                       'Set Image Display Time', self.set_image_display_duration_seconds_action),
+            MenuButton(UIConstants.LONG_BUTTON_LEFT,
+                       80,
+                       UIConstants.LONG_BUTTON_WIDTH,
+                       UIConstants.BUTTON_HEIGHT,
+                       'WiFi', self.wifi)
         ]
         PhotoFrameMenu.__init__(self, buttons, False)
 
@@ -34,3 +39,6 @@ class SettingsMenu(PhotoFrameMenu):
 
     def set_image_display_duration_seconds_action(self):
         self._menu_navigator.push_image_display_duration_second_modifier()
+
+    def wifi(self):
+        self._menu_navigator.push_wifi_menu()

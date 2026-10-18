@@ -6,7 +6,7 @@ Download updates (on the target machine if possible)
  sudo apt-get update
  sudo apt full-upgrade
  sudo apt-get update
-sudo apt full-upgrade
+ sudo apt full-upgrade
 
 Build a new app release
  python utilities/build_app_release.py version
@@ -23,18 +23,24 @@ Unzip the code
 
 Move release/start-photoframe.sh
 To the photoframe folder
-Edit it
+Update the paths
 Make it executable
  chmod +x start-photoframe.sh
 
 Add the sh file to the autostart
  nano ~/.config/labwc/autostart
-and add
- /home/pi/photoframe/start-photoframe.sh &
+and add (check user)
+ /home/{user}/photoframe/start-photoframe.sh &
 Make it executable
  chmod +x ~/.config/labwc/autostart
 
 Move release/project_config.json to /home/pi/photoframe
 and edit the values
+
+Check home path values for these files
+~/.config/labwc/autostart
+/home/{user}/photoframe/start-photoframe.sh
+project_config,json
+
 
 reboot
