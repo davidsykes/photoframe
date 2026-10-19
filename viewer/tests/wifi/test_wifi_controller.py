@@ -11,7 +11,6 @@ class WiFiControllerTests(unittest.TestCase):
         self.assertEqual(hotspots,
                          ['a','b'])
 
-
     def setUp(self):
         self.subprocess_wrapper = Mock(spec=SubprocessWrapper)
         self.subprocess_wrapper.run_return_stdout = self.run_return_stdout

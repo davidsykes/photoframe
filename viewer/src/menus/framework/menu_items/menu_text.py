@@ -1,7 +1,7 @@
 from viewer.src.menus.framework.menu_items.menu_item import MenuItem
 
 
-class DisplayMenuItem(MenuItem):
+class MenuText(MenuItem):
     def __init__(self, name, coordinates, display_text):
         self.name = name
         self._coordinates = coordinates

@@ -1,7 +1,7 @@
 from viewer.src.menus.framework.menu_action import MenuAction
 from viewer.src.menus.framework.menu_items.menu_button import MenuButton
 from viewer.src.menus.framework.menu_coordinates_generator import MenuCoordinatesGenerator
-from viewer.src.menus.framework.menu_items.display_menu_item import DisplayMenuItem
+from viewer.src.menus.framework.menu_items.menu_text import MenuText
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
 from viewer.src.menus.framework.ui_constants import UIConstants
 
@@ -9,10 +9,10 @@ from viewer.src.menus.framework.ui_constants import UIConstants
 class IntegerValueModifierMenu(PhotoFrameMenu):
     def __init__(self):
         mc = MenuCoordinatesGenerator()
-        self._title =  DisplayMenuItem('title_text',
+        self._title =  MenuText('title_text',
                                        mc.wide(10),
                                        '----------')
-        self._value_display = DisplayMenuItem('value_display_text',
+        self._value_display = MenuText('value_display_text',
                                              mc.button(30, 35),
                                              '--')
         buttons = [

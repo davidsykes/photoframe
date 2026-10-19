@@ -52,6 +52,7 @@ from viewer.src.status.application_status import ApplicationStatus
 from viewer.src.logic.action_timer import ActionTimer
 from viewer.src.status.version_loader import VersionLoader
 from viewer.src.logic.randomiser import Randomiser
+from viewer.src.wifi.hotspot_elucidator import HotSpotElucidator
 from viewer.src.wifi.wifi_controller import WiFiController
 
 class DisplayType(Enum):
@@ -300,7 +301,8 @@ class PhotoFrameApp:
         menu_navigator.add_menu('time_modifier', time_modifier_menu)
         menu_navigator.add_menu('value_modifier', IntegerValueModifierMenu())
         wifi_controller = WiFiController(subprocess_wrapper)
-        menu_navigator.add_menu('wifi_menu', WiFiMenu(wifi_controller))
+        hotspot_elucidator = HotSpotElucidator(wifi_controller)
+        menu_navigator.add_menu('wifi_menu', WiFiMenu(wifi_controller, hotspot_elucidator))
         settings_menu = SettingsMenu(menu_navigator)
 
         first_menu = FirstMenu(menu_handler, settings_menu, debug_menu, historic_photo_chooser)

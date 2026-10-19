@@ -134,7 +134,7 @@ class PiSystemDisplay:
 
         pygame.draw.rect(self.screen, colour, rect, border_radius=UIConstants.CORNER_RADIUS)
 
-    def draw_text(self, text, colour, position):
+    def draw_text(self, text, colour, position, font=0):
         scaled_position = (position[0] * self._screen_size[0] / 100,
                            position[1] * self._screen_size[1] / 100)
         pygame_text = self.my_font.render(text, True, colour)

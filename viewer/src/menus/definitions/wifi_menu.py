@@ -1,12 +1,20 @@
+from viewer.src.menus.framework.menu_items.menu_text import MenuText
 from viewer.src.menus.framework.menu_items.menu_button import MenuButton
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
 from viewer.src.menus.framework.ui_constants import UIConstants
 
 
 class WiFiMenu(PhotoFrameMenu):
-    def __init__(self, wifi_controller):
+    def __init__(self,
+                 wifi_controller,
+                 hotspot_elucidator):
         self._wifi_controller = wifi_controller
+        self._hotspot_elucidator = hotspot_elucidator
+        self._status_button = MenuText('status',
+                            (20, 20),
+                            'initialising...')
         buttons = [
+            self._status_button,
             MenuButton(UIConstants.LONG_BUTTON_LEFT,
                        20,
                        UIConstants.LONG_BUTTON_WIDTH,
@@ -35,5 +43,6 @@ class WiFiMenu(PhotoFrameMenu):
         self._menu_navigator.push_image_display_duration_second_modifier()
 
     def initialise(self):
-        hotspots = self._wifi_controller.list_hotspots()
+        hotspots = self._hotspot_elucidator.list_hotspots()
         print(f'HOTHOTHOTHOT {hotspots}')
+        self._status_button.update_text(hotspots.status)

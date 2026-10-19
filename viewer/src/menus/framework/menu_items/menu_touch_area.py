@@ -18,3 +18,6 @@ class MenuTouchArea:
 
     def press(self):
         return self._action()
+    
+    def render(self, display):
+        pass

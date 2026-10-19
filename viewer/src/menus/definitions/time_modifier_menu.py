@@ -2,7 +2,7 @@ from datetime import time
 from viewer.src.menus.framework.menu_action import MenuAction
 from viewer.src.menus.framework.menu_items.menu_button import MenuButton
 from viewer.src.menus.framework.menu_coordinates_generator import MenuCoordinatesGenerator
-from viewer.src.menus.framework.menu_items.display_menu_item import DisplayMenuItem
+from viewer.src.menus.framework.menu_items.menu_text import MenuText
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
 from viewer.src.menus.framework.ui_constants import UIConstants
 
@@ -10,10 +10,10 @@ from viewer.src.menus.framework.ui_constants import UIConstants
 class TimeModifierMenu(PhotoFrameMenu):
     def __init__(self):
         mc = MenuCoordinatesGenerator()
-        self._title =  DisplayMenuItem('title_text',
+        self._title =  MenuText('title_text',
                                        mc.wide(10),
                                        '----------')
-        self._time_display = DisplayMenuItem('time_display_text',
+        self._time_display = MenuText('time_display_text',
                                              mc.button(30, 35),
                                              '--:--')
         buttons = [
@@ -33,10 +33,10 @@ class TimeModifierMenu(PhotoFrameMenu):
                        '+',
                        self.minute_up,
                        'minute up'),
-            DisplayMenuItem('hour_text',
+            MenuText('hour_text',
                      mc.button(20, 35),
                      'Hour'),
-            DisplayMenuItem('minute_text',
+            MenuText('minute_text',
                      mc.button(40, 35),
                      'Minute'),
             MenuButton(20,

@@ -43,5 +43,5 @@ class PCSystemDisplay:
     def draw_rectangle(self, colour, position):
         pass
 
-    def draw_text(self, text, colour, position):
-        print(f'Draw text >>>{text}<<< in {colour} at {position}')
+    def draw_text(self, text, colour, position, font=0):
+        print(f'Draw text >>>{text}<<< in {colour} at {position} size {font}')
