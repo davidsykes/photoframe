@@ -13,7 +13,7 @@ from viewer.src.database.database_value import DatabaseValue
 from viewer.src.database.photo_frame_database import PhotoFrameDatabase
 from viewer.src.display.display_on_off_controller import DisplayOnOffController
 from viewer.src.display.image_provider import ImageProvider
-from viewer.src.display.subprocess_wrapper import SubprocessWrapper
+from common.src.subprocess_wrapper import SubprocessWrapper
 from viewer.src.display.wlopm_commands import WlopmCommands
 from viewer.src.display.wlr_randr_commands import WlrRandrCommands
 from viewer.src.logic.image_display_duration_seconds_value_wrapper import ImageDisplayDurationSecondsWrapper
@@ -299,7 +299,7 @@ class PhotoFrameApp:
                                        image_display_duration_seconds_value_wrapper)
         menu_navigator.add_menu('time_modifier', time_modifier_menu)
         menu_navigator.add_menu('value_modifier', IntegerValueModifierMenu())
-        wifi_controller = WiFiController()
+        wifi_controller = WiFiController(subprocess_wrapper)
         menu_navigator.add_menu('wifi_menu', WiFiMenu(wifi_controller))
         settings_menu = SettingsMenu(menu_navigator)
 

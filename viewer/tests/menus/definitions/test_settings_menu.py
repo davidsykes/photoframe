@@ -9,7 +9,7 @@ class SettingsMenuTests(unittest.TestCase):
     def test_the_image_show_time_can_be_selected(self):
         self.out.mouse_down(
             UIConstants.LONG_BUTTON_LEFT,
-            40
+            61
         )
 
         self.menu_navigator.push_image_display_duration_second_modifier.assert_called_once()

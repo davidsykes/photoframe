@@ -3,7 +3,7 @@ from unittest.mock import Mock
 
 from common.src.system_operations import SystemOperations
 from viewer.src.display.display_on_off_controller import DisplayOnOffController
-from viewer.src.display.subprocess_wrapper import SubprocessWrapper
+from common.src.subprocess_wrapper import SubprocessWrapper
 from viewer.src.status.application_status import ApplicationStatus
 
 class DisplayOnOffControllerTests(unittest.TestCase):
@@ -36,15 +36,6 @@ class DisplayOnOffControllerTests(unittest.TestCase):
         self.subprocess_wrapper.run_return_stdout.assert_called_with(
             'turn display on command'
         )
-
-    # def test_display_on_logs_the_event(self):
-    #     self.out.initialise()
-
-    #     self.out.display_on()
-
-    #     self.system_operations.log.assert_called_with(
-    #         'Turn display on: turn display on command'
-    #     )
 
     def test_if_display_on_fails_the_event_is_logged(self):
         self.out.initialise()
