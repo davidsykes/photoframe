@@ -1,6 +1,10 @@
 class UIConstants:
     MENU_MARGIN = 5
     MENU_WIDTH = 90
+
+    WIDE_BUTTON_SIZE = (60,20)
+
+    # For review
     BUTTON_WIDTH = 10
     BUTTON_HEIGHT = 5
     BUTTON_LEFT = 5

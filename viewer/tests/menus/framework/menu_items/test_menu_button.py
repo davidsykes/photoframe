@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import Mock, call
+from unittest.mock import Mock
 
 from viewer.src.menus.framework.menu_items.menu_button import MenuButton
 
