@@ -12,6 +12,7 @@ from viewer.src.cycle_stop_detector import CycleStopDetector
 from viewer.src.database.database_value import DatabaseValue
 from viewer.src.database.photo_frame_database import PhotoFrameDatabase
 from viewer.src.display.display_on_off_controller import DisplayOnOffController
+from viewer.src.display.display_wrapper import DisplayWrapper
 from viewer.src.display.image_provider import ImageProvider
 from common.src.subprocess_wrapper import SubprocessWrapper
 from viewer.src.display.wlopm_commands import WlopmCommands
@@ -131,7 +132,7 @@ class PhotoFrameApp:
                                       whole_project_configuration.hide_mouse)
         else:
             raise ValueError(f"Unknown display type: {self._display_type}")
-        display.initialise_display()
+        display.initialise_display(DisplayWrapper(display))
 
         photo_history = PhotoHistory(50)
         historic_photo_chooser = HistoricPhotoChooser(photo_history)

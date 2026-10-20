@@ -15,7 +15,7 @@ class PiSystemDisplay:
         self.COLOUR_LIGHT = (170,170,170)
         self.COLOUR_DARK = (70,70,70)
 
-    def initialise_display(self):
+    def initialise_display(self, wrapper):
         print("Initialising Pi System Display.")
         pygame.init()
         print('Desktop sizes:', pygame.display.get_desktop_sizes())
@@ -26,6 +26,7 @@ class PiSystemDisplay:
         self.my_font = pygame.font.SysFont('Comic Sans MS', 30)
         if self._hide_mouse is True:
             pygame.mouse.set_visible(False)
+        self.wrapper = wrapper
 
     def load_image(self, image_path):
         self._status_updater.update_status('Current image', image_path)
@@ -139,3 +140,17 @@ class PiSystemDisplay:
                            position[1] * self._screen_size[1] / 100)
         pygame_text = self.my_font.render(text, True, colour)
         self.screen.blit(pygame_text, scaled_position)
+
+    def render_text(self,
+                    text,
+                    colour = None):
+        if colour is None:
+            colour = self.COLOUR_WHITE
+        pygame_text = self.my_font.render(text, True, colour)
+
+    def draw_rendered_text(self,
+                           rendered_text,
+                           position):
+        scaled_position = (position[0] * self._screen_size[0] / 100,
+                           position[1] * self._screen_size[1] / 100)
+        self.screen.blit(rendered_text, scaled_position)

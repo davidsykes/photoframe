@@ -11,8 +11,9 @@ class PCSystemDisplay:
         self._print_value = 0
         self._print_values = {}
 
-    def initialise_display(self):
+    def initialise_display(self, wrapper):
         print("Initialising PC System Display")
+        self.wrapper = wrapper
 
     def load_image(self, image_path):
         return PygameImage(image_path, image_path, 1, 1)
@@ -45,3 +46,11 @@ class PCSystemDisplay:
 
     def draw_text(self, text, colour, position, font=0):
         print(f'Draw text >>>{text}<<< in {colour} at {position} size {font}')
+
+    def render_text(self, text):
+        return text
+
+    def draw_rendered_text(self,
+                           rendered_text,
+                           position):
+        print(f'Draw text >>>{rendered_text}<<< in colour at {position} size font')
