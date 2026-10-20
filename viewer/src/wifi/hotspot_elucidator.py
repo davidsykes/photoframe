@@ -3,4 +3,5 @@ class HotSpotElucidator:
         self._wifi_controller = wifi_controller
 
     def list_hotspots(self):
-        raise 'bpp'
+        spots = self._wifi_controller.list_hotspots()
+        print(f'SSPPOOTTSS {spots}')
