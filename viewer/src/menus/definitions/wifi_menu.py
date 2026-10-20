@@ -1,5 +1,5 @@
-from viewer.src.menus.framework.menu_items.menu_text import MenuText
 from viewer.src.menus.framework.menu_items.menu_button import MenuButton
+from viewer.src.menus.framework.menu_items.menu_text2 import MenuText2
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
 from viewer.src.menus.framework.ui_constants import UIConstants
 
@@ -10,9 +10,8 @@ class WiFiMenu(PhotoFrameMenu):
                  hotspot_elucidator):
         self._wifi_controller = wifi_controller
         self._hotspot_elucidator = hotspot_elucidator
-        self._status_button = MenuText('status',
-                            (20, 20),
-                            'initialising...')
+        self._status_button = MenuText2('initialising...',
+                            (20, 20))
         buttons = [
             self._status_button,
             MenuButton(UIConstants.LONG_BUTTON_LEFT,
