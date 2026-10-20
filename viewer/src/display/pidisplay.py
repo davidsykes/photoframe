@@ -146,7 +146,8 @@ class PiSystemDisplay:
                     colour = None):
         if colour is None:
             colour = self.COLOUR_WHITE
-        pygame_text = self.my_font.render(text, True, colour)
+        rendered_text = self.my_font.render(text, True, colour)
+        return rendered_text
 
     def draw_rendered_text(self,
                            rendered_text,
