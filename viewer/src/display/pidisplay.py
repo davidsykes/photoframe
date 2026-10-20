@@ -152,7 +152,6 @@ class PiSystemDisplay:
         if colour is None:
             colour = self.COLOUR_WHITE
         rendered_text = self.my_font.render(text, True, colour)
-        print(f'Render text {text}')
         return rendered_text
 
     def draw_rendered_text(self,
@@ -160,5 +159,4 @@ class PiSystemDisplay:
                            position):
         scaled_position = (position[0] * self._screen_size[0] / 100,
                            position[1] * self._screen_size[1] / 100)
-        print(f'Blit text {scaled_position}')
         self.screen.blit(rendered_text, scaled_position)

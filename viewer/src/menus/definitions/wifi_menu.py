@@ -15,11 +15,6 @@ class WiFiMenu(PhotoFrameMenu):
         buttons = [
             self._status_button,
             MenuButton(UIConstants.LONG_BUTTON_LEFT,
-                       20,
-                       UIConstants.LONG_BUTTON_WIDTH,
-                       UIConstants.BUTTON_HEIGHT,
-                       'Set Wake Time', self.set_wake_time_action),
-            MenuButton(UIConstants.LONG_BUTTON_LEFT,
                        40,
                        UIConstants.LONG_BUTTON_WIDTH,
                        UIConstants.BUTTON_HEIGHT,
@@ -43,6 +38,4 @@ class WiFiMenu(PhotoFrameMenu):
 
     def initialise(self):
         hotspots = self._hotspot_elucidator.list_hotspots()
-        print(f'HOTHOTHOTHOT1 {hotspots}')
-        print(f'HOTHOTHOTHOT2 {hotspots.status}')
         self._status_button.update_text(hotspots.status)

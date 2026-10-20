@@ -46,7 +46,6 @@ class SystemOperations:
         return [f.name for f in path.iterdir() if f.is_dir()]
 
     def rmtree(self, path):
-        print(f'Remove folder {path}')
         shutil.rmtree(path)
 
     def rename(self, from_path, to_path):
