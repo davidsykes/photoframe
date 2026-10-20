@@ -115,6 +115,7 @@ class PiSystemDisplay:
                 pygame.WINDOWFOCUSGAINED,
                 pygame.ACTIVEEVENT,
                 pygame.MOUSEBUTTONUP,
+                pygame.MOUSEWHEEL,
             ]:
                 pass
             elif event.type in [

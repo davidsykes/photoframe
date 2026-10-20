@@ -43,5 +43,6 @@ class WiFiMenu(PhotoFrameMenu):
 
     def initialise(self):
         hotspots = self._hotspot_elucidator.list_hotspots()
-        print(f'HOTHOTHOTHOT {hotspots}')
+        print(f'HOTHOTHOTHOT1 {hotspots}')
+        print(f'HOTHOTHOTHOT2 {hotspots.status}')
         self._status_button.update_text(hotspots.status)
