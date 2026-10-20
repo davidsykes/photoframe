@@ -8,6 +8,7 @@ class MenuText(MenuItem):
         self._display_text = display_text
 
     def render(self, display):
+        print(f'RREREREREREEERER {self._display_text} <> {self._coordinates}')
         display.draw_rectangle(
             display.COLOUR_DARK,
             self._coordinates
