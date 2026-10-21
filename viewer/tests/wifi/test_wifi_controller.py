@@ -6,7 +6,7 @@ from viewer.src.wifi.wifi_controller import WiFiController
 
 class WiFiControllerTests(unittest.TestCase):
     def test_list_hotspots_runs_the_list_hotspot_command(self):
-        hotspots = self.out.list_hotspots()
+        hotspots = self.out.list_network_connections()
 
         self.assertEqual(hotspots,
                          ['a','b'])

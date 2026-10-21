@@ -6,7 +6,7 @@ from viewer.src.wifi.wifi_controller import WiFiController
 
 class HotSpotElucidatorTests(unittest.TestCase):
     def test_list_hotspots_returns_a_list_of_the_hotspits(self):
-        self.wifi_controller.list_hotspots.return_value = (
+        self.wifi_controller.list_network_connections.return_value = (
 """DIRECT-aS-EPSON-XP-3100 Series
 a907
 a907
@@ -26,7 +26,7 @@ W-537A361
 """
         )
 
-        hotspots = self.out.list_hotspots()
+        hotspots = self.out.list_network_connections()
 
         self.assertEqual(hotspots.networks,
                          [
@@ -43,25 +43,25 @@ W-537A361
                          ])
         
     def test_if_no_hotspots_are_listed_the_list_is_empty(self):
-        self.wifi_controller.list_hotspots.return_value = ''
+        self.wifi_controller.list_network_connections.return_value = ''
 
-        hotspots = self.out.list_hotspots()
+        hotspots = self.out.list_network_connections()
 
         self.assertEqual(hotspots.networks,
                          [])
         
     def test_if_no_hotspots_are_listed_the_status_is_set(self):
-        self.wifi_controller.list_hotspots.return_value = ''
+        self.wifi_controller.list_network_connections.return_value = ''
 
-        hotspots = self.out.list_hotspots()
+        hotspots = self.out.list_network_connections()
 
         self.assertEqual(hotspots.status,
                          'No Wifi Networks found')
         
     def test_if_the_controller_returns_an_error_the_error_is_returned(self):
-        self.wifi_controller.list_hotspots.side_effect = Exception("Test")
+        self.wifi_controller.list_network_connections.side_effect = Exception("Test")
 
-        hotspots = self.out.list_hotspots()
+        hotspots = self.out.list_network_connections()
 
         self.assertEqual(hotspots.status,
                          'Test')

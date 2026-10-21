@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import Mock
 
 from common.src.system_operations import SystemOperations
+from viewer.src.data.wifi_networks import WiFiNetworks
 from viewer.src.menus.definitions.wifi_menu import WiFiMenu
 from viewer.src.wifi.hotspot_elucidator import HotSpotElucidator
 from viewer.src.wifi.wifi_controller import WiFiController
@@ -28,8 +29,10 @@ class WiFiMenuTests(unittest.TestCase):
 
         self.assertEqual(2, len(self.display.rendered_text))
 
-    @unittest.skip
     def test_when_initialised_connections_are_shown(self):
+        self.hotspot_elucidator.list_network_connections.return_value = (
+            WiFiNetworks('Updated Status', ['Network 1', 'Network 2', 'Network 3'])
+        )
         self.out.initialise()
         self.out.render(self.display)
 

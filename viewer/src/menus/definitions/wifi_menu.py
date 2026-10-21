@@ -23,10 +23,11 @@ class WiFiMenu(PhotoFrameMenu):
 
     def initialise(self):
         self._system_operations.log('Initialising network connections')
-        hotspots = self._hotspot_elucidator.list_hotspots()
-        self._system_operations.log(f'status {hotspots.status}')
+        hotspots = self._hotspot_elucidator.list_network_connections()
+        self._system_operations.log(f'status = "{hotspots.status}"')
         self._system_operations.log(f'connections "{hotspots.networks}"')
         self._status_button.update_text(hotspots.status)
+        self.add_networks(hotspots.networks)
 
     def add_wifi_buttons(self, wifi):
         wifis = wifi.split(',') if wifi else []
@@ -36,11 +37,28 @@ class WiFiMenu(PhotoFrameMenu):
                 f'add wifi {w}')
             self._base_buttons.append(
                 MenuButton2(w,
-                            partial(self._select_wifi, w),
+                            partial(self.select_wifi, w),
                             (10, y),
                             UIConstants.SMALL_BUTTON_SIZE)
                             )
             y += UIConstants.SMALL_BUTTON_SIZE[1] + 5
 
-    def _select_wifi(self, wifi):
+    def select_wifi(self, wifi):
         print(f'SELELFCLELEL {wifi}')
+
+    def add_networks(self, networks):
+        x = 70
+        y = 10
+        buttons = self._base_buttons.copy()
+        for network in networks:
+            buttons.append(
+                MenuButton2(network,
+                            partial(self.select_network, network),
+                            (x, y),
+                            UIConstants.SMALL_BUTTON_SIZE)
+                            )
+            y += UIConstants.SMALL_BUTTON_SIZE[1] + 5
+        PhotoFrameMenu.__init__(self, buttons, self.is_image_enabled)
+
+    def select_network(self, network):
+        print(f'NENRENRNENRE {network}')
