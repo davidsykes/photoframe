@@ -15,7 +15,8 @@ class TestWholeProjectConfiguration(unittest.TestCase):
                 "image_display_duration_seconds": 2,
                 "photo_set_filter": 'filter',
                 "viewer_parameters": "viewer parameters",
-                 "hide_mouse": False}
+                "hide_mouse": False,
+                "wifi": "one,two,three"}
         config = self.set_up_config(data)
         self.assertEqual(config.remote_config_url, "remote config url")
         self.assertEqual(config.images_folder, Path('frame_folder/images folder'))
@@ -24,6 +25,7 @@ class TestWholeProjectConfiguration(unittest.TestCase):
         self.assertEqual(config.hide_mouse, False)
         self.assertEqual(config.viewer_app_working_folder, 'viewer app working folder')
         self.assertEqual(config.viewer_parameters, "viewer parameters")
+        self.assertEqual(config.wifi, "one,two,three")
 
     def test_basic_load_old_version(self):
         data = { "images_folder": "frame_folder/images folder",
@@ -37,10 +39,11 @@ class TestWholeProjectConfiguration(unittest.TestCase):
         self.assertEqual(config.photo_set_filter, 'ava')
         self.assertEqual(config.hide_mouse, True)
 
-    def test_the_filter_defaults_to_ava(self):
+    def test_missing_item_defaults(self):
         config = self.set_up_config(self.minimal_data)
 
         self.assertEqual(config.photo_set_filter, 'ava')
+        self.assertEqual(config.wifi, "")
 
     def test_hide_mouse_defaults_to_true(self):
         config = self.set_up_config(self.minimal_data)

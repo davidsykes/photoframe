@@ -42,5 +42,6 @@ Check home path values for these files
 /home/{user}/photoframe/start-photoframe.sh
 project_config,json
 
-
 reboot
+
+Finally ensure the screen orientation is correct and add any wifi information

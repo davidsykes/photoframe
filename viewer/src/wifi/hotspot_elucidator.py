@@ -6,18 +6,15 @@ class HotSpotElucidator:
         self._wifi_controller = wifi_controller
 
     def list_hotspots(self):
-        networks = []
         try:
             spots_text = self._wifi_controller.list_hotspots()
-            print(f'SSPPOOTTSS "{spots_text}"')
-            spots_info = spots_text.splitlines()
-            for spot in spots_info[1:]:
-                networks.append(spot)
+            ssids = [line for line in spots_text.splitlines() if line]
+            ssids = list(dict.fromkeys(ssids))
             return WiFiNetworks(
-                '' if len(networks) > 0 else 'No Wifi Networks found',
-                networks)
+                '' if len(ssids) > 0 else 'No Wifi Networks found',
+                ssids)
         except Exception as e:
             return WiFiNetworks(
                 str(e),
-                networks
+                []
             )

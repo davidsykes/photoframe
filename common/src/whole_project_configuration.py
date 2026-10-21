@@ -29,3 +29,6 @@ class WholeProjectConfiguration:
             'viewer_parameters',
             "")
         self.database_path = self.images_folder.parent / 'photoframe.db'
+        self.wifi = config.get_or_default(
+            'wifi',
+            "")
