@@ -8,9 +8,11 @@ from viewer.src.menus.framework.ui_constants import UIConstants
 
 class WiFiMenu(PhotoFrameMenu):
     def __init__(self,
+                 system_operations,
                  wifi_controller,
                  hotspot_elucidator,
                  wifi):
+        self._system_operations = system_operations
         self._wifi_controller = wifi_controller
         self._hotspot_elucidator = hotspot_elucidator
         self._status_button = MenuText2('initialising...',
@@ -20,13 +22,18 @@ class WiFiMenu(PhotoFrameMenu):
         PhotoFrameMenu.__init__(self, self._base_buttons, False)
 
     def initialise(self):
+        self._system_operations.log('Initialising network connections')
         hotspots = self._hotspot_elucidator.list_hotspots()
+        self._system_operations.log(f'status {hotspots.status}')
+        self._system_operations.log(f'connections "{hotspots.networks}"')
         self._status_button.update_text(hotspots.status)
 
     def add_wifi_buttons(self, wifi):
         wifis = wifi.split(',') if wifi else []
         y = 20
         for w in wifis:
+            self._system_operations.log(
+                f'add wifi {w}')
             self._base_buttons.append(
                 MenuButton2(w,
                             partial(self._select_wifi, w),

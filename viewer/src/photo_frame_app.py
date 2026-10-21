@@ -305,7 +305,8 @@ class PhotoFrameApp:
         menu_navigator.add_menu('value_modifier', IntegerValueModifierMenu())
         wifi_controller = WiFiController(subprocess_wrapper)
         hotspot_elucidator = HotSpotElucidator(wifi_controller)
-        menu_navigator.add_menu('wifi_menu', WiFiMenu(wifi_controller,
+        menu_navigator.add_menu('wifi_menu', WiFiMenu(system_operations,
+                                                      wifi_controller,
                                                       hotspot_elucidator,
                                                       wifi))
         settings_menu = SettingsMenu(menu_navigator)

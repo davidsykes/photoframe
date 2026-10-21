@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import Mock
 
+from common.src.system_operations import SystemOperations
 from viewer.src.menus.definitions.wifi_menu import WiFiMenu
 from viewer.src.wifi.hotspot_elucidator import HotSpotElucidator
 from viewer.src.wifi.wifi_controller import WiFiController
@@ -18,7 +19,8 @@ class WiFiMenuTests(unittest.TestCase):
         self.assertTrue('Wifi 3' in self.display.rendered_text)
 
     def test_if_wifi_entries_are_empty_none_are_displayed(self):
-        self.out = WiFiMenu(self.wifi_controller,
+        self.out = WiFiMenu(self.system_operations,
+                            self.wifi_controller,
                             self.hotspot_elucidator,
                             "")
 
@@ -37,13 +39,15 @@ class WiFiMenuTests(unittest.TestCase):
         self.assertTrue('Network 3' in self.display.rendered_text)
 
     def setUp(self):
+        self.system_operations = Mock(spec=SystemOperations)
         self.wifi_controller = Mock(spec=WiFiController)
         self.hotspot_elucidator = Mock(spec=HotSpotElucidator)
         self.display = Mock()
         self.display.rendered_text = {}
         self.display.draw_text = self.draw_text
         self.display.wrapper.draw_text = self.draw_text2
-        self.out = WiFiMenu(self.wifi_controller,
+        self.out = WiFiMenu(self.system_operations,
+                            self.wifi_controller,
                             self.hotspot_elucidator,
                             "Wifi 1,Wifi 2,Wifi 3")
 
