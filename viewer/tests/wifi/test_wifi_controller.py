@@ -18,5 +18,6 @@ class WiFiControllerTests(unittest.TestCase):
             self.subprocess_wrapper)
 
     def run_return_stdout(self, command):
-        self.assertEqual(command, ['nmcli', 'dev', 'wifi', 'list'])
+        self.assertEqual(command,
+                         ['nmcli', '-t', '-f', 'SSID', 'dev', 'wifi', 'list'])
         return ['a','b']
