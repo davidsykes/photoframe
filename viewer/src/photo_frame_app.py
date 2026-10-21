@@ -190,7 +190,8 @@ class PhotoFrameApp:
             system_operations,
             historic_photo_chooser,
             awake_schedule,
-            image_display_duration_seconds_value_wrapper
+            image_display_duration_seconds_value_wrapper,
+            whole_project_configuration.wifi
         )
 
         image_from_file_loader = ImageFromFileLoader(display)
@@ -280,7 +281,8 @@ class PhotoFrameApp:
                            system_operations,
                            historic_photo_chooser,
                            awake_schedule,
-                           image_display_duration_seconds_value_wrapper):
+                           image_display_duration_seconds_value_wrapper,
+                           wifi):
         pid_rss_extractor = PIDRSSExtractor()
         memory_monitor = MemoryMonitor(
             subprocess_wrapper,
@@ -303,7 +305,9 @@ class PhotoFrameApp:
         menu_navigator.add_menu('value_modifier', IntegerValueModifierMenu())
         wifi_controller = WiFiController(subprocess_wrapper)
         hotspot_elucidator = HotSpotElucidator(wifi_controller)
-        menu_navigator.add_menu('wifi_menu', WiFiMenu(wifi_controller, hotspot_elucidator))
+        menu_navigator.add_menu('wifi_menu', WiFiMenu(wifi_controller,
+                                                      hotspot_elucidator,
+                                                      wifi))
         settings_menu = SettingsMenu(menu_navigator)
 
         first_menu = FirstMenu(menu_handler, settings_menu, debug_menu, historic_photo_chooser)

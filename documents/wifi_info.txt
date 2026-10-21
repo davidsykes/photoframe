@@ -1,0 +1,51 @@
+nmcli dev wifi list
+
+nmcli dev wifi connect "YourSSID" password "YourPassword"
+
+import subprocess
+
+
+class WifiManager:
+    def list_networks(self):
+        result = subprocess.run(
+            [
+                'nmcli',
+                '--terse',
+                '--fields',
+                'SSID,SIGNAL,SECURITY',
+                'dev',
+                'wifi',
+                'list',
+            ],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+
+        return result.stdout
+
+    def connect(self, ssid, password):
+        subprocess.run(
+            [
+                'nmcli',
+                'dev',
+                'wifi',
+                'connect',
+                ssid,
+                'password',
+                password,
+            ],
+            check=True,
+        )
+
+wifi_manager.list_networks()
+wifi_manager.connect(ssid, password)
+
+Wi-Fi
+  HomeNetwork      82%
+  Phone hotspot    67%
+  GuestWiFi        41%
+
+Select network
+Enter password
+Connect
