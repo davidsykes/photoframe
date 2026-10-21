@@ -15,9 +15,14 @@ class WiFiMenu(PhotoFrameMenu):
         self._system_operations = system_operations
         self._wifi_controller = wifi_controller
         self._hotspot_elucidator = hotspot_elucidator
-        self._status_button = MenuText2('initialising...',
-                            (10, 10))
-        self._base_buttons = [self._status_button]
+        self._status_text = MenuText2('initialising...', (10, 5))
+        self._ssid_text = MenuText2('...', (10, 10))
+        self._password_text = MenuText2('...', (10, 15))
+        self._base_buttons = [
+            self._status_text,
+            self._ssid_text,
+            self._password_text,
+            MenuButton2('Ok', self.ok, (10, 20), UIConstants.SMALL_BUTTON_SIZE)]
         self.add_wifi_buttons(wifi)
         PhotoFrameMenu.__init__(self, self._base_buttons, False)
 
@@ -26,12 +31,14 @@ class WiFiMenu(PhotoFrameMenu):
         hotspots = self._hotspot_elucidator.list_network_connections()
         self._system_operations.log(f'status = "{hotspots.status}"')
         self._system_operations.log(f'connections "{hotspots.networks}"')
-        self._status_button.update_text(hotspots.status)
+        self._status_text.update_text(hotspots.status)
         self.add_networks(hotspots.networks)
+        self._ssid = ''
+        self._password = ''
 
     def add_wifi_buttons(self, wifi):
         wifis = wifi.split(',') if wifi else []
-        y = 20
+        y = 30
         for w in wifis:
             self._system_operations.log(
                 f'add wifi {w}')
@@ -44,11 +51,11 @@ class WiFiMenu(PhotoFrameMenu):
             y += UIConstants.SMALL_BUTTON_SIZE[1] + 5
 
     def select_wifi(self, wifi):
-        print(f'SELELFCLELEL {wifi}')
+        self._password += wifi
 
     def add_networks(self, networks):
-        x = 70
-        y = 10
+        x = 50
+        y = 20
         buttons = self._base_buttons.copy()
         for network in networks:
             buttons.append(
@@ -57,8 +64,11 @@ class WiFiMenu(PhotoFrameMenu):
                             (x, y),
                             UIConstants.SMALL_BUTTON_SIZE)
                             )
-            y += UIConstants.SMALL_BUTTON_SIZE[1] + 5
+            y += UIConstants.SMALL_BUTTON_SIZE[1] + 2
         PhotoFrameMenu.__init__(self, buttons, self.is_image_enabled)
 
     def select_network(self, network):
-        print(f'NENRENRNENRE {network}')
+        self._ssid = network
+
+    def ok(self):
+        raise 'sfsdf'

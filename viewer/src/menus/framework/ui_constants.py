@@ -6,7 +6,7 @@ class UIConstants:
 
     BUTTON_SIZE = (30,20)
     WIDE_BUTTON_SIZE = (60,20)
-    SMALL_BUTTON_SIZE = (20,10)
+    SMALL_BUTTON_SIZE = (20,5)
 
     # For review
     BUTTON_WIDTH = 10
