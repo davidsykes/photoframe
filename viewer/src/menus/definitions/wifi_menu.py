@@ -30,8 +30,8 @@ class WiFiMenu(PhotoFrameMenu):
     def initialise(self):
         self._system_operations.log('Initialising network connections')
         hotspots = self._hotspot_elucidator.list_network_connections()
-        self._system_operations.log(f'status = "{hotspots.status}"')
-        self._system_operations.log(f'connections "{hotspots.networks}"')
+        self._system_operations.log(f'hotspots status = "{hotspots.status}"')
+        self._system_operations.log(f'hotspots connections "{hotspots.networks}"')
         self._status_text.update_text(hotspots.status)
         self.add_networks(hotspots.networks)
         self._ssid = ''
@@ -39,6 +39,8 @@ class WiFiMenu(PhotoFrameMenu):
 
     def render(self, display):
         for s in self._status_info:
+            print(f'SSSSSSS {s}')
+            print(f'SSSSSSS type({s})')
             display.print_text(s)
         PhotoFrameMenu.render(self, display)
 
@@ -58,6 +60,7 @@ class WiFiMenu(PhotoFrameMenu):
 
     def select_wifi(self, wifi):
         self._password += wifi
+        self._password_text.update_text(self._password)
 
     def add_networks(self, networks):
         x = 50
@@ -75,6 +78,7 @@ class WiFiMenu(PhotoFrameMenu):
 
     def select_network(self, network):
         self._ssid = network
+        self._ssid_text.update_text(self._ssid)
 
     def ok(self):
         self._status_info.append(f'SSID={self._ssid}')
