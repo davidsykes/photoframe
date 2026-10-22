@@ -83,5 +83,6 @@ class WiFiMenu(PhotoFrameMenu):
     def ok(self):
         self._status_info.append(f'SSID={self._ssid}')
         self._status_info.append(f'PWD={self._password}')
-        r = self._wifi_controller.connect(self._ssid, self._password)
-        self._status_info.append(r.splitlines())
+        result = self._wifi_controller.connect(self._ssid, self._password)
+        for r in result.splitlines():
+            self._status_info.append(r)
