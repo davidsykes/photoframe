@@ -24,6 +24,7 @@ class WiFiMenu(PhotoFrameMenu):
             self._password_text,
             MenuButton2('Ok', self.ok, (10, 20), UIConstants.SMALL_BUTTON_SIZE)]
         self.add_wifi_buttons(wifi)
+        self._status_info = []
         PhotoFrameMenu.__init__(self, self._base_buttons, False)
 
     def initialise(self):
@@ -35,6 +36,11 @@ class WiFiMenu(PhotoFrameMenu):
         self.add_networks(hotspots.networks)
         self._ssid = ''
         self._password = ''
+
+    def render(self, display):
+        for s in self._status_info:
+            display.print_text(s)
+        PhotoFrameMenu.render(self, display)
 
     def add_wifi_buttons(self, wifi):
         wifis = wifi.split(',') if wifi else []
@@ -71,4 +77,7 @@ class WiFiMenu(PhotoFrameMenu):
         self._ssid = network
 
     def ok(self):
-        raise 'sfsdf'
+        self._status_info.append(f'SSID={self._ssid}')
+        self._status_info.append(f'PWD={self._password}')
+        r = self._wifi_controller.connect(self._ssid, self._password)
+        self._status_info.append(r.splitlines())

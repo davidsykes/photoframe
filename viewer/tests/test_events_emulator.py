@@ -3,25 +3,28 @@ from unittest.mock import Mock
 
 from common.src.system_operations import SystemOperations
 from viewer.src.menus.framework.events_emulator import EventsEmulator
+from viewer.src.data.uievent import UIEvent, UIEventType
 
 
 class EventsEmulatorTests(unittest.TestCase):
     def test_events_appear_when_they_are_ready(self):
         self.out.set_events([
-            (10,'Set 1'),
-            (20,'Set 2'),
+            (10, 1,2),
+            (20, 3,4),
         ])
 
         self.assertEqual(self.out.get_events(), [])
         self.set_time(9)
         self.assertEqual(self.out.get_events(), [])
         self.set_time(10)
-        self.assertEqual(self.out.get_events(), 'Set 1')
+        self.assertEqual(self.out.get_events(),
+                         [UIEvent(UIEventType.MOUSE_DOWN, 1,2)])
         self.assertEqual(self.out.get_events(), [])
         self.set_time(19)
         self.assertEqual(self.out.get_events(), [])
         self.set_time(20)
-        self.assertEqual(self.out.get_events(), 'Set 2')
+        self.assertEqual(self.out.get_events(),
+                         [UIEvent(UIEventType.MOUSE_DOWN, 3,4)])
         self.assertEqual(self.out.get_events(), [])
 
     def setUp(self):
