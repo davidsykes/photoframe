@@ -13,7 +13,7 @@ class WiFiController:
         command = ['nmcli',
                    'connection',
                    'delete',
-                   f'"{ssid}"'
+                   ssid
                    ]
         return self._subprocess_wrapper.run_return_stdout(command)
 
@@ -22,7 +22,7 @@ class WiFiController:
                    'dev',
                    'wifi',
                    'connect',
-                   f'"{ssid}"',
+                   ssid,
                    'password',
-                   f'"{password}"']
+                   password]
         return self._subprocess_wrapper.run_return_stdout(command)
