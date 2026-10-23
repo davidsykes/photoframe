@@ -17,7 +17,6 @@ class DisplayWrapperTests(unittest.TestCase):
             (12,34)
         )
 
-
     def setUp(self):
         self.rendered_text = Mock()
         self.display = Mock()

@@ -9,8 +9,8 @@ class PhotoFrameMenuTests(unittest.TestCase):
     def test_a_default_back_button_is_added(self):
         self.out.render(self.display)
 
-        self.display.draw_text.assert_called_once_with(
-            'Back', 'white',
+        self.display.wrapper.draw_text.assert_called_once_with(
+            'Back',
             (UIConstants.BUTTON_RIGHT+1,
             UIConstants.MENU_MARGIN+1)
         )
@@ -27,8 +27,8 @@ class PhotoFrameMenuTests(unittest.TestCase):
         self.assertEqual(r, MenuAction.BACK)
 
     def test_press_returns_value_if_the_button_is_found(self):
-        self.assertIsNone(self.out.press('non existant button'))
-        self.assertEqual(self.out.press('Back'), MenuAction.BACK)
+        self.assertIsNone(self.out.activate_control('non existant button'))
+        self.assertEqual(self.out.activate_control('Back'), MenuAction.BACK)
 
     def test_on_enter_does_nothing(self):
         self.out.on_enter()
@@ -37,6 +37,6 @@ class PhotoFrameMenuTests(unittest.TestCase):
         self.out.on_exit()
 
     def setUp(self):
-        self.display = Mock(COLOUR_WHITE='white')
+        self.display = Mock()
         self.buttons = []
         self.out = PhotoFrameMenu(self.buttons, False)

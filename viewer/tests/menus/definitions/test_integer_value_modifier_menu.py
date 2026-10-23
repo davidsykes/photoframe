@@ -5,12 +5,12 @@ from viewer.src.menus.definitions.integer_value_modifier_menu import IntegerValu
 
 class IntegerValueModifierMenuTests(unittest.TestCase):
     def test_menu_items_are_created(self):
-        self.assertEqual(len(self.out._buttons), 6)
-        self.assertEqual(self.out._buttons[0].name, 'title_text')
-        self.assertEqual(self.out._buttons[1].name, 'value_display_text')
-        self.assertEqual(self.out._buttons[2].name, 'value up')
-        self.assertEqual(self.out._buttons[3].name, 'value down')
-        self.assertEqual(self.out._buttons[4].name, 'Ok')
+        self.assertEqual(len(self.out._controls), 6)
+        self.assertEqual(self.out._controls[0].name, 'title_text')
+        self.assertEqual(self.out._controls[1].name, 'value_display_text')
+        self.assertEqual(self.out._controls[2].name, 'value up')
+        self.assertEqual(self.out._controls[3].name, 'value down')
+        self.assertEqual(self.out._controls[4].name, 'Ok')
 
     def test_menu_items_are_displayed(self):
         self.out.render(self.display)
@@ -20,27 +20,27 @@ class IntegerValueModifierMenuTests(unittest.TestCase):
         self.assertTrue('-' in self.display.rendered_text)
 
     def test_display_value_can_be_increased(self):
-        self.out.press('value up')
+        self.out.activate_control('value up')
 
         self.assertEqual(self.out.display_value,
                          124)
 
     def test_display_value_can_be_decreased(self):
-        self.out.press('value down')
+        self.out.activate_control('value down')
 
         self.assertEqual(self.get_display_value(),
                          '122')
 
     def test_changing_display_value_does_not_affect_set_value(self):
-        self.out.press('value up')
+        self.out.activate_control('value up')
         self.assertEqual(self.value, 123)
 
-        self.out.press('value down')
+        self.out.activate_control('value down')
         self.assertEqual(self.value, 123)
 
     def test_value_is_updated_when_ok_is_pressed(self):
-        self.out.press('value up')
-        self.out.press('Ok')
+        self.out.activate_control('value up')
+        self.out.activate_control('Ok')
 
         self.assertEqual(self.value, 124)
 
@@ -51,8 +51,8 @@ class IntegerValueModifierMenuTests(unittest.TestCase):
 
     def test_if_get_and_set_not_set_value_defaults_internally_to_0(self):
         self.out = IntegerValueModifierMenu()
-        self.out.press('value up')
-        self.out.press('value up')
+        self.out.activate_control('value up')
+        self.out.activate_control('value up')
 
         self.assertEqual(self.out.display_value, 2)
 

@@ -9,18 +9,20 @@ class WiFiController:
         )
         return spots
 
+    def delete_connection(self, ssid):
+        command = ['nmcli',
+                   'connection',
+                   'delete',
+                   f'"{ssid}"'
+                   ]
+        return self._subprocess_wrapper.run_return_stdout(command)
+
     def connect(self, ssid, password):
         command = ['nmcli',
                    'dev',
                    'wifi',
                    'connect',
-                   ssid,
+                   f'"{ssid}"',
                    'password',
-                   password]
-
-        try:
-            return self._subprocess_wrapper.run_return_stdout(
-                command
-                )
-        except Exception as e:
-            return str(e)
+                   f'"{password}"']
+        return self._subprocess_wrapper.run_return_stdout(command)

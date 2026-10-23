@@ -1,6 +1,7 @@
 
 class MenuButton2:
-    def __init__(self, text, action, position, size):
+    def __init__(self, text, action, position, size, alt_name=None):
+        self.name = text if alt_name is None else alt_name
         self._text = text
         self._action = action
         self._position = position
@@ -20,9 +21,8 @@ class MenuButton2:
              self._w,
              self._h)
         )
-        display.draw_text(
+        display.wrapper.draw_text(
             self._text,
-            display.COLOUR_WHITE,
             (self._x + 1, self._y + 1)
         )
 
@@ -31,7 +31,7 @@ class MenuButton2:
             y >= self._y and
             x <= self._x2 and
             y <= self._y2):
-            return self.press()
+            return self.activate()
 
-    def press(self):
+    def activate(self):
         return self._action()

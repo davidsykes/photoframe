@@ -1,5 +1,4 @@
 from functools import partial
-
 from viewer.src.menus.framework.menu_items.menu_button2 import MenuButton2
 from viewer.src.menus.framework.menu_items.menu_text2 import MenuText2
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
@@ -9,15 +8,17 @@ from viewer.src.menus.framework.ui_constants import UIConstants
 class WiFiMenu(PhotoFrameMenu):
     def __init__(self,
                  system_operations,
-                 wifi_controller,
                  hotspot_elucidator,
+                 ssid_connector,
                  wifi):
         self._system_operations = system_operations
-        self._wifi_controller = wifi_controller
         self._hotspot_elucidator = hotspot_elucidator
+        self._ssid_connector = ssid_connector
         self._status_text = MenuText2('initialising...', (10, 5))
         self._ssid_text = MenuText2('...', (10, 10))
+        self._ssid = ''
         self._password_text = MenuText2('...', (10, 15))
+        self._password = ''
         self._base_buttons = [
             self._status_text,
             self._ssid_text,
@@ -39,8 +40,6 @@ class WiFiMenu(PhotoFrameMenu):
 
     def render(self, display):
         for s in self._status_info:
-            print(f'SSSSSSS {s}')
-            print(f'SSSSSSS type({s})')
             display.print_text(s)
         PhotoFrameMenu.render(self, display)
 
@@ -83,6 +82,6 @@ class WiFiMenu(PhotoFrameMenu):
     def ok(self):
         self._status_info.append(f'SSID={self._ssid}')
         self._status_info.append(f'PWD={self._password}')
-        result = self._wifi_controller.connect(self._ssid, self._password)
+        result = self._ssid_connector.connect(self._ssid, self._password)
         for r in result.splitlines():
             self._status_info.append(r)

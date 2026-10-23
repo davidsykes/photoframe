@@ -12,9 +12,8 @@ class MenuButtonTests(unittest.TestCase):
             (123, 456, 100, 150)
         )
 
-        self.display.draw_text.assert_called_once_with(
+        self.display.wrapper.draw_text.assert_called_once_with(
             'button text',
-            'white colour',
             (124, 457)
         )
 

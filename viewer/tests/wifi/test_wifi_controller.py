@@ -14,27 +14,30 @@ class WiFiControllerTests(unittest.TestCase):
         self.assertEqual(hotspots,
                          ['a','b'])
         
+    def test_delete_runs_the_delete_command(self):
+        self.expected_command = ['nmcli',
+                                 'connection',
+                                 'delete',
+                                 '"my ssid"']
+        self.stdout_return = 'delete result'
+
+        result = self.out.delete_connection('my ssid')
+        
+        self.assertEqual(result, 'delete result')
+        
     def test_connect_runs_the_connect_command(self):
         self.expected_command = ['nmcli',
                                  'dev',
                                  'wifi',
                                  'connect',
-                                 'ssid',
+                                 '"my ssid"',
                                  'password',
-                                 'password']
+                                 '"my password"']
         self.stdout_return = 'connection result'
 
-        result = self.out.connect('ssid', 'password')
+        result = self.out.connect('my ssid', 'my password')
         
         self.assertEqual(result, 'connection result')
-        
-    def test_if_connect_throw_exception_the_error_is_returned(self):
-        self.subprocess_wrapper.run_return_stdout = Mock()
-        self.subprocess_wrapper.run_return_stdout.side_effect = Exception("Exception test")
-
-        result = self.out.connect('ssid', 'password')
-        
-        self.assertEqual(result, 'Exception test')
 
     def setUp(self):
         self.subprocess_wrapper = Mock(spec=SubprocessWrapper)
