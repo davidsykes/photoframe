@@ -1,23 +1,18 @@
-from viewer.src.menus.framework.menu_items.menu_item import MenuItem
 
-
-class MenuText(MenuItem):
-    def __init__(self, name, coordinates, display_text):
-        self.name = name
-        self._coordinates = coordinates
-        self._display_text = display_text
+class MenuText:
+    def __init__(self,
+                 text,
+                 position,
+                 font=0):
+        self._text = text
+        self._position = position
+        self._font = font
 
     def render(self, display):
-        display.draw_rectangle(
-            display.COLOUR_DARK,
-            self._coordinates
-        )
-        display.draw_text(
-            self._display_text,
-            display.COLOUR_WHITE,
-            (self._coordinates[0] + 1,
-             self._coordinates[1] + 1)
+        display.wrapper.draw_text(
+            self._text,
+            self._position
         )
 
     def update_text(self, text):
-        self._display_text = text
+        self._text = text
