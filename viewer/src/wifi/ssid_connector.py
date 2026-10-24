@@ -9,5 +9,5 @@ class SSIDConnector:
             self._wifi_controller.delete_connection(ssid)
             return self._wifi_controller.connect(ssid, password)
         except Exception as e:
-            return str(e)
+            return f'Wifi Connect Error: {str(e)}'
 
