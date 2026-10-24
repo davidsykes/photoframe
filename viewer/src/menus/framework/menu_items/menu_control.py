@@ -1,8 +1,14 @@
 
 class MenuControl:
-    def __init__(self, name, rect_xywh, action):
+    def __init__(self,
+                 name,
+                 action,
+                 *,
+                 rect_xywh=None,
+                 position=None,
+                 size=None):
         self.name = name
-        self._rect_xywh = rect_xywh
+        self._rect_xywh = rect_xywh if rect_xywh is not None else position + size
         self._action = action
 
     def activate(self, x, y):

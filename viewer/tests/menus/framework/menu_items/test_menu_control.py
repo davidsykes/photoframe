@@ -26,6 +26,21 @@ class MenuControlTests(unittest.TestCase):
         self.assertIsNone(self.out.activate(self.x-1, self.y))
         self.assertEqual('value', self.out.activate(self.x, self.y))
 
+    def test_area_can_come_from_a_rect(self):
+        control = MenuControl('control',
+                              self.action,
+                              rect_xywh=(1,2,3,4))
+
+        self.assertEqual(control._rect_xywh, (1,2,3,4))
+
+    def test_area_can_come_from_position_and_size(self):
+        control = MenuControl('control',
+                              self.action,
+                              position=(1,2),
+                              size=(3,4))
+
+        self.assertEqual(control._rect_xywh, (1,2,3,4))
+
     def setUp(self):
         self.display = Mock()
         self.display.COLOUR_LIGHT = 'light colour'
@@ -37,9 +52,10 @@ class MenuControlTests(unittest.TestCase):
         self.x2 = self.x + width - 1
         self.y2 = self.y + height - 1
         self.out = MenuControl('control',
-                               (self.x, self.y,
-                              width, height),
-                              self.action)
+                               self.action,
+                               rect_xywh=(self.x, self.y,
+                                          width, height),
+                              )
         self.action_count = 0
 
     def action(self):
