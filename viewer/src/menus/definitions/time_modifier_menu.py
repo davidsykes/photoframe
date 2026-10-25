@@ -1,7 +1,7 @@
 from datetime import time
 from viewer.src.menus.framework.menu_action import MenuAction
-from viewer.src.menus.framework.menu_items.menu_button import MenuButton
 from viewer.src.menus.framework.menu_coordinates_generator import MenuCoordinatesGenerator
+from viewer.src.menus.framework.menu_items.menu_button_text import MenuButtonText
 from viewer.src.menus.framework.menu_items.menu_text import MenuText
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
 from viewer.src.menus.framework.ui_constants import UIConstants
@@ -10,57 +10,53 @@ from viewer.src.menus.framework.ui_constants import UIConstants
 class TimeModifierMenu(PhotoFrameMenu):
     def __init__(self):
         mc = MenuCoordinatesGenerator()
-        self._title =  MenuText('title_text',
-                                       mc.wide(10),
-                                       '----------')
-        self._time_display = MenuText('time_display_text',
-                                             mc.button(30, 35),
-                                             '--:--')
+        self._title =  MenuText('----------',
+                                mc.wide(10))
+        self._time_display = MenuText('--:--',
+                                      mc.button(30, 35))
         buttons = [
             self._title,
             self._time_display,
-            MenuButton(20,
-                       30,
-                       UIConstants.BUTTON_WIDTH,
-                       UIConstants.BUTTON_HEIGHT,
-                       '+',
-                       self.hour_up,
-                       'hour up'),
-            MenuButton(40,
-                       30,
-                       UIConstants.BUTTON_WIDTH,
-                       UIConstants.BUTTON_HEIGHT,
-                       '+',
-                       self.minute_up,
-                       'minute up'),
-            MenuText('hour_text',
-                     mc.button(20, 35),
-                     'Hour'),
-            MenuText('minute_text',
-                     mc.button(40, 35),
-                     'Minute'),
-            MenuButton(20,
-                       40,
-                       UIConstants.BUTTON_WIDTH,
-                       UIConstants.BUTTON_HEIGHT,
-                       '-',
-                       self.hour_down,
-                       'hour down'),
-            MenuButton(40,
-                       40,
-                       UIConstants.BUTTON_WIDTH,
-                       UIConstants.BUTTON_HEIGHT,
-                       '-',
-                       self.minute_down,
-                       'minute down'),
-            MenuButton(30,
-                       50,
-                       UIConstants.BUTTON_WIDTH,
-                       UIConstants.BUTTON_HEIGHT,
-                       'Ok',
-                       self.ok)
+            MenuButtonText('+',
+                           rect_xywh=(20,
+                                      30,
+                                      UIConstants.BUTTON_WIDTH,
+                                      UIConstants.BUTTON_HEIGHT),
+                            action=self.hour_up,
+                            alt_name='hour up'),
+            MenuButtonText('+',
+                           rect_xywh=(40,
+                                      30,
+                                      UIConstants.BUTTON_WIDTH,
+                                      UIConstants.BUTTON_HEIGHT),
+                            action=self.minute_up,
+                            alt_name='minute up'),
+            MenuText('Hour',
+                     mc.button(20, 35)),
+            MenuText('Minute',
+                     mc.button(40, 35)),
+            MenuButtonText('-',
+                           rect_xywh=(20,
+                                      40,
+                                      UIConstants.BUTTON_WIDTH,
+                                      UIConstants.BUTTON_HEIGHT),
+                            action=self.hour_down,
+                            alt_name='hour down'),
+            MenuButtonText('-',
+                           rect_xywh=(40,
+                                      40,
+                                      UIConstants.BUTTON_WIDTH,
+                                      UIConstants.BUTTON_HEIGHT),
+                            action=self.minute_down,
+                            alt_name='minute down'),
+            MenuButtonText('Ok',
+                           rect_xywh=(30,
+                                      50,
+                                      UIConstants.BUTTON_WIDTH,
+                                      UIConstants.BUTTON_HEIGHT),
+                            action=self.ok)
         ]
-        PhotoFrameMenu.__init__(self, buttons, False)
+        super().__init__(buttons, False)
         self.get_value = None
         self.set_value = None
         self.display_time = time(12,0)

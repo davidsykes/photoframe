@@ -18,7 +18,7 @@ class WiFiControllerTests(unittest.TestCase):
         self.expected_command = ['nmcli',
                                  'connection',
                                  'delete',
-                                 '"my ssid"']
+                                 'my ssid']
         self.stdout_return = 'delete result'
 
         result = self.out.delete_connection('my ssid')
@@ -30,9 +30,9 @@ class WiFiControllerTests(unittest.TestCase):
                                  'dev',
                                  'wifi',
                                  'connect',
-                                 '"my ssid"',
+                                 'my ssid',
                                  'password',
-                                 '"my password"']
+                                 'my password']
         self.stdout_return = 'connection result'
 
         result = self.out.connect('my ssid', 'my password')
