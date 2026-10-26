@@ -12,17 +12,22 @@ class FirstMenu(PhotoFrameMenu):
                  debug_menu,
                  historic_photo_chooser):
         buttons = [
-            MenuTouchArea(self.previous_image, (0,20,40,80)),
+            MenuTouchArea('previous image',
+                          action=self.previous_image,
+                          rect_xywh=(0,20,40,80)),
             MenuText('<', (UIConstants.MENU_MARGIN, 40)),
-            MenuTouchArea(self.next_image, (60,20,100,80)),
+            MenuTouchArea('next image',
+                          action=self.next_image,
+                          rect_xywh=(60,20,100,80)),
             MenuText('>', (70, 40)),
             MenuButtonText('Debug',
                         position=(0,UIConstants.SCREEN_HEIGHT-UIConstants.MENU_MARGIN),
                         size=UIConstants.SMALL_BUTTON_SIZE,
                         action=self.debug_menu),
             MenuButtonText('Settings',
-                        rect_xywh=(UIConstants.SCREEN_WIDTH - UIConstants.MENU_MARGIN - UIConstants.BUTTON_SIZE[0],
+                        position=(UIConstants.SCREEN_WIDTH - UIConstants.MENU_MARGIN - UIConstants.BUTTON_SIZE[0],
                          UIConstants.SCREEN_WIDTH - UIConstants.MENU_MARGIN - UIConstants.BUTTON_SIZE[1]),
+                         size = UIConstants.BUTTON_SIZE,
                          action=self.settings_menu),
         ]
         super().__init__(buttons, True)
