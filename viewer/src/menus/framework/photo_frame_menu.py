@@ -1,5 +1,5 @@
 from viewer.src.menus.framework.menu_action import MenuAction
-from viewer.src.menus.framework.menu_items.menu_button2 import MenuButton2
+from viewer.src.menus.framework.menu_items.menu_button_text import MenuButtonText
 from viewer.src.menus.framework.ui_constants import UIConstants
 
 
@@ -7,11 +7,11 @@ class PhotoFrameMenu:
     def __init__(self, controls, is_image_enabled):
         self._controls = controls
         self._controls.append(
-            MenuButton2('Back',
-                        self.back_action,
-                        (UIConstants.BUTTON_RIGHT,
+            MenuButtonText('Back',
+                        action=self.back_action,
+                        position=(UIConstants.BUTTON_RIGHT,
                          UIConstants.MENU_MARGIN),
-                        UIConstants.BUTTON_SIZE))
+                        size=UIConstants.BUTTON_SIZE))
         self.is_image_enabled = is_image_enabled
 
     def render(self, display):
@@ -27,9 +27,9 @@ class PhotoFrameMenu:
 
     def activate_control(self, button_name):
         for control in self._controls:
-            if hasattr(control, 'activate'):
+            if hasattr(control, 'activateX'):
                 if control.name == button_name:
-                    return control.activate()
+                    return control.activateX()
 
     def on_enter(self):
         pass

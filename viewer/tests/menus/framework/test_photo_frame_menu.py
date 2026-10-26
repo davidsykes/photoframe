@@ -30,6 +30,12 @@ class PhotoFrameMenuTests(unittest.TestCase):
         self.assertIsNone(self.out.activate_control('non existant button'))
         self.assertEqual(self.out.activate_control('Back'), MenuAction.BACK)
 
+    def test_menu_controls_with_no_activate_are_ignored(self):
+        control = Mock()
+        menu = PhotoFrameMenu([control], False)
+
+        menu.mouse_down(1,1)        
+
     def test_on_enter_does_nothing(self):
         self.out.on_enter()
 
@@ -38,5 +44,5 @@ class PhotoFrameMenuTests(unittest.TestCase):
 
     def setUp(self):
         self.display = Mock()
-        self.buttons = []
-        self.out = PhotoFrameMenu(self.buttons, False)
+        self.controls = []
+        self.out = PhotoFrameMenu(self.controls, False)
