@@ -41,6 +41,13 @@ class MenuControlTests(unittest.TestCase):
 
         self.assertEqual(control._rect_xywh, (1,2,3,4))
 
+    def test_an_invalid_area_raises_an_exception(self):
+        with self.assertRaises(Exception) as context:
+            _ = MenuControl('control',
+                              self.action,
+                              rect_xywh=(1,2,3))
+
+
     def setUp(self):
         self.display = Mock()
         self.display.COLOUR_LIGHT = 'light colour'

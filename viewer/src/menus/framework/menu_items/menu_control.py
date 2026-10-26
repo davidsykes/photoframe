@@ -1,3 +1,4 @@
+from viewer.src.viewer_exit_exception import ViewerExitException
 
 class MenuControl:
     def __init__(self,
@@ -10,6 +11,8 @@ class MenuControl:
         self.name = name
         self._rect_xywh = rect_xywh if rect_xywh is not None else position + size
         self._action = action
+        if len(self._rect_xywh) != 4:
+            raise ViewerExitException(103,f'Control {name} has invalid coordinates {self._rect_xywh}')
 
     def mouse_down(self, x, y):
         left = self._rect_xywh[0]
