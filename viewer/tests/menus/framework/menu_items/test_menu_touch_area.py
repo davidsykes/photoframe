@@ -32,8 +32,9 @@ class MenuTouchAreaTests(unittest.TestCase):
         height = 150
         self.x2 = self.x + width - 1
         self.y2 = self.y + height - 1
-        self.out = MenuTouchArea(self.action,
-                               (self.x, self.y,self.x2, self.y2))
+        self.out = MenuTouchArea('name',
+                                 action=self.action,
+                                 rect_xywh=(self.x, self.y, width, height))
         self.action_count = 0
 
     def action(self):
