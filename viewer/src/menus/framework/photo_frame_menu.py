@@ -20,16 +20,17 @@ class PhotoFrameMenu:
 
     def mouse_down(self, x, y):
         for control in self._controls:
-            v = control.mouse_down(x, y)
-            if v is not None:
-                return v
+            if hasattr(control, 'mouse_down'):
+                v = control.mouse_down(x, y)
+                if v is not None:
+                    return v
         return None
 
     def activate_control(self, button_name):
         for control in self._controls:
-            if hasattr(control, 'activateX'):
+            if hasattr(control, 'activate'):
                 if control.name == button_name:
-                    return control.activateX()
+                    return control.activate()
 
     def on_enter(self):
         pass

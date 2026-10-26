@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import Mock
 
 from viewer.src.menus.framework.menu_action import MenuAction
+from viewer.src.menus.framework.menu_items.menu_text import MenuText
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
 from viewer.src.menus.framework.ui_constants import UIConstants
 
@@ -31,7 +32,7 @@ class PhotoFrameMenuTests(unittest.TestCase):
         self.assertEqual(self.out.activate_control('Back'), MenuAction.BACK)
 
     def test_menu_controls_with_no_activate_are_ignored(self):
-        control = Mock()
+        control = MenuText('text', (0,0))
         menu = PhotoFrameMenu([control], False)
 
         menu.mouse_down(1,1)        

@@ -1,6 +1,6 @@
 from functools import partial
-from viewer.src.menus.framework.menu_items.menu_button2 import MenuButton2
-from viewer.src.menus.framework.menu_items.menu_text2 import MenuText2
+from viewer.src.menus.framework.menu_items.menu_button_text import MenuButtonText
+from viewer.src.menus.framework.menu_items.menu_text import MenuText
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
 from viewer.src.menus.framework.ui_constants import UIConstants
 
@@ -14,19 +14,22 @@ class WiFiMenu(PhotoFrameMenu):
         self._system_operations = system_operations
         self._hotspot_elucidator = hotspot_elucidator
         self._ssid_connector = ssid_connector
-        self._status_text = MenuText2('initialising...', (10, 5))
-        self._ssid_text = MenuText2('...', (10, 10))
+        self._status_text = MenuText('initialising...', (10, 5))
+        self._ssid_text = MenuText('...', (10, 10))
         self._ssid = ''
-        self._password_text = MenuText2('...', (10, 15))
+        self._password_text = MenuText('...', (10, 15))
         self._password = ''
         self._base_buttons = [
             self._status_text,
             self._ssid_text,
             self._password_text,
-            MenuButton2('Ok', self.ok, (10, 20), UIConstants.SMALL_BUTTON_SIZE)]
+            MenuButtonText('Ok',
+                           action=self.ok,
+                           position=(10, 20),
+                           size=UIConstants.SMALL_BUTTON_SIZE)]
         self.add_wifi_buttons(wifi)
         self._status_info = []
-        PhotoFrameMenu.__init__(self, self._base_buttons, False)
+        super().__init__(self._base_buttons, False)
 
     def initialise(self):
         self._system_operations.log('Initialising network connections')
@@ -50,11 +53,11 @@ class WiFiMenu(PhotoFrameMenu):
             self._system_operations.log(
                 f'add wifi {w}')
             self._base_buttons.append(
-                MenuButton2(w,
-                            partial(self.select_wifi, w),
-                            (10, y),
-                            UIConstants.SMALL_BUTTON_SIZE)
-                            )
+                MenuButtonText(w,
+                               action=partial(self.select_wifi, w),
+                               position=(10, y),
+                               size=UIConstants.SMALL_BUTTON_SIZE)
+                               )
             y += UIConstants.SMALL_BUTTON_SIZE[1] + 5
 
     def select_wifi(self, wifi):
@@ -67,13 +70,13 @@ class WiFiMenu(PhotoFrameMenu):
         buttons = self._base_buttons.copy()
         for network in networks:
             buttons.append(
-                MenuButton2(network,
-                            partial(self.select_network, network),
-                            (x, y),
-                            UIConstants.SMALL_BUTTON_SIZE)
-                            )
+                MenuButtonText(network,
+                               action=partial(self.select_network, network),
+                               position=(x, y),
+                               size=UIConstants.SMALL_BUTTON_SIZE)
+                               )
             y += UIConstants.SMALL_BUTTON_SIZE[1] + 2
-        PhotoFrameMenu.__init__(self, buttons, self.is_image_enabled)
+        super().__init__(buttons, self.is_image_enabled)
 
     def select_network(self, network):
         self._ssid = network

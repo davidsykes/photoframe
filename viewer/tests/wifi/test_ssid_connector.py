@@ -27,14 +27,14 @@ class SSIDConnectorTests(unittest.TestCase):
 
         result = self.out.connect('ssid', 'password')
         
-        self.assertEqual(result, 'Delete Exception')
+        self.assertEqual(result, 'Wifi Connect Error: Delete Exception')
         
     def test_if_connect_throws_an_exception_the_error_is_returned(self):
         self.wifi_controller.connect.side_effect = Exception("Connect Exception")
 
         result = self.out.connect('ssid', 'password')
         
-        self.assertEqual(result, 'Connect Exception')
+        self.assertEqual(result, 'Wifi Connect Error: Connect Exception')
 
     def setUp(self):
         self.wifi_controller = Mock(spec=WiFiController)

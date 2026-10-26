@@ -18,7 +18,7 @@ class MenuButtonTextTests(unittest.TestCase):
         )
 
     def test_menu_text_buttons_can_be_activated(self):
-        self.out.activate(123, 456)
+        self.out.mouse_down(123, 456)
 
         self.assertEqual(1, self.action_count)
 

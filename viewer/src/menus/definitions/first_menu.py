@@ -1,7 +1,5 @@
-from viewer.src.menus.framework.menu_items.menu_button import MenuButton
-from viewer.src.menus.framework.menu_items.menu_button2 import MenuButton2
+from viewer.src.menus.framework.menu_items.menu_button_text import MenuButtonText
 from viewer.src.menus.framework.menu_items.menu_text import MenuText
-from viewer.src.menus.framework.menu_items.menu_text2 import MenuText2
 from viewer.src.menus.framework.menu_items.menu_touch_area import MenuTouchArea
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
 from viewer.src.menus.framework.ui_constants import UIConstants
@@ -15,22 +13,19 @@ class FirstMenu(PhotoFrameMenu):
                  historic_photo_chooser):
         buttons = [
             MenuTouchArea(self.previous_image, (0,20,40,80)),
-            MenuText2('<', (UIConstants.MENU_MARGIN, 40)),
-            MenuButton(UIConstants.BUTTON_LEFT , 47, UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, 'Previous', self.previous_image),
+            MenuText('<', (UIConstants.MENU_MARGIN, 40)),
             MenuTouchArea(self.next_image, (60,20,100,80)),
-            MenuText2('>', (70, 40)),
-            MenuButton(UIConstants.BUTTON_RIGHT, 47, UIConstants.BUTTON_WIDTH, UIConstants.BUTTON_HEIGHT, 'Next', self.next_image),
-            MenuButton2('Debug',
-                        self.debug_menu,
-                        (0,UIConstants.SCREEN_HEIGHT-UIConstants.MENU_MARGIN),
-                        UIConstants.SMALL_BUTTON_SIZE),
-            MenuButton2('Settings',
-                        self.settings_menu,
-                        (UIConstants.SCREEN_WIDTH - UIConstants.MENU_MARGIN - UIConstants.BUTTON_SIZE[0],
+            MenuText('>', (70, 40)),
+            MenuButtonText('Debug',
+                        position=(0,UIConstants.SCREEN_HEIGHT-UIConstants.MENU_MARGIN),
+                        size=UIConstants.SMALL_BUTTON_SIZE,
+                        action=self.debug_menu),
+            MenuButtonText('Settings',
+                        rect_xywh=(UIConstants.SCREEN_WIDTH - UIConstants.MENU_MARGIN - UIConstants.BUTTON_SIZE[0],
                          UIConstants.SCREEN_WIDTH - UIConstants.MENU_MARGIN - UIConstants.BUTTON_SIZE[1]),
-                         UIConstants.BUTTON_SIZE),
+                         action=self.settings_menu),
         ]
-        PhotoFrameMenu.__init__(self, buttons, True)
+        super().__init__(buttons, True)
 
         self._menu_handler = menu_handler
         self._settings_menu = settings_menu

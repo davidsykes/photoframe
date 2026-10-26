@@ -23,8 +23,8 @@ class MenuControlTests(unittest.TestCase):
         self.mouse_hit(self.x2, self.y2)
 
     def test_mouse_hits_return_action_value(self):
-        self.assertIsNone(self.out.activate(self.x-1, self.y))
-        self.assertEqual('value', self.out.activate(self.x, self.y))
+        self.assertIsNone(self.out.mouse_down(self.x-1, self.y))
+        self.assertEqual('value', self.out.mouse_down(self.x, self.y))
 
     def test_area_can_come_from_a_rect(self):
         control = MenuControl('control',
@@ -64,10 +64,10 @@ class MenuControlTests(unittest.TestCase):
 
     def mouse_miss(self, x, y):
         expected = self.action_count
-        self.out.activate(x, y)
+        self.out.mouse_down(x, y)
         self.assertEqual(expected, self.action_count)
 
     def mouse_hit(self, x, y):
         expected = self.action_count + 1
-        self.out.activate(x, y)
+        self.out.mouse_down(x, y)
         self.assertEqual(expected, self.action_count)

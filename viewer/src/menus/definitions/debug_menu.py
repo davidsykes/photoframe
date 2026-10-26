@@ -1,5 +1,5 @@
 from viewer.src.menus.framework.menu_action import MenuAction
-from viewer.src.menus.framework.menu_items.menu_button import MenuButton
+from viewer.src.menus.framework.menu_items.menu_button_text import MenuButtonText
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
 from viewer.src.menus.framework.ui_constants import UIConstants
 from viewer.src.viewer_exit_exception import ViewerExitException
@@ -20,7 +20,7 @@ class DebugMenu(PhotoFrameMenu):
         buttons.append(self.create_button('Random', self.render_random))
         buttons.append(self.create_button('Crash', self.simulate_crash))
         buttons.append(self.create_button('Quit', self.end_program_cleanly))
-        PhotoFrameMenu.__init__(self, buttons, True)
+        super().__init__(buttons, True)
 
         self._statuses = statuses
         self._awake_decider = awake_decider
@@ -29,10 +29,12 @@ class DebugMenu(PhotoFrameMenu):
         self._memory_monitor = memory_monitor
 
     def create_button(self, text, action):
-        button = MenuButton(self.button_x,
+        button = MenuButtonText(text,
+                            rect_xywh=(self.button_x,
                             self.button_y,
                             UIConstants.BUTTON_WIDTH,
-                            UIConstants.BUTTON_HEIGHT, text, action)
+                            UIConstants.BUTTON_HEIGHT),
+                            action=action)
         self.button_y += UIConstants.BUTTON_HEIGHT + 1
         return button
 

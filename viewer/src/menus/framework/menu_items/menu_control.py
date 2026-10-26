@@ -11,7 +11,7 @@ class MenuControl:
         self._rect_xywh = rect_xywh if rect_xywh is not None else position + size
         self._action = action
 
-    def activate(self, x, y):
+    def mouse_down(self, x, y):
         left = self._rect_xywh[0]
         top = self._rect_xywh[1]
         right = left + self._rect_xywh[2] - 1
@@ -20,4 +20,7 @@ class MenuControl:
             y >= top and
             x <= right and
             y <= bottom):
-            return self._action()
+            return self.activate()
+
+    def activate(self):
+        return self._action()
