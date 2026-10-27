@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import Mock
 
+from viewer.src.display.display_scaler import DisplayScaler
 from viewer.src.display.display_wrapper import DisplayWrapper
 
 
@@ -29,24 +30,28 @@ class DisplayWrapperTests(unittest.TestCase):
         self.display.load_image.assert_called_once_with(
             'image path'
         )
-
+        self.display_scaler.scale.assert_called_once_with((12,34))
         self.display.scale_image.assert_called_once_with(
-            'image', (12,34))
+            'image', (123,345))
 
         self.assertEqual('scaled image', image)
 
     def test_show_image_shows_the_image(self):
         self.out.show_image('image', (12,34))
 
+        self.display_scaler.scale.assert_called_once_with((12,34))
         self.display.show_image.assert_called_once_with(
-            'image', (12,34)
+            'image', (123,345)
         )
 
     def setUp(self):
         self.rendered_text = Mock()
         self.display = Mock()
         self.display.render_text = self.render_text
-        self.out = DisplayWrapper(self.display)
+        self.display_scaler = Mock(spec=DisplayScaler)
+        self.display_scaler.scale.return_value = (123,345)
+        self.out = DisplayWrapper(self.display,
+                                  self.display_scaler)
 
     def render_text(self, text):
         if text == 'text':
