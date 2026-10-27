@@ -1,3 +1,4 @@
+from viewer.src.menus.framework.menu_items.menu_button_image import MenuButtonImage
 from viewer.src.menus.framework.menu_items.menu_button_text import MenuButtonText
 from viewer.src.menus.framework.menu_items.menu_text import MenuText
 from viewer.src.menus.framework.menu_items.menu_touch_area import MenuTouchArea
@@ -29,6 +30,12 @@ class FirstMenu(PhotoFrameMenu):
                          UIConstants.SCREEN_WIDTH - UIConstants.MENU_MARGIN - UIConstants.BUTTON_SIZE[1]),
                          size = UIConstants.BUTTON_SIZE,
                          action=self.settings_menu),
+            MenuButtonImage('Settings2',
+                            'viewer/src/data/settings.jpg',
+                            self.settings_menu,
+                            position=(UIConstants.SCREEN_WIDTH - UIConstants.MENU_MARGIN -UIConstants.MENU_IMAGE_SIZE[0] - 40,
+                                      UIConstants.SCREEN_HEIGHT - UIConstants.MENU_MARGIN - UIConstants.MENU_IMAGE_SIZE[1]),
+                                      size = UIConstants.MENU_IMAGE_SIZE),
         ]
         super().__init__(buttons, True)
 
