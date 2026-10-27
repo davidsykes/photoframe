@@ -28,12 +28,15 @@ class PiSystemDisplay:
             pygame.mouse.set_visible(False)
         self.wrapper = wrapper
 
+    def screen_size(self):
+        return self.screen.get_size()
+
     def load_full_screen_image(self, image_path):
         self._status_updater.update_status('Current image', image_path)
         image = self.load_image(image_path)
         image = image.convert()
         iw, ih = image.get_size()
-        sw, sh = self.screen.get_size()
+        sw, sh = self.screen_size()
 
         scale = min(
             sw / iw,

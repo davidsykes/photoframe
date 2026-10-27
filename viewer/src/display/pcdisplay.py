@@ -15,6 +15,9 @@ class PCSystemDisplay:
         print("Initialising PC System Display")
         self.wrapper = wrapper
 
+    def screen_size(self):
+        return ((1024,768))
+
     def load_full_screen_image(self, image_path):
         return PygameImage(image_path, image_path, 1, 1)
 
