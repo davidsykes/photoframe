@@ -29,7 +29,7 @@ class MainLoop:
             self._display.prepare_screen()
             if self._menu.is_image_enabled:
                 if self._current_image is not None:
-                    self._display.show_image(self._current_image)
+                    self._display.show_full_screen_image(self._current_image)
             self._menu.render(self._display)
             self._display.flip()
         self._display.tick(60)

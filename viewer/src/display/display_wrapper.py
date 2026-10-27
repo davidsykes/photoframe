@@ -10,3 +10,11 @@ class DisplayWrapper:
             rendered_text,
             position
         )
+
+    def load_image_from_file_and_scale(self, image_path, size):
+        image = self._display.load_image(image_path)
+        image = self._display.scale_image(image, size)
+        return image
+
+    def show_image(self, image, position):
+        self._display.show_image(image, position)

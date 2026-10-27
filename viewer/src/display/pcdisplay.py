@@ -1,6 +1,6 @@
+import os
 import time
 from viewer.src.display.pygame_image import PygameImage
-
 
 class PCSystemDisplay:
     def __init__(self, event_emulator):
@@ -15,14 +15,27 @@ class PCSystemDisplay:
         print("Initialising PC System Display")
         self.wrapper = wrapper
 
-    def load_image(self, image_path):
+    def load_full_screen_image(self, image_path):
         return PygameImage(image_path, image_path, 1, 1)
+
+    def load_image(self, image_path):
+        if not os.path.isfile(image_path):
+            raise f'File {image_path} not found'
+        print(f'Loaded image {image_path}')
+        return image_path
 
     def prepare_screen(self):
         self._print_value = 0
 
-    def show_image(self, image):
+    def scale_image(self, image, size):
+        print(f'Scale {image} to {size}')
+        return image
+
+    def show_full_screen_image(self, image):
         print(f"Showing image on PC: {image.image_path}")
+
+    def show_image(self, image, position):
+        print(f"Showing image on PC: {image} at {position}")
 
     def print_text(self, s):
         i = self._print_value

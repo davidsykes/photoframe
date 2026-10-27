@@ -28,13 +28,9 @@ class PiSystemDisplay:
             pygame.mouse.set_visible(False)
         self.wrapper = wrapper
 
-    def load_image(self, image_path):
+    def load_full_screen_image(self, image_path):
         self._status_updater.update_status('Current image', image_path)
-        try:
-            image = pygame.image.load(image_path)
-        except pygame.error as e:
-            err = f'Unable to load image {image_path}: {e}'
-            raise RuntimeError(err)
+        image = self.load_image(image_path)
         image = image.convert()
         iw, ih = image.get_size()
         sw, sh = self.screen.get_size()
@@ -56,13 +52,42 @@ class PiSystemDisplay:
 
         return PygameImage(image_path, image, x, y)
 
+    def load_image(self, image_path):
+        try:
+            image = pygame.image.load(image_path)
+            return image.convert()
+        except pygame.error as e:
+            err = f'Unable to load image {image_path}: {e}'
+            raise RuntimeError(err)
+
     def prepare_screen(self):
         self.screen.fill((0, 0, 0))
         self._print_y = 0
 
-    def show_image(self, image):
+    def scale_image(self, image, size):
+        print(f'Scale {image} to {size}')
+        iw, ih = image.get_size()
+        sw, sh = size[0], size[1]
+
+        scale = min(
+            sw / iw,
+            sh / ih
+        )
+
+        new_size = (
+            int(iw * scale),
+            int(ih * scale)
+        )
+
+        image = pygame.transform.smoothscale(image, new_size)
+        return image
+
+    def show_full_screen_image(self, image):
         self.screen.blit(image.image, (image.x, image.y))
         self._status_updater.update_status('Current image', image.image_path)
+
+    def show_image(self, image, position):
+        self.screen.blit(image, position)
 
     def flip(self):
         pygame.display.flip()
