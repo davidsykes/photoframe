@@ -313,7 +313,7 @@ class PhotoFrameApp:
                                                       hotspot_elucidator,
                                                       ssid_connector,
                                                       wifi))
-        settings_menu = SettingsMenu(menu_navigator)
+        settings_menu = SettingsMenu(menu_navigator, debug_menu)
 
         first_menu = FirstMenu(menu_handler, settings_menu, debug_menu, historic_photo_chooser)
         menu_handler.set_main_menu(first_menu)

@@ -5,7 +5,7 @@ from viewer.src.menus.framework.ui_constants import UIConstants
 
 
 class SettingsMenu(PhotoFrameMenu):
-    def __init__(self, menu_navigator):
+    def __init__(self, menu_navigator, debug_menu):
         buttons = [
             MenuButtonImage('Set Wake Time',
                             'viewer/src/data/sunrise.jpg',
@@ -19,36 +19,35 @@ class SettingsMenu(PhotoFrameMenu):
                             position=(UIConstants.MENU_MARGIN + 40,
                                       UIConstants.MENU_MARGIN + 10),
                                       size = UIConstants.MENU_IMAGE_SIZE2),
-            MenuButtonText('Set Image Display Time',
-                           action=self.set_image_display_duration_seconds_action,
-                           rect_xywh=(UIConstants.LONG_BUTTON_LEFT,
-                                      60,
-                                      UIConstants.LONG_BUTTON_WIDTH,
-                                      UIConstants.BUTTON_HEIGHT)
-                                      ),
             MenuButtonImage('Set Image Display Time',
                             'viewer/src/data/image_timer.png',
                             self.set_image_display_duration_seconds_action,
                             position=(UIConstants.MENU_MARGIN + 10,
                                       UIConstants.MENU_MARGIN + 40),
                                       size = UIConstants.MENU_IMAGE_SIZE2),
-            MenuButtonText('WiFi',
-                           action=self.wifi,
-                           rect_xywh=(UIConstants.LONG_BUTTON_LEFT,
-                                      80,
-                                      UIConstants.LONG_BUTTON_WIDTH,
-                                      UIConstants.BUTTON_HEIGHT)
-                                      ),
             MenuButtonImage('WiFi',
                             'viewer/src/data/wifi.png',
                             self.wifi,
-                            position=(UIConstants.MENU_MARGIN + 20,
-                                      UIConstants.MENU_MARGIN + 70),
-                                      size = UIConstants.MENU_IMAGE_SIZE),
+                            position=(UIConstants.SCREEN_WIDTH - UIConstants.MENU_MARGIN -UIConstants.MENU_IMAGE_SIZE[0],
+                                      UIConstants.SCREEN_HEIGHT - UIConstants.MENU_MARGIN - UIConstants.MENU_IMAGE_SIZE[1]),
+                            size = UIConstants.MENU_IMAGE_SIZE),
+            MenuButtonImage('Debug',
+                            'viewer/src/data/debug.png',
+                            self.debug,
+                            position=(UIConstants.MENU_MARGIN,
+                                      UIConstants.SCREEN_HEIGHT - UIConstants.MENU_MARGIN - UIConstants.MENU_IMAGE_SIZE[1]),
+                            size = UIConstants.MENU_IMAGE_SIZE),
         ]
         super().__init__(buttons, False)
 
         self._menu_navigator = menu_navigator
+        self._debug_menu = debug_menu
+        self._debug_menu_enabled = False
+
+    def render(self, display):
+        PhotoFrameMenu.render(self, display)
+        if self._debug_menu_enabled:
+            self._debug_menu.render(display)
 
     def set_wake_time_action(self):
         self._menu_navigator.push_wake_time_modifier()
@@ -61,3 +60,6 @@ class SettingsMenu(PhotoFrameMenu):
 
     def wifi(self):
         self._menu_navigator.push_wifi_menu()
+
+    def debug(self):
+        self._debug_menu_enabled = not self._debug_menu_enabled

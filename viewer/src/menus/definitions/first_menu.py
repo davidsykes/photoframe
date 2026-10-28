@@ -30,7 +30,7 @@ class FirstMenu(PhotoFrameMenu):
                             self.settings_menu,
                             position=(UIConstants.SCREEN_WIDTH - UIConstants.MENU_MARGIN -UIConstants.MENU_IMAGE_SIZE[0],
                                       UIConstants.SCREEN_HEIGHT - UIConstants.MENU_MARGIN - UIConstants.MENU_IMAGE_SIZE[1]),
-                                      size = UIConstants.MENU_IMAGE_SIZE),
+                            size = UIConstants.MENU_IMAGE_SIZE),
         ]
         super().__init__(buttons, True)
 
@@ -64,7 +64,6 @@ class FirstMenu(PhotoFrameMenu):
         self._historic_photo_chooser.forward()
 
     def debug_menu(self):
-        #self._menu_handler.set_current_menu(self._debug_menu)
         self._debug_menu_enabled = not self._debug_menu_enabled
 
     def settings_menu(self):
