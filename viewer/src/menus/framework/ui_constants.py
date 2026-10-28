@@ -1,7 +1,7 @@
 class UIConstants:
     SCREEN_WIDTH = 100
     SCREEN_HEIGHT = 100
-    MENU_MARGIN = 5
+    MENU_MARGIN = 3
     MENU_WIDTH = 90
 
     BUTTON_SIZE = (30,20)
