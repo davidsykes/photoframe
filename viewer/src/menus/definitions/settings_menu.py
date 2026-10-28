@@ -7,15 +7,11 @@ from viewer.src.menus.framework.ui_constants import UIConstants
 class SettingsMenu(PhotoFrameMenu):
     def __init__(self, menu_navigator):
         buttons = [
-            MenuButtonText(text = 'Set Wake Time',
-                       action = self.set_wake_time_action,
-                       position = (UIConstants.MENU_MARGIN, 20),
-                       size= UIConstants.WIDE_BUTTON_SIZE),
             MenuButtonImage('Set Wake Time',
                             'viewer/src/data/sunrise.jpg',
                             self.set_wake_time_action,
-                            position=(UIConstants.MENU_MARGIN,
-                                      UIConstants.MENU_MARGIN),
+                            position=(UIConstants.MENU_MARGIN + 10,
+                                      UIConstants.MENU_MARGIN + 10),
                                       size = UIConstants.MENU_IMAGE_SIZE2),
             MenuButtonText('Set Sleep Time',
                            action=self.set_sleep_time_action,
@@ -24,6 +20,12 @@ class SettingsMenu(PhotoFrameMenu):
                                       UIConstants.LONG_BUTTON_WIDTH,
                                       UIConstants.BUTTON_HEIGHT)
                                       ),
+            MenuButtonImage('Set Wake Time',
+                            'viewer/src/data/moonlight.jpg',
+                            self.set_sleep_time_action,
+                            position=(UIConstants.MENU_MARGIN + 40,
+                                      UIConstants.MENU_MARGIN + 10),
+                                      size = UIConstants.MENU_IMAGE_SIZE2),
             MenuButtonText('Set Image Display Time',
                            action=self.set_image_display_duration_seconds_action,
                            rect_xywh=(UIConstants.LONG_BUTTON_LEFT,
