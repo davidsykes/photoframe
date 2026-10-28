@@ -1,3 +1,4 @@
+from viewer.src.menus.framework.menu_items.menu_button_image import MenuButtonImage
 from viewer.src.menus.framework.menu_items.menu_button_text import MenuButtonText
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
 from viewer.src.menus.framework.ui_constants import UIConstants
@@ -10,6 +11,12 @@ class SettingsMenu(PhotoFrameMenu):
                        action = self.set_wake_time_action,
                        position = (UIConstants.MENU_MARGIN, 20),
                        size= UIConstants.WIDE_BUTTON_SIZE),
+            MenuButtonImage('Set Wake Time',
+                            'viewer/src/data/sunrise.jpg',
+                            self.set_wake_time_action,
+                            position=(UIConstants.MENU_MARGIN,
+                                      UIConstants.MENU_MARGIN),
+                                      size = UIConstants.MENU_IMAGE_SIZE2),
             MenuButtonText('Set Sleep Time',
                            action=self.set_sleep_time_action,
                            rect_xywh=(UIConstants.LONG_BUTTON_LEFT,

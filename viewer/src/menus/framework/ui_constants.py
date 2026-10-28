@@ -9,6 +9,7 @@ class UIConstants:
     SMALL_BUTTON_SIZE = (20,5)
 
     MENU_IMAGE_SIZE = (10,10)
+    MENU_IMAGE_SIZE2 = (20,20)
 
     # For review
     BUTTON_WIDTH = 10
