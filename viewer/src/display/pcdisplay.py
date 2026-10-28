@@ -1,6 +1,7 @@
 import os
 import time
 from viewer.src.display.pygame_image import PygameImage
+from viewer.src.viewer_exit_exception import ViewerExitException
 
 class PCSystemDisplay:
     def __init__(self, event_emulator):
@@ -23,7 +24,7 @@ class PCSystemDisplay:
 
     def load_image(self, image_path):
         if not os.path.isfile(image_path):
-            raise f'File {image_path} not found'
+            raise ViewerExitException(104, f'File {image_path} not found')
         print(f'Loaded image {image_path}')
         return image_path
 

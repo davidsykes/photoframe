@@ -15,6 +15,3 @@ class DatabaseValue:
 
     def get_int(self):
         return int(self._current_value)
-
-    def set(self, value):
-        raise 'oops'

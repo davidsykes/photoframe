@@ -13,13 +13,6 @@ class SettingsMenu(PhotoFrameMenu):
                             position=(UIConstants.MENU_MARGIN + 10,
                                       UIConstants.MENU_MARGIN + 10),
                                       size = UIConstants.MENU_IMAGE_SIZE2),
-            MenuButtonText('Set Sleep Time',
-                           action=self.set_sleep_time_action,
-                           rect_xywh=(UIConstants.LONG_BUTTON_LEFT,
-                                      40,
-                                      UIConstants.LONG_BUTTON_WIDTH,
-                                      UIConstants.BUTTON_HEIGHT)
-                                      ),
             MenuButtonImage('Set Wake Time',
                             'viewer/src/data/moonlight.jpg',
                             self.set_sleep_time_action,
@@ -33,13 +26,25 @@ class SettingsMenu(PhotoFrameMenu):
                                       UIConstants.LONG_BUTTON_WIDTH,
                                       UIConstants.BUTTON_HEIGHT)
                                       ),
+            MenuButtonImage('Set Image Display Time',
+                            'viewer/src/data/image_timer.png',
+                            self.set_image_display_duration_seconds_action,
+                            position=(UIConstants.MENU_MARGIN + 10,
+                                      UIConstants.MENU_MARGIN + 40),
+                                      size = UIConstants.MENU_IMAGE_SIZE2),
             MenuButtonText('WiFi',
                            action=self.wifi,
                            rect_xywh=(UIConstants.LONG_BUTTON_LEFT,
                                       80,
                                       UIConstants.LONG_BUTTON_WIDTH,
                                       UIConstants.BUTTON_HEIGHT)
-                                      )
+                                      ),
+            MenuButtonImage('WiFi',
+                            'viewer/src/data/wifi.png',
+                            self.wifi,
+                            position=(UIConstants.MENU_MARGIN + 20,
+                                      UIConstants.MENU_MARGIN + 70),
+                                      size = UIConstants.MENU_IMAGE_SIZE),
         ]
         super().__init__(buttons, False)
 
