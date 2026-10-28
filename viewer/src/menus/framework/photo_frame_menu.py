@@ -1,6 +1,5 @@
 from viewer.src.menus.framework.menu_action import MenuAction
 from viewer.src.menus.framework.menu_items.menu_button_image import MenuButtonImage
-from viewer.src.menus.framework.menu_items.menu_button_text import MenuButtonText
 from viewer.src.menus.framework.ui_constants import UIConstants
 
 
@@ -8,16 +7,10 @@ class PhotoFrameMenu:
     def __init__(self, controls, is_image_enabled):
         self._controls = controls
         self._controls.append(
-            MenuButtonText('Back',
-                        action=self.back_action,
-                        position=(UIConstants.BUTTON_RIGHT,
-                         UIConstants.MENU_MARGIN),
-                        size=UIConstants.BUTTON_SIZE))
-        self._controls.append(
             MenuButtonImage('Back',
                             'viewer/src/data/back_to_photos.png',
                             self.back_action,
-                            position=(UIConstants.SCREEN_WIDTH - UIConstants.MENU_MARGIN -UIConstants.MENU_IMAGE_SIZE[0] - 40,
+                            position=(UIConstants.SCREEN_WIDTH - UIConstants.MENU_MARGIN -UIConstants.MENU_IMAGE_SIZE[0],
                                       UIConstants.MENU_MARGIN),
                                       size = UIConstants.MENU_IMAGE_SIZE))
 
