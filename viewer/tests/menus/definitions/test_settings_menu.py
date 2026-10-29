@@ -16,4 +16,4 @@ class SettingsMenuTests(unittest.TestCase):
 
     def setUp(self):
         self.menu_navigator = Mock(spec=MenuNavigator)
-        self.out = SettingsMenu(self.menu_navigator)
+        self.out = SettingsMenu(self.menu_navigator, Mock())

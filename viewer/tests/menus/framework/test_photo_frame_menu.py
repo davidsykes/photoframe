@@ -10,11 +10,7 @@ class PhotoFrameMenuTests(unittest.TestCase):
     def test_a_default_back_button_is_added(self):
         self.out.render(self.display)
 
-        self.display.wrapper.draw_text.assert_called_once_with(
-            'Back',
-            (UIConstants.BUTTON_RIGHT+1,
-            UIConstants.MENU_MARGIN+1)
-        )
+        self.display.wrapper.show_image.assert_called_once()
 
     def test_a_mouse_miss_returns_none(self):
         r = self.out.mouse_down(0,0)

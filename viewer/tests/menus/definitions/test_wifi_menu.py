@@ -27,7 +27,7 @@ class WiFiMenuTests(unittest.TestCase):
 
         self.out.render(self.display)
 
-        self.assertEqual(4, len(self.display.rendered_text))
+        self.assertEqual(3, len(self.display.rendered_text))
 
     def test_when_initialised_connections_are_shown(self):
         self.out.initialise()
