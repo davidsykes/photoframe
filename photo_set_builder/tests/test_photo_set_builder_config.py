@@ -4,6 +4,7 @@ from unittest.mock import Mock
 
 from common.src.config_file import ConfigFile
 from common.src.config_file_loader import ConfigFileLoader
+from photo_set_builder.src.logic.photo_set_builder_exception import PhotoSetBuilderException
 from photo_set_builder.src.photo_set_builder_config import PhotosetBuilderConfig
 
 class PhotosetBuilderConfigTests(unittest.TestCase):
@@ -31,8 +32,19 @@ class PhotosetBuilderConfigTests(unittest.TestCase):
             Path('dropbox_path')
         )
 
+    def test_missing_file_raises_an_exception(self):
+        self.config_file_loader.load_config_file = Mock()
+        self.config_file_loader.load_config_file.return_value = None
+
+        with self.assertRaises(PhotoSetBuilderException):
+            PhotosetBuilderConfig(
+                self.config_file_loader,
+                self.config_path
+                )
+
     def setUp(self):
         self.config_file_loader = Mock(spec=ConfigFileLoader)
+        self.config_path = Path('config file path')
         self.config = ConfigFile(
             {
                 'photo_sets_path': 'images folder',
@@ -40,14 +52,14 @@ class PhotosetBuilderConfigTests(unittest.TestCase):
                 'compressed_folder_name': 'compressed',
                 'dropbox_path': 'dropbox_path'
             },
-            'config file path'
+            self.config_path
         )
         self.config_file_loader.load_config_file = self.load_config_file
         self.out = PhotosetBuilderConfig(
             self.config_file_loader,
-            'config file path'
+            self.config_path
             )
 
-    def load_config_file(self, config_file_path):
-        self.assertEqual(config_file_path, 'config file path')
+    def load_config_file(self, config_file_path:Path):
+        self.assertEqual(config_file_path, self.config_path)
         return self.config

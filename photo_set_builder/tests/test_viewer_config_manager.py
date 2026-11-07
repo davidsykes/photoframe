@@ -1,3 +1,4 @@
+from pathlib import Path
 import unittest
 from unittest.mock import Mock
 from common.src.config_file import ConfigFile
@@ -57,7 +58,7 @@ class ViewerConfigManagerTests(unittest.TestCase):
 
     def setUp(self):
         self.config_file_loader = Mock(spec=ConfigFileLoader)
-        self.config_file_path = 'config file path'
+        self.config_file_path = Path('config file path')
         self.config = ConfigFile(
             {
                 'version': '30',
@@ -82,8 +83,8 @@ class ViewerConfigManagerTests(unittest.TestCase):
             self.json
             )
 
-    def load_config_file(self, config_file_path):
-        self.assertEqual(config_file_path, 'config file path')
+    def load_config_file(self, config_file_path:Path):
+        self.assertEqual(config_file_path, self.config_file_path)
         return self.config
 
     def compare_configs(self, one, two):

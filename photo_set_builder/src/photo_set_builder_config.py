@@ -1,12 +1,18 @@
 from pathlib import Path
 
+from common.src.config_file_loader import ConfigFileLoader
+from photo_set_builder.src.logic.photo_set_builder_exception import PhotoSetBuilderException
+
 
 class PhotosetBuilderConfig:
     def __init__(self,
-                 config_file_loader,
-                 config_file_path):
+                 config_file_loader:ConfigFileLoader,
+                 config_file_path:Path):
         self._config = config_file_loader.load_config_file(
             config_file_path)
+        if self._config is None:
+            raise PhotoSetBuilderException(f'Config file {config_file_path} not found')
+
 
     @property
     def photo_sets_path(self):
