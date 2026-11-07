@@ -12,6 +12,6 @@ class CompressedPhotosRemover:
                 path = compressed_photos_path / photo.photo_name
                 self._system_operations.log(
                     f'Delete compressed file {path}')
-                #self._system_operations.delete_file(path)
+                self._system_operations.delete_file(path)
                 photos_have_been_removed = True
         return photos_have_been_removed
