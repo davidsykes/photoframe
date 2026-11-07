@@ -39,3 +39,6 @@ class ViewerConfigManager:
             self._config.config[self._config_version_name] = self._current_version + 1
             save_path = self.config_file_path
             self._json_wrapper.dumps(save_path, self._config.config)
+            print(f'Written version {self._config.config[self._config_version_name]} to {save_path}')
+        else:
+            print(f'Config unchanged {self.config_file_path}')

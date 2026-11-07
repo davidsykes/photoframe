@@ -74,6 +74,7 @@ def main() -> int:
     photo_sets_synchroniser.synchronise_photo_sets(
         photo_sets_definitions)
     viewer_config_manager.save_viewer_config_if_changed()
+    return 0
 
 def main2():
     try:
