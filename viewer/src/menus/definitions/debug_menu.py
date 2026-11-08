@@ -13,7 +13,7 @@ class DebugMenu(PhotoFrameMenu):
                  random_monitor,
                  memory_monitor):
         self.button_x = UIConstants.BUTTON_RIGHT
-        self.button_y = UIConstants.MENU_MARGIN + UIConstants.BUTTON_HEIGHT + 1
+        self.button_y = UIConstants.MENU_MARGIN + UIConstants.BUTTON_HEIGHT + 15
         buttons = []
         buttons.append(self.create_button('Sleep', self.sleep))
         buttons.append(self.create_button('Wake', self.wake))
