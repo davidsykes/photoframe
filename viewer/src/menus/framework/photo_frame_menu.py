@@ -17,7 +17,7 @@ class PhotoFrameMenu:
 
         self.is_image_enabled = is_image_enabled
 
-    def render(self, display):
+    def render(self, display) -> None:
         for control in self._controls:
             control.render(display)
 

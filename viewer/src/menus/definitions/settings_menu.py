@@ -1,11 +1,17 @@
+from viewer.src.awake_periods.awake_decider import AwakeDecider
+from viewer.src.menus.definitions.debug_menu import DebugMenu
 from viewer.src.menus.framework.menu_items.menu_button_image import MenuButtonImage
-from viewer.src.menus.framework.menu_items.menu_button_text import MenuButtonText
+from viewer.src.menus.framework.menu_navigator import MenuNavigator
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
 from viewer.src.menus.framework.ui_constants import UIConstants
+from viewer.src.viewer_exit_exception import ViewerExitException
 
 
 class SettingsMenu(PhotoFrameMenu):
-    def __init__(self, menu_navigator, debug_menu):
+    def __init__(self,
+                 menu_navigator:MenuNavigator,
+                 debug_menu:DebugMenu,
+                 awake_decider:AwakeDecider):
         buttons = [
             MenuButtonImage('Set Wake Time',
                             'viewer/src/data/sunrise.jpg',
@@ -25,12 +31,24 @@ class SettingsMenu(PhotoFrameMenu):
                             position=(UIConstants.MENU_MARGIN + 10,
                                       UIConstants.MENU_MARGIN + 40),
                                       size = UIConstants.MENU_IMAGE_SIZE2),
-            MenuButtonImage('WiFi',
-                            'viewer/src/data/wifi.png',
-                            self.wifi,
+            MenuButtonImage('Wake',
+                            'viewer/src/data/image_timer.png',
+                            self.sleep,
+                            position=(UIConstants.MENU_MARGIN + 40,
+                                      UIConstants.MENU_MARGIN + 40),
+                                      size = UIConstants.MENU_IMAGE_SIZE2),
+            MenuButtonImage('Quit',
+                            'viewer/src/data/system.png',
+                            self.end_program_cleanly,
                             position=(UIConstants.SCREEN_WIDTH - UIConstants.MENU_MARGIN -UIConstants.MENU_IMAGE_SIZE[0],
                                       UIConstants.SCREEN_HEIGHT - UIConstants.MENU_MARGIN - UIConstants.MENU_IMAGE_SIZE[1]),
                             size = UIConstants.MENU_IMAGE_SIZE),
+            # MenuButtonImage('WiFi',
+            #                 'viewer/src/data/wifi.png',
+            #                 self.wifi,
+            #                 position=(UIConstants.SCREEN_WIDTH - UIConstants.MENU_MARGIN -UIConstants.MENU_IMAGE_SIZE[0],
+            #                           UIConstants.SCREEN_HEIGHT - UIConstants.MENU_MARGIN - UIConstants.MENU_IMAGE_SIZE[1]),
+            #                 size = UIConstants.MENU_IMAGE_SIZE),
             MenuButtonImage('Debug',
                             'viewer/src/data/debug.png',
                             self.debug,
@@ -43,6 +61,7 @@ class SettingsMenu(PhotoFrameMenu):
         self._menu_navigator = menu_navigator
         self._debug_menu = debug_menu
         self._debug_menu_enabled = False
+        self._awake_decider = awake_decider
 
     def render(self, display):
         PhotoFrameMenu.render(self, display)
@@ -63,3 +82,9 @@ class SettingsMenu(PhotoFrameMenu):
 
     def debug(self):
         self._debug_menu_enabled = not self._debug_menu_enabled
+
+    def sleep(self):
+        self._awake_decider.go_to_sleep()
+
+    def end_program_cleanly(self):
+        raise ViewerExitException(101, "Quit by mouse down")
