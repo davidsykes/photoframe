@@ -5,7 +5,7 @@ class ApplicationStatus:
         self.statuses = {}
         self._logs = []
 
-    def update_status(self, key, value):
+    def update_status(self, key:str, value:str) -> None:
         self.statuses[key] = value
 
     def render(self, display):

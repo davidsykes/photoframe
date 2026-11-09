@@ -29,12 +29,12 @@ class FirstMenu(PhotoFrameMenu):
                             size = UIConstants.MENU_IMAGE_SIZE),
             MenuTouchArea('previous image',
                           action=self.previous_image,
-                          rect_xywh=(0,20,40,80)),
+                          rect_xywh=(0,10,30,90)),
             MenuText('<', (UIConstants.MENU_MARGIN, 40)),
             MenuTouchArea('next image',
                           action=self.next_image,
-                          rect_xywh=(60,20,100,80)),
-            MenuText('>', (70, 40)),
+                          rect_xywh=(70,10,100,90)),
+            MenuText('>', (90, 40)),
         ]
         super().__init__(buttons, True)
 

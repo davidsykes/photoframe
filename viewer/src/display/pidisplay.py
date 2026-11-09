@@ -1,37 +1,41 @@
+from common.src.system_operations import SystemOperations
 import pygame # pyright: ignore[reportMissingImports]
+from viewer.src.display.display_wrapper import DisplayWrapper
 from viewer.src.display.pygame_image import PygameImage
 from viewer.src.menus.framework.ui_constants import UIConstants
 from viewer.src.data.uievent import UIEvent, UIEventType
+from viewer.src.status.application_status import ApplicationStatus
 from viewer.src.viewer_exit_exception import ViewerExitException
 
 class PiSystemDisplay:
-    def __init__(self, system_operations, status_updater, hide_mouse):
+    def __init__(self, system_operations:SystemOperations, status_updater:ApplicationStatus, hide_mouse:bool):
         self.system_operations = system_operations
         self._status_updater = status_updater
         self._hide_mouse = hide_mouse
         self.event_count = 0
-        self._clock = pygame.time.Clock()
+        self._clock = pygame.time.Clock() # type: ignore
         self.COLOUR_WHITE = (255,255,255)
         self.COLOUR_LIGHT = (170,170,170)
         self.COLOUR_DARK = (70,70,70)
 
-    def initialise_display(self, wrapper):
+    def initialise_display(self, wrapper:DisplayWrapper):
         print("Initialising Pi System Display.")
-        pygame.init()
-        print('Desktop sizes:', pygame.display.get_desktop_sizes())
-        self.screen = pygame.display.set_mode(
+        pygame.init() # type: ignore
+        print('Desktop sizes:', pygame.display.get_desktop_sizes()) # type: ignore
+        self.screen = pygame.display.set_mode( # type: ignore
             (0,0), pygame.FULLSCREEN)
-        self._screen_size = self.screen.get_size()
+        self._screen_size = self.screen_size()
         pygame.display.set_caption("Pi System Display")
         self.my_font = pygame.font.SysFont('Comic Sans MS', 30)
+        self.my_font2 = pygame.font.SysFont('Comic Sans MS', 72)
         if self._hide_mouse is True:
             pygame.mouse.set_visible(False)
         self.wrapper = wrapper
 
-    def screen_size(self):
-        return self.screen.get_size()
+    def screen_size(self) -> tuple[int,int]:
+        return self.screen.get_size() # type: ignore
 
-    def load_full_screen_image(self, image_path):
+    def load_full_screen_image(self, image_path:str):
         self._status_updater.update_status('Current image', image_path)
         image = self.load_image(image_path)
         image = image.convert()
@@ -98,13 +102,6 @@ class PiSystemDisplay:
     def tick(self, v):
         self._clock.tick(v)
 
-    def print_text(self, message):
-        text_surface = self.my_font.render(message,
-                                           True,
-                                           (255, 255, 255))
-        self.screen.blit(text_surface, (8, self._print_y))
-        self._print_y += 20
-
     def get_events(self):
         events = []
         for event in pygame.event.get():
@@ -163,6 +160,13 @@ class PiSystemDisplay:
         rect = pygame.Rect(x,y,w,h)
 
         pygame.draw.rect(self.screen, colour, rect, border_radius=UIConstants.CORNER_RADIUS)
+
+    def print_text(self, message):
+        text_surface = self.my_font.render(message,
+                                           True,
+                                           (255, 255, 255))
+        self.screen.blit(text_surface, (8, self._print_y))
+        self._print_y += 20
 
     def draw_text(self, text, colour, position, font=0):
         rendered_text = self.render_text(text)

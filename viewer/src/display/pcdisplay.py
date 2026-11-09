@@ -41,13 +41,6 @@ class PCSystemDisplay:
     def show_image(self, image, position):
         print(f"Showing image on PC: {image} at {position}")
 
-    def print_text(self, s):
-        i = self._print_value
-        if i not in self._print_values or self._print_values[i] != s:
-            self._print_values[i] = s
-            print(f'Status {i}: {s}')
-        self._print_value += 1
-
     def flip(self):
         print('flip')
         print('')
@@ -60,6 +53,13 @@ class PCSystemDisplay:
 
     def draw_rectangle(self, colour, position):
         pass
+
+    def print_text(self, s:str):
+        i = self._print_value
+        if i not in self._print_values or self._print_values[i] != s:
+            self._print_values[i] = s
+            print(f'Status {i}: {s}')
+        self._print_value += 1
 
     def draw_text(self, text, colour, position, font=0):
         print(f'Draw text >>>{text}<<< in {colour} at {position} size {font}')
