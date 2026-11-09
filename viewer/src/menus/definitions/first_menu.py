@@ -74,3 +74,4 @@ class FirstMenu(PhotoFrameMenu):
 
     def settings_menu(self):
         self._menu_handler.set_current_menu(self._settings_menu)
+        return MenuAction.NONE

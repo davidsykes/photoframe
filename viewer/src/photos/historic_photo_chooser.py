@@ -1,12 +1,17 @@
+from viewer.src.photos.photo_history import PhotoHistory
+
+
 class HistoricPhotoChooser:
-    def __init__(self, photo_history):
+    def __init__(self, photo_history:PhotoHistory):
         self._photo_history = photo_history
-        self._current_index = None
+        self._current_index:int | None = None
 
     def enable(self):
+        print('ENENENENENENENENN')
         self._current_index = 0
 
     def disable(self):
+        print('DSIDSDSIDISIDSD')
         self._current_index = None
 
     def back(self):
@@ -17,7 +22,7 @@ class HistoricPhotoChooser:
         if self._current_index > 0:
             self._current_index -= 1
 
-    def choose_previous_photo(self):
+    def choose_previous_photo(self) -> int | None:
         if self._current_index is None:
             return None
         return self._photo_history[self._current_index]
