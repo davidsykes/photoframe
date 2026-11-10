@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import Mock
 
+from viewer.src.awake_periods.awake_decider import AwakeDecider
 from viewer.src.menus.definitions.settings_menu import SettingsMenu
 from viewer.src.menus.framework.menu_navigator import MenuNavigator
 from viewer.src.menus.framework.ui_constants import UIConstants
@@ -14,6 +15,17 @@ class SettingsMenuTests(unittest.TestCase):
 
         self.menu_navigator.push_image_display_duration_second_modifier.assert_called_once()
 
+    def test_the_display_can_be_put_to_sleep(self):
+        self.out.mouse_down(
+            UIConstants.MENU_MARGIN + 41,
+            UIConstants.MENU_MARGIN + 42
+        )
+
+        self.awake_decider.go_to_sleep.assert_called_once()
+
     def setUp(self):
         self.menu_navigator = Mock(spec=MenuNavigator)
-        self.out = SettingsMenu(self.menu_navigator, Mock())
+        self.awake_decider = Mock(spec=AwakeDecider)
+        self.out = SettingsMenu(self.menu_navigator,
+                                Mock(),
+                                self.awake_decider)

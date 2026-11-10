@@ -2,8 +2,6 @@ import unittest
 from unittest.mock import Mock, call
 
 from common.src.system_operations import SystemOperations
-from viewer.src.display.display_on_off_controller import DisplayOnOffController
-from viewer.src.menus.definitions.debug_menu import DebugMenu
 from viewer.src.menus.framework.menu_action import MenuAction
 from viewer.src.menus.framework.menu_handler import MenuHandler
 
@@ -72,11 +70,6 @@ class MenuHandlerTests(unittest.TestCase):
             [call(102,202)]
         )
 
-    def test_a_mouse_turns_the_display_on(self):
-        self.out.mouse_down(100,200)
-
-        self.display_on_off_controller.display_on.assert_called_once()
-
     def test_menus_are_rendered_when_they_are_enabled(self):
         self.out.render('display')
         self.main_menu.assert_not_called()
@@ -89,9 +82,7 @@ class MenuHandlerTests(unittest.TestCase):
     def setUp(self):
         self.main_menu = Mock()
         self.menu_2 = Mock()
-        self.display_on_off_controller = Mock(spec=DisplayOnOffController)
         self.system_operations = Mock(spec=SystemOperations)
         self.out = MenuHandler(
-            self.display_on_off_controller,
             self.system_operations)
         self.out.set_main_menu(self.main_menu)

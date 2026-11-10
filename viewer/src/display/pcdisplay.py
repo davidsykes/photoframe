@@ -25,14 +25,12 @@ class PCSystemDisplay:
     def load_image(self, image_path):
         if not os.path.isfile(image_path):
             raise ViewerExitException(104, f'File {image_path} not found')
-        print(f'Loaded image {image_path}')
         return image_path
 
     def prepare_screen(self):
         self._print_value = 0
 
     def scale_image(self, image, size):
-        print(f'Scale {image} to {size}')
         return image
 
     def show_full_screen_image(self, image):

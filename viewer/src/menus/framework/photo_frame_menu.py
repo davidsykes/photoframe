@@ -21,7 +21,7 @@ class PhotoFrameMenu:
         for control in self._controls:
             control.render(display)
 
-    def mouse_down(self, x:int, y:int) -> MenuAction | None:
+    def mouse_down(self, x:float, y:float) -> MenuAction | None:
         for control in self._controls:
             if hasattr(control, 'mouse_down'):
                 v = control.mouse_down(x, y)

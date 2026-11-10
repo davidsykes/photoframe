@@ -299,7 +299,7 @@ class PhotoFrameApp:
             random_monitor,
             memory_monitor
             )
-        menu_handler = MenuHandler(display_on_off_controller, system_operations)
+        menu_handler = MenuHandler(system_operations)
         time_modifier_menu = TimeModifierMenu()
         menu_navigator = MenuNavigator(menu_handler,
                                        awake_schedule,
@@ -318,5 +318,5 @@ class PhotoFrameApp:
         first_menu = FirstMenu(menu_handler, settings_menu, debug_menu, historic_photo_chooser)
         menu_handler.set_main_menu(first_menu)
         event_handler = EventHandler(menu_handler)
-        events_handler = EventsHandler(display, event_handler)
+        events_handler = EventsHandler(display, event_handler, awake_decider)
         return events_handler, menu_handler

@@ -7,11 +7,9 @@ class HistoricPhotoChooser:
         self._current_index:int | None = None
 
     def enable(self):
-        print('ENENENENENENENENN')
         self._current_index = 0
 
     def disable(self):
-        print('DSIDSDSIDISIDSD')
         self._current_index = None
 
     def back(self):
