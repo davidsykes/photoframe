@@ -12,14 +12,11 @@ class DebugMenu(PhotoFrameMenu):
                  display_on_off_controller,
                  random_monitor,
                  memory_monitor):
-        self.button_x = UIConstants.BUTTON_RIGHT
+        self.button_x = UIConstants.MENU_MARGIN
         self.button_y = UIConstants.MENU_MARGIN + UIConstants.BUTTON_HEIGHT + 15
         buttons = []
-        buttons.append(self.create_button('Sleep', self.sleep))
-        buttons.append(self.create_button('Wake', self.wake))
         buttons.append(self.create_button('Random', self.render_random))
         buttons.append(self.create_button('Crash', self.simulate_crash))
-        buttons.append(self.create_button('Quit', self.end_program_cleanly))
         super().__init__(buttons, True)
 
         self._statuses = statuses

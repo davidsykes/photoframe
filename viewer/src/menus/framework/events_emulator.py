@@ -13,7 +13,7 @@ class EventsEmulator:
     def _set_initial_events(self):
         self.set_events([
             (0.1, 20, 20),
-            (0.2, UIConstants.BUTTON_RIGHT+1, 91),
+            (0.2, UIConstants.MENU_MARGIN+1, 91),
             (0.3, UIConstants.LONG_BUTTON_LEFT+1, 81),
             (0.4, 11, 41),
             (0.5, 11, 51),

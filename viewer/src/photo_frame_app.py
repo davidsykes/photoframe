@@ -299,7 +299,7 @@ class PhotoFrameApp:
             random_monitor,
             memory_monitor
             )
-        menu_handler = MenuHandler(system_operations)
+        menu_handler = MenuHandler(system_operations, historic_photo_chooser)
         time_modifier_menu = TimeModifierMenu()
         menu_navigator = MenuNavigator(menu_handler,
                                        awake_schedule,

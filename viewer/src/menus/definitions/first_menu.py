@@ -44,12 +44,6 @@ class FirstMenu(PhotoFrameMenu):
         self._historic_photo_chooser = historic_photo_chooser
         self._debug_menu_enabled = False
 
-    def on_enter(self):
-        self._historic_photo_chooser.enable()
-
-    def on_exit(self):
-        self._historic_photo_chooser.disable()
-
     def render(self, display):
         PhotoFrameMenu.render(self, display)
         if self._debug_menu_enabled:

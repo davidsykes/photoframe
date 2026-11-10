@@ -60,6 +60,21 @@ class HistoricPhotoChooserTests(unittest.TestCase):
         out.enable()
         self.assertEqual(None, out.choose_previous_photo())
 
+    def test_when_disabled_back_and_forward_have_no_effect(self):
+        self.out.back()
+        self.out.forward()
+
+        self.assertIsNone(self.out.choose_previous_photo())
+
+    def test_if_chooser_is_enabled_twice_the_index_is_not_reset(self):
+        self.out.enable()
+        self.out.back()
+        self.out.back()
+        self.assertEqual('Photo 1', self.out.choose_previous_photo())
+
+        self.out.enable()
+        self.assertEqual('Photo 1', self.out.choose_previous_photo())
+
     def setUp(self):
         self.photo_history = PhotoHistory(3)
         self.photo_history.new_photo('Photo 1')

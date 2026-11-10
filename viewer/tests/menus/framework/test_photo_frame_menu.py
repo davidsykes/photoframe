@@ -18,8 +18,7 @@ class PhotoFrameMenuTests(unittest.TestCase):
         self.assertIsNone(r)
 
     def test_default_back_button_returns_back(self):
-        r = self.out.mouse_down(UIConstants.BUTTON_RIGHT+1,
-            UIConstants.MENU_MARGIN+1)
+        r = self.out.activate_control('Back')
 
         self.assertEqual(r, MenuAction.BACK)
 
@@ -32,12 +31,6 @@ class PhotoFrameMenuTests(unittest.TestCase):
         menu = PhotoFrameMenu([control], False)
 
         menu.mouse_down(1,1)        
-
-    def test_on_enter_does_nothing(self):
-        self.out.on_enter()
-
-    def test_on_exit_does_nothing(self):
-        self.out.on_exit()
 
     def setUp(self):
         self.display = Mock()

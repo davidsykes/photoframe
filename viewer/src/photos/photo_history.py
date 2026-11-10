@@ -2,20 +2,20 @@ from collections import deque
 
 
 class PhotoHistory:
-    def __init__(self, maximum_count):
-        self._history = deque(maxlen = maximum_count)
+    def __init__(self, maximum_count:int):
+        self._history:deque[str] = deque(maxlen = maximum_count)
 
     def __len__(self) -> int:
         return len(self._history)
 
-    def __getitem__(self, index):
+    def __getitem__(self, index:int):
         if index < len(self._history):
             return self._history[-index-1]
 
-    def new_photo(self, photo):
+    def new_photo(self, photo:str):
         self._history.append(photo)
 
-    def has_photo_been_shown_recently(self, photo):
+    def has_photo_been_shown_recently(self, photo:str):
         if photo in self._history:
             return True
         return False

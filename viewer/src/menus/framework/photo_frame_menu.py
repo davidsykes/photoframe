@@ -1,3 +1,5 @@
+from typing import Any
+
 from viewer.src.menus.framework.menu_action import MenuAction
 from viewer.src.menus.framework.menu_items.menu_button_image import MenuButtonImage
 from viewer.src.menus.framework.ui_constants import UIConstants
@@ -10,14 +12,14 @@ class PhotoFrameMenu:
             MenuButtonImage('Back',
                             'viewer/src/data/back_to_photos.png',
                             self.back_action,
-                            position=(UIConstants.SCREEN_WIDTH - UIConstants.MENU_MARGIN -UIConstants.MENU_IMAGE_SIZE[0],
+                            position=(UIConstants.SCREEN_WIDTH - UIConstants.MENU_MARGIN - UIConstants.MENU_IMAGE_SIZE[0],
                                       UIConstants.MENU_MARGIN),
                                       size = UIConstants.MENU_IMAGE_SIZE))
 
 
         self.is_image_enabled = is_image_enabled
 
-    def render(self, display) -> None:
+    def render(self, display:Any) -> None:
         for control in self._controls:
             control.render(display)
 
@@ -34,12 +36,6 @@ class PhotoFrameMenu:
             if hasattr(control, 'activate'):
                 if control.name == button_name:
                     return control.activate()
-
-    def on_enter(self):
-        pass
-
-    def on_exit(self):
-        pass
 
     def back_action(self):
         return MenuAction.BACK
