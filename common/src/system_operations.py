@@ -79,7 +79,7 @@ class SystemOperations:
         self.logger.info(message)
         print(f'{self.log_indent}+++ {message}')
 
-    def get_time_seconds(self):
+    def get_time_seconds(self) -> float:
         return time.time()
 
     def get_current_time_of_day(self):

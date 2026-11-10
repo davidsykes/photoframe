@@ -1,5 +1,6 @@
 from viewer.src.awake_periods.awake_decider import AwakeDecider
 from viewer.src.menus.definitions.debug_menu import DebugMenu
+from viewer.src.menus.framework.menu_action import MenuAction
 from viewer.src.menus.framework.menu_items.menu_button_image import MenuButtonImage
 from viewer.src.menus.framework.menu_navigator import MenuNavigator
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
@@ -31,14 +32,14 @@ class SettingsMenu(PhotoFrameMenu):
                             position=(UIConstants.MENU_MARGIN + 10,
                                       UIConstants.MENU_MARGIN + 40),
                                       size = UIConstants.MENU_IMAGE_SIZE2),
-            MenuButtonImage('Wake',
+            MenuButtonImage('Sleep',
                             'viewer/src/data/image_timer.png',
                             self.sleep,
                             position=(UIConstants.MENU_MARGIN + 40,
                                       UIConstants.MENU_MARGIN + 40),
                                       size = UIConstants.MENU_IMAGE_SIZE2),
             MenuButtonImage('Quit',
-                            'viewer/src/data/system.png',
+                            'viewer/src/data/sleep.jpg',
                             self.end_program_cleanly,
                             position=(UIConstants.SCREEN_WIDTH - UIConstants.MENU_MARGIN -UIConstants.MENU_IMAGE_SIZE[0],
                                       UIConstants.SCREEN_HEIGHT - UIConstants.MENU_MARGIN - UIConstants.MENU_IMAGE_SIZE[1]),
@@ -85,6 +86,7 @@ class SettingsMenu(PhotoFrameMenu):
 
     def sleep(self):
         self._awake_decider.go_to_sleep()
+        return MenuAction.BACK
 
     def end_program_cleanly(self):
         raise ViewerExitException(101, "Quit by mouse down")
