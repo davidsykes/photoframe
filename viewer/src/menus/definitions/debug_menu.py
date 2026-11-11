@@ -13,7 +13,7 @@ class DebugMenu(PhotoFrameMenu):
                  random_monitor,
                  memory_monitor):
         self.button_x = UIConstants.MENU_MARGIN
-        self.button_y = UIConstants.MENU_MARGIN + UIConstants.BUTTON_HEIGHT + 15
+        self.button_y = 80
         buttons = []
         buttons.append(self.create_button('Random', self.render_random))
         buttons.append(self.create_button('Crash', self.simulate_crash))
