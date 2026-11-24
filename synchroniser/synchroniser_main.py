@@ -5,6 +5,8 @@ from common.src.action_result_recorder import ActionResultRecorder
 from common.src.config_file_loader import ConfigFileLoader
 from common.src.config_file_updater import ConfigFileUpdater
 from common.src.remote_files_retriever import RemoteFilesRetriever
+from common.src.retrying_action import RetryingAction
+from common.src.retrying_action_downloader import RetryingActionDownloader
 from common.src.system_operations import SystemOperations
 from common.src.whole_project_configuration import WholeProjectConfiguration
 from common.unzipper import UnZipper
@@ -28,16 +30,32 @@ def main() -> int:
     temp_folder_location = PHOTOFRAME_PROJECT_ROOT / "temp"
     system_operations.ensure_folder_exists(temp_folder_location)
     config_file_loader = ConfigFileLoader(system_operations)
+
+    remote_files_retriever_once = RemoteFilesRetriever(system_operations)
+    remote_files_retriever_retry = RetryingActionDownloader(
+        RetryingAction(
+            remote_files_retriever_once.download_file_or_return_false,
+            system_operations,
+            'Download remote file',
+            30,
+            5
+        )
+    )
+
+
     remote_files_retriever = RemoteFilesRetriever(system_operations)
     action_result_logger = ActionResultLogger(system_operations)
     action_status_recorder = ActionResultRecorder(
         'Download remote config',
         action_result_logger)
+
     config_file_updater = ConfigFileUpdater(
-        remote_files_retriever,
+        #remote_files_retriever,
+        remote_files_retriever_retry,
         config_file_loader,
         system_operations,
         action_status_recorder)
+
     project_config = WholeProjectConfiguration(config_file_loader)
     remote_config_loader = RemoteConfigLoader(
         WORKING_FOLDER,
