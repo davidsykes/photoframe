@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from common.src.action_result_recorder_protocol import ActionResultRecorderProtocol
 from common.src.config_file_loader import ConfigFileLoader
 from common.src.remote_files_retriever import RemoteFilesRetriever
 from common.src.system_operations import SystemOperations
@@ -9,7 +10,7 @@ class ConfigFileUpdater:
                  remote_files_retriever:RemoteFilesRetriever,
                  config_file_loader:ConfigFileLoader,
                  sys_operations:SystemOperations,
-                 status_updater):
+                 status_updater:ActionResultRecorderProtocol):
         self._remote_files_retriever = remote_files_retriever
         self._config_file_loader = config_file_loader
         self._sys_operations = sys_operations
@@ -28,5 +29,4 @@ class ConfigFileUpdater:
                 success = True
             else:
                 self._sys_operations.delete_file(temp_local_file_path)
-        print(f'Update Config File Result {success}')
         self._status_updater.update_status(success)

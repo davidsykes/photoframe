@@ -1,19 +1,22 @@
 from viewer.src.menus.definitions.debug_menu import DebugMenu
+from viewer.src.menus.definitions.settings_menu import SettingsMenu
 from viewer.src.menus.framework.menu_action import MenuAction
+from viewer.src.menus.framework.menu_handler import MenuHandler
 from viewer.src.menus.framework.menu_items.menu_button_image import MenuButtonImage
 from viewer.src.menus.framework.menu_items.menu_control import MenuControl
 from viewer.src.menus.framework.menu_items.menu_text import MenuText
 from viewer.src.menus.framework.menu_items.menu_touch_area import MenuTouchArea
 from viewer.src.menus.framework.photo_frame_menu import PhotoFrameMenu
 from viewer.src.menus.framework.ui_constants import UIConstants
+from viewer.src.photos.historic_photo_chooser import HistoricPhotoChooser
 
 
 class FirstMenu(PhotoFrameMenu):
     def __init__(self,
-                 menu_handler,
-                 settings_menu,
+                 menu_handler:MenuHandler,
+                 settings_menu:SettingsMenu,
                  debug_menu:DebugMenu,
-                 historic_photo_chooser):
+                 historic_photo_chooser:HistoricPhotoChooser):
         buttons:list[MenuControl|MenuText] = [
             MenuButtonImage('Debug',
                             'viewer/src/data/debug.png',
