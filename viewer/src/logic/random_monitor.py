@@ -17,4 +17,4 @@ class RandomMonitor:
     def render(self, status_monitor):
         for index in range(len(self._set_names)):
             status_monitor.update_status(
-                f'Set {self._set_names[index]}', f'{self._set_weightings[index]} - {self._set_chosen_count[index]}')
+                f'Set {self._set_names[index]}', f'Weighting={self._set_weightings[index]} - Chosen={self._set_chosen_count[index]}')

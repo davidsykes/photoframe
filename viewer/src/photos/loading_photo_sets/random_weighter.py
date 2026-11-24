@@ -1,8 +1,11 @@
+from datetime import date
+
+
 class RandomWeighter:
-    def __init__(self, now):
+    def __init__(self, now:date):
         self._now = now
 
-    def weigh(self, set_date):
+    def weigh(self, set_date:date) -> int:
         age = (self._now - set_date).days
         if age <= 7:
             return 8

@@ -34,7 +34,7 @@ class SystemOperations:
             os.makedirs(folder_path)
             self.log(f'Created folder {folder_path}')
 
-    def list_files_recursive(self, folder_path, excluded_extensions):
+    def list_files_recursive(self, folder_path:Path, excluded_extensions:set[str]) -> list[str]:
         return [
             str(path)
             for path in Path(folder_path).rglob("*")
