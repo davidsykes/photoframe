@@ -1,8 +1,13 @@
+from common.src.subprocess_wrapper import SubprocessWrapper
+from viewer.src.monitoring.pid_rss_extractor import PIDRSSExtractor
+from viewer.src.status.application_status import ApplicationStatus
+
+
 class MemoryMonitor:
     def __init__(self,
-                 subprocess_wrapper,
-                 status_updater,
-                 pid_rss_extractor):
+                 subprocess_wrapper:SubprocessWrapper,
+                 status_updater:ApplicationStatus,
+                 pid_rss_extractor:PIDRSSExtractor):
         self._subprocess_wrapper = subprocess_wrapper
         self._status_updater = status_updater
         self._pid_rss_extractor = pid_rss_extractor
@@ -29,4 +34,4 @@ class MemoryMonitor:
         output = self._subprocess_wrapper.run_return_stdout(command)
         rss = self._pid_rss_extractor.extract_rss(output)
         self._rss = self._rss + ' ' + rss
-        self._status_updater.update_status('RSS Memory', f'{self._rss}kb)
+        self._status_updater.update_status('RSS Memory', f'{self._rss}kb')

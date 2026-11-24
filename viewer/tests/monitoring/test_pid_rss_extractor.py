@@ -1,5 +1,4 @@
 import unittest
-from unittest.mock import Mock
 
 from viewer.src.monitoring.pid_rss_extractor import PIDRSSExtractor
 
@@ -22,6 +21,16 @@ class PIDRSSExtractorTests(unittest.TestCase):
         result = self.out.extract_rss(output)
 
         self.assertEqual(result, 'rss')
+
+    def test_if_pid_not_found_none_is_returned(self):
+        output = "\n".join(
+            ['pid1 python',
+             'pid2 python watev something',
+             'pid3 python watev something else'])
+
+        pid = self.out.extract_pid(output)
+
+        self.assertIsNone(pid)
 
     def setUp(self):
         self.out = PIDRSSExtractor()

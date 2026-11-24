@@ -1,7 +1,7 @@
 import subprocess
 
 class SubprocessWrapper:
-    def run_return_stdout(self, command):
+    def run_return_stdout(self, command:str) -> str:
         result = subprocess.run(command,
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE,
