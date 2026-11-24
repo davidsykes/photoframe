@@ -1,10 +1,14 @@
 from pathlib import Path
 
+from common.src.config_file_loader import ConfigFileLoader
+from common.src.remote_files_retriever import RemoteFilesRetriever
+from common.src.system_operations import SystemOperations
+
 class ConfigFileUpdater:
     def __init__(self,
-                 remote_files_retriever,
-                 config_file_loader,
-                 sys_operations,
+                 remote_files_retriever:RemoteFilesRetriever,
+                 config_file_loader:ConfigFileLoader,
+                 sys_operations:SystemOperations,
                  status_updater):
         self._remote_files_retriever = remote_files_retriever
         self._config_file_loader = config_file_loader

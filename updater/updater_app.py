@@ -8,7 +8,7 @@ from common.src.config_file_loader import ConfigFileLoader
 from common.src.retrying_action import RetryingAction
 from common.src.system_operations import SystemOperations
 from common.src.whole_project_configuration import WholeProjectConfiguration
-from updater.src.retrying_action_downloader import RetryingActionDownloader
+from common.src.retrying_action_downloader import RetryingActionDownloader
 from updater.src.sandbox import Sandbox
 from common.unzipper import UnZipper
 from updater.src.subprocess_exec import SubprocessExec

@@ -5,13 +5,14 @@ from common.src.config_file_loader import ConfigFileLoader
 class WholeProjectConfiguration:
     def __init__(self, config_file_loader:ConfigFileLoader):
         self._config_file_loader = config_file_loader
-        self._configuration_file_name = 'project_config.json'
+        self._configuration_file_name = Path('project_config.json')
         self.load_values()
 
     def load_values(self):
         config = self._config_file_loader.load_config_file(
             self._configuration_file_name
         )
+        assert config is not None
         self.remote_config_url = config.get('remote_config_url')
         self.images_folder = Path(config.get('images_folder'))
 
@@ -19,7 +20,7 @@ class WholeProjectConfiguration:
 
         self.image_display_duration_seconds = config.get_or_default(
             'image_display_duration_seconds',
-            config.get_or_default('image_display_duration_seconds', 20))
+            config.get_or_default('image_display_duration_seconds', '20'))
 
         self.photo_set_filter = config.get_or_default(
             'photo_set_filter',

@@ -5,7 +5,7 @@ from pathlib import Path
 import time
 
 class SystemOperations:
-    def load_file(self, file_name) -> str:
+    def load_file(self, file_name:Path) -> str|None:
         try:
             with open(file_name, 'r') as file:
                 data = file.read()
