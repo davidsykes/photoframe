@@ -1,12 +1,13 @@
 import json
 from pathlib import Path
 from common.src.config_file import ConfigFile
+from common.src.system_operations import SystemOperations
 
 class ConfigFileLoader:
-    def __init__(self, system_operations):
+    def __init__(self, system_operations:SystemOperations):
         self._system_operations = system_operations
 
-    def load_config_file(self, file_name:Path) -> ConfigFile:
+    def load_config_file(self, file_name:Path) -> ConfigFile|None:
         try:
             data = self._system_operations.load_file(file_name)
             if data:

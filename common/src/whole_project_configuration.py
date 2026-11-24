@@ -1,7 +1,9 @@
 from pathlib import Path
 
+from common.src.config_file_loader import ConfigFileLoader
+
 class WholeProjectConfiguration:
-    def __init__(self, config_file_loader):
+    def __init__(self, config_file_loader:ConfigFileLoader):
         self._config_file_loader = config_file_loader
         self._configuration_file_name = 'project_config.json'
         self.load_values()

@@ -14,7 +14,7 @@ class ConfigFile:
             raise Exception(
                 f"Key '{key}' not found in configuration file '{self.file_name}'.")
 
-    def get_or_default(self, key, default) -> str:
+    def get_or_default(self, key:str, default:str) -> str:
         if key in self.config:
             return self.config[key]
         return default

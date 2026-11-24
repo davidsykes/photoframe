@@ -29,4 +29,4 @@ class MemoryMonitor:
         output = self._subprocess_wrapper.run_return_stdout(command)
         rss = self._pid_rss_extractor.extract_rss(output)
         self._rss = self._rss + ' ' + rss
-        self._status_updater.update_status('RSS', self._rss)
+        self._status_updater.update_status('RSS Memory', f'{self._rss}kb)

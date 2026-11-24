@@ -29,7 +29,7 @@ class SystemOperations:
     def isdir(self, path) -> bool:
         return os.path.isdir(path)
 
-    def ensure_folder_exists(self, folder_path):
+    def ensure_folder_exists(self, folder_path:Path) -> None:
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
             self.log(f'Created folder {folder_path}')
@@ -52,7 +52,7 @@ class SystemOperations:
         shutil.move(str(from_path), str(to_path))
         return True
 
-    def set_logger(self, log_file_name, log_indent):
+    def set_logger(self, log_file_name:str, log_indent:str):
         log_folder = Path('logs')
         if not os.path.exists(log_folder):
             os.makedirs(log_folder)
@@ -67,7 +67,7 @@ class SystemOperations:
         self.logger = logging.getLogger(__name__)
         self.log_indent = log_indent
 
-    def log(self, message):
+    def log(self, message:str) -> None:
         self.logger.info(message)
         print(f'{self.log_indent}--- {message}')
 

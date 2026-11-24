@@ -1,12 +1,19 @@
 
+from common.src.whole_project_configuration import WholeProjectConfiguration
+from synchroniser.src.photo_collections.photo_collections import PhotoCollections
+from synchroniser.src.photo_folders_remover import PhotoFoldersRemover
+from synchroniser.src.photo_folders_synchroniser import PhotoFoldersSynchroniser
+from synchroniser.src.remote_config_loader import RemoteConfigLoader
+
+
 class SynchroniserApp:
     def __init__(self,
-                 whole_project_config,
-                 remote_config_loader,
-                 photo_collections,
-                 photo_folders_synchroniser,
-                 photo_folders_remover,
-                 photo_folders_filter):
+                 whole_project_config:WholeProjectConfiguration,
+                 remote_config_loader:RemoteConfigLoader,
+                 photo_collections:PhotoCollections,
+                 photo_folders_synchroniser:PhotoFoldersSynchroniser,
+                 photo_folders_remover:PhotoFoldersRemover,
+                 photo_folders_filter:str):
         self._whole_project_config = whole_project_config
         self._remote_config_loader = remote_config_loader
         self._photo_collections = photo_collections

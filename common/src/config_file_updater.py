@@ -24,4 +24,5 @@ class ConfigFileUpdater:
                 success = True
             else:
                 self._sys_operations.delete_file(temp_local_file_path)
+        print(f'Update Config File Result {success}')
         self._status_updater.update_status(success)
