@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-from sys import stdout
 import time
 
 class LogsAnalyser:
@@ -14,7 +13,7 @@ class LogsAnalyser:
         self._folders = {}
 
     def analyse_logs(self):
-        return
+        #return
         self.find_log_files(self._project_root, )
         self.find_log_files(self._working_folder)
         self._status_updater.update_status('Log file count', self._log_count)

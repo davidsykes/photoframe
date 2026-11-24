@@ -1,17 +1,22 @@
+from typing import Any, Callable
+
+from common.src.system_operations import SystemOperations
+
+
 class RetryingAction:
     def __init__(self,
-                 action,
-                 sys_operations,
-                 action_description,
-                 timeout_seconds,
-                 retry_interval_seconds):
+                 action:Callable[..., Any],
+                 sys_operations:SystemOperations,
+                 action_description:str,
+                 timeout_seconds:int,
+                 retry_interval_seconds:int):
         self._action = action
         self._sys_operations = sys_operations
         self._action_description = action_description
         self._timeout_seconds = timeout_seconds
         self._retry_interval_seconds = retry_interval_seconds
 
-    def execute(self, *args, **kwargs):
+    def execute(self, *args:Any, **kwargs:Any):
         deadline = self._sys_operations.time_monotonic() + self._timeout_seconds
 
         while True:

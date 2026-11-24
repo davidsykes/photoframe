@@ -1,7 +1,6 @@
 import unittest
 from unittest.mock import Mock
 
-from common.src.config_file import ConfigFile
 from common.src.retrying_action import RetryingAction
 from common.src.system_operations import SystemOperations
 
@@ -9,7 +8,6 @@ class RetryingActionTests(unittest.TestCase):
     def test_if_the_action_succeeds_true_is_returned(self):
         self.system_operations.time_monotonic.return_value = 0
         self.action.return_value = True
-        #self.system_operations.time_monotonic.side_effect = [0, 1, 2, 3, 4, 5]
 
         result = self.out.execute(1,2,3)
 

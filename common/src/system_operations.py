@@ -94,5 +94,5 @@ class SystemOperations:
     def time_monotonic(self):
         return time.monotonic()
 
-    def sleep(self, seconds):
+    def sleep(self, seconds:float) -> None:
         time.sleep(seconds)

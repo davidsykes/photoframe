@@ -35,7 +35,6 @@ class MenuButtonTextTests(unittest.TestCase):
     def setUp(self):
         self.display = Mock()
         self.display.COLOUR_LIGHT = 'light colour'
-        # self.display.COLOUR_WHITE = 'white colour'
         self.x = 123
         self.y = 456
         width = 100
