@@ -12,7 +12,7 @@ class ActionTimer:
         if callable(time_between_checks):
             self._get_time_between_checks = time_between_checks
         else:
-            self._get_time_between_checks = lambda: time_between_checks
+            self._get_time_between_checks = lambda: int(time_between_checks)
 
         self._last_time = 0
         self._paused = False
