@@ -26,7 +26,8 @@ class ActionTimer:
             if self._counts > 0:
                 self._counts -= 1
                 self._system_operations.log(f'{self._name} Now is {now}')
-                self._system_operations.log(f'{self._name} tbc is {self._get_time_between_checks()}')
+                tbc = self._get_time_between_checks()
+                self._system_operations.log(f'{self._name} tbc is {tbc} {type(tbc)}')
             if now >= self._last_time + self._get_time_between_checks():
                 self._last_time = now
                 return self._action()
