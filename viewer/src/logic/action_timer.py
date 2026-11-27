@@ -15,7 +15,7 @@ class ActionTimer:
             self._get_time_between_checks = time_between_checks
         else:
             system_operations.log(f'Action timer {name} has time type {type(time_between_checks)} = {time_between_checks}')
-            self._get_time_between_checks = lambda: int(time_between_checks)
+            self._get_time_between_checks = lambda: time_between_checks
 
         self._last_time = 0
         self._paused = False
@@ -23,12 +23,12 @@ class ActionTimer:
     def run_if_due(self):
         if self._paused is False:
             now = self._system_operations.get_time_seconds()
+            tbc = int(self._get_time_between_checks())
             if self._counts > 0:
                 self._counts -= 1
                 self._system_operations.log(f'{self._name} Now is {now}')
-                tbc = self._get_time_between_checks()
                 self._system_operations.log(f'{self._name} tbc is {tbc} {type(tbc)}')
-            if now >= self._last_time + self._get_time_between_checks():
+            if now >= self._last_time + tbc:
                 self._last_time = now
                 return self._action()
         return None

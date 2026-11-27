@@ -58,8 +58,20 @@ class ActionTimerTests(unittest.TestCase):
         self.assert_call_at_time_returns(14, None)
         self.assert_call_at_time_returns(15, 2)
 
-    def test_duration_can_be_a_callable(self):
+    def test_duration_can_be_a_callable_int(self):
         self.duration = 15
+        self.out = ActionTimer(
+            'name',
+            self.system_operations,
+            self.action,
+            self.get_duration)
+
+        self.assert_call_at_time_returns(0, 1)
+        self.assert_call_at_time_returns(14, None)
+        self.assert_call_at_time_returns(15, 2)
+
+    def test_duration_can_be_a_callable_string(self):
+        self.duration = '15'
         self.out = ActionTimer(
             'name',
             self.system_operations,
